@@ -6,10 +6,13 @@ go:
   - "1.10.x"
   - "1.9.x"
   - "1.8.x"
+  - "1.7.x"
+  - "1.6.x"
+  - "1.5.x"
   - master
 matrix:
   allow_failures:
-    - go: "1.8.x"
+    - go: "1.5.x"
     - go: master
 sudo: true
 before_install:
