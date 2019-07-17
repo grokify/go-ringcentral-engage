@@ -38,6 +38,8 @@ See the `examples` folder for usage.
 
 ## Coverage
 
+14/127 APIs.
+
 - [x] Communities
   - [x] GET /1.0/communities
   - [x] GET /1.0/communities/:id
