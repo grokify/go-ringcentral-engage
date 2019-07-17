@@ -35,6 +35,26 @@ paths:
       summary: Getting all communities
       tags:
       - Communities
+  /communities/{communityId}:
+    get:
+      description: This method renders a community from given id.
+      operationId: getCommunity
+      parameters:
+      - in: path
+        name: communityId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Community'
+          description: Success
+      summary: Getting a community from its id
+      tags:
+      - Communities
   /content_sources:
     get:
       description: This method renders sources ordered by creation date (ascending).

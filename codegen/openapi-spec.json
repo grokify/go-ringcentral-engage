@@ -57,6 +57,37 @@
         }
       }
     },
+    "/communities/{communityId}": {
+      "get": {
+        "tags": [
+          "Communities"
+        ],
+        "summary": "Getting a community from its id",
+        "operationId": "getCommunity",
+        "description": "This method renders a community from given id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "communityId",
+            "type": "string",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Community"
+            }
+          }
+        }
+      }
+    },
     "/content_sources": {
       "get": {
         "tags": [

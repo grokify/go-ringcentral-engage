@@ -45,13 +45,23 @@ func main() {
 
 	switch opts.Object {
 	case "community":
-		info, resp, err := client.CommunitiesApi.GetAllCommunities(context.Background(), nil)
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode != 200 {
-			log.Fatal(resp.StatusCode)
+		if len(opts.Id) > 0 {
+			info, resp, err := client.CommunitiesApi.GetCommunity(context.Background(), opts.Id)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		} else {
+			info, resp, err := client.CommunitiesApi.GetAllCommunities(context.Background(), nil)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
 		}
-		fmtutil.PrintJSON(info)
 	case "source":
 		if len(opts.Id) > 0 {
 			info, resp, err := client.SourcesApi.GetSource(context.Background(), opts.Id)

@@ -5,6 +5,7 @@ All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAllCommunities**](CommunitiesApi.md#GetAllCommunities) | **Get** /communities | Getting all communities
+[**GetCommunity**](CommunitiesApi.md#GetCommunity) | **Get** /communities/{communityId} | Getting a community from its id
 
 
 
@@ -36,6 +37,39 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAllCommunitiesResponse**](GetAllCommunitiesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCommunity
+
+> Community GetCommunity(ctx, communityId)
+Getting a community from its id
+
+This method renders a community from given id.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**communityId** | **string**|  | 
+
+### Return type
+
+[**Community**](Community.md)
 
 ### Authorization
 
