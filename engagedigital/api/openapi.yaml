@@ -10,6 +10,7 @@ tags:
 - name: Folders
 - name: Sources
 - name: Teams
+- name: Users
 paths:
   /communities:
     get:
@@ -130,6 +131,26 @@ paths:
       tags:
       - Folders
   /folders/{folderId}:
+    delete:
+      description: This method destroys an existing folder. It renders the folder
+        itself. It renders a 404 if id is invalid.
+      operationId: deleteFolder
+      parameters:
+      - in: path
+        name: folderId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: Success
+      summary: Deleting a folder
+      tags:
+      - Folders
     get:
       description: This method renders a folder from given id.
       operationId: getFolder
@@ -220,6 +241,107 @@ paths:
       summary: Getting a team from its id
       tags:
       - Teams
+  /users:
+    get:
+      description: |-
+        This method renders users ordered by creation date (descending).
+
+        Authorization​: only users that can view users. If the user affiliated to the token has the manage_users_of_my_teams permission, only the users belonging to at least one of the teams he’s the leader of will be returned.
+      operationId: getAllUsers
+      parameters:
+      - description: To filter users on given email.
+        in: query
+        name: email
+        schema:
+          type: string
+      - description: To filter users on given category id.
+        in: query
+        name: category_id
+        schema:
+          type: string
+      - description: To filter users on given identity id.
+        in: query
+        name: identity_id
+        schema:
+          type: string
+      - description: To filter users on given external id.
+        in: query
+        name: external_id
+        schema:
+          type: string
+      - description: To filter users on given role id.
+        in: query
+        name: role_id
+        schema:
+          type: string
+      - description: To filter users on given team id.
+        in: query
+        name: team_id
+        schema:
+          type: string
+      - description: The record index to start. Default value is 0.
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        in: query
+        name: limit
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllTeamsResponse'
+          description: Success
+      summary: Getting all users
+      tags:
+      - Users
+  /users/{userId}:
+    delete:
+      description: |-
+        This method deletes the given user. In case of success it renders the deleted user, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that can update users. The user affiliated to the token must have at least all the permissions of the other user. If the user affiliated to the token has the manage_users_of_my_teams permission, the deleted user will need to belong to at least one of the teams he’s the leader of.
+      operationId: deleteUser
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+      summary: Deleting a user
+      tags:
+      - Users
+    get:
+      description: This method renders a user from given id.
+      operationId: getUser
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+      summary: Getting a user from its id
+      tags:
+      - Users
 components:
   schemas:
     Community:
@@ -477,6 +599,22 @@ components:
             $ref: '#/components/schemas/Team'
           type: array
       type: object
+    GetAllUsersResponse:
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
     Restriction:
       properties:
         only:
@@ -629,4 +767,83 @@ components:
           items:
             type: string
           type: array
+      type: object
+    User:
+      example:
+        firstname: firstname
+        gender: gender
+        identity_ids:
+        - identity_ids
+        - identity_ids
+        team_ids:
+        - team_ids
+        - team_ids
+        timezone: timezone
+        created_at: 2000-01-23T04:56:07.000+00:00
+        external_id: external_id
+        locale: locale
+        enabled: true
+        invitation_pending: true
+        lastname: lastname
+        spoken_languages:
+        - spoken_languages
+        - spoken_languages
+        rc_user_id: rc_user_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        role_id: role_id
+        nickname: nickname
+        category_ids:
+        - category_ids
+        - category_ids
+        id: id
+        email: email
+      properties:
+        category_ids:
+          items:
+            type: string
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        enabled:
+          type: boolean
+        external_id:
+          type: string
+        firstname:
+          type: string
+        gender:
+          type: string
+        id:
+          type: string
+        identity_ids:
+          items:
+            type: string
+          type: array
+        invitation_pending:
+          type: boolean
+        lastname:
+          type: string
+        locale:
+          type: string
+        nickname:
+          type: string
+        rc_user_id:
+          type: string
+        role_id:
+          type: string
+        spoken_languages:
+          items:
+            type: string
+          type: array
+        team_ids:
+          items:
+            type: string
+          type: array
+        timezone:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
       type: object

@@ -13,12 +13,14 @@ func main() {
 	dir := "partial-specs"
 	spec, err := swagger2.MergeDirectory(dir)
 	if err != nil {
-		log.Fatal()
+		fmt.Println("MERGE_ERROR")
+		log.Fatal(err)
 	}
 
 	err = ioutilmore.WriteFileJSON(outfile, spec, 0644, "", "  ")
 	if err != nil {
-		log.Fatal()
+		fmt.Println("WRITE_ERROR")
+		log.Fatal(err)
 	}
 
 	fmt.Printf("WROTE [%v]\n", outfile)

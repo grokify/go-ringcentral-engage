@@ -1,21 +1,21 @@
-# \FoldersApi
+# \UsersApi
 
 All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteFolder**](FoldersApi.md#DeleteFolder) | **Delete** /folders/{folderId} | Deleting a folder
-[**GetAllFolders**](FoldersApi.md#GetAllFolders) | **Get** /folders | Getting all folders
-[**GetFolder**](FoldersApi.md#GetFolder) | **Get** /folders/{folderId} | Getting a folder from its id
+[**DeleteUser**](UsersApi.md#DeleteUser) | **Delete** /users/{userId} | Deleting a user
+[**GetAllUsers**](UsersApi.md#GetAllUsers) | **Get** /users | Getting all users
+[**GetUser**](UsersApi.md#GetUser) | **Get** /users/{userId} | Getting a user from its id
 
 
 
-## DeleteFolder
+## DeleteUser
 
-> Folder DeleteFolder(ctx, folderId)
-Deleting a folder
+> User DeleteUser(ctx, userId)
+Deleting a user
 
-This method destroys an existing folder. It renders the folder itself. It renders a 404 if id is invalid.
+This method deletes the given user. In case of success it renders the deleted user, otherwise, it renders an error (422 HTTP code).  Authorization​: only users that can update users. The user affiliated to the token must have at least all the permissions of the other user. If the user affiliated to the token has the manage_users_of_my_teams permission, the deleted user will need to belong to at least one of the teams he’s the leader of.
 
 ### Required Parameters
 
@@ -23,11 +23,11 @@ This method destroys an existing folder. It renders the folder itself. It render
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string**|  | 
+**userId** | **string**|  | 
 
 ### Return type
 
-[**Folder**](Folder.md)
+[**User**](User.md)
 
 ### Authorization
 
@@ -43,12 +43,12 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## GetAllFolders
+## GetAllUsers
 
-> GetAllFoldersResponse GetAllFolders(ctx, optional)
-Getting all folders
+> GetAllTeamsResponse GetAllUsers(ctx, optional)
+Getting all users
 
-This method renders folders.
+This method renders users ordered by creation date (descending).  Authorization​: only users that can view users. If the user affiliated to the token has the manage_users_of_my_teams permission, only the users belonging to at least one of the teams he’s the leader of will be returned.
 
 ### Required Parameters
 
@@ -56,21 +56,27 @@ This method renders folders.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***GetAllFoldersOpts** | optional parameters | nil if no parameters
+ **optional** | ***GetAllUsersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a GetAllFoldersOpts struct
+Optional parameters are passed through a pointer to a GetAllUsersOpts struct
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **email** | **optional.String**| To filter users on given email. | 
+ **categoryId** | **optional.String**| To filter users on given category id. | 
+ **identityId** | **optional.String**| To filter users on given identity id. | 
+ **externalId** | **optional.String**| To filter users on given external id. | 
+ **roleId** | **optional.String**| To filter users on given role id. | 
+ **teamId** | **optional.String**| To filter users on given team id. | 
  **offset** | **optional.Int32**| The record index to start. Default value is 0. | 
  **limit** | **optional.String**| The max number of records to return. Default value is 30, max value is 150. | 
 
 ### Return type
 
-[**GetAllFoldersResponse**](GetAllFoldersResponse.md)
+[**GetAllTeamsResponse**](GetAllTeamsResponse.md)
 
 ### Authorization
 
@@ -86,12 +92,12 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## GetFolder
+## GetUser
 
-> Folder GetFolder(ctx, folderId)
-Getting a folder from its id
+> User GetUser(ctx, userId)
+Getting a user from its id
 
-This method renders a folder from given id.
+This method renders a user from given id.
 
 ### Required Parameters
 
@@ -99,11 +105,11 @@ This method renders a folder from given id.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**folderId** | **string**|  | 
+**userId** | **string**|  | 
 
 ### Return type
 
-[**Folder**](Folder.md)
+[**User**](User.md)
 
 ### Authorization
 

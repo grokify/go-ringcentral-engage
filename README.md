@@ -82,13 +82,13 @@ See the `examples` folder for usage.
   - [x] DELETE /1.0/teams/:id
 
 - [ ] Users
-  - [ ] GET /1.0/users/me
-  - [ ] GET /1.0/users
-  - [ ] GET /1.0/users/:id
+  - [x] GET /1.0/users/me
+  - [x] GET /1.0/users
+  - [x] GET /1.0/users/:id
   - [ ] POST /1.0/users
   - [ ] PUT /1.0/users/:id
   - [ ] POST /1.0/users/invite
-  - [ ] DELETE /1.0/users/:id
+  - [x] DELETE /1.0/users/:id
 
 - [ ] User Source Permissions
   - [ ] GET /1.0/users/:id/sources_permissions

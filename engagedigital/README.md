@@ -34,6 +34,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
+*FoldersApi* | [**DeleteFolder**](docs/FoldersApi.md#deletefolder) | **Delete** /folders/{folderId} | Deleting a folder
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
 *FoldersApi* | [**GetFolder**](docs/FoldersApi.md#getfolder) | **Get** /folders/{folderId} | Getting a folder from its id
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
@@ -41,6 +42,9 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**DeleteTeam**](docs/TeamsApi.md#deleteteam) | **Delete** /teams/{teamId} | Deleting a team
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
+*UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Deleting a user
+*UsersApi* | [**GetAllUsers**](docs/UsersApi.md#getallusers) | **Get** /users | Getting all users
+*UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Getting a user from its id
 
 
 ## Documentation For Models
@@ -51,9 +55,11 @@ Class | Method | HTTP request | Description
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
+ - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [Restriction](docs/Restriction.md)
  - [Source](docs/Source.md)
  - [Team](docs/Team.md)
+ - [User](docs/User.md)
 
 
 ## Documentation For Authorization

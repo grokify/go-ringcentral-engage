@@ -116,6 +116,24 @@ func main() {
 			}
 			fmtutil.PrintJSON(info)
 		}
+	case "user":
+		if len(opts.Id) > 0 {
+			info, resp, err := client.UsersApi.GetUser(context.Background(), opts.Id)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		} else {
+			info, resp, err := client.UsersApi.GetAllUsers(context.Background(), nil)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		}
 	}
 
 	fmt.Println("DONE")
