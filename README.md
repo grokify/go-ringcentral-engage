@@ -30,6 +30,19 @@ https://www.dimelo.com
 
 See the `examples` folder for usage.
 
+## Coverage
+
+## Coverage
+
+- [x] Communities
+  - [x] GET /1.0/communities
+  - [x] GET /1.0/communities/:id
+
+- [ ] Sources
+  - [x] GET /1.0/content_sources
+  - [x] GET /1.0/content_sources/:id
+  - [ ] PUT /1.0/content_sources/:id
+
 ## Credits
 
 This SDK is auto-generated using OpenAPI Generator.
