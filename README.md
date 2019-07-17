@@ -54,6 +54,16 @@ See the `examples` folder for usage.
   - [ ] POST /1.0/roles
   - [ ] PUT /1.0/roles/:id
   
-## Credits
+## Building the SDK
 
-This SDK is auto-generated using OpenAPI Generator.
+This SDK is auto-generated from the [OpenAPI 2.0 / Swagger 2.0 spec](codegen/openapi-spec.json) using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
+
+Run:
+
+```
+$ cd codegen
+$ go run openapi-spec_merge.go
+$ sh openapi-generator_command.sh
+$ rm -rf ../engagedigital
+$ mv engagedigital ..
+```
