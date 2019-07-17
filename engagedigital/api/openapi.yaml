@@ -7,6 +7,7 @@ servers:
 - url: https://DOMAIN.api.engagement.dimelo.com/1.0
 tags:
 - name: Communities
+- name: Folders
 - name: Sources
 paths:
   /communities:
@@ -101,6 +102,52 @@ paths:
       summary: Getting a source from its id
       tags:
       - Sources
+  /folders:
+    get:
+      description: This method renders folders.
+      operationId: getAllFolders
+      parameters:
+      - description: The record index to start. Default value is 0.
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        in: query
+        name: limit
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllFoldersResponse'
+          description: Success
+      summary: Getting all folders
+      tags:
+      - Folders
+  /folders/{folderId}:
+    get:
+      description: This method renders a folder from given id.
+      operationId: getFolder
+      parameters:
+      - in: path
+        name: folderId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: Success
+      summary: Getting a folder from its id
+      tags:
+      - Folders
 components:
   schemas:
     Community:
@@ -123,6 +170,39 @@ components:
           type: string
         type:
           type: string
+        updated_at:
+          format: date-time
+          type: string
+      type: object
+    Folder:
+      example:
+        render_threads_count: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        parent_id: parent_id
+        query: query
+        created_at: 2000-01-23T04:56:07.000+00:00
+        role_restriction: '{}'
+        id: id
+        label: label
+        position: 5
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        label:
+          type: string
+        parent_id:
+          type: string
+        position:
+          type: integer
+        query:
+          type: string
+        render_threads_count:
+          type: boolean
+        role_restriction:
+          type: object
         updated_at:
           format: date-time
           type: string
@@ -158,6 +238,45 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Community'
+          type: array
+      type: object
+    GetAllFoldersResponse:
+      example:
+        offset: 1
+        records:
+        - render_threads_count: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          parent_id: parent_id
+          query: query
+          created_at: 2000-01-23T04:56:07.000+00:00
+          role_restriction: '{}'
+          id: id
+          label: label
+          position: 5
+        - render_threads_count: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          parent_id: parent_id
+          query: query
+          created_at: 2000-01-23T04:56:07.000+00:00
+          role_restriction: '{}'
+          id: id
+          label: label
+          position: 5
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Folder'
           type: array
       type: object
     GetAllSourcesResponse:
@@ -243,6 +362,13 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Source'
+          type: array
+      type: object
+    Restriction:
+      properties:
+        only:
+          items:
+            type: string
           type: array
       type: object
     Source:

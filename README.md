@@ -42,8 +42,8 @@ See the `examples` folder for usage.
   - [ ] PUT /1.0/content_sources/:id
 
 - [ ] Folders
-  - [ ] GET /1.0/folders
-  - [ ] GET /1.0/folders/:id
+  - [x] GET /1.0/folders
+  - [x] GET /1.0/folders/:id
   - [ ] POST /1.0/folders
   - [ ] PUT /1.0/folders/:id
   - [ ] DELETE /1.0/folders/:id

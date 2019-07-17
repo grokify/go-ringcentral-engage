@@ -15,6 +15,9 @@
       "name": "Communities"
     },
     {
+      "name": "Folders"
+    },
+    {
       "name": "Sources"
     }
   ],
@@ -156,6 +159,75 @@
           }
         }
       }
+    },
+    "/folders": {
+      "get": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Getting all folders",
+        "operationId": "getAllFolders",
+        "description": "This method renders folders.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "type": "integer",
+            "in": "query",
+            "description": "The record index to start. Default value is 0."
+          },
+          {
+            "name": "limit",
+            "type": "string",
+            "in": "query",
+            "description": "The max number of records to return. Default value is 30, max value is 150."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetAllFoldersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/folders/{folderId}": {
+      "get": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Getting a folder from its id",
+        "operationId": "getFolder",
+        "description": "This method renders a folder from given id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "folderId",
+            "type": "string",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -177,6 +249,37 @@
         "type": {
           "type": "string"
         },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "Folder": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "parent_id": {
+          "type": "string"
+        },
+        "position": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "render_threads_count": {
+          "type": "boolean"
+        },
+        "role_restriction": {},
         "updated_at": {
           "format": "date-time",
           "type": "string"
@@ -205,6 +308,28 @@
         }
       }
     },
+    "GetAllFoldersResponse": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/definitions/Folder"
+          },
+          "type": "array"
+        }
+      }
+    },
     "GetAllSourcesResponse": {
       "properties": {
         "count": {
@@ -222,6 +347,16 @@
         "records": {
           "items": {
             "$ref": "#/definitions/Source"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "Restriction": {
+      "properties": {
+        "only": {
+          "items": {
+            "type": "string"
           },
           "type": "array"
         }

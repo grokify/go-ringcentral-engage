@@ -34,6 +34,8 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
+*FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
+*FoldersApi* | [**GetFolder**](docs/FoldersApi.md#getfolder) | **Get** /folders/{folderId} | Getting a folder from its id
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
 
@@ -41,8 +43,11 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Community](docs/Community.md)
+ - [Folder](docs/Folder.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
+ - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
+ - [Restriction](docs/Restriction.md)
  - [Source](docs/Source.md)
 
 
