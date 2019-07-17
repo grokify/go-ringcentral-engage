@@ -131,7 +131,7 @@ func (a *SourcesApiService) GetAllSources(ctx context.Context, localVarOptionals
 SourcesApiService Getting a source from its id
 This method renders a source from given id.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param sourceId The record index to start. Default value is 0.
+ * @param sourceId
 @return Source
 */
 func (a *SourcesApiService) GetSource(ctx context.Context, sourceId string) (Source, *http.Response, error) {

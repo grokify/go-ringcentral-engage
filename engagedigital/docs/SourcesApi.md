@@ -65,7 +65,7 @@ This method renders a source from given id.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceId** | **string**| The record index to start. Default value is 0. | 
+**sourceId** | **string**|  | 
 
 ### Return type
 

@@ -115,7 +115,6 @@
             "name":"sourceId",
             "type":"string",
             "in":"path",
-            "description":"The record index to start. Default value is 0.",
             "required":false
           }
         ],

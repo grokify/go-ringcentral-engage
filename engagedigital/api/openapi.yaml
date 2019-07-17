@@ -68,8 +68,7 @@ paths:
       description: This method renders a source from given id.
       operationId: getSource
       parameters:
-      - description: The record index to start. Default value is 0.
-        in: path
+      - in: path
         name: sourceId
         required: true
         schema:
