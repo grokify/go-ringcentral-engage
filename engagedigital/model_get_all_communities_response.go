@@ -10,8 +10,8 @@
 package engagedigital
 
 type GetAllCommunitiesResponse struct {
-	Count int32 `json:"count,omitempty"`
-	Limit int32 `json:"limit,omitempty"`
-	Offset int32 `json:"offset,omitempty"`
+	Count   int32       `json:"count,omitempty"`
+	Limit   int32       `json:"limit,omitempty"`
+	Offset  int32       `json:"offset,omitempty"`
 	Records []Community `json:"records,omitempty"`
 }

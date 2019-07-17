@@ -8,15 +8,16 @@
  */
 
 package engagedigital
+
 import (
 	"time"
 )
 
 type Community struct {
-	Id string `json:"id,omitempty"`
+	Id        string    `json:"id,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
-	Active bool `json:"active,omitempty"`
-	Name string `json:"name,omitempty"`
-	Type string `json:"type,omitempty"`
+	Active    bool      `json:"active,omitempty"`
+	Name      string    `json:"name,omitempty"`
+	Type      string    `json:"type,omitempty"`
 }

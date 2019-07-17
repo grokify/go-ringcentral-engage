@@ -154,7 +154,6 @@ func parameterToJson(obj interface{}) (string, error) {
 	return string(jsonBuf), err
 }
 
-
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	return c.cfg.HTTPClient.Do(request)
@@ -497,6 +496,5 @@ func (e GenericOpenAPIError) Body() []byte {
 func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
 }
-
 
 func (apiClient *APIClient) HTTPClient() *http.Client { return apiClient.cfg.HTTPClient }
