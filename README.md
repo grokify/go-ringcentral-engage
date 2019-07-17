@@ -43,6 +43,19 @@ See the `examples` folder for usage.
   - [x] GET /1.0/content_sources/:id
   - [ ] PUT /1.0/content_sources/:id
 
+- [ ] Folders
+  - [ ] GET /1.0/folders
+  - [ ] GET /1.0/folders/:id
+  - [ ] POST /1.0/folders
+  - [ ] PUT /1.0/folders/:id
+  - [ ] DELETE /1.0/folders/:id
+
+- [ ] Roles
+  - [ ] GET /1.0/roles
+  - [ ] GET /1.0/roles/:id
+  - [ ] POST /1.0/roles
+  - [ ] PUT /1.0/roles/:id
+  
 ## Credits
 
 This SDK is auto-generated using OpenAPI Generator.
