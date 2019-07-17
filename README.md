@@ -241,7 +241,7 @@ You won't normally need to do this unless you want to modify the SDK, like addin
 
 This SDK is auto-generated from the [OpenAPI 2.0 / Swagger 2.0 spec](codegen/openapi-spec.json) using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
 
-> **Note:** This SDK uses marged OpenAPI spec so do not edit the `codegen/openapi-spec.json` file. Instead, edit files in and add files to the `codegen/partial-specs` folder.
+> **Note:** This SDK uses a merged OpenAPI spec so do not edit the `codegen/openapi-spec.json` file. Instead, edit files in and add files to the `codegen/partial-specs` folder.
 
 Run:
 
