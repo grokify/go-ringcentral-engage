@@ -53,6 +53,13 @@ See the `examples` folder for usage.
   - [ ] GET /1.0/roles/:id
   - [ ] POST /1.0/roles
   - [ ] PUT /1.0/roles/:id
+
+- [ ] Categories
+  - [ ] GET /1.0/categories
+  - [ ] GET /1.0/categories/:id
+  - [ ] POST /1.0/categories
+  - [ ] PUT /1.0/categories/:id
+  - [ ] DELETE /1.0/categories/:id
   
 ## Building the SDK
 
