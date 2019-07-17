@@ -26,6 +26,12 @@ This currently provides a minimal Go SDK for RingCentral Engage Digital, formerl
 
 https://www.dimelo.com
 
+## Installation
+
+```
+$ go get github.com/grokify/go-ringcental-engage/...
+```
+
 ## Usage
 
 See the `examples` folder for usage.
