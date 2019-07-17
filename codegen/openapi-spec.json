@@ -95,6 +95,39 @@
           }
         }
       }
+    },
+    "/content_sources/{sourceId}":{
+      "get":{
+        "tags":[
+          "Sources"
+        ],
+        "summary":"Getting a source from its id",
+        "operationId":"getSource",
+        "description":"This method renders a source from given id.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"sourceId",
+            "type":"string",
+            "in":"path",
+            "description":"The record index to start. Default value is 0.",
+            "required":false
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/Source"
+            }
+          }
+        }
+      }
     }
   },
   "definitions":{
@@ -180,7 +213,8 @@
           "format":"date-time"
         },
         "active":{
-          "type":"boolean"
+          "type":"boolean",
+          "description":"Activate/deactivate the source"
         },
         "community_id":{
           "type":"string"
@@ -188,8 +222,9 @@
         "channel_id":{
           "type":"string"
         },
-        "inamed":{
-          "type":"string"
+        "name":{
+          "type":"string",
+          "description":"Source name"
         },
         "status":{
           "type":"string"
@@ -197,43 +232,57 @@
         "color":{
           "type":"integer",
           "format":"int32",
-          "description":"Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9"
+          "description":"Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9"
         },
         "sla_response":{
           "type":"integer",
-          "format":"int32"
+          "format":"int32",
+          "description":"Response time (seconds)"
         },
         "sla_expired_strategy":{
-          "type":"string"
+          "type":"string",
+          "enum":[
+            "max",
+            "half",
+            "base"
+          ],
+          "description":"SLA expired strategy (\"max\", \"half\" or \"base\")"
         },
         "intervention_messages_boost":{
           "type":"integer",
-          "format":"int32"
+          "format":"int32",
+          "description":"Priority boost of messages with intervention"
         },
         "transferred_tasks_boost":{
           "type":"integer",
-          "format":"int32"
+          "format":"int32",
+          "description":"Priority boost of transferred tasks"
         },
         "hidden_from_stats":{
-          "type":"boolean"
+          "type":"boolean",
+          "description":"Hide from statistics"
         },
         "default_category_ids":{
           "type":"array",
           "items":{
             "type":"string"
-          }
+          },
+          "description":"Default categories"
         },
         "user_thread_default_category_ids":{
           "type":"array",
           "items":{
             "type":"string"
-          }
+          },
+          "description":"Default categories (agent messages)"
         },
         "default_content_language":{
-          "type":"string"
+          "type":"string",
+          "description":"Default content language"
         },
         "auto_detect_content_language":{
-          "type":"boolean"
+          "type":"boolean",
+          "description":"Auto-detect content language (Boolean)"
         },
         "time_sheet_ids":{
           "type":"array",
@@ -242,11 +291,13 @@
           }
         },
         "content_archiving":{
-          "type":"boolean"
+          "type":"boolean",
+          "description":"Automatic archiving of old contents (Boolean)"
         },
         "content_archiving_period":{
           "type":"integer",
-          "format":"int64"
+          "format":"int64",
+          "description":"Archive contents older than (seconds)"
         },
         "content_languages":{
           "type":"array",

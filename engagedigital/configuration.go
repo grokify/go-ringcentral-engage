@@ -60,7 +60,7 @@ type Configuration struct {
 
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
-		BasePath:      "https://DOMAIN.api.engagement.dimelo.com/v1.0",
+		BasePath:      "https://DOMAIN.api.engagement.dimelo.com/1.0",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "OpenAPI-Generator/1.0.0/go",
 	}

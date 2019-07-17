@@ -1,6 +1,6 @@
 # \CommunitiesApi
 
-All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/v1.0*
+All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

@@ -21,6 +21,7 @@ type options struct {
 	Site   string `short:"s" long:"site" description:"A site" required:"true"`
 	Token  string `short:"t" long:"token" description:"A token" required:"true"`
 	Object string `short:"o" long:"object" description:"An object" required:"true"`
+	Id     string `short:"i" long:"id" description:"An object id" required:"false"`
 }
 
 func NewApiClient(site, token string) *engagedigital.APIClient {
@@ -39,6 +40,7 @@ func main() {
 
 	client := NewApiClient(opts.Site, opts.Token)
 
+	opts.Id = strings.TrimSpace(opts.Id)
 	opts.Object = strings.ToLower(strings.TrimSpace(opts.Object))
 
 	switch opts.Object {
@@ -51,13 +53,23 @@ func main() {
 		}
 		fmtutil.PrintJSON(info)
 	case "source":
-		info, resp, err := client.SourcesApi.GetAllSources(context.Background(), nil)
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode != 200 {
-			log.Fatal(resp.StatusCode)
+		if len(opts.Id) > 0 {
+			info, resp, err := client.SourcesApi.GetSource(context.Background(), opts.Id)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		} else {
+			info, resp, err := client.SourcesApi.GetAllSources(context.Background(), nil)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
 		}
-		fmtutil.PrintJSON(info)
 	}
 
 	fmt.Println("DONE")

@@ -5,7 +5,7 @@ info:
   title: Engage Digital API
   version: "1.0"
 servers:
-- url: https://DOMAIN.api.engagement.dimelo.com/v1.0
+- url: https://DOMAIN.api.engagement.dimelo.com/1.0
 paths:
   /communities:
     get:
@@ -61,6 +61,27 @@ paths:
                 $ref: '#/components/schemas/GetAllSourcesResponse'
           description: Success
       summary: Getting all sources
+      tags:
+      - Sources
+  /content_sources/{sourceId}:
+    get:
+      description: This method renders a source from given id.
+      operationId: getSource
+      parameters:
+      - description: The record index to start. Default value is 0.
+        in: path
+        name: sourceId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+          description: Success
+      summary: Getting a source from its id
       tags:
       - Sources
 components:
@@ -133,7 +154,7 @@ components:
           - default_category_ids
           color: 5
           default_content_language: default_content_language
-          sla_expired_strategy: sla_expired_strategy
+          sla_expired_strategy: max
           created_at: 2000-01-23T04:56:07.000+00:00
           active: true
           content_archiving: true
@@ -150,7 +171,7 @@ components:
           - time_sheet_ids
           - time_sheet_ids
           transferred_tasks_boost: 7
-          inamed: inamed
+          name: name
           id: id
           channel_id: channel_id
           user_thread_default_category_ids:
@@ -165,7 +186,7 @@ components:
           - default_category_ids
           color: 5
           default_content_language: default_content_language
-          sla_expired_strategy: sla_expired_strategy
+          sla_expired_strategy: max
           created_at: 2000-01-23T04:56:07.000+00:00
           active: true
           content_archiving: true
@@ -182,7 +203,7 @@ components:
           - time_sheet_ids
           - time_sheet_ids
           transferred_tasks_boost: 7
-          inamed: inamed
+          name: name
           id: id
           channel_id: channel_id
           user_thread_default_category_ids:
@@ -216,7 +237,7 @@ components:
         - default_category_ids
         color: 5
         default_content_language: default_content_language
-        sla_expired_strategy: sla_expired_strategy
+        sla_expired_strategy: max
         created_at: 2000-01-23T04:56:07.000+00:00
         active: true
         content_archiving: true
@@ -233,7 +254,7 @@ components:
         - time_sheet_ids
         - time_sheet_ids
         transferred_tasks_boost: 7
-        inamed: inamed
+        name: name
         id: id
         channel_id: channel_id
         user_thread_default_category_ids:
@@ -251,52 +272,69 @@ components:
           format: date-time
           type: string
         active:
+          description: Activate/deactivate the source
           type: boolean
         community_id:
           type: string
         channel_id:
           type: string
-        inamed:
+        name:
+          description: Source name
           type: string
         status:
           type: string
         color:
-          description: 'Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow:
-            5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9'
+          description: 'Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise:
+            3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9'
           format: int32
           type: integer
         sla_response:
+          description: Response time (seconds)
           format: int32
           type: integer
         sla_expired_strategy:
+          description: SLA expired strategy ("max", "half" or "base")
+          enum:
+          - max
+          - half
+          - base
           type: string
         intervention_messages_boost:
+          description: Priority boost of messages with intervention
           format: int32
           type: integer
         transferred_tasks_boost:
+          description: Priority boost of transferred tasks
           format: int32
           type: integer
         hidden_from_stats:
+          description: Hide from statistics
           type: boolean
         default_category_ids:
+          description: Default categories
           items:
             type: string
           type: array
         user_thread_default_category_ids:
+          description: Default categories (agent messages)
           items:
             type: string
           type: array
         default_content_language:
+          description: Default content language
           type: string
         auto_detect_content_language:
+          description: Auto-detect content language (Boolean)
           type: boolean
         time_sheet_ids:
           items:
             type: string
           type: array
         content_archiving:
+          description: Automatic archiving of old contents (Boolean)
           type: boolean
         content_archiving_period:
+          description: Archive contents older than (seconds)
           format: int64
           type: integer
         content_languages:

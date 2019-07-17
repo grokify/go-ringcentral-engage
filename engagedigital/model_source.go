@@ -14,29 +14,42 @@ import (
 )
 
 type Source struct {
-	Id          string    `json:"id,omitempty"`
-	CreatedAt   time.Time `json:"created_at,omitempty"`
-	UpdatedAt   time.Time `json:"updated_at,omitempty"`
-	Active      bool      `json:"active,omitempty"`
-	CommunityId string    `json:"community_id,omitempty"`
-	ChannelId   string    `json:"channel_id,omitempty"`
-	Inamed      string    `json:"inamed,omitempty"`
-	Status      string    `json:"status,omitempty"`
-	// Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9
-	Color                        int32    `json:"color,omitempty"`
-	SlaResponse                  int32    `json:"sla_response,omitempty"`
-	SlaExpiredStrategy           string   `json:"sla_expired_strategy,omitempty"`
-	InterventionMessagesBoost    int32    `json:"intervention_messages_boost,omitempty"`
-	TransferredTasksBoost        int32    `json:"transferred_tasks_boost,omitempty"`
-	HiddenFromStats              bool     `json:"hidden_from_stats,omitempty"`
-	DefaultCategoryIds           []string `json:"default_category_ids,omitempty"`
+	Id        string    `json:"id,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	// Activate/deactivate the source
+	Active      bool   `json:"active,omitempty"`
+	CommunityId string `json:"community_id,omitempty"`
+	ChannelId   string `json:"channel_id,omitempty"`
+	// Source name
+	Name   string `json:"name,omitempty"`
+	Status string `json:"status,omitempty"`
+	// Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9
+	Color int32 `json:"color,omitempty"`
+	// Response time (seconds)
+	SlaResponse int32 `json:"sla_response,omitempty"`
+	// SLA expired strategy (\"max\", \"half\" or \"base\")
+	SlaExpiredStrategy string `json:"sla_expired_strategy,omitempty"`
+	// Priority boost of messages with intervention
+	InterventionMessagesBoost int32 `json:"intervention_messages_boost,omitempty"`
+	// Priority boost of transferred tasks
+	TransferredTasksBoost int32 `json:"transferred_tasks_boost,omitempty"`
+	// Hide from statistics
+	HiddenFromStats bool `json:"hidden_from_stats,omitempty"`
+	// Default categories
+	DefaultCategoryIds []string `json:"default_category_ids,omitempty"`
+	// Default categories (agent messages)
 	UserThreadDefaultCategoryIds []string `json:"user_thread_default_category_ids,omitempty"`
-	DefaultContentLanguage       string   `json:"default_content_language,omitempty"`
-	AutoDetectContentLanguage    bool     `json:"auto_detect_content_language,omitempty"`
-	TimeSheetIds                 []string `json:"time_sheet_ids,omitempty"`
-	ContentArchiving             bool     `json:"content_archiving,omitempty"`
-	ContentArchivingPeriod       int64    `json:"content_archiving_period,omitempty"`
-	ContentLanguages             []string `json:"content_languages,omitempty"`
-	Type                         string   `json:"type,omitempty"`
-	ErrorMessage                 string   `json:"error_message,omitempty"`
+	// Default content language
+	DefaultContentLanguage string `json:"default_content_language,omitempty"`
+	// Auto-detect content language (Boolean)
+	AutoDetectContentLanguage bool     `json:"auto_detect_content_language,omitempty"`
+	TimeSheetIds              []string `json:"time_sheet_ids,omitempty"`
+	// Automatic archiving of old contents (Boolean)
+	ContentArchiving bool `json:"content_archiving,omitempty"`
+	// Archive contents older than (seconds)
+	ContentArchivingPeriod int64    `json:"content_archiving_period,omitempty"`
+	ContentLanguages       []string `json:"content_languages,omitempty"`
+	Type                   string   `json:"type,omitempty"`
+	ErrorMessage           string   `json:"error_message,omitempty"`
 }
