@@ -56,6 +56,8 @@ See the `examples` folder for usage.
   
 ## Building the SDK
 
+You won't normally need to do this unless you want to modify the SDK, like adding endpoints via the OpenAPI 2.0 / Swagger 2.0 specification.
+
 This SDK is auto-generated from the [OpenAPI 2.0 / Swagger 2.0 spec](codegen/openapi-spec.json) using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator).
 
 Run:
