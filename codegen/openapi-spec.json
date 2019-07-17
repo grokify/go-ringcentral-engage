@@ -7,7 +7,7 @@
     "termsOfService":"https://developer.ringcentral.com"
   },
   "host":"DOMAIN.api.engagement.dimelo.com",
-  "basePath":"/v1.0",
+  "basePath":"/1.0",
   "schemes":[
     "https"
   ],
