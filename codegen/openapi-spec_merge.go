@@ -20,8 +20,7 @@ func main() {
 	if err != nil {
 		log.Fatal()
 	}
+
 	fmt.Printf("WROTE [%v]\n", outfile)
-
 	fmt.Println("DONE")
-
 }
