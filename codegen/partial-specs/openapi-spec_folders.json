@@ -1,164 +1,194 @@
 {
-    "swagger":"2.0",
-    "info":{
-      "description":"",
-      "version":"1.0",
-      "title":"Engage Digital API",
-      "termsOfService":"https://developer.ringcentral.com"
-    },
-    "host":"DOMAIN.api.engagement.dimelo.com",
-    "basePath":"/1.0",
-    "schemes":[
-      "https"
-    ],
-    "tags":[
-      {
-        "name":"Folders"
-      }
-    ],
-    "paths":{
-      "/folders":{
-        "get":{
-          "tags":[
-            "Folders"
-          ],
-          "summary":"Getting all folders",
-          "operationId":"getAllFolders",
-          "description":"This method renders folders.",
-          "consumes":[
-            "application/json"
-          ],
-          "produces":[
-            "application/json"
-          ],
-          "parameters":[
-            {
-              "name":"offset",
-              "type":"integer",
-              "format":"int32",
-              "in":"query",
-              "description":"The record index to start. Default value is 0.",
-              "required":false
-            },
-            {
-              "name":"limit",
-              "type":"string",
-              "format":"int32",
-              "in":"query",
-              "description":"The max number of records to return. Default value is 30, max value is 150.",
-              "required":false
-            }
-          ],
-          "responses":{
-            "200":{
-              "description":"Success",
-              "schema":{
-                "$ref":"#/definitions/GetAllFoldersResponse"
-              }
-            }
+  "swagger":"2.0",
+  "info":{
+    "description":"",
+    "version":"1.0",
+    "title":"Engage Digital API",
+    "termsOfService":"https://developer.ringcentral.com"
+  },
+  "host":"DOMAIN.api.engagement.dimelo.com",
+  "basePath":"/1.0",
+  "schemes":[
+    "https"
+  ],
+  "tags":[
+    {
+      "name":"Folders"
+    }
+  ],
+  "paths":{
+    "/folders":{
+      "get":{
+        "tags":[
+          "Folders"
+        ],
+        "summary":"Getting all folders",
+        "operationId":"getAllFolders",
+        "description":"This method renders folders.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"offset",
+            "type":"integer",
+            "format":"int32",
+            "in":"query",
+            "description":"The record index to start. Default value is 0.",
+            "required":false
+          },
+          {
+            "name":"limit",
+            "type":"string",
+            "format":"int32",
+            "in":"query",
+            "description":"The max number of records to return. Default value is 30, max value is 150.",
+            "required":false
           }
-        }
-      },
-      "/folders/{folderId}":{
-        "get":{
-          "tags":[
-            "Folders"
-          ],
-          "summary":"Getting a folder from its id",
-          "operationId":"getFolder",
-          "description":"This method renders a folder from given id.",
-          "consumes":[
-            "application/json"
-          ],
-          "produces":[
-            "application/json"
-          ],
-          "parameters":[
-            {
-              "name":"folderId",
-              "type":"string",
-              "in":"path",
-              "required":false
-            }
-          ],
-          "responses":{
-            "200":{
-              "description":"Success",
-              "schema":{
-                "$ref":"#/definitions/Folder"
-              }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/GetAllFoldersResponse"
             }
           }
         }
       }
     },
-    "definitions":{
-      "GetAllFoldersResponse":{
-        "properties":{
-          "count":{
-            "type":"integer",
-            "format":"int32"
-          },
-          "limit":{
-            "type":"integer",
-            "format":"int32"
-          },
-          "offset":{
-            "type":"integer",
-            "format":"int32"
-          },
-          "records":{
-            "type":"array",
-            "items":{
+    "/folders/{folderId}":{
+      "get":{
+        "tags":[
+          "Folders"
+        ],
+        "summary":"Getting a folder from its id",
+        "operationId":"getFolder",
+        "description":"This method renders a folder from given id.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"folderId",
+            "type":"string",
+            "in":"path",
+            "required":true
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
               "$ref":"#/definitions/Folder"
             }
           }
         }
       },
-      "Folder":{
-        "properties":{
-          "id":{
-            "type":"string"
-          },
-          "created_at":{
+      "delete":{
+        "tags":[
+          "Folders"
+        ],
+        "summary":"Deleting a folder",
+        "operationId":"deleteFolder",
+        "description":"This method destroys an existing folder. It renders the folder itself. It renders a 404 if id is invalid.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"folderId",
             "type":"string",
-            "format":"date-time"
-          },
-          "updated_at":{
-            "type":"string",
-            "format":"date-time"
-          },
-          "label":{
-            "type":"string"
-          },
-          "parent_id":{
-            "type":"string"
-          },
-          "position":{
-            "type":"integer"
-          },
-          "query":{
-            "type":"string"
-          },
-          "render_threads_count":{
-            "type":"boolean"
-          },
-          "role_restriction":{
-            "schema":{
-              "$ref":"#/definitions/Restriction"
-            }
+            "in":"path",
+            "required":true
           }
-        }
-      },
-      "Restriction":{
-        "properties":{
-          "only":{
-            "type":"array",
-            "items":{
-              "type":"string"
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/Folder"
             }
           }
         }
       }
     }
+  },
+  "definitions":{
+    "GetAllFoldersResponse":{
+      "properties":{
+        "count":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "limit":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "offset":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "records":{
+          "type":"array",
+          "items":{
+            "$ref":"#/definitions/Folder"
+          }
+        }
+      }
+    },
+    "Folder":{
+      "properties":{
+        "id":{
+          "type":"string"
+        },
+        "created_at":{
+          "type":"string",
+          "format":"date-time"
+        },
+        "updated_at":{
+          "type":"string",
+          "format":"date-time"
+        },
+        "label":{
+          "type":"string"
+        },
+        "parent_id":{
+          "type":"string"
+        },
+        "position":{
+          "type":"integer"
+        },
+        "query":{
+          "type":"string"
+        },
+        "render_threads_count":{
+          "type":"boolean"
+        },
+        "role_restriction":{
+          "schema":{
+            "$ref":"#/definitions/Restriction"
+          }
+        }
+      }
+    },
+    "Restriction":{
+      "properties":{
+        "only":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          }
+        }
+      }
+    }
   }
+}
