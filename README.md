@@ -20,4 +20,16 @@
  [twitter-svg]: https://img.shields.io/twitter/follow/ringcentraldevs.svg?style=social&label=follow
  [twitter-link]: https://twitter.com/RingCentralDevs
 
+## Overview
+
+This currently provides a minimal Go SDK for RingCentral Engage Digital, formerly Dimelo:
+
+https://www.dimelo.com
+
+## Usage
+
 See the `examples` folder for usage.
+
+## Credits
+
+This SDK is auto-generated using OpenAPI Generator.
