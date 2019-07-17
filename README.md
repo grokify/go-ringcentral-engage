@@ -73,7 +73,7 @@ See the `examples` folder for usage.
   - [x] GET /1.0/teams/:id
   - [ ] POST /1.0/teams
   - [ ] PUT /1.0/teams/:id
-  - [ ] DELETE /1.0/teams/:id
+  - [x] DELETE /1.0/teams/:id
 
 ## Building the SDK
 

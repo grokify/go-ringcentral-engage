@@ -89,6 +89,43 @@
               }
             }
           }
+        },
+        "delete":{
+          "tags":[
+            "Teams"
+          ],
+          "summary":"Deleting a team",
+          "operationId":"deleteTeam",
+          "description":"This method destroys an existing team. It renders the team itself. It renders a 404 if id is invalid.",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name":"teamId",
+              "type":"string",
+              "in":"path",
+              "required":false
+            },
+            {
+              "name":"take_over_category_id",
+              "type":"string",
+              "in":"query",
+              "required":false,
+              "description":"ID of a category to recategorize (optional)."
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Success",
+              "schema":{
+                "$ref":"#/definitions/Team"
+              }
+            }
+          }
         }
       }
     },
