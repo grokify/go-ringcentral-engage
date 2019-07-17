@@ -32,8 +32,6 @@ See the `examples` folder for usage.
 
 ## Coverage
 
-## Coverage
-
 - [x] Communities
   - [x] GET /1.0/communities
   - [x] GET /1.0/communities/:id
