@@ -35,6 +35,34 @@ paths:
       summary: Getting all communities
       tags:
       - Communities
+  /content_sources:
+    get:
+      description: This method renders sources ordered by creation date (ascending).
+      operationId: getAllSources
+      parameters:
+      - description: The record index to start. Default value is 0.
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        in: query
+        name: limit
+        schema:
+          format: int32
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllSourcesResponse'
+          description: Success
+      summary: Getting all sources
+      tags:
+      - Sources
 components:
   schemas:
     GetAllCommunitiesResponse:
@@ -92,5 +120,191 @@ components:
         name:
           type: string
         type:
+          type: string
+      type: object
+    GetAllSourcesResponse:
+      example:
+        offset: 1
+        records:
+        - sla_response: 5
+          error_message: error_message
+          default_category_ids:
+          - default_category_ids
+          - default_category_ids
+          color: 5
+          default_content_language: default_content_language
+          sla_expired_strategy: sla_expired_strategy
+          created_at: 2000-01-23T04:56:07.000+00:00
+          active: true
+          content_archiving: true
+          content_languages:
+          - content_languages
+          - content_languages
+          type: type
+          auto_detect_content_language: true
+          content_archiving_period: 9
+          intervention_messages_boost: 2
+          community_id: community_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          time_sheet_ids:
+          - time_sheet_ids
+          - time_sheet_ids
+          transferred_tasks_boost: 7
+          inamed: inamed
+          id: id
+          channel_id: channel_id
+          user_thread_default_category_ids:
+          - user_thread_default_category_ids
+          - user_thread_default_category_ids
+          status: status
+          hidden_from_stats: true
+        - sla_response: 5
+          error_message: error_message
+          default_category_ids:
+          - default_category_ids
+          - default_category_ids
+          color: 5
+          default_content_language: default_content_language
+          sla_expired_strategy: sla_expired_strategy
+          created_at: 2000-01-23T04:56:07.000+00:00
+          active: true
+          content_archiving: true
+          content_languages:
+          - content_languages
+          - content_languages
+          type: type
+          auto_detect_content_language: true
+          content_archiving_period: 9
+          intervention_messages_boost: 2
+          community_id: community_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          time_sheet_ids:
+          - time_sheet_ids
+          - time_sheet_ids
+          transferred_tasks_boost: 7
+          inamed: inamed
+          id: id
+          channel_id: channel_id
+          user_thread_default_category_ids:
+          - user_thread_default_category_ids
+          - user_thread_default_category_ids
+          status: status
+          hidden_from_stats: true
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Source'
+          type: array
+      type: object
+    Source:
+      example:
+        sla_response: 5
+        error_message: error_message
+        default_category_ids:
+        - default_category_ids
+        - default_category_ids
+        color: 5
+        default_content_language: default_content_language
+        sla_expired_strategy: sla_expired_strategy
+        created_at: 2000-01-23T04:56:07.000+00:00
+        active: true
+        content_archiving: true
+        content_languages:
+        - content_languages
+        - content_languages
+        type: type
+        auto_detect_content_language: true
+        content_archiving_period: 9
+        intervention_messages_boost: 2
+        community_id: community_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        time_sheet_ids:
+        - time_sheet_ids
+        - time_sheet_ids
+        transferred_tasks_boost: 7
+        inamed: inamed
+        id: id
+        channel_id: channel_id
+        user_thread_default_category_ids:
+        - user_thread_default_category_ids
+        - user_thread_default_category_ids
+        status: status
+        hidden_from_stats: true
+      properties:
+        id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        active:
+          type: boolean
+        community_id:
+          type: string
+        channel_id:
+          type: string
+        inamed:
+          type: string
+        status:
+          type: string
+        color:
+          description: 'Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow:
+            5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9'
+          format: int32
+          type: integer
+        sla_response:
+          format: int32
+          type: integer
+        sla_expired_strategy:
+          type: string
+        intervention_messages_boost:
+          format: int32
+          type: integer
+        transferred_tasks_boost:
+          format: int32
+          type: integer
+        hidden_from_stats:
+          type: boolean
+        default_category_ids:
+          items:
+            type: string
+          type: array
+        user_thread_default_category_ids:
+          items:
+            type: string
+          type: array
+        default_content_language:
+          type: string
+        auto_detect_content_language:
+          type: boolean
+        time_sheet_ids:
+          items:
+            type: string
+          type: array
+        content_archiving:
+          type: boolean
+        content_archiving_period:
+          format: int64
+          type: integer
+        content_languages:
+          items:
+            type: string
+          type: array
+        type:
+          type: string
+        error_message:
           type: string
       type: object

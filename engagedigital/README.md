@@ -33,12 +33,15 @@ All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/v1.0*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
+*SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 
 
 ## Documentation For Models
 
  - [Community](docs/Community.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
+ - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
+ - [Source](docs/Source.md)
 
 
 ## Documentation For Authorization
