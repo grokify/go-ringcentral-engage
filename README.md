@@ -223,7 +223,7 @@ See the `examples` folder for usage.
 - [ ] Survey Response
   - [ ] GET /1.0/survey_responses/:id
 
-There are 127 endpoints. To count, use the following:
+There are 127 endpoints. To count, use the following on OS-X:
 
 ```
 $ grep ' [ ]' README.md  | wc -l
