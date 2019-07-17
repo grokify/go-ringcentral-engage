@@ -14,10 +14,10 @@ import (
 )
 
 type Community struct {
-	Id        string    `json:"id,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	Active    bool      `json:"active,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	Id        string    `json:"id,omitempty"`
 	Name      string    `json:"name,omitempty"`
 	Type      string    `json:"type,omitempty"`
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
 }

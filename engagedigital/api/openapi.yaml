@@ -1,11 +1,13 @@
 openapi: 3.0.1
 info:
-  description: ""
   termsOfService: https://developer.ringcentral.com
   title: Engage Digital API
   version: "1.0"
 servers:
 - url: https://DOMAIN.api.engagement.dimelo.com/1.0
+tags:
+- name: Communities
+- name: Sources
 paths:
   /communities:
     get:
@@ -16,14 +18,12 @@ paths:
         in: query
         name: offset
         schema:
-          format: int32
           type: integer
       - description: The max number of records to return. Default value is 30, max
           value is 150.
         in: query
         name: limit
         schema:
-          format: int32
           type: string
       responses:
         200:
@@ -44,14 +44,12 @@ paths:
         in: query
         name: offset
         schema:
-          format: int32
           type: integer
       - description: The max number of records to return. Default value is 30, max
           value is 150.
         in: query
         name: limit
         schema:
-          format: int32
           type: string
       responses:
         200:
@@ -85,20 +83,44 @@ paths:
       - Sources
 components:
   schemas:
+    Community:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        type: type
+      properties:
+        active:
+          type: boolean
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      type: object
     GetAllCommunitiesResponse:
       example:
         offset: 1
         records:
         - updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
           active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           id: id
           type: type
         - updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
-          created_at: 2000-01-23T04:56:07.000+00:00
           active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           id: id
           type: type
         count: 0
@@ -118,98 +140,74 @@ components:
             $ref: '#/components/schemas/Community'
           type: array
       type: object
-    Community:
-      example:
-        updated_at: 2000-01-23T04:56:07.000+00:00
-        name: name
-        created_at: 2000-01-23T04:56:07.000+00:00
-        active: true
-        id: id
-        type: type
-      properties:
-        id:
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        active:
-          type: boolean
-        name:
-          type: string
-        type:
-          type: string
-      type: object
     GetAllSourcesResponse:
       example:
         offset: 1
         records:
-        - sla_response: 5
-          error_message: error_message
+        - error_message: error_message
+          sla_response: 7
           default_category_ids:
           - default_category_ids
           - default_category_ids
           color: 5
           default_content_language: default_content_language
-          sla_expired_strategy: max
-          created_at: 2000-01-23T04:56:07.000+00:00
+          sla_expired_strategy: sla_expired_strategy
           active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           content_archiving: true
           content_languages:
           - content_languages
           - content_languages
           type: type
           auto_detect_content_language: true
-          content_archiving_period: 9
+          content_archiving_period: 5
           intervention_messages_boost: 2
           community_id: community_id
-          updated_at: 2000-01-23T04:56:07.000+00:00
           time_sheet_ids:
           - time_sheet_ids
           - time_sheet_ids
-          transferred_tasks_boost: 7
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          transferred_tasks_boost: 9
           name: name
           id: id
           channel_id: channel_id
           user_thread_default_category_ids:
           - user_thread_default_category_ids
           - user_thread_default_category_ids
-          status: status
           hidden_from_stats: true
-        - sla_response: 5
-          error_message: error_message
+          status: status
+        - error_message: error_message
+          sla_response: 7
           default_category_ids:
           - default_category_ids
           - default_category_ids
           color: 5
           default_content_language: default_content_language
-          sla_expired_strategy: max
-          created_at: 2000-01-23T04:56:07.000+00:00
+          sla_expired_strategy: sla_expired_strategy
           active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
           content_archiving: true
           content_languages:
           - content_languages
           - content_languages
           type: type
           auto_detect_content_language: true
-          content_archiving_period: 9
+          content_archiving_period: 5
           intervention_messages_boost: 2
           community_id: community_id
-          updated_at: 2000-01-23T04:56:07.000+00:00
           time_sheet_ids:
           - time_sheet_ids
           - time_sheet_ids
-          transferred_tasks_boost: 7
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          transferred_tasks_boost: 9
           name: name
           id: id
           channel_id: channel_id
           user_thread_default_category_ids:
           - user_thread_default_category_ids
           - user_thread_default_category_ids
-          status: status
           hidden_from_stats: true
+          status: status
         count: 0
         limit: 6
       properties:
@@ -229,106 +227,54 @@ components:
       type: object
     Source:
       example:
-        sla_response: 5
         error_message: error_message
+        sla_response: 7
         default_category_ids:
         - default_category_ids
         - default_category_ids
         color: 5
         default_content_language: default_content_language
-        sla_expired_strategy: max
-        created_at: 2000-01-23T04:56:07.000+00:00
+        sla_expired_strategy: sla_expired_strategy
         active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
         content_archiving: true
         content_languages:
         - content_languages
         - content_languages
         type: type
         auto_detect_content_language: true
-        content_archiving_period: 9
+        content_archiving_period: 5
         intervention_messages_boost: 2
         community_id: community_id
-        updated_at: 2000-01-23T04:56:07.000+00:00
         time_sheet_ids:
         - time_sheet_ids
         - time_sheet_ids
-        transferred_tasks_boost: 7
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        transferred_tasks_boost: 9
         name: name
         id: id
         channel_id: channel_id
         user_thread_default_category_ids:
         - user_thread_default_category_ids
         - user_thread_default_category_ids
-        status: status
         hidden_from_stats: true
+        status: status
       properties:
-        id:
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        updated_at:
-          format: date-time
-          type: string
         active:
           description: Activate/deactivate the source
           type: boolean
-        community_id:
-          type: string
+        auto_detect_content_language:
+          description: Auto-detect content language (Boolean)
+          type: boolean
         channel_id:
-          type: string
-        name:
-          description: Source name
-          type: string
-        status:
           type: string
         color:
           description: 'Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise:
             3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9'
           format: int32
           type: integer
-        sla_response:
-          description: Response time (seconds)
-          format: int32
-          type: integer
-        sla_expired_strategy:
-          description: SLA expired strategy ("max", "half" or "base")
-          enum:
-          - max
-          - half
-          - base
+        community_id:
           type: string
-        intervention_messages_boost:
-          description: Priority boost of messages with intervention
-          format: int32
-          type: integer
-        transferred_tasks_boost:
-          description: Priority boost of transferred tasks
-          format: int32
-          type: integer
-        hidden_from_stats:
-          description: Hide from statistics
-          type: boolean
-        default_category_ids:
-          description: Default categories
-          items:
-            type: string
-          type: array
-        user_thread_default_category_ids:
-          description: Default categories (agent messages)
-          items:
-            type: string
-          type: array
-        default_content_language:
-          description: Default content language
-          type: string
-        auto_detect_content_language:
-          description: Auto-detect content language (Boolean)
-          type: boolean
-        time_sheet_ids:
-          items:
-            type: string
-          type: array
         content_archiving:
           description: Automatic archiving of old contents (Boolean)
           type: boolean
@@ -340,8 +286,56 @@ components:
           items:
             type: string
           type: array
-        type:
+        created_at:
+          format: date-time
+          type: string
+        default_category_ids:
+          description: Default categories
+          items:
+            type: string
+          type: array
+        default_content_language:
+          description: Default content language
           type: string
         error_message:
           type: string
+        hidden_from_stats:
+          description: Hide from statistics
+          type: boolean
+        id:
+          type: string
+        intervention_messages_boost:
+          description: Priority boost of messages with intervention
+          format: int32
+          type: integer
+        name:
+          description: Source name
+          type: string
+        sla_expired_strategy:
+          description: SLA expired strategy ("max", "half" or "base")
+          type: string
+        sla_response:
+          description: Response time (seconds)
+          format: int32
+          type: integer
+        status:
+          type: string
+        time_sheet_ids:
+          items:
+            type: string
+          type: array
+        transferred_tasks_boost:
+          description: Priority boost of transferred tasks
+          format: int32
+          type: integer
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_thread_default_category_ids:
+          description: Default categories (agent messages)
+          items:
+            type: string
+          type: array
       type: object

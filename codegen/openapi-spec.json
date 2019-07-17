@@ -1,314 +1,307 @@
 {
-  "swagger":"2.0",
-  "info":{
-    "description":"",
-    "version":"1.0",
-    "title":"Engage Digital API",
-    "termsOfService":"https://developer.ringcentral.com"
+  "swagger": "2.0",
+  "host": "DOMAIN.api.engagement.dimelo.com",
+  "info": {
+    "version": "1.0",
+    "title": "Engage Digital API",
+    "termsOfService": "https://developer.ringcentral.com"
   },
-  "host":"DOMAIN.api.engagement.dimelo.com",
-  "basePath":"/1.0",
-  "schemes":[
+  "basePath": "/1.0",
+  "schemes": [
     "https"
   ],
-  "paths":{
-    "/communities":{
-      "get":{
-        "tags":[
+  "tags": [
+    {
+      "name": "Communities"
+    },
+    {
+      "name": "Sources"
+    }
+  ],
+  "paths": {
+    "/communities": {
+      "get": {
+        "tags": [
           "Communities"
         ],
-        "summary":"Getting all communities",
-        "operationId":"getAllCommunities",
-        "description":"This method renders communities ordered by creation date (ascending).",
-        "consumes":[
+        "summary": "Getting all communities",
+        "operationId": "getAllCommunities",
+        "description": "This method renders communities ordered by creation date (ascending).",
+        "consumes": [
           "application/json"
         ],
-        "produces":[
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"offset",
-            "type":"integer",
-            "format":"int32",
-            "in":"query",
-            "description":"The record index to start. Default value is 0.",
-            "required":false
+            "name": "offset",
+            "type": "integer",
+            "in": "query",
+            "description": "The record index to start. Default value is 0."
           },
           {
-            "name":"limit",
-            "type":"string",
-            "format":"int32",
-            "in":"query",
-            "description":"The max number of records to return. Default value is 30, max value is 150.",
-            "required":false
+            "name": "limit",
+            "type": "string",
+            "in": "query",
+            "description": "The max number of records to return. Default value is 30, max value is 150."
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Success",
-            "schema":{
-              "$ref":"#/definitions/GetAllCommunitiesResponse"
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetAllCommunitiesResponse"
             }
           }
         }
       }
     },
-    "/content_sources":{
-      "get":{
-        "tags":[
+    "/content_sources": {
+      "get": {
+        "tags": [
           "Sources"
         ],
-        "summary":"Getting all sources",
-        "operationId":"getAllSources",
-        "description":"This method renders sources ordered by creation date (ascending).",
-        "consumes":[
+        "summary": "Getting all sources",
+        "operationId": "getAllSources",
+        "description": "This method renders sources ordered by creation date (ascending).",
+        "consumes": [
           "application/json"
         ],
-        "produces":[
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"offset",
-            "type":"integer",
-            "format":"int32",
-            "in":"query",
-            "description":"The record index to start. Default value is 0.",
-            "required":false
+            "name": "offset",
+            "type": "integer",
+            "in": "query",
+            "description": "The record index to start. Default value is 0."
           },
           {
-            "name":"limit",
-            "type":"string",
-            "format":"int32",
-            "in":"query",
-            "description":"The max number of records to return. Default value is 30, max value is 150.",
-            "required":false
+            "name": "limit",
+            "type": "string",
+            "in": "query",
+            "description": "The max number of records to return. Default value is 30, max value is 150."
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Success",
-            "schema":{
-              "$ref":"#/definitions/GetAllSourcesResponse"
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetAllSourcesResponse"
             }
           }
         }
       }
     },
-    "/content_sources/{sourceId}":{
-      "get":{
-        "tags":[
+    "/content_sources/{sourceId}": {
+      "get": {
+        "tags": [
           "Sources"
         ],
-        "summary":"Getting a source from its id",
-        "operationId":"getSource",
-        "description":"This method renders a source from given id.",
-        "consumes":[
+        "summary": "Getting a source from its id",
+        "operationId": "getSource",
+        "description": "This method renders a source from given id.",
+        "consumes": [
           "application/json"
         ],
-        "produces":[
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"sourceId",
-            "type":"string",
-            "in":"path",
-            "required":false
+            "name": "sourceId",
+            "type": "string",
+            "in": "path"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Success",
-            "schema":{
-              "$ref":"#/definitions/Source"
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Source"
             }
           }
         }
       }
     }
   },
-  "definitions":{
-    "GetAllCommunitiesResponse":{
-      "properties":{
-        "count":{
-          "type":"integer",
-          "format":"int32"
+  "definitions": {
+    "Community": {
+      "properties": {
+        "active": {
+          "type": "boolean"
         },
-        "limit":{
-          "type":"integer",
-          "format":"int32"
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
         },
-        "offset":{
-          "type":"integer",
-          "format":"int32"
+        "id": {
+          "type": "string"
         },
-        "records":{
-          "type":"array",
-          "items":{
-            "$ref":"#/definitions/Community"
-          }
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
         }
       }
     },
-    "Community":{
-      "properties":{
-        "id":{
-          "type":"string"
+    "GetAllCommunitiesResponse": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
         },
-        "created_at":{
-          "type":"string",
-          "format":"date-time"
+        "limit": {
+          "format": "int32",
+          "type": "integer"
         },
-        "updated_at":{
-          "type":"string",
-          "format":"date-time"
+        "offset": {
+          "format": "int32",
+          "type": "integer"
         },
-        "active":{
-          "type":"boolean"
-        },
-        "name":{
-          "type":"string"
-        },
-        "type":{
-          "type":"string"
-        }
-      }
-    },
-    "GetAllSourcesResponse":{
-      "properties":{
-        "count":{
-          "type":"integer",
-          "format":"int32"
-        },
-        "limit":{
-          "type":"integer",
-          "format":"int32"
-        },
-        "offset":{
-          "type":"integer",
-          "format":"int32"
-        },
-        "records":{
-          "type":"array",
-          "items":{
-            "$ref":"#/definitions/Source"
-          }
-        }
-      }
-    },
-    "Source":{
-      "properties":{
-        "id":{
-          "type":"string"
-        },
-        "created_at":{
-          "type":"string",
-          "format":"date-time"
-        },
-        "updated_at":{
-          "type":"string",
-          "format":"date-time"
-        },
-        "active":{
-          "type":"boolean",
-          "description":"Activate/deactivate the source"
-        },
-        "community_id":{
-          "type":"string"
-        },
-        "channel_id":{
-          "type":"string"
-        },
-        "name":{
-          "type":"string",
-          "description":"Source name"
-        },
-        "status":{
-          "type":"string"
-        },
-        "color":{
-          "type":"integer",
-          "format":"int32",
-          "description":"Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9"
-        },
-        "sla_response":{
-          "type":"integer",
-          "format":"int32",
-          "description":"Response time (seconds)"
-        },
-        "sla_expired_strategy":{
-          "type":"string",
-          "enum":[
-            "max",
-            "half",
-            "base"
-          ],
-          "description":"SLA expired strategy (\"max\", \"half\" or \"base\")"
-        },
-        "intervention_messages_boost":{
-          "type":"integer",
-          "format":"int32",
-          "description":"Priority boost of messages with intervention"
-        },
-        "transferred_tasks_boost":{
-          "type":"integer",
-          "format":"int32",
-          "description":"Priority boost of transferred tasks"
-        },
-        "hidden_from_stats":{
-          "type":"boolean",
-          "description":"Hide from statistics"
-        },
-        "default_category_ids":{
-          "type":"array",
-          "items":{
-            "type":"string"
+        "records": {
+          "items": {
+            "$ref": "#/definitions/Community"
           },
-          "description":"Default categories"
+          "type": "array"
+        }
+      }
+    },
+    "GetAllSourcesResponse": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
         },
-        "user_thread_default_category_ids":{
-          "type":"array",
-          "items":{
-            "type":"string"
+        "limit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/definitions/Source"
           },
-          "description":"Default categories (agent messages)"
+          "type": "array"
+        }
+      }
+    },
+    "Source": {
+      "properties": {
+        "active": {
+          "description": "Activate/deactivate the source",
+          "type": "boolean"
         },
-        "default_content_language":{
-          "type":"string",
-          "description":"Default content language"
+        "auto_detect_content_language": {
+          "description": "Auto-detect content language (Boolean)",
+          "type": "boolean"
         },
-        "auto_detect_content_language":{
-          "type":"boolean",
-          "description":"Auto-detect content language (Boolean)"
+        "channel_id": {
+          "type": "string"
         },
-        "time_sheet_ids":{
-          "type":"array",
-          "items":{
-            "type":"string"
-          }
+        "color": {
+          "description": "Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9",
+          "format": "int32",
+          "type": "integer"
         },
-        "content_archiving":{
-          "type":"boolean",
-          "description":"Automatic archiving of old contents (Boolean)"
+        "community_id": {
+          "type": "string"
         },
-        "content_archiving_period":{
-          "type":"integer",
-          "format":"int64",
-          "description":"Archive contents older than (seconds)"
+        "content_archiving": {
+          "description": "Automatic archiving of old contents (Boolean)",
+          "type": "boolean"
         },
-        "content_languages":{
-          "type":"array",
-          "items":{
-            "type":"string"
-          }
+        "content_archiving_period": {
+          "description": "Archive contents older than (seconds)",
+          "format": "int64",
+          "type": "integer"
         },
-        "type":{
-          "type":"string"
+        "content_languages": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
-        "error_message":{
-          "type":"string"
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "default_category_ids": {
+          "description": "Default categories",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "default_content_language": {
+          "description": "Default content language",
+          "type": "string"
+        },
+        "error_message": {
+          "type": "string"
+        },
+        "hidden_from_stats": {
+          "description": "Hide from statistics",
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "intervention_messages_boost": {
+          "description": "Priority boost of messages with intervention",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Source name",
+          "type": "string"
+        },
+        "sla_expired_strategy": {
+          "description": "SLA expired strategy (\"max\", \"half\" or \"base\")",
+          "type": "string"
+        },
+        "sla_response": {
+          "description": "Response time (seconds)",
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "time_sheet_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "transferred_tasks_boost": {
+          "description": "Priority boost of transferred tasks",
+          "format": "int32",
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_thread_default_category_ids": {
+          "description": "Default categories (agent messages)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       }
     }

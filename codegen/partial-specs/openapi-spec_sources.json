@@ -1,0 +1,233 @@
+{
+  "swagger":"2.0",
+  "info":{
+    "description":"",
+    "version":"1.0",
+    "title":"Engage Digital API",
+    "termsOfService":"https://developer.ringcentral.com"
+  },
+  "host":"DOMAIN.api.engagement.dimelo.com",
+  "basePath":"/1.0",
+  "schemes":[
+    "https"
+  ],
+  "tags":[
+    {
+      "name": "Sources"
+    }
+  ],
+  "paths":{
+    "/content_sources":{
+      "get":{
+        "tags":[
+          "Sources"
+        ],
+        "summary":"Getting all sources",
+        "operationId":"getAllSources",
+        "description":"This method renders sources ordered by creation date (ascending).",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"offset",
+            "type":"integer",
+            "format":"int32",
+            "in":"query",
+            "description":"The record index to start. Default value is 0.",
+            "required":false
+          },
+          {
+            "name":"limit",
+            "type":"string",
+            "format":"int32",
+            "in":"query",
+            "description":"The max number of records to return. Default value is 30, max value is 150.",
+            "required":false
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/GetAllSourcesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/content_sources/{sourceId}":{
+      "get":{
+        "tags":[
+          "Sources"
+        ],
+        "summary":"Getting a source from its id",
+        "operationId":"getSource",
+        "description":"This method renders a source from given id.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"sourceId",
+            "type":"string",
+            "in":"path",
+            "required":false
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/Source"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+    "GetAllSourcesResponse":{
+      "properties":{
+        "count":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "limit":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "offset":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "records":{
+          "type":"array",
+          "items":{
+            "$ref":"#/definitions/Source"
+          }
+        }
+      }
+    },
+    "Source":{
+      "properties":{
+        "id":{
+          "type":"string"
+        },
+        "created_at":{
+          "type":"string",
+          "format":"date-time"
+        },
+        "updated_at":{
+          "type":"string",
+          "format":"date-time"
+        },
+        "active":{
+          "type":"boolean",
+          "description":"Activate/deactivate the source"
+        },
+        "community_id":{
+          "type":"string"
+        },
+        "channel_id":{
+          "type":"string"
+        },
+        "name":{
+          "type":"string",
+          "description":"Source name"
+        },
+        "status":{
+          "type":"string"
+        },
+        "color":{
+          "type":"integer",
+          "format":"int32",
+          "description":"Color of the icon: Default: 0 Blue: 1 Green: 2 Turquoise: 3 Purple: 4 Yellow: 5 Orange: 6 Red: 7 Asphalt: 8 Grey: 9"
+        },
+        "sla_response":{
+          "type":"integer",
+          "format":"int32",
+          "description":"Response time (seconds)"
+        },
+        "sla_expired_strategy":{
+          "type":"string",
+          "enum":[
+            "max",
+            "half",
+            "base"
+          ],
+          "description":"SLA expired strategy (\"max\", \"half\" or \"base\")"
+        },
+        "intervention_messages_boost":{
+          "type":"integer",
+          "format":"int32",
+          "description":"Priority boost of messages with intervention"
+        },
+        "transferred_tasks_boost":{
+          "type":"integer",
+          "format":"int32",
+          "description":"Priority boost of transferred tasks"
+        },
+        "hidden_from_stats":{
+          "type":"boolean",
+          "description":"Hide from statistics"
+        },
+        "default_category_ids":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          },
+          "description":"Default categories"
+        },
+        "user_thread_default_category_ids":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          },
+          "description":"Default categories (agent messages)"
+        },
+        "default_content_language":{
+          "type":"string",
+          "description":"Default content language"
+        },
+        "auto_detect_content_language":{
+          "type":"boolean",
+          "description":"Auto-detect content language (Boolean)"
+        },
+        "time_sheet_ids":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          }
+        },
+        "content_archiving":{
+          "type":"boolean",
+          "description":"Automatic archiving of old contents (Boolean)"
+        },
+        "content_archiving_period":{
+          "type":"integer",
+          "format":"int64",
+          "description":"Archive contents older than (seconds)"
+        },
+        "content_languages":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          }
+        },
+        "type":{
+          "type":"string"
+        },
+        "error_message":{
+          "type":"string"
+        }
+      }
+    }
+  }
+}
