@@ -60,7 +60,21 @@ See the `examples` folder for usage.
   - [ ] POST /1.0/categories
   - [ ] PUT /1.0/categories/:id
   - [ ] DELETE /1.0/categories/:id
-  
+
+- [ ] Tags
+  - [ ] GET /1.0/tags
+  - [ ] GET /1.0/tags/:id
+  - [ ] POST /1.0/tags
+  - [ ] PUT /1.0/tags/:id
+  - [ ] DELETE /1.0/tags/:id
+
+- [ ] Teams
+  - [x] GET /1.0/teams
+  - [x] GET /1.0/teams/:id
+  - [ ] POST /1.0/teams
+  - [ ] PUT /1.0/teams/:id
+  - [ ] DELETE /1.0/teams/:id
+
 ## Building the SDK
 
 You won't normally need to do this unless you want to modify the SDK, like adding endpoints via the OpenAPI 2.0 / Swagger 2.0 specification.

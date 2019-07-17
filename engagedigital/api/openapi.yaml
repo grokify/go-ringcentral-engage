@@ -9,6 +9,7 @@ tags:
 - name: Communities
 - name: Folders
 - name: Sources
+- name: Teams
 paths:
   /communities:
     get:
@@ -148,6 +149,52 @@ paths:
       summary: Getting a folder from its id
       tags:
       - Folders
+  /teams:
+    get:
+      description: This method renders teams ordered by creation date (ascending).
+      operationId: getAllTeams
+      parameters:
+      - description: The record index to start. Default value is 0.
+        in: query
+        name: offset
+        schema:
+          type: integer
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        in: query
+        name: limit
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllTeamsResponse'
+          description: Success
+      summary: Getting all teams
+      tags:
+      - Teams
+  /teams/{teamId}:
+    get:
+      description: This method renders a team from given id.
+      operationId: getTeam
+      parameters:
+      - in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Success
+      summary: Getting a team from its id
+      tags:
+      - Teams
 components:
   schemas:
     Community:
@@ -364,6 +411,47 @@ components:
             $ref: '#/components/schemas/Source'
           type: array
       type: object
+    GetAllTeamsResponse:
+      example:
+        offset: 1
+        records:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          user_ids:
+          - user_ids
+          - user_ids
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          leader_ids:
+          - leader_ids
+          - leader_ids
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          user_ids:
+          - user_ids
+          - user_ids
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          leader_ids:
+          - leader_ids
+          - leader_ids
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Team'
+          type: array
+      type: object
     Restriction:
       properties:
         only:
@@ -481,6 +569,38 @@ components:
           type: string
         user_thread_default_category_ids:
           description: Default categories (agent messages)
+          items:
+            type: string
+          type: array
+      type: object
+    Team:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_ids:
+        - user_ids
+        - user_ids
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        leader_ids:
+        - leader_ids
+        - leader_ids
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        leader_ids:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_ids:
           items:
             type: string
           type: array

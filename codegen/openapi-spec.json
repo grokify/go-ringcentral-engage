@@ -19,6 +19,9 @@
     },
     {
       "name": "Sources"
+    },
+    {
+      "name": "Teams"
     }
   ],
   "paths": {
@@ -228,6 +231,75 @@
           }
         }
       }
+    },
+    "/teams": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Getting all teams",
+        "operationId": "getAllTeams",
+        "description": "This method renders teams ordered by creation date (ascending).",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "type": "integer",
+            "in": "query",
+            "description": "The record index to start. Default value is 0."
+          },
+          {
+            "name": "limit",
+            "type": "string",
+            "in": "query",
+            "description": "The max number of records to return. Default value is 30, max value is 150."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetAllTeamsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamId}": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Getting a team from its id",
+        "operationId": "getTeam",
+        "description": "This method renders a team from given id.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "teamId",
+            "type": "string",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -352,6 +424,28 @@
         }
       }
     },
+    "GetAllTeamsResponse": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/definitions/Team"
+          },
+          "type": "array"
+        }
+      }
+    },
     "Restriction": {
       "properties": {
         "only": {
@@ -464,6 +558,36 @@
         },
         "user_thread_default_category_ids": {
           "description": "Default categories (agent messages)",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "Team": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "leader_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "user_ids": {
           "items": {
             "type": "string"
           },
