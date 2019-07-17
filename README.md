@@ -12,7 +12,7 @@
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
  [goreport-link]: https://goreportcard.com/report/github.com/grokify/go-ringcentral-engage
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
- [docs-godoc-link]: https://godoc.org/github.com/grokify/go-ringcentral-engage
+ [docs-godoc-link]: https://godoc.org/github.com/grokify/go-ringcentral-engage/engagedigital
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-link]: https://github.com/grokify/go-ringcentral-engage/blob/master/LICENSE
  [stackoverflow-svg]: https://img.shields.io/badge/Stack%20Overflow-ringcentral-orange.svg
