@@ -10,8 +10,8 @@ import (
 )
 
 func main() {
-	outfile := "openapi-spec.json"
-	dir := "partial-specs"
+	outfile := "openapi-spec_v2.0.0.json"
+	dir := "partial-specs_v2.0.0"
 	spec, err := swagger2.MergeDirectory(dir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "MERGE_ERROR")

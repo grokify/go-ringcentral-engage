@@ -78,7 +78,7 @@
             "name":"sourceId",
             "type":"string",
             "in":"path",
-            "required":false
+            "required":true
           }
         ],
         "responses":{
