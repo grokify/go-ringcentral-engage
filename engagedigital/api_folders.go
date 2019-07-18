@@ -27,6 +27,132 @@ var (
 type FoldersApiService service
 
 /*
+FoldersApiService Creating a folder
+This method creates a new folder. In case of success it renders the created folder, otherwise an error (422 HTTP code).
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *CreateFolderOpts - Optional Parameters:
+ * @param "Label" (optional.String) -  Folder’s label (mandatory).
+ * @param "ParentId" (optional.String) -  ID of the parent folder.
+ * @param "Position" (optional.Int32) -  position of the folder.
+ * @param "Query" (optional.String) -  query of the folder as described in ​Search API documentation.​\\n\\nExample: “​active_and_assigned_to_me:true”
+ * @param "RenderThreadsCount" (optional.Bool) -  boolean describing display of the number of threads.
+ * @param "RoleRestrictionOnly" (optional.Interface of []string) -  list of roles allowed to see this folder. This parameter has to be a hash otherwise it will raise a 400 error. The key should be \"only\". For example: `&role_restriction[only][]=4e5596cdae70f677b5000002`
+ * @param "TeamRestrictionOnly" (optional.Interface of []string) -  list of teams allowed to see this folder. Same thing as role_restriction: team_restriction parameter has to be a hash with the key \"only\".
+@return Folder
+*/
+
+type CreateFolderOpts struct {
+	Label               optional.String
+	ParentId            optional.String
+	Position            optional.Int32
+	Query               optional.String
+	RenderThreadsCount  optional.Bool
+	RoleRestrictionOnly optional.Interface
+	TeamRestrictionOnly optional.Interface
+}
+
+func (a *FoldersApiService) CreateFolder(ctx context.Context, localVarOptionals *CreateFolderOpts) (Folder, *http.Response, error) {
+	var (
+		localVarHttpMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Folder
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/folders"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Label.IsSet() {
+		localVarQueryParams.Add("label", parameterToString(localVarOptionals.Label.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ParentId.IsSet() {
+		localVarQueryParams.Add("parent_id", parameterToString(localVarOptionals.ParentId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Position.IsSet() {
+		localVarQueryParams.Add("position", parameterToString(localVarOptionals.Position.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Query.IsSet() {
+		localVarQueryParams.Add("query", parameterToString(localVarOptionals.Query.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.RenderThreadsCount.IsSet() {
+		localVarQueryParams.Add("render_threads_count", parameterToString(localVarOptionals.RenderThreadsCount.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.RoleRestrictionOnly.IsSet() {
+		localVarQueryParams.Add("role_restriction[only][]", parameterToString(localVarOptionals.RoleRestrictionOnly.Value(), "csv"))
+	}
+	if localVarOptionals != nil && localVarOptionals.TeamRestrictionOnly.IsSet() {
+		localVarQueryParams.Add("team_restriction[only][]", parameterToString(localVarOptionals.TeamRestrictionOnly.Value(), "csv"))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v Folder
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
 FoldersApiService Deleting a folder
 This method destroys an existing folder. It renders the folder itself. It renders a 404 if id is invalid.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

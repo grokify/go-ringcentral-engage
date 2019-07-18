@@ -130,6 +130,72 @@ paths:
       summary: Getting all folders
       tags:
       - Folders
+    post:
+      description: This method creates a new folder. In case of success it renders
+        the created folder, otherwise an error (422 HTTP code).
+      operationId: createFolder
+      parameters:
+      - description: Folder’s label (mandatory).
+        in: query
+        name: label
+        schema:
+          type: string
+      - description: ID of the parent folder.
+        in: query
+        name: parent_id
+        schema:
+          type: string
+      - description: 'position of the folder. '
+        in: query
+        name: position
+        schema:
+          type: integer
+      - description: 'query of the folder as described in ​Search API documentation.​\n\nExample:
+          “​active_and_assigned_to_me:true”'
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: 'boolean describing display of the number of threads. '
+        in: query
+        name: render_threads_count
+        schema:
+          type: boolean
+      - description: 'list of roles allowed to see this folder. This parameter has
+          to be a hash otherwise it will raise a 400 error. The key should be "only".
+          For example: `&role_restriction[only][]=4e5596cdae70f677b5000002`'
+        explode: false
+        in: query
+        name: role_restriction[only][]
+        schema:
+          items:
+            description: //TODO automatically added by openapi-generator due to missing
+              iner type definition in the spec
+            type: string
+          type: array
+        style: form
+      - description: 'list of teams allowed to see this folder. Same thing as role_restriction:
+          team_restriction parameter has to be a hash with the key "only".'
+        explode: false
+        in: query
+        name: team_restriction[only][]
+        schema:
+          items:
+            description: //TODO automatically added by openapi-generator due to missing
+              iner type definition in the spec
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: Success
+      summary: Creating a folder
+      tags:
+      - Folders
   /folders/{folderId}:
     delete:
       description: This method destroys an existing folder. It renders the folder
@@ -194,6 +260,48 @@ paths:
                 $ref: '#/components/schemas/GetAllTeamsResponse'
           description: Success
       summary: Getting all teams
+      tags:
+      - Teams
+    post:
+      description: This method creates a new team. In case of success it renders the
+        created tag, otherwise, it renders an error (422 HTTP code).
+      operationId: createTeam
+      parameters:
+      - description: Team name.
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: List of user id as leaders
+        explode: false
+        in: query
+        name: leader_ids[]
+        schema:
+          items:
+            description: //TODO automatically added by openapi-generator due to missing
+              iner type definition in the spec
+            type: string
+          type: array
+        style: form
+      - description: List of user id as team members.
+        explode: false
+        in: query
+        name: user_ids[]
+        schema:
+          items:
+            description: //TODO automatically added by openapi-generator due to missing
+              iner type definition in the spec
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Success
+      summary: Creating a team
       tags:
       - Teams
   /teams/{teamId}:

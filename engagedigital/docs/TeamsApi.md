@@ -4,10 +4,55 @@ All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateTeam**](TeamsApi.md#CreateTeam) | **Post** /teams | Creating a team
 [**DeleteTeam**](TeamsApi.md#DeleteTeam) | **Delete** /teams/{teamId} | Deleting a team
 [**GetAllTeams**](TeamsApi.md#GetAllTeams) | **Get** /teams | Getting all teams
 [**GetTeam**](TeamsApi.md#GetTeam) | **Get** /teams/{teamId} | Getting a team from its id
 
+
+
+## CreateTeam
+
+> Team CreateTeam(ctx, optional)
+Creating a team
+
+This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***CreateTeamOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateTeamOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **optional.String**| Team name. | 
+ **leaderIds** | [**optional.Interface of []string**](string.md)| List of user id as leaders | 
+ **userIds** | [**optional.Interface of []string**](string.md)| List of user id as team members. | 
+
+### Return type
+
+[**Team**](Team.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeleteTeam

@@ -52,7 +52,7 @@ See the `examples` folder for usage.
 - [ ] Folders
   - [x] GET /1.0/folders
   - [x] GET /1.0/folders/:id
-  - [ ] POST /1.0/folders
+  - [x] POST /1.0/folders
   - [ ] PUT /1.0/folders/:id
   - [x] DELETE /1.0/folders/:id
 
@@ -79,7 +79,7 @@ See the `examples` folder for usage.
 - [ ] Teams
   - [x] GET /1.0/teams
   - [x] GET /1.0/teams/:id
-  - [ ] POST /1.0/teams
+  - [x] POST /1.0/teams
   - [ ] PUT /1.0/teams/:id
   - [x] DELETE /1.0/teams/:id
 

@@ -1,186 +1,237 @@
 {
-    "swagger":"2.0",
-    "info":{
-      "description":"",
-      "version":"1.0",
-      "title":"Engage Digital API",
-      "termsOfService":"https://developer.ringcentral.com"
-    },
-    "host":"DOMAIN.api.engagement.dimelo.com",
-    "basePath":"/1.0",
-    "schemes":[
-      "https"
-    ],
-    "tags":[
-      {
-        "name":"Teams"
-      }
-    ],
-    "paths":{
-      "/teams":{
-        "get":{
-          "tags":[
-            "Teams"
-          ],
-          "summary":"Getting all teams",
-          "operationId":"getAllTeams",
-          "description":"This method renders teams ordered by creation date (ascending).",
-          "consumes":[
-            "application/json"
-          ],
-          "produces":[
-            "application/json"
-          ],
-          "parameters":[
-            {
-              "name":"offset",
-              "type":"integer",
-              "format":"int32",
-              "in":"query",
-              "description":"The record index to start. Default value is 0.",
-              "required":false
-            },
-            {
-              "name":"limit",
-              "type":"string",
-              "format":"int32",
-              "in":"query",
-              "description":"The max number of records to return. Default value is 30, max value is 150.",
-              "required":false
-            }
-          ],
-          "responses":{
-            "200":{
-              "description":"Success",
-              "schema":{
-                "$ref":"#/definitions/GetAllTeamsResponse"
-              }
+  "swagger":"2.0",
+  "info":{
+    "description":"",
+    "version":"1.0",
+    "title":"Engage Digital API",
+    "termsOfService":"https://developer.ringcentral.com"
+  },
+  "host":"DOMAIN.api.engagement.dimelo.com",
+  "basePath":"/1.0",
+  "schemes":[
+    "https"
+  ],
+  "tags":[
+    {
+      "name":"Teams"
+    }
+  ],
+  "paths":{
+    "/teams":{
+      "get":{
+        "tags":[
+          "Teams"
+        ],
+        "summary":"Getting all teams",
+        "operationId":"getAllTeams",
+        "description":"This method renders teams ordered by creation date (ascending).",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"offset",
+            "type":"integer",
+            "format":"int32",
+            "in":"query",
+            "description":"The record index to start. Default value is 0.",
+            "required":false
+          },
+          {
+            "name":"limit",
+            "type":"string",
+            "format":"int32",
+            "in":"query",
+            "description":"The max number of records to return. Default value is 30, max value is 150.",
+            "required":false
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/GetAllTeamsResponse"
             }
           }
         }
       },
-      "/teams/{teamId}":{
-        "get":{
-          "tags":[
-            "Teams"
-          ],
-          "summary":"Getting a team from its id",
-          "operationId":"getTeam",
-          "description":"This method renders a team from given id.",
-          "consumes":[
-            "application/json"
-          ],
-          "produces":[
-            "application/json"
-          ],
-          "parameters":[
-            {
-              "name":"teamId",
-              "type":"string",
-              "in":"path",
-              "required":true
+      "post":{
+        "tags":[
+          "Teams"
+        ],
+        "summary":"Creating a team",
+        "operationId":"createTeam",
+        "description":"This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name": "name",
+            "description": "Team name.",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "leader_ids[]",
+            "description": "List of user id as leaders",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "string."
             }
-          ],
-          "responses":{
-            "200":{
-              "description":"Success",
-              "schema":{
-                "$ref":"#/definitions/Team"
-              }
+          },
+          {
+            "name": "user_ids[]",
+            "description": "List of user id as team members.",
+            "in": "query",
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "string"
             }
           }
-        },
-        "delete":{
-          "tags":[
-            "Teams"
-          ],
-          "summary":"Deleting a team",
-          "operationId":"deleteTeam",
-          "description":"This method destroys an existing team. It renders the team itself. It renders a 404 if id is invalid.",
-          "consumes":[
-            "application/json"
-          ],
-          "produces":[
-            "application/json"
-          ],
-          "parameters":[
-            {
-              "name":"teamId",
-              "type":"string",
-              "in":"path",
-              "required":true
-            },
-            {
-              "name":"take_over_category_id",
-              "type":"string",
-              "in":"query",
-              "required":false,
-              "description":"ID of a category to recategorize (optional)."
-            }
-          ],
-          "responses":{
-            "200":{
-              "description":"Success",
-              "schema":{
-                "$ref":"#/definitions/Team"
-              }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/Team"
             }
           }
         }
       }
     },
-    "definitions":{
-      "GetAllTeamsResponse":{
-        "properties":{
-          "count":{
-            "type":"integer",
-            "format":"int32"
-          },
-          "limit":{
-            "type":"integer",
-            "format":"int32"
-          },
-          "offset":{
-            "type":"integer",
-            "format":"int32"
-          },
-          "records":{
-            "type":"array",
-            "items":{
+    "/teams/{teamId}":{
+      "get":{
+        "tags":[
+          "Teams"
+        ],
+        "summary":"Getting a team from its id",
+        "operationId":"getTeam",
+        "description":"This method renders a team from given id.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"teamId",
+            "type":"string",
+            "in":"path",
+            "required":true
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
               "$ref":"#/definitions/Team"
             }
           }
         }
       },
-      "Team":{
-        "properties":{
-          "id":{
-            "type":"string"
-          },
-          "created_at":{
+      "delete":{
+        "tags":[
+          "Teams"
+        ],
+        "summary":"Deleting a team",
+        "operationId":"deleteTeam",
+        "description":"This method destroys an existing team. It renders the team itself. It renders a 404 if id is invalid.",
+        "consumes":[
+          "application/json"
+        ],
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "name":"teamId",
             "type":"string",
-            "format":"date-time"
+            "in":"path",
+            "required":true
           },
-          "updated_at":{
+          {
+            "name":"take_over_category_id",
             "type":"string",
-            "format":"date-time"
-          },
-          "name":{
-            "type":"string"
-          },
-          "leader_ids":{
-            "type":"array",
-            "items":{
-              "type":"string"
-            }
-          },
-          "user_ids":{
-            "type":"array",
-            "items":{
-              "type":"string"
+            "in":"query",
+            "required":false,
+            "description":"ID of a category to recategorize (optional)."
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "schema":{
+              "$ref":"#/definitions/Team"
             }
           }
         }
       }
     }
+  },
+  "definitions":{
+    "GetAllTeamsResponse":{
+      "properties":{
+        "count":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "limit":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "offset":{
+          "type":"integer",
+          "format":"int32"
+        },
+        "records":{
+          "type":"array",
+          "items":{
+            "$ref":"#/definitions/Team"
+          }
+        }
+      }
+    },
+    "Team":{
+      "properties":{
+        "id":{
+          "type":"string"
+        },
+        "created_at":{
+          "type":"string",
+          "format":"date-time"
+        },
+        "updated_at":{
+          "type":"string",
+          "format":"date-time"
+        },
+        "name":{
+          "type":"string"
+        },
+        "leader_ids":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          }
+        },
+        "user_ids":{
+          "type":"array",
+          "items":{
+            "type":"string"
+          }
+        }
+      }
+    }
   }
+}

@@ -202,6 +202,72 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Creating a folder",
+        "operationId": "createFolder",
+        "description": "This method creates a new folder. In case of success it renders the created folder, otherwise an error (422 HTTP code).",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "label",
+            "type": "string",
+            "in": "query",
+            "description": "Folder’s label (mandatory)."
+          },
+          {
+            "name": "parent_id",
+            "type": "string",
+            "in": "query",
+            "description": "ID of the parent folder."
+          },
+          {
+            "name": "position",
+            "type": "integer",
+            "in": "query",
+            "description": "position of the folder. "
+          },
+          {
+            "name": "query",
+            "type": "string",
+            "in": "query",
+            "description": "query of the folder as described in ​Search API documentation.​\\n\\nExample: “​active_and_assigned_to_me:true”"
+          },
+          {
+            "name": "render_threads_count",
+            "type": "boolean",
+            "in": "query",
+            "description": "boolean describing display of the number of threads. "
+          },
+          {
+            "name": "role_restriction[only][]",
+            "type": "array",
+            "in": "query",
+            "description": "list of roles allowed to see this folder. This parameter has to be a hash otherwise it will raise a 400 error. The key should be \"only\". For example: `\u0026role_restriction[only][]=4e5596cdae70f677b5000002`"
+          },
+          {
+            "name": "team_restriction[only][]",
+            "type": "array",
+            "in": "query",
+            "description": "list of teams allowed to see this folder. Same thing as role_restriction: team_restriction parameter has to be a hash with the key \"only\"."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        }
       }
     },
     "/folders/{folderId}": {
@@ -299,6 +365,48 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/GetAllTeamsResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Creating a team",
+        "operationId": "createTeam",
+        "description": "This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "in": "query",
+            "description": "Team name."
+          },
+          {
+            "name": "leader_ids[]",
+            "type": "array",
+            "in": "query",
+            "description": "List of user id as leaders"
+          },
+          {
+            "name": "user_ids[]",
+            "type": "array",
+            "in": "query",
+            "description": "List of user id as team members."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Team"
             }
           }
         }

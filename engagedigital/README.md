@@ -34,11 +34,13 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
+*FoldersApi* | [**CreateFolder**](docs/FoldersApi.md#createfolder) | **Post** /folders | Creating a folder
 *FoldersApi* | [**DeleteFolder**](docs/FoldersApi.md#deletefolder) | **Delete** /folders/{folderId} | Deleting a folder
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
 *FoldersApi* | [**GetFolder**](docs/FoldersApi.md#getfolder) | **Get** /folders/{folderId} | Getting a folder from its id
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
+*TeamsApi* | [**CreateTeam**](docs/TeamsApi.md#createteam) | **Post** /teams | Creating a team
 *TeamsApi* | [**DeleteTeam**](docs/TeamsApi.md#deleteteam) | **Delete** /teams/{teamId} | Deleting a team
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
