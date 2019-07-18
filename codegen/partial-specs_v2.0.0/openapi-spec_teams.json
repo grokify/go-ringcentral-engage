@@ -84,9 +84,10 @@
             "description": "List of user id as leaders",
             "in": "query",
             "type": "array",
+            "collectionFormat": "multi",
             "required": false,
             "items": {
-              "type": "string."
+              "type": "string"
             }
           },
           {
@@ -94,6 +95,7 @@
             "description": "List of user id as team members.",
             "in": "query",
             "type": "array",
+            "collectionFormat": "multi",
             "required": false,
             "items": {
               "type": "string"

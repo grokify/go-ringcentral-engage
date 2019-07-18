@@ -394,13 +394,15 @@
             "name": "leader_ids[]",
             "type": "array",
             "in": "query",
-            "description": "List of user id as leaders"
+            "description": "List of user id as leaders",
+            "collectionFormat": "multi"
           },
           {
             "name": "user_ids[]",
             "type": "array",
             "in": "query",
-            "description": "List of user id as team members."
+            "description": "List of user id as team members.",
+            "collectionFormat": "multi"
           }
         ],
         "responses": {
