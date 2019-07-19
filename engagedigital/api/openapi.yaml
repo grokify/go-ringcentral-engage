@@ -850,14 +850,11 @@ components:
     Locale:
       properties:
         code:
-          format: string
-          type: object
+          type: string
         interface:
-          format: boolean
-          type: object
+          type: boolean
         name:
-          format: string
-          type: object
+          type: string
       type: object
     Restriction:
       properties:

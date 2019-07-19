@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  termsOfService: https://developer.ringcentral.com
+  title: Engage Digital API
+  version: "1.0"
+servers:
+- url: https://DOMAIN.api.engagement.dimelo.com/1.0
+tags:
+- name: Locales
+paths:
+  /locales:
+    get:
+      description: This method renders all available locales.
+      operationId: getAllLocales
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Locale'
+                type: array
+          description: List of all locales
+      summary: Getting all locales
+      tags:
+      - Locales
+components:
+  schemas:
+    Locale:
+      example:
+        code: code
+        name: name
+        interface: true
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        interface:
+          type: boolean

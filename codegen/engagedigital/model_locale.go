@@ -10,7 +10,7 @@
 package engagedigital
 
 type Locale struct {
+	Name      string `json:"name,omitempty"`
 	Code      string `json:"code,omitempty"`
 	Interface bool   `json:"interface,omitempty"`
-	Name      string `json:"name,omitempty"`
 }

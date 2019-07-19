@@ -901,13 +901,13 @@
     "Locale": {
       "properties": {
         "code": {
-          "format": "string"
+          "type": "string"
         },
         "interface": {
-          "format": "boolean"
+          "type": "boolean"
         },
         "name": {
-          "format": "string"
+          "type": "string"
         }
       }
     },
