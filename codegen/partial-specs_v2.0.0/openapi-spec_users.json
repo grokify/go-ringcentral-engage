@@ -188,6 +188,9 @@
       }
     },
     "User":{
+      "required":[
+        "id"
+      ],
       "properties":{
         "id":{
           "type":"string"

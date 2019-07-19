@@ -49,9 +49,13 @@ type APIClient struct {
 
 	FoldersApi *FoldersApiService
 
+	LocalesApi *LocalesApiService
+
 	SourcesApi *SourcesApiService
 
 	TeamsApi *TeamsApiService
+
+	TimezonesApi *TimezonesApiService
 
 	UsersApi *UsersApiService
 }
@@ -74,8 +78,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.CommunitiesApi = (*CommunitiesApiService)(&c.common)
 	c.FoldersApi = (*FoldersApiService)(&c.common)
+	c.LocalesApi = (*LocalesApiService)(&c.common)
 	c.SourcesApi = (*SourcesApiService)(&c.common)
 	c.TeamsApi = (*TeamsApiService)(&c.common)
+	c.TimezonesApi = (*TimezonesApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
 
 	return c

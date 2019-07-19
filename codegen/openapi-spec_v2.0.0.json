@@ -18,10 +18,16 @@
       "name": "Folders"
     },
     {
+      "name": "Locales"
+    },
+    {
       "name": "Sources"
     },
     {
       "name": "Teams"
+    },
+    {
+      "name": "Timezones"
     },
     {
       "name": "Users"
@@ -339,6 +345,25 @@
         }
       }
     },
+    "/locales": {
+      "get": {
+        "tags": [
+          "Locales"
+        ],
+        "summary": "Getting all locales",
+        "operationId": "getAllLocales",
+        "description": "This method renders all available locales.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all locales",
+            "schema": {}
+          }
+        }
+      }
+    },
     "/teams": {
       "get": {
         "tags": [
@@ -547,6 +572,25 @@
             "schema": {
               "$ref": "#/definitions/Team"
             }
+          }
+        }
+      }
+    },
+    "/timezones": {
+      "get": {
+        "tags": [
+          "Timezones"
+        ],
+        "summary": "Getting all timezones",
+        "operationId": "getAllTimezones",
+        "description": "This method renders all available timezones.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all timezones",
+            "schema": {}
           }
         }
       }
@@ -854,6 +898,19 @@
         }
       }
     },
+    "Locale": {
+      "properties": {
+        "code": {
+          "format": "string"
+        },
+        "interface": {
+          "format": "boolean"
+        },
+        "name": {
+          "format": "string"
+        }
+      }
+    },
     "Restriction": {
       "properties": {
         "only": {
@@ -1000,6 +1057,16 @@
             "type": "string"
           },
           "type": "array"
+        }
+      }
+    },
+    "Timezone": {
+      "properties": {
+        "name": {
+          "format": "string"
+        },
+        "utc_offset": {
+          "format": "integer"
         }
       }
     },

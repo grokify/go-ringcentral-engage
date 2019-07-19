@@ -1,0 +1,57 @@
+{
+  "swagger":"2.0",
+  "info":{
+    "description":"",
+    "version":"1.0",
+    "title":"Engage Digital API",
+    "termsOfService":"https://developer.ringcentral.com"
+  },
+  "host":"DOMAIN.api.engagement.dimelo.com",
+  "basePath":"/1.0",
+  "schemes":[
+    "https"
+  ],
+  "tags":[
+    {
+      "name": "Timezones"
+    }
+  ],
+  "paths":{
+    "/timezones":{
+      "get":{
+        "tags":[
+          "Timezones"
+        ],
+        "summary":"Getting all timezones",
+        "operationId":"getAllTimezones",
+        "description":"This method renders all available timezones.",
+        "produces":[
+          "application/json"
+        ],
+        "responses":{
+          "200":{
+            "description":"List of all timezones",
+            "schema":{
+              "type":"array",
+              "items":{
+                "$ref":"#/definitions/Timezone"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+    "Timezone":{
+      "properties":{
+        "name":{
+          "format":"string"
+        },
+        "utc_offset":{
+          "format":"integer"
+        }
+      }
+    }
+  }
+}

@@ -8,8 +8,10 @@ servers:
 tags:
 - name: Communities
 - name: Folders
+- name: Locales
 - name: Sources
 - name: Teams
+- name: Timezones
 - name: Users
 paths:
   /communities:
@@ -232,6 +234,20 @@ paths:
       summary: Getting a folder from its id
       tags:
       - Folders
+  /locales:
+    get:
+      description: This method renders all available locales.
+      operationId: getAllLocales
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: List of all locales
+      summary: Getting all locales
+      tags:
+      - Locales
   /teams:
     get:
       description: This method renders teams ordered by creation date (ascending).
@@ -384,6 +400,20 @@ paths:
       summary: Updating a team
       tags:
       - Teams
+  /timezones:
+    get:
+      description: This method renders all available timezones.
+      operationId: getAllTimezones
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: List of all timezones
+      summary: Getting all timezones
+      tags:
+      - Timezones
   /users:
     get:
       description: |-
@@ -817,6 +847,18 @@ components:
             $ref: '#/components/schemas/User'
           type: array
       type: object
+    Locale:
+      properties:
+        code:
+          format: string
+          type: object
+        interface:
+          format: boolean
+          type: object
+        name:
+          format: string
+          type: object
+      type: object
     Restriction:
       properties:
         only:
@@ -969,6 +1011,15 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Timezone:
+      properties:
+        name:
+          format: string
+          type: object
+        utc_offset:
+          format: integer
+          type: object
       type: object
     User:
       example:

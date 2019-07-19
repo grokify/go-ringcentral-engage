@@ -62,24 +62,6 @@ func main() {
 			}
 			fmtutil.PrintJSON(info)
 		}
-	case "source":
-		if len(opts.Id) > 0 {
-			info, resp, err := client.SourcesApi.GetSource(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
-		} else {
-			info, resp, err := client.SourcesApi.GetAllSources(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
-		}
 	case "folder":
 		if len(opts.Id) > 0 {
 			info, resp, err := client.FoldersApi.GetFolder(context.Background(), opts.Id)
@@ -91,6 +73,32 @@ func main() {
 			fmtutil.PrintJSON(info)
 		} else {
 			info, resp, err := client.FoldersApi.GetAllFolders(context.Background(), nil)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		}
+	case "locale":
+		info, resp, err := client.LocalesApi.GetAllLocales(context.Background())
+		if err != nil {
+			log.Fatal(err)
+		} else if resp.StatusCode != 200 {
+			log.Fatal(resp.StatusCode)
+		}
+		fmtutil.PrintJSON(info)
+	case "source":
+		if len(opts.Id) > 0 {
+			info, resp, err := client.SourcesApi.GetSource(context.Background(), opts.Id)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		} else {
+			info, resp, err := client.SourcesApi.GetAllSources(context.Background(), nil)
 			if err != nil {
 				log.Fatal(err)
 			} else if resp.StatusCode != 200 {

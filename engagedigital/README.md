@@ -38,6 +38,7 @@ Class | Method | HTTP request | Description
 *FoldersApi* | [**DeleteFolder**](docs/FoldersApi.md#deletefolder) | **Delete** /folders/{folderId} | Deleting a folder
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
 *FoldersApi* | [**GetFolder**](docs/FoldersApi.md#getfolder) | **Get** /folders/{folderId} | Getting a folder from its id
+*LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
 *TeamsApi* | [**CreateTeam**](docs/TeamsApi.md#createteam) | **Post** /teams | Creating a team
@@ -45,6 +46,7 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
 *TeamsApi* | [**UpdateTeam**](docs/TeamsApi.md#updateteam) | **Put** /teams/{teamId} | Updating a team
+*TimezonesApi* | [**GetAllTimezones**](docs/TimezonesApi.md#getalltimezones) | **Get** /timezones | Getting all timezones
 *UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Deleting a user
 *UsersApi* | [**GetAllUsers**](docs/UsersApi.md#getallusers) | **Get** /users | Getting all users
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Getting a user from its id
@@ -59,9 +61,11 @@ Class | Method | HTTP request | Description
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
+ - [Locale](docs/Locale.md)
  - [Restriction](docs/Restriction.md)
  - [Source](docs/Source.md)
  - [Team](docs/Team.md)
+ - [Timezone](docs/Timezone.md)
  - [User](docs/User.md)
 
 

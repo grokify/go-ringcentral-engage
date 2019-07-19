@@ -254,3 +254,9 @@ $ sh openapi-generator_command.sh
 $ rm -rf ../engagedigital
 $ mv engagedigital ..
 ```
+
+# Notes
+
+OpenAPI spec is validated here:
+
+https://apidevtools.org/swagger-parser/online/
