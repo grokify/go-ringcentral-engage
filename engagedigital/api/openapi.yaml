@@ -273,7 +273,7 @@ paths:
         schema:
           type: string
       - description: List of user id as leaders
-        explode: false
+        explode: true
         in: query
         name: leader_ids[]
         schema:
@@ -284,7 +284,7 @@ paths:
           type: array
         style: form
       - description: List of user id as team members.
-        explode: false
+        explode: true
         in: query
         name: user_ids[]
         schema:

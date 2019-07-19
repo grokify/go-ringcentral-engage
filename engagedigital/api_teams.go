@@ -16,6 +16,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -64,10 +65,26 @@ func (a *TeamsApiService) CreateTeam(ctx context.Context, localVarOptionals *Cre
 		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.LeaderIds.IsSet() {
-		localVarQueryParams.Add("leader_ids[]", parameterToString(localVarOptionals.LeaderIds.Value(), "csv"))
+		t := localVarOptionals.LeaderIds.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("leader_ids[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("leader_ids[]", parameterToString(t, "multi"))
+		}
 	}
 	if localVarOptionals != nil && localVarOptionals.UserIds.IsSet() {
-		localVarQueryParams.Add("user_ids[]", parameterToString(localVarOptionals.UserIds.Value(), "csv"))
+		t := localVarOptionals.UserIds.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("user_ids[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("user_ids[]", parameterToString(t, "multi"))
+		}
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
