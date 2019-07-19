@@ -1,12 +1,15 @@
 # RingCentral Engage SDK for Go
 
 [![Build Status][build-status-svg]][build-status-link]
+![API Coverage][api-coverage-svg]
 [![Go Report Card][goreport-svg]][goreport-link]
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
+
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-18%2F127%20%3D%2014%25-red.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -38,7 +41,7 @@ See the `examples` folder for usage.
 
 ## Coverage
 
-14/127 APIs.
+18/127 APIs - 14%
 
 - [x] Communities
   - [x] GET /1.0/communities
