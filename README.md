@@ -76,11 +76,11 @@ See the `examples` folder for usage.
   - [ ] PUT /1.0/tags/:id
   - [ ] DELETE /1.0/tags/:id
 
-- [ ] Teams
+- [x] Teams
   - [x] GET /1.0/teams
   - [x] GET /1.0/teams/:id
   - [x] POST /1.0/teams
-  - [ ] PUT /1.0/teams/:id
+  - [x] PUT /1.0/teams/:id
   - [x] DELETE /1.0/teams/:id
 
 - [ ] Users

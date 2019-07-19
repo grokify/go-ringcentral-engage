@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteTeam**](TeamsApi.md#DeleteTeam) | **Delete** /teams/{teamId} | Deleting a team
 [**GetAllTeams**](TeamsApi.md#GetAllTeams) | **Get** /teams | Getting all teams
 [**GetTeam**](TeamsApi.md#GetTeam) | **Get** /teams/{teamId} | Getting a team from its id
+[**UpdateTeam**](TeamsApi.md#UpdateTeam) | **Put** /teams/{teamId} | Updating a team
 
 
 
@@ -156,6 +157,52 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **teamId** | **string**|  | 
+
+### Return type
+
+[**Team**](Team.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateTeam
+
+> Team UpdateTeam(ctx, teamId, optional)
+Updating a team
+
+This method updates an existing team from given attributes and renders it in case of success.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**teamId** | **string**|  | 
+ **optional** | ***UpdateTeamOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UpdateTeamOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **name** | **optional.String**| Team name. | 
+ **leaderIds** | [**optional.Interface of []string**](string.md)| List of user id as leaders | 
+ **userIds** | [**optional.Interface of []string**](string.md)| List of user id as team members. | 
 
 ### Return type
 

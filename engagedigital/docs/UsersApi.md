@@ -45,7 +45,7 @@ No authorization required
 
 ## GetAllUsers
 
-> GetAllTeamsResponse GetAllUsers(ctx, optional)
+> GetAllUsersResponse GetAllUsers(ctx, optional)
 Getting all users
 
 This method renders users ordered by creation date (descending).  Authorization​: only users that can view users. If the user affiliated to the token has the manage_users_of_my_teams permission, only the users belonging to at least one of the teams he’s the leader of will be returned.
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetAllTeamsResponse**](GetAllTeamsResponse.md)
+[**GetAllUsersResponse**](GetAllUsersResponse.md)
 
 ### Authorization
 

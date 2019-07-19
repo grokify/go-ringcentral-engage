@@ -252,13 +252,19 @@
             "name": "role_restriction[only][]",
             "type": "array",
             "in": "query",
-            "description": "list of roles allowed to see this folder. This parameter has to be a hash otherwise it will raise a 400 error. The key should be \"only\". For example: `\u0026role_restriction[only][]=4e5596cdae70f677b5000002`"
+            "description": "list of roles allowed to see this folder. This parameter has to be a hash otherwise it will raise a 400 error. The key should be \"only\". For example: `\u0026role_restriction[only][]=4e5596cdae70f677b5000002`",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "team_restriction[only][]",
             "type": "array",
             "in": "query",
-            "description": "list of teams allowed to see this folder. Same thing as role_restriction: team_restriction parameter has to be a hash with the key \"only\"."
+            "description": "list of teams allowed to see this folder. Same thing as role_restriction: team_restriction parameter has to be a hash with the key \"only\".",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -395,14 +401,20 @@
             "type": "array",
             "in": "query",
             "description": "List of user id as leaders",
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "user_ids[]",
             "type": "array",
             "in": "query",
             "description": "List of user id as team members.",
-            "collectionFormat": "multi"
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -435,6 +447,62 @@
             "type": "string",
             "in": "path",
             "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Updating a team",
+        "operationId": "updateTeam",
+        "description": "This method updates an existing team from given attributes and renders it in case of success.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "teamId",
+            "type": "string",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "in": "query",
+            "description": "Team name."
+          },
+          {
+            "name": "leader_ids[]",
+            "type": "array",
+            "in": "query",
+            "description": "List of user id as leaders",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_ids[]",
+            "type": "array",
+            "in": "query",
+            "description": "List of user id as team members.",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -551,7 +619,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/GetAllTeamsResponse"
+              "$ref": "#/definitions/GetAllUsersResponse"
             }
           }
         }

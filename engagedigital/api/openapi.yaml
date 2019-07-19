@@ -169,8 +169,6 @@ paths:
         name: role_restriction[only][]
         schema:
           items:
-            description: //TODO automatically added by openapi-generator due to missing
-              iner type definition in the spec
             type: string
           type: array
         style: form
@@ -181,8 +179,6 @@ paths:
         name: team_restriction[only][]
         schema:
           items:
-            description: //TODO automatically added by openapi-generator due to missing
-              iner type definition in the spec
             type: string
           type: array
         style: form
@@ -278,8 +274,6 @@ paths:
         name: leader_ids[]
         schema:
           items:
-            description: //TODO automatically added by openapi-generator due to missing
-              iner type definition in the spec
             type: string
           type: array
         style: form
@@ -289,8 +283,6 @@ paths:
         name: user_ids[]
         schema:
           items:
-            description: //TODO automatically added by openapi-generator due to missing
-              iner type definition in the spec
             type: string
           type: array
         style: form
@@ -349,6 +341,49 @@ paths:
       summary: Getting a team from its id
       tags:
       - Teams
+    put:
+      description: This method updates an existing team from given attributes and
+        renders it in case of success.
+      operationId: updateTeam
+      parameters:
+      - in: path
+        name: teamId
+        required: true
+        schema:
+          type: string
+      - description: Team name.
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: List of user id as leaders
+        explode: true
+        in: query
+        name: leader_ids[]
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: List of user id as team members.
+        explode: true
+        in: query
+        name: user_ids[]
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Success
+      summary: Updating a team
+      tags:
+      - Teams
   /users:
     get:
       description: |-
@@ -403,7 +438,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAllTeamsResponse'
+                $ref: '#/components/schemas/GetAllUsersResponse'
           description: Success
       summary: Getting all users
       tags:
@@ -708,6 +743,65 @@ components:
           type: array
       type: object
     GetAllUsersResponse:
+      example:
+        offset: 1
+        records:
+        - firstname: firstname
+          gender: gender
+          identity_ids:
+          - identity_ids
+          - identity_ids
+          team_ids:
+          - team_ids
+          - team_ids
+          timezone: timezone
+          created_at: 2000-01-23T04:56:07.000+00:00
+          external_id: external_id
+          locale: locale
+          enabled: true
+          invitation_pending: true
+          lastname: lastname
+          spoken_languages:
+          - spoken_languages
+          - spoken_languages
+          rc_user_id: rc_user_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          role_id: role_id
+          nickname: nickname
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          email: email
+        - firstname: firstname
+          gender: gender
+          identity_ids:
+          - identity_ids
+          - identity_ids
+          team_ids:
+          - team_ids
+          - team_ids
+          timezone: timezone
+          created_at: 2000-01-23T04:56:07.000+00:00
+          external_id: external_id
+          locale: locale
+          enabled: true
+          invitation_pending: true
+          lastname: lastname
+          spoken_languages:
+          - spoken_languages
+          - spoken_languages
+          rc_user_id: rc_user_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          role_id: role_id
+          nickname: nickname
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          email: email
+        count: 0
+        limit: 6
       properties:
         count:
           format: int32

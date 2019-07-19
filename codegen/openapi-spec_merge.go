@@ -26,4 +26,5 @@ func main() {
 
 	fmt.Printf("WROTE [%v]\n", outfile)
 	fmt.Println("DONE")
+
 }

@@ -127,7 +127,7 @@ This method renders users ordered by creation date (descending).  Authorizationâ
  * @param "TeamId" (optional.String) -  To filter users on given team id.
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
  * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
-@return GetAllTeamsResponse
+@return GetAllUsersResponse
 */
 
 type GetAllUsersOpts struct {
@@ -141,14 +141,14 @@ type GetAllUsersOpts struct {
 	Limit      optional.String
 }
 
-func (a *UsersApiService) GetAllUsers(ctx context.Context, localVarOptionals *GetAllUsersOpts) (GetAllTeamsResponse, *http.Response, error) {
+func (a *UsersApiService) GetAllUsers(ctx context.Context, localVarOptionals *GetAllUsersOpts) (GetAllUsersResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  GetAllTeamsResponse
+		localVarReturnValue  GetAllUsersResponse
 	)
 
 	// create path and map variables
@@ -221,7 +221,7 @@ func (a *UsersApiService) GetAllUsers(ctx context.Context, localVarOptionals *Ge
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v GetAllTeamsResponse
+			var v GetAllUsersResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

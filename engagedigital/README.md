@@ -44,6 +44,7 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**DeleteTeam**](docs/TeamsApi.md#deleteteam) | **Delete** /teams/{teamId} | Deleting a team
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
+*TeamsApi* | [**UpdateTeam**](docs/TeamsApi.md#updateteam) | **Put** /teams/{teamId} | Updating a team
 *UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Deleting a user
 *UsersApi* | [**GetAllUsers**](docs/UsersApi.md#getallusers) | **Get** /users | Getting all users
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Getting a user from its id
