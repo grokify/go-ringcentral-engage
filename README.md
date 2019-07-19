@@ -49,11 +49,11 @@ See the `examples` folder for usage.
   - [x] GET /1.0/content_sources/:id
   - [ ] PUT /1.0/content_sources/:id
 
-- [ ] Folders
+- [x] Folders
   - [x] GET /1.0/folders
   - [x] GET /1.0/folders/:id
   - [x] POST /1.0/folders
-  - [ ] PUT /1.0/folders/:id
+  - [x] PUT /1.0/folders/:id
   - [x] DELETE /1.0/folders/:id
 
 - [ ] Roles

@@ -167,7 +167,92 @@
               "$ref":"#/definitions/Folder"
             }
           }
-        }
+        },
+        "put":{
+          "tags":[
+            "Folders"
+          ],
+          "summary":"Updating a folder",
+          "operationId":"updateFolder",
+          "description":"This method updates an existing folder from given attributes and renders it in case of success.",
+          "consumes":[
+            "application/json"
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+            {
+              "name":"folderId",
+              "type":"string",
+              "in":"path",
+              "required":true
+            },
+            {
+              "name":"label",
+              "description":"Folder’s label (mandatory).",
+              "in":"query",
+              "type":"string",
+              "required":false
+            },
+            {
+              "name":"parent_id",
+              "description":"ID of the parent folder.",
+              "in":"query",
+              "type":"string",
+              "required":false
+            },
+            {
+              "name":"position",
+              "description":"position of the folder. ",
+              "in":"query",
+              "type":"integer",
+              "required":false
+            },
+            {
+              "name":"query",
+              "description":"query of the folder as described in ​Search API documentation.​\\n\\nExample: “​active_and_assigned_to_me:true”",
+              "in":"query",
+              "type":"string",
+              "required":false
+            },
+            {
+              "name":"render_threads_count",
+              "description":"boolean describing display of the number of threads. ",
+              "in":"query",
+              "type":"boolean",
+              "required":false
+            },
+            {
+              "name":"role_restriction[only][]",
+              "description":"list of roles allowed to see this folder. This parameter has to be a hash otherwise it will raise a 400 error. The key should be \"only\". For example: `&role_restriction[only][]=4e5596cdae70f677b5000002`",
+              "in":"query",
+              "type":"array",
+              "required":false,
+              "items":{
+                "type":"string"
+              }
+            },
+            {
+              "name":"team_restriction[only][]",
+              "description":"list of teams allowed to see this folder. Same thing as role_restriction: team_restriction parameter has to be a hash with the key \"only\".",
+              "in":"query",
+              "type":"array",
+              "required":false,
+              "items":{
+                "type":"string"
+              }
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"Success",
+              "schema":{
+                "$ref":"#/definitions/Folder"
+              }
+            }
+          }
+        }  
       },
       "delete":{
         "tags":[
