@@ -120,6 +120,156 @@ paths:
       summary: Getting a source from its id
       tags:
       - Sources
+    put:
+      description: This method updates an existing source from given attributes and
+        renders it in case of success.
+      operationId: updateSource
+      parameters:
+      - explode: false
+        in: path
+        name: sourceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Source name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Activate/deactivate the source (Boolean)
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Channel
+        explode: true
+        in: query
+        name: channel_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Color of the icon (see S​ ource colors​) (Integer)
+        explode: true
+        in: query
+        name: color
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Response time (seconds)
+        explode: true
+        in: query
+        name: sla_response
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: SLA expired strategy ("max", "half" or "base")
+        explode: true
+        in: query
+        name: sla_expired_strategy
+        required: false
+        schema:
+          enum:
+          - max
+          - half
+          - base
+          type: string
+        style: form
+      - description: Priority boost of messages with intervention (Integer)
+        explode: true
+        in: query
+        name: intervention_messages_boost
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Priority boost of transferred tasks (Integer)
+        explode: true
+        in: query
+        name: transferred_tasks_boost
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Hide from statistics (Boolean)
+        explode: true
+        in: query
+        name: hidden_from_stats
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Default categories
+        explode: true
+        in: query
+        name: default_category_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Default categories (agent messages)
+        explode: true
+        in: query
+        name: user_thread_default_category_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Default content language
+        explode: true
+        in: query
+        name: default_content_language
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Auto-detect content language (Boolean)
+        explode: true
+        in: query
+        name: auto_detect_content_language
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Automatic archiving of old contents (Boolean)
+        explode: true
+        in: query
+        name: content_archiving
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Archive contents older than (seconds)
+        explode: true
+        in: query
+        name: content_archiving_period
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+          description: Success
+      summary: Updating a source
+      tags:
+      - Sources
   /folders:
     get:
       description: This method renders folders.

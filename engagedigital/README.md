@@ -42,6 +42,7 @@ Class | Method | HTTP request | Description
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
+*SourcesApi* | [**UpdateSource**](docs/SourcesApi.md#updatesource) | **Put** /content_sources/{sourceId} | Updating a source
 *TeamsApi* | [**CreateTeam**](docs/TeamsApi.md#createteam) | **Post** /teams | Creating a team
 *TeamsApi* | [**DeleteTeam**](docs/TeamsApi.md#deleteteam) | **Delete** /teams/{teamId} | Deleting a team
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
