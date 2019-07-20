@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**DeleteUser**](UsersApi.md#DeleteUser) | **Delete** /users/{userId} | Deleting a user
 [**GetAllUsers**](UsersApi.md#GetAllUsers) | **Get** /users | Getting all users
 [**GetUser**](UsersApi.md#GetUser) | **Get** /users/{userId} | Getting a user from its id
+[**InviteUser**](UsersApi.md#InviteUser) | **Post** /users/invite | Inviting a user
 
 
 
@@ -106,6 +107,65 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **userId** | **string**|  | 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## InviteUser
+
+> User InviteUser(ctx, email, firstname, lastname, roleId, optional)
+Inviting a user
+
+This method invites a new user. In case of success it renders the created user, otherwise, it renders an error (422 HTTP code).  Authorization​: only users that can invite other users. If the user affiliated to the token has the manage_users_of_my_teams permission, the invited user will need to belong to at least one of the teams he’s the leader of. It will not be possible to assign the user to other teams.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**email** | **string**| User email (mandatory). | 
+**firstname** | **string**| User firstname (mandatory). | 
+**lastname** | **string**| User lastname (mandatory). | 
+**roleId** | **string**| User role id (mandatory). | 
+ **optional** | ***InviteUserOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a InviteUserOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **categoryIds** | [**optional.Interface of []string**](string.md)| User list of category ids (multiple). | 
+ **enabled** | **optional.Bool**| Whether the user is enabled or not (boolean). | 
+ **externalId** | **optional.String**| User external id. | 
+ **gender** | **optional.String**| User gender (\&quot;man\&quot; or \&quot;woman\&quot;). | 
+ **identityIds** | [**optional.Interface of []string**](string.md)| User list of identity ids (multiple). | 
+ **locale** | **optional.String**| Language for the user interface. | 
+ **nickname** | **optional.String**| User nickname. | 
+ **teamIds** | [**optional.Interface of []string**](string.md)| User list of team ids (multiple). | 
+ **timezone** | **optional.String**| Use the timezone endpoint to get the timezone name (String), default is empty for | 
+ **spokenLanguages** | [**optional.Interface of []string**](string.md)| List of locales corresponding to the languages spoken by the user (multiple). | 
 
 ### Return type
 

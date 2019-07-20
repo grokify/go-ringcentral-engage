@@ -640,6 +640,65 @@ paths:
       summary: Getting all locales
       tags:
       - Locales
+  /roles:
+    get:
+      description: This method renders roles ordered by creation date (ascending).
+      operationId: getAllRoles
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllRolesResponse'
+          description: Success
+      summary: Getting all roles
+      tags:
+      - Roles
+  /roles/{roleId}:
+    get:
+      description: |-
+        This method renders a role from given id.
+
+        Authorization​: only users that can manage roles.
+      operationId: getRole
+      parameters:
+      - explode: false
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: Success
+      summary: Getting a role from its id
+      tags:
+      - Roles
   /teams:
     get:
       description: This method renders teams ordered by creation date (ascending).
@@ -920,6 +979,149 @@ paths:
       summary: Getting all users
       tags:
       - Users
+  /users/invite:
+    post:
+      description: |-
+        This method invites a new user. In case of success it renders the created user, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that can invite other users. If the user affiliated to the token has the manage_users_of_my_teams permission, the invited user will need to belong to at least one of the teams he’s the leader of. It will not be possible to assign the user to other teams.
+      operationId: inviteUser
+      parameters:
+      - description: User list of category ids (multiple).
+        explode: true
+        in: query
+        name: category_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: User email (mandatory).
+        explode: true
+        in: query
+        name: email
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Whether the user is enabled or not (boolean).
+        explode: true
+        in: query
+        name: enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: User external id.
+        explode: true
+        in: query
+        name: external_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User firstname (mandatory).
+        explode: true
+        in: query
+        name: firstname
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: User gender ("man" or "woman").
+        explode: true
+        in: query
+        name: gender
+        required: false
+        schema:
+          enum:
+          - man
+          - woman
+          type: string
+        style: form
+      - description: User list of identity ids (multiple).
+        explode: true
+        in: query
+        name: identity_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: User lastname (mandatory).
+        explode: true
+        in: query
+        name: lastname
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Language for the user interface.
+        explode: true
+        in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User nickname.
+        explode: true
+        in: query
+        name: nickname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User role id (mandatory).
+        explode: true
+        in: query
+        name: role_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: User list of team ids (multiple).
+        explode: true
+        in: query
+        name: team_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Use the timezone endpoint to get the timezone name (String),
+          default is empty for
+        explode: true
+        in: query
+        name: timezone
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: List of locales corresponding to the languages spoken by the
+          user (multiple).
+        explode: true
+        in: query
+        name: spoken_languages
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+      summary: Inviting a user
+      tags:
+      - Users
   /users/{userId}:
     delete:
       description: |-
@@ -1169,6 +1371,168 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Identity'
+          type: array
+    GetAllRolesResponse:
+      example:
+        offset: 1
+        records:
+        - manage_ice: true
+          update_own_intervention: true
+          author_block_content: true
+          update_settings: true
+          receive_tasks: true
+          manage_reply_assistant: true
+          access_previous_messages: true
+          update_time_sheet: true
+          read_presence: true
+          search_event: true
+          manage_folders: true
+          id: id
+          publish_content: true
+          manage_custom_fields: true
+          manage_topologies: true
+          manage_chat: true
+          invite_user: true
+          read_community: true
+          update_extension: true
+          anonymize_identity: true
+          manage_emails_templates: true
+          export_identity: true
+          update_content_source: true
+          delay_export_content: true
+          read_stats: true
+          use_emoji: true
+          manage_roles: true
+          manage_own_notifications: true
+          read_export: true
+          open_content_thread: true
+          monitor_team_tasks: true
+          manage_teams: true
+          manage_api_access_tokens: true
+          create_user: true
+          manage_custom_notifications: true
+          update_identity: true
+          update_community: true
+          update_intervention: true
+          reply_with_assistant: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          read_content_source: true
+          use_cobrowsing: true
+          impersonate_user: true
+          manage_identities: true
+          read_identity: true
+          update_user: true
+          manage_app_sdk_applications: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          access_pull_mode: true
+          create_content_source: true
+          admin_stamp_answer: true
+          approve_content: true
+          delete_content_thread: true
+          mute_content: true
+          create_community: true
+          monitor_tasks: true
+          read_event: true
+          manage_tags: true
+          label: label
+          manage_categories: true
+          manage_users_of_my_teams: true
+          lock_identity: true
+          create_and_destroy_extension: true
+          close_content_thread: true
+          read_own_stats: true
+          read_user: true
+          access_help_center: true
+          manage_messaging: true
+          manage_rules_engine_rules: true
+          assign_intervention: true
+          search_contents: true
+        - manage_ice: true
+          update_own_intervention: true
+          author_block_content: true
+          update_settings: true
+          receive_tasks: true
+          manage_reply_assistant: true
+          access_previous_messages: true
+          update_time_sheet: true
+          read_presence: true
+          search_event: true
+          manage_folders: true
+          id: id
+          publish_content: true
+          manage_custom_fields: true
+          manage_topologies: true
+          manage_chat: true
+          invite_user: true
+          read_community: true
+          update_extension: true
+          anonymize_identity: true
+          manage_emails_templates: true
+          export_identity: true
+          update_content_source: true
+          delay_export_content: true
+          read_stats: true
+          use_emoji: true
+          manage_roles: true
+          manage_own_notifications: true
+          read_export: true
+          open_content_thread: true
+          monitor_team_tasks: true
+          manage_teams: true
+          manage_api_access_tokens: true
+          create_user: true
+          manage_custom_notifications: true
+          update_identity: true
+          update_community: true
+          update_intervention: true
+          reply_with_assistant: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          read_content_source: true
+          use_cobrowsing: true
+          impersonate_user: true
+          manage_identities: true
+          read_identity: true
+          update_user: true
+          manage_app_sdk_applications: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          access_pull_mode: true
+          create_content_source: true
+          admin_stamp_answer: true
+          approve_content: true
+          delete_content_thread: true
+          mute_content: true
+          create_community: true
+          monitor_tasks: true
+          read_event: true
+          manage_tags: true
+          label: label
+          manage_categories: true
+          manage_users_of_my_teams: true
+          lock_identity: true
+          create_and_destroy_extension: true
+          close_content_thread: true
+          read_own_stats: true
+          read_user: true
+          access_help_center: true
+          manage_messaging: true
+          manage_rules_engine_rules: true
+          assign_intervention: true
+          search_contents: true
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Role'
           type: array
     GetAllSourcesResponse:
       example:
@@ -1467,6 +1831,224 @@ components:
           items:
             type: string
           type: array
+    Role:
+      example:
+        manage_ice: true
+        update_own_intervention: true
+        author_block_content: true
+        update_settings: true
+        receive_tasks: true
+        manage_reply_assistant: true
+        access_previous_messages: true
+        update_time_sheet: true
+        read_presence: true
+        search_event: true
+        manage_folders: true
+        id: id
+        publish_content: true
+        manage_custom_fields: true
+        manage_topologies: true
+        manage_chat: true
+        invite_user: true
+        read_community: true
+        update_extension: true
+        anonymize_identity: true
+        manage_emails_templates: true
+        export_identity: true
+        update_content_source: true
+        delay_export_content: true
+        read_stats: true
+        use_emoji: true
+        manage_roles: true
+        manage_own_notifications: true
+        read_export: true
+        open_content_thread: true
+        monitor_team_tasks: true
+        manage_teams: true
+        manage_api_access_tokens: true
+        create_user: true
+        manage_custom_notifications: true
+        update_identity: true
+        update_community: true
+        update_intervention: true
+        reply_with_assistant: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        read_content_source: true
+        use_cobrowsing: true
+        impersonate_user: true
+        manage_identities: true
+        read_identity: true
+        update_user: true
+        manage_app_sdk_applications: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        access_pull_mode: true
+        create_content_source: true
+        admin_stamp_answer: true
+        approve_content: true
+        delete_content_thread: true
+        mute_content: true
+        create_community: true
+        monitor_tasks: true
+        read_event: true
+        manage_tags: true
+        label: label
+        manage_categories: true
+        manage_users_of_my_teams: true
+        lock_identity: true
+        create_and_destroy_extension: true
+        close_content_thread: true
+        read_own_stats: true
+        read_user: true
+        access_help_center: true
+        manage_messaging: true
+        manage_rules_engine_rules: true
+        assign_intervention: true
+        search_contents: true
+      properties:
+        access_help_center:
+          type: boolean
+        access_previous_messages:
+          type: boolean
+        access_pull_mode:
+          type: boolean
+        admin_stamp_answer:
+          type: boolean
+        anonymize_identity:
+          type: boolean
+        approve_content:
+          type: boolean
+        assign_intervention:
+          type: boolean
+        author_block_content:
+          type: boolean
+        close_content_thread:
+          type: boolean
+        create_and_destroy_extension:
+          type: boolean
+        create_community:
+          type: boolean
+        create_content_source:
+          type: boolean
+        create_user:
+          type: boolean
+        created_at:
+          format: date-time
+          type: string
+        delay_export_content:
+          type: boolean
+        delete_content_thread:
+          type: boolean
+        export_identity:
+          type: boolean
+        id:
+          type: string
+        impersonate_user:
+          type: boolean
+        invite_user:
+          type: boolean
+        label:
+          type: string
+        lock_identity:
+          type: boolean
+        manage_api_access_tokens:
+          type: boolean
+        manage_app_sdk_applications:
+          type: boolean
+        manage_categories:
+          type: boolean
+        manage_chat:
+          type: boolean
+        manage_custom_fields:
+          type: boolean
+        manage_custom_notifications:
+          type: boolean
+        manage_emails_templates:
+          type: boolean
+        manage_folders:
+          type: boolean
+        manage_ice:
+          type: boolean
+        manage_identities:
+          type: boolean
+        manage_messaging:
+          type: boolean
+        manage_own_notifications:
+          type: boolean
+        manage_reply_assistant:
+          type: boolean
+        manage_roles:
+          type: boolean
+        manage_rules_engine_rules:
+          type: boolean
+        manage_tags:
+          type: boolean
+        manage_teams:
+          type: boolean
+        manage_topologies:
+          type: boolean
+        manage_users_of_my_teams:
+          type: boolean
+        monitor_tasks:
+          type: boolean
+        monitor_team_tasks:
+          type: boolean
+        mute_content:
+          type: boolean
+        open_content_thread:
+          type: boolean
+        publish_content:
+          type: boolean
+        read_community:
+          type: boolean
+        read_content_source:
+          type: boolean
+        read_event:
+          type: boolean
+        read_export:
+          type: boolean
+        read_identity:
+          type: boolean
+        read_own_stats:
+          type: boolean
+        read_presence:
+          type: boolean
+        read_stats:
+          type: boolean
+        read_user:
+          type: boolean
+        receive_tasks:
+          type: boolean
+        reply_with_assistant:
+          type: boolean
+        search_contents:
+          type: boolean
+        search_event:
+          type: boolean
+        update_community:
+          type: boolean
+        update_content_source:
+          type: boolean
+        update_extension:
+          type: boolean
+        update_identity:
+          type: boolean
+        update_intervention:
+          type: boolean
+        update_own_intervention:
+          type: boolean
+        update_settings:
+          type: boolean
+        update_time_sheet:
+          type: boolean
+        update_user:
+          type: boolean
+        updated_at:
+          format: date-time
+          type: string
+        use_cobrowsing:
+          type: boolean
+        use_emoji:
+          type: boolean
     Source:
       example:
         error_message: error_message

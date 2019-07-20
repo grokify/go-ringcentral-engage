@@ -42,6 +42,8 @@ Class | Method | HTTP request | Description
 *IdentitiesApi* | [**GetAllIdentities**](docs/IdentitiesApi.md#getallidentities) | **Get** /identities | Getting all identities
 *IdentitiesApi* | [**GetIdentity**](docs/IdentitiesApi.md#getidentity) | **Get** /identities/{identityId} | Getting an identity from its id
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
+*RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
+*RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
 *SourcesApi* | [**UpdateSource**](docs/SourcesApi.md#updatesource) | **Put** /content_sources/{sourceId} | Updating a source
@@ -54,6 +56,7 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Deleting a user
 *UsersApi* | [**GetAllUsers**](docs/UsersApi.md#getallusers) | **Get** /users | Getting all users
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Getting a user from its id
+*UsersApi* | [**InviteUser**](docs/UsersApi.md#inviteuser) | **Post** /users/invite | Inviting a user
 
 
 ## Documentation For Models
@@ -63,12 +66,14 @@ Class | Method | HTTP request | Description
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
+ - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [Identity](docs/Identity.md)
  - [Locale](docs/Locale.md)
  - [Restriction](docs/Restriction.md)
+ - [Role](docs/Role.md)
  - [Source](docs/Source.md)
  - [Team](docs/Team.md)
  - [Timezone](docs/Timezone.md)

@@ -64,8 +64,8 @@ See the `examples` folder for usage.
   - [x] DELETE /1.0/folders/:id
 
 - [ ] Roles
-  - [ ] GET /1.0/roles
-  - [ ] GET /1.0/roles/:id
+  - [x] GET /1.0/roles
+  - [x] GET /1.0/roles/:id
   - [ ] POST /1.0/roles
   - [ ] PUT /1.0/roles/:id
 
@@ -96,7 +96,7 @@ See the `examples` folder for usage.
   - [x] GET /1.0/users/:id
   - [ ] POST /1.0/users
   - [ ] PUT /1.0/users/:id
-  - [ ] POST /1.0/users/invite
+  - [x] POST /1.0/users/invite
   - [x] DELETE /1.0/users/:id
 
 - [ ] User Source Permissions
