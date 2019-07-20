@@ -9,7 +9,7 @@
 [![Twitter][twitter-svg]][twitter-link]
 
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-27%2F127%20%3D%2021%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-26%2F127%20%3D%2020%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -45,7 +45,7 @@ See the `examples` folder for usage.
 
 ## Coverage
 
-27/127 APIs - 21%
+26/127 APIs - 20%
 
 - [x] Communities
   - [x] GET /1.0/communities
