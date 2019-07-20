@@ -256,8 +256,8 @@ Run:
 
 ```
 $ cd codegen
-$ go run openapi-spec_merge.go
-$ sh openapi-generator_command.sh
+$ go run merge.go -v 3
+$ sh generate.sh
 $ rm -rf ../engagedigital
 $ mv engagedigital ..
 ```
