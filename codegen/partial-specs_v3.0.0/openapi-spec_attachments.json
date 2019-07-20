@@ -136,6 +136,12 @@
       }
     ],
     "components":{
+      "securitySchemes":{
+        "bearerAuth":{
+          "type":"http",
+          "scheme": "bearer"
+        }
+      },
       "schemas":{
         "GetAllAttachmentsResponse":{
           "properties":{
