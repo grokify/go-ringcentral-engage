@@ -513,6 +513,117 @@ paths:
       summary: Updating a folder
       tags:
       - Folders
+  /identities:
+    get:
+      description: This method renders identities ordered by creation date (descending).
+        Only identities in sources where token’s user has “read” permission are returned.
+      operationId: getAllIdentities
+      parameters:
+      - description: To filter identities on given community id.
+        explode: true
+        in: query
+        name: community_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter on given group id.
+        explode: true
+        in: query
+        name: identity_group_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter identities on given user id.
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To change the criteria chosen to sort the identities. The value
+          can be “created_at” or
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at
+          - updated_at
+          type: string
+        style: form
+      - description: To filter identities on given user id
+        explode: true
+        in: query
+        name: foreign_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter identities on given uuid
+        explode: true
+        in: query
+        name: uuid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllIdentitiesResponse'
+          description: Success
+      summary: Getting all identities
+      tags:
+      - Identities
+  /identities/{identityId}:
+    get:
+      description: This method renders an identity from given id. If token’s user
+        does not have “read” on identity’s source community a 404 HTTP response will
+        be returned.
+      operationId: getIdentity
+      parameters:
+      - explode: false
+        in: path
+        name: identityId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Identity'
+          description: Success
+      summary: Getting an identity from its id
+      tags:
+      - Identities
   /locales:
     get:
       description: This method renders all available locales.
@@ -993,6 +1104,72 @@ components:
           items:
             $ref: '#/components/schemas/Folder'
           type: array
+    GetAllIdentitiesResponse:
+      example:
+        offset: 1
+        records:
+        - home_phone: home_phone
+          firstname: firstname
+          extra_values: '{}'
+          gender: gender
+          user_ids:
+          - user_ids
+          - user_ids
+          created_at: 2000-01-23T04:56:07.000+00:00
+          display_name: display_name
+          type: type
+          uuid: uuid
+          community_url: community_url
+          lastname: lastname
+          foreign_id: foreign_id
+          community_id: community_id
+          avatar_url: avatar_url
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          mobile_phone: mobile_phone
+          identity_group_id: identity_group_id
+          company: company
+          id: id
+          screenname: screenname
+          email: email
+        - home_phone: home_phone
+          firstname: firstname
+          extra_values: '{}'
+          gender: gender
+          user_ids:
+          - user_ids
+          - user_ids
+          created_at: 2000-01-23T04:56:07.000+00:00
+          display_name: display_name
+          type: type
+          uuid: uuid
+          community_url: community_url
+          lastname: lastname
+          foreign_id: foreign_id
+          community_id: community_id
+          avatar_url: avatar_url
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          mobile_phone: mobile_phone
+          identity_group_id: identity_group_id
+          company: company
+          id: id
+          screenname: screenname
+          email: email
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Identity'
+          type: array
     GetAllSourcesResponse:
       example:
         offset: 1
@@ -1191,6 +1368,78 @@ components:
           items:
             $ref: '#/components/schemas/User'
           type: array
+    Identity:
+      example:
+        home_phone: home_phone
+        firstname: firstname
+        extra_values: '{}'
+        gender: gender
+        user_ids:
+        - user_ids
+        - user_ids
+        created_at: 2000-01-23T04:56:07.000+00:00
+        display_name: display_name
+        type: type
+        uuid: uuid
+        community_url: community_url
+        lastname: lastname
+        foreign_id: foreign_id
+        community_id: community_id
+        avatar_url: avatar_url
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        mobile_phone: mobile_phone
+        identity_group_id: identity_group_id
+        company: company
+        id: id
+        screenname: screenname
+        email: email
+      properties:
+        avatar_url:
+          type: string
+        community_id:
+          type: string
+        community_url:
+          type: string
+        company:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        display_name:
+          type: string
+        email:
+          type: string
+        extra_values:
+          type: object
+        firstname:
+          type: string
+        foreign_id:
+          type: string
+        gender:
+          type: string
+        home_phone:
+          type: string
+        id:
+          type: string
+        identity_group_id:
+          type: string
+        lastname:
+          type: string
+        mobile_phone:
+          type: string
+        screenname:
+          type: string
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_ids:
+          items:
+            type: string
+          type: array
+        uuid:
+          type: string
     Locale:
       example:
         code: code

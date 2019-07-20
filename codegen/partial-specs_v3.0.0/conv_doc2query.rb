@@ -30,6 +30,14 @@ doc = '● name: Source name
 ● content_archiving: Automatic archiving of old contents (Boolean)
 ● content_archiving_period: Archive contents older than (seconds)'
 
+doc = '● community_id: To filter identities on given community id.
+● identity_group_id: To filter on given group id.
+● user_id: To filter identities on given user id.
+● sort: To change the criteria chosen to sort the identities. The value can be “created_at” or
+“updated_at”.
+● foreign_id: To filter identities on given user id
+● uuid: To filter identities on given uuid'
+
 parameters = []
 
 doc.split("\n").each do |line|

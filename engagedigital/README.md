@@ -39,6 +39,8 @@ Class | Method | HTTP request | Description
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
 *FoldersApi* | [**GetFolder**](docs/FoldersApi.md#getfolder) | **Get** /folders/{folderId} | Getting a folder from its id
 *FoldersApi* | [**UpdateFolder**](docs/FoldersApi.md#updatefolder) | **Put** /folders/{folderId} | Updating a folder
+*IdentitiesApi* | [**GetAllIdentities**](docs/IdentitiesApi.md#getallidentities) | **Get** /identities | Getting all identities
+*IdentitiesApi* | [**GetIdentity**](docs/IdentitiesApi.md#getidentity) | **Get** /identities/{identityId} | Getting an identity from its id
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
@@ -60,9 +62,11 @@ Class | Method | HTTP request | Description
  - [Folder](docs/Folder.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
+ - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
+ - [Identity](docs/Identity.md)
  - [Locale](docs/Locale.md)
  - [Restriction](docs/Restriction.md)
  - [Source](docs/Source.md)

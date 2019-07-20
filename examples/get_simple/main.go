@@ -80,6 +80,24 @@ func main() {
 			}
 			fmtutil.PrintJSON(info)
 		}
+	case "identity":
+		if len(opts.Id) > 0 {
+			info, resp, err := client.IdentitiesApi.GetIdentity(context.Background(), opts.Id)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		} else {
+			info, resp, err := client.IdentitiesApi.GetAllIdentities(context.Background(), nil)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		}
 	case "locale":
 		info, resp, err := client.LocalesApi.GetAllLocales(context.Background())
 		if err != nil {
