@@ -1,8 +1,8 @@
 # RingCentral Engage SDK for Go
 
 [![Build Status][build-status-svg]][build-status-link]
-![API Coverage][api-coverage-svg]
 [![Go Report Card][goreport-svg]][goreport-link]
+![API Coverage][api-coverage-svg]
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
