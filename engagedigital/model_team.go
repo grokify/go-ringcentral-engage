@@ -15,7 +15,7 @@ import (
 
 type Team struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
-	Id        string    `json:"id,omitempty"`
+	Id        string    `json:"id"`
 	LeaderIds []string  `json:"leader_ids,omitempty"`
 	Name      string    `json:"name,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`

@@ -14,13 +14,13 @@ import (
 )
 
 type Folder struct {
-	CreatedAt          time.Time              `json:"created_at,omitempty"`
-	Id                 string                 `json:"id,omitempty"`
-	Label              string                 `json:"label,omitempty"`
-	ParentId           string                 `json:"parent_id,omitempty"`
-	Position           int32                  `json:"position,omitempty"`
-	Query              string                 `json:"query,omitempty"`
-	RenderThreadsCount bool                   `json:"render_threads_count,omitempty"`
-	RoleRestriction    map[string]interface{} `json:"role_restriction,omitempty"`
-	UpdatedAt          time.Time              `json:"updated_at,omitempty"`
+	CreatedAt          time.Time   `json:"created_at,omitempty"`
+	Id                 string      `json:"id"`
+	Label              string      `json:"label,omitempty"`
+	ParentId           string      `json:"parent_id,omitempty"`
+	Position           int32       `json:"position,omitempty"`
+	Query              string      `json:"query,omitempty"`
+	RenderThreadsCount bool        `json:"render_threads_count,omitempty"`
+	RoleRestriction    Restriction `json:"role_restriction,omitempty"`
+	UpdatedAt          time.Time   `json:"updated_at,omitempty"`
 }

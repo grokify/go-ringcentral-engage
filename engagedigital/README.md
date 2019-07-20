@@ -38,6 +38,7 @@ Class | Method | HTTP request | Description
 *FoldersApi* | [**DeleteFolder**](docs/FoldersApi.md#deletefolder) | **Delete** /folders/{folderId} | Deleting a folder
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
 *FoldersApi* | [**GetFolder**](docs/FoldersApi.md#getfolder) | **Get** /folders/{folderId} | Getting a folder from its id
+*FoldersApi* | [**UpdateFolder**](docs/FoldersApi.md#updatefolder) | **Put** /folders/{folderId} | Updating a folder
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## GetAllLocales
 
-> map[string]interface{} GetAllLocales(ctx, )
+> []Locale GetAllLocales(ctx, )
 Getting all locales
 
 This method renders all available locales.
@@ -21,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**map[string]interface{}**](map[string]interface{}.md)
+[**[]Locale**](Locale.md)
 
 ### Authorization
 

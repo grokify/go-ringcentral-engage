@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ExternalId** | **string** |  | [optional] 
 **Firstname** | **string** |  | [optional] 
 **Gender** | **string** |  | [optional] 
-**Id** | **string** |  | [optional] 
+**Id** | **string** |  | 
 **IdentityIds** | **[]string** |  | [optional] 
 **InvitationPending** | **bool** |  | [optional] 
 **Lastname** | **string** |  | [optional] 

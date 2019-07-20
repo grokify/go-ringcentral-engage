@@ -21,7 +21,7 @@ type User struct {
 	ExternalId        string    `json:"external_id,omitempty"`
 	Firstname         string    `json:"firstname,omitempty"`
 	Gender            string    `json:"gender,omitempty"`
-	Id                string    `json:"id,omitempty"`
+	Id                string    `json:"id"`
 	IdentityIds       []string  `json:"identity_ids,omitempty"`
 	InvitationPending bool      `json:"invitation_pending,omitempty"`
 	Lastname          string    `json:"lastname,omitempty"`

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## GetAllTimezones
 
-> map[string]interface{} GetAllTimezones(ctx, )
+> []Timezone GetAllTimezones(ctx, )
 Getting all timezones
 
 This method renders all available timezones.
@@ -21,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**map[string]interface{}**](map[string]interface{}.md)
+[**[]Timezone**](Timezone.md)
 
 ### Authorization
 

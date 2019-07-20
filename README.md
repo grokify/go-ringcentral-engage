@@ -9,7 +9,7 @@
 [![Twitter][twitter-svg]][twitter-link]
 
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-18%2F127%20%3D%2014%25-red.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-20%2F127%20%3D%2015%25-red.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -41,7 +41,7 @@ See the `examples` folder for usage.
 
 ## Coverage
 
-18/127 APIs - 14%
+20/127 APIs - 15%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -183,11 +183,11 @@ See the `examples` folder for usage.
   - [ ] GET /1.0/settings
   - [ ] PUT /1.0/settings
 
-- [ ] Locales
-  - [ ] GET /1.0/locales
+- [x] Locales
+  - [x] GET /1.0/locales
 
-- [ ] Timezones
-  - [ ] GET /1.0/timezones
+- [x] Timezones
+  - [x] GET /1.0/timezones
 
 - [ ] Presence statuses
   - [ ] GET /1.0/presence_status
@@ -257,9 +257,11 @@ $ sh openapi-generator_command.sh
 $ rm -rf ../engagedigital
 $ mv engagedigital ..
 ```
+# Credits
 
-# Notes
+Thanks to the following apps for making this possible:
 
-OpenAPI spec is validated here:
-
-https://apidevtools.org/swagger-parser/online/
+* https://github.com/OpenAPITools/openapi-generator
+* https://github.com/getkin/kin-openapi/tree/master/openapi3
+* https://apidevtools.org/swagger-parser/online/
+* https://mermade.org.uk/openapi-converter

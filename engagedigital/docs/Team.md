@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | [**time.Time**](time.Time.md) |  | [optional] 
-**Id** | **string** |  | [optional] 
+**Id** | **string** |  | 
 **LeaderIds** | **[]string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **UpdatedAt** | [**time.Time**](time.Time.md) |  | [optional] 

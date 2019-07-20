@@ -27,16 +27,16 @@ type LocalesApiService service
 LocalesApiService Getting all locales
 This method renders all available locales.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return map[string]interface{}
+@return []Locale
 */
-func (a *LocalesApiService) GetAllLocales(ctx context.Context) (map[string]interface{}, *http.Response, error) {
+func (a *LocalesApiService) GetAllLocales(ctx context.Context) ([]Locale, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  []Locale
 	)
 
 	// create path and map variables
@@ -85,7 +85,7 @@ func (a *LocalesApiService) GetAllLocales(ctx context.Context) (map[string]inter
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v map[string]interface{}
+			var v []Locale
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

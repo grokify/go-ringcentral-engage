@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.0
 info:
   termsOfService: https://developer.ringcentral.com
   title: Engage Digital API
@@ -7,12 +7,6 @@ servers:
 - url: https://DOMAIN.api.engagement.dimelo.com/1.0
 tags:
 - name: Communities
-- name: Folders
-- name: Locales
-- name: Sources
-- name: Teams
-- name: Timezones
-- name: Users
 paths:
   /communities:
     get:
@@ -20,16 +14,24 @@ paths:
       operationId: getAllCommunities
       parameters:
       - description: The record index to start. Default value is 0.
+        explode: true
         in: query
         name: offset
+        required: false
         schema:
+          format: int32
           type: integer
+        style: form
       - description: The max number of records to return. Default value is 30, max
           value is 150.
+        explode: true
         in: query
         name: limit
+        required: false
         schema:
+          format: int32
           type: string
+        style: form
       responses:
         200:
           content:
@@ -45,11 +47,13 @@ paths:
       description: This method renders a community from given id.
       operationId: getCommunity
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: communityId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -66,16 +70,24 @@ paths:
       operationId: getAllSources
       parameters:
       - description: The record index to start. Default value is 0.
+        explode: true
         in: query
         name: offset
+        required: false
         schema:
+          format: int32
           type: integer
+        style: form
       - description: The max number of records to return. Default value is 30, max
           value is 150.
+        explode: true
         in: query
         name: limit
+        required: false
         schema:
+          format: int32
           type: string
+        style: form
       responses:
         200:
           content:
@@ -91,11 +103,13 @@ paths:
       description: This method renders a source from given id.
       operationId: getSource
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: sourceId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -112,16 +126,24 @@ paths:
       operationId: getAllFolders
       parameters:
       - description: The record index to start. Default value is 0.
+        explode: true
         in: query
         name: offset
+        required: false
         schema:
+          format: int32
           type: integer
+        style: form
       - description: The max number of records to return. Default value is 30, max
           value is 150.
+        explode: true
         in: query
         name: limit
+        required: false
         schema:
+          format: int32
           type: string
+        style: form
       responses:
         200:
           content:
@@ -138,37 +160,53 @@ paths:
       operationId: createFolder
       parameters:
       - description: Folder’s label (mandatory).
+        explode: true
         in: query
         name: label
+        required: false
         schema:
           type: string
+        style: form
       - description: ID of the parent folder.
+        explode: true
         in: query
         name: parent_id
+        required: false
         schema:
           type: string
+        style: form
       - description: 'position of the folder. '
+        explode: true
         in: query
         name: position
+        required: false
         schema:
           type: integer
+        style: form
       - description: 'query of the folder as described in ​Search API documentation.​\n\nExample:
           “​active_and_assigned_to_me:true”'
+        explode: true
         in: query
         name: query
+        required: false
         schema:
           type: string
+        style: form
       - description: 'boolean describing display of the number of threads. '
+        explode: true
         in: query
         name: render_threads_count
+        required: false
         schema:
           type: boolean
+        style: form
       - description: 'list of roles allowed to see this folder. This parameter has
           to be a hash otherwise it will raise a 400 error. The key should be "only".
           For example: `&role_restriction[only][]=4e5596cdae70f677b5000002`'
-        explode: false
+        explode: true
         in: query
         name: role_restriction[only][]
+        required: false
         schema:
           items:
             type: string
@@ -176,9 +214,10 @@ paths:
         style: form
       - description: 'list of teams allowed to see this folder. Same thing as role_restriction:
           team_restriction parameter has to be a hash with the key "only".'
-        explode: false
+        explode: true
         in: query
         name: team_restriction[only][]
+        required: false
         schema:
           items:
             type: string
@@ -200,11 +239,13 @@ paths:
         itself. It renders a 404 if id is invalid.
       operationId: deleteFolder
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: folderId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -219,11 +260,13 @@ paths:
       description: This method renders a folder from given id.
       operationId: getFolder
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: folderId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -232,6 +275,92 @@ paths:
                 $ref: '#/components/schemas/Folder'
           description: Success
       summary: Getting a folder from its id
+      tags:
+      - Folders
+    put:
+      description: This method updates an existing folder from given attributes and
+        renders it in case of success.
+      operationId: updateFolder
+      parameters:
+      - explode: false
+        in: path
+        name: folderId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Folder’s label (mandatory).
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: ID of the parent folder.
+        explode: true
+        in: query
+        name: parent_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'position of the folder. '
+        explode: true
+        in: query
+        name: position
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: 'query of the folder as described in ​Search API documentation.​\n\nExample:
+          “​active_and_assigned_to_me:true”'
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'boolean describing display of the number of threads. '
+        explode: true
+        in: query
+        name: render_threads_count
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: 'list of roles allowed to see this folder. This parameter has
+          to be a hash otherwise it will raise a 400 error. The key should be "only".
+          For example: `&role_restriction[only][]=4e5596cdae70f677b5000002`'
+        explode: true
+        in: query
+        name: role_restriction[only][]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'list of teams allowed to see this folder. Same thing as role_restriction:
+          team_restriction parameter has to be a hash with the key "only".'
+        explode: true
+        in: query
+        name: team_restriction[only][]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: Success
+      summary: Updating a folder
       tags:
       - Folders
   /locales:
@@ -243,7 +372,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                items:
+                  $ref: '#/components/schemas/Locale'
+                type: array
           description: List of all locales
       summary: Getting all locales
       tags:
@@ -254,16 +385,24 @@ paths:
       operationId: getAllTeams
       parameters:
       - description: The record index to start. Default value is 0.
+        explode: true
         in: query
         name: offset
+        required: false
         schema:
+          format: int32
           type: integer
+        style: form
       - description: The max number of records to return. Default value is 30, max
           value is 150.
+        explode: true
         in: query
         name: limit
+        required: false
         schema:
+          format: int32
           type: string
+        style: form
       responses:
         200:
           content:
@@ -280,14 +419,18 @@ paths:
       operationId: createTeam
       parameters:
       - description: Team name.
+        explode: true
         in: query
         name: name
+        required: false
         schema:
           type: string
+        style: form
       - description: List of user id as leaders
         explode: true
         in: query
         name: leader_ids[]
+        required: false
         schema:
           items:
             type: string
@@ -297,6 +440,7 @@ paths:
         explode: true
         in: query
         name: user_ids[]
+        required: false
         schema:
           items:
             type: string
@@ -318,16 +462,21 @@ paths:
         It renders a 404 if id is invalid.
       operationId: deleteTeam
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: teamId
         required: true
         schema:
           type: string
+        style: simple
       - description: ID of a category to recategorize (optional).
+        explode: true
         in: query
         name: take_over_category_id
+        required: false
         schema:
           type: string
+        style: form
       responses:
         200:
           content:
@@ -342,11 +491,13 @@ paths:
       description: This method renders a team from given id.
       operationId: getTeam
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: teamId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -362,20 +513,26 @@ paths:
         renders it in case of success.
       operationId: updateTeam
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: teamId
         required: true
         schema:
           type: string
+        style: simple
       - description: Team name.
+        explode: true
         in: query
         name: name
+        required: false
         schema:
           type: string
+        style: form
       - description: List of user id as leaders
         explode: true
         in: query
         name: leader_ids[]
+        required: false
         schema:
           items:
             type: string
@@ -385,6 +542,7 @@ paths:
         explode: true
         in: query
         name: user_ids[]
+        required: false
         schema:
           items:
             type: string
@@ -409,7 +567,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                items:
+                  $ref: '#/components/schemas/Timezone'
+                type: array
           description: List of all timezones
       summary: Getting all timezones
       tags:
@@ -423,46 +583,72 @@ paths:
       operationId: getAllUsers
       parameters:
       - description: To filter users on given email.
+        explode: true
         in: query
         name: email
+        required: false
         schema:
           type: string
+        style: form
       - description: To filter users on given category id.
+        explode: true
         in: query
         name: category_id
+        required: false
         schema:
           type: string
+        style: form
       - description: To filter users on given identity id.
+        explode: true
         in: query
         name: identity_id
+        required: false
         schema:
           type: string
+        style: form
       - description: To filter users on given external id.
+        explode: true
         in: query
         name: external_id
+        required: false
         schema:
           type: string
+        style: form
       - description: To filter users on given role id.
+        explode: true
         in: query
         name: role_id
+        required: false
         schema:
           type: string
+        style: form
       - description: To filter users on given team id.
+        explode: true
         in: query
         name: team_id
+        required: false
         schema:
           type: string
+        style: form
       - description: The record index to start. Default value is 0.
+        explode: true
         in: query
         name: offset
+        required: false
         schema:
+          format: int32
           type: integer
+        style: form
       - description: The max number of records to return. Default value is 30, max
           value is 150.
+        explode: true
         in: query
         name: limit
+        required: false
         schema:
+          format: int32
           type: string
+        style: form
       responses:
         200:
           content:
@@ -481,11 +667,13 @@ paths:
         Authorization​: only users that can update users. The user affiliated to the token must have at least all the permissions of the other user. If the user affiliated to the token has the manage_users_of_my_teams permission, the deleted user will need to belong to at least one of the teams he’s the leader of.
       operationId: deleteUser
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: userId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -500,11 +688,13 @@ paths:
       description: This method renders a user from given id.
       operationId: getUser
       parameters:
-      - in: path
+      - explode: false
+        in: path
         name: userId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         200:
           content:
@@ -540,7 +730,6 @@ components:
         updated_at:
           format: date-time
           type: string
-      type: object
     Folder:
       example:
         render_threads_count: true
@@ -548,7 +737,10 @@ components:
         parent_id: parent_id
         query: query
         created_at: 2000-01-23T04:56:07.000+00:00
-        role_restriction: '{}'
+        role_restriction:
+          only:
+          - only
+          - only
         id: id
         label: label
         position: 5
@@ -569,11 +761,12 @@ components:
         render_threads_count:
           type: boolean
         role_restriction:
-          type: object
+          $ref: '#/components/schemas/Restriction'
         updated_at:
           format: date-time
           type: string
-      type: object
+      required:
+      - id
     GetAllCommunitiesResponse:
       example:
         offset: 1
@@ -606,7 +799,6 @@ components:
           items:
             $ref: '#/components/schemas/Community'
           type: array
-      type: object
     GetAllFoldersResponse:
       example:
         offset: 1
@@ -616,7 +808,10 @@ components:
           parent_id: parent_id
           query: query
           created_at: 2000-01-23T04:56:07.000+00:00
-          role_restriction: '{}'
+          role_restriction:
+            only:
+            - only
+            - only
           id: id
           label: label
           position: 5
@@ -625,7 +820,10 @@ components:
           parent_id: parent_id
           query: query
           created_at: 2000-01-23T04:56:07.000+00:00
-          role_restriction: '{}'
+          role_restriction:
+            only:
+            - only
+            - only
           id: id
           label: label
           position: 5
@@ -645,7 +843,6 @@ components:
           items:
             $ref: '#/components/schemas/Folder'
           type: array
-      type: object
     GetAllSourcesResponse:
       example:
         offset: 1
@@ -657,7 +854,7 @@ components:
           - default_category_ids
           color: 5
           default_content_language: default_content_language
-          sla_expired_strategy: sla_expired_strategy
+          sla_expired_strategy: max
           active: true
           created_at: 2000-01-23T04:56:07.000+00:00
           content_archiving: true
@@ -689,7 +886,7 @@ components:
           - default_category_ids
           color: 5
           default_content_language: default_content_language
-          sla_expired_strategy: sla_expired_strategy
+          sla_expired_strategy: max
           active: true
           created_at: 2000-01-23T04:56:07.000+00:00
           content_archiving: true
@@ -730,7 +927,6 @@ components:
           items:
             $ref: '#/components/schemas/Source'
           type: array
-      type: object
     GetAllTeamsResponse:
       example:
         offset: 1
@@ -771,7 +967,6 @@ components:
           items:
             $ref: '#/components/schemas/Team'
           type: array
-      type: object
     GetAllUsersResponse:
       example:
         offset: 1
@@ -846,8 +1041,11 @@ components:
           items:
             $ref: '#/components/schemas/User'
           type: array
-      type: object
     Locale:
+      example:
+        code: code
+        name: name
+        interface: true
       properties:
         code:
           type: string
@@ -855,14 +1053,16 @@ components:
           type: boolean
         name:
           type: string
-      type: object
     Restriction:
+      example:
+        only:
+        - only
+        - only
       properties:
         only:
           items:
             type: string
           type: array
-      type: object
     Source:
       example:
         error_message: error_message
@@ -872,7 +1072,7 @@ components:
         - default_category_ids
         color: 5
         default_content_language: default_content_language
-        sla_expired_strategy: sla_expired_strategy
+        sla_expired_strategy: max
         active: true
         created_at: 2000-01-23T04:56:07.000+00:00
         content_archiving: true
@@ -951,6 +1151,10 @@ components:
           type: string
         sla_expired_strategy:
           description: SLA expired strategy ("max", "half" or "base")
+          enum:
+          - max
+          - half
+          - base
           type: string
         sla_response:
           description: Response time (seconds)
@@ -976,7 +1180,6 @@ components:
           items:
             type: string
           type: array
-      type: object
     Team:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -1008,16 +1211,17 @@ components:
           items:
             type: string
           type: array
-      type: object
+      required:
+      - id
     Timezone:
+      example:
+        utc_offset: ""
+        name: ""
       properties:
         name:
           format: string
-          type: object
         utc_offset:
           format: integer
-          type: object
-      type: object
     User:
       example:
         firstname: firstname
@@ -1096,4 +1300,5 @@ components:
         updated_at:
           format: date-time
           type: string
-      type: object
+      required:
+      - id
