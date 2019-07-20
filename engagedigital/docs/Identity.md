@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Gender** | **string** |  | [optional] 
 **HomePhone** | **string** |  | [optional] 
 **Id** | **string** |  | [optional] 
-**IdentityGroupId** | **string** |  | [optional] 
+**IdentityGroupId** | **string** | The identity group id references the identity group that contains all informations (phone, notes, etc.). Many identities may belong to this group. If the identity group id is null, it means that identity does not have a group and any extra information. Please refer to identity groups API for more informations. | [optional] 
 **Lastname** | **string** |  | [optional] 
 **MobilePhone** | **string** |  | [optional] 
 **Screenname** | **string** |  | [optional] 

@@ -39,6 +39,10 @@ $ go get github.com/grokify/go-ringcental-engage/...
 
 See the `examples` folder for usage.
 
+## Documentation
+
+[engagedigital/README.md](https://github.com/grokify/go-ringcentral-engage/blob/master/engagedigital/README.md)
+
 ## Coverage
 
 23/127 APIs - 18%
