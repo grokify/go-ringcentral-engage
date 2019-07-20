@@ -109,6 +109,27 @@ doc = '
   }
 '
 
+doc = '
+{  "id": "5b87a6b2f042de5f94fabf8d",
+
+  "created_at": "2018-08-30T08:11:30Z",
+  "updated_at": "2018-08-30T08:11:30Z",
+  "content_type": "image/jpeg",
+  "filename": "cat.jpeg",
+  "foreign_id": null,
+  
+
+  "size": 700754,
+  "url": "http://domain-test.engagement.dimelo.dev/attachments/5b87a6b2f042de5f94fabf8d",
+ 
+
+  "video_metadata": [],
+  "embed": false,
+  "public?": true
+
+}
+'
+
 properties = {}
 
 object = MultiJson.load doc

@@ -32,6 +32,9 @@ All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AttachmentsApi* | [**CreateAttachment**](docs/AttachmentsApi.md#createattachment) | **Post** /attachments | Creating an attachment
+*AttachmentsApi* | [**GetAllAttachments**](docs/AttachmentsApi.md#getallattachments) | **Get** /attachments | Getting all attachments
+*AttachmentsApi* | [**GetAttachment**](docs/AttachmentsApi.md#getattachment) | **Get** /attachments/{attachmentId} | Getting an attachment from its id
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
 *FoldersApi* | [**CreateFolder**](docs/FoldersApi.md#createfolder) | **Post** /folders | Creating a folder
@@ -61,8 +64,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [Attachment](docs/Attachment.md)
  - [Community](docs/Community.md)
  - [Folder](docs/Folder.md)
+ - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)

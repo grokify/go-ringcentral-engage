@@ -6,8 +6,92 @@ info:
 servers:
 - url: https://DOMAIN.api.engagement.dimelo.com/1.0
 tags:
-- name: Communities
+- name: Attachments
 paths:
+  /attachments:
+    get:
+      description: This method renders attachments ordered by creation date (descending).
+      operationId: getAllAttachments
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllAttachmentsResponse'
+          description: Success
+      summary: Getting all attachments
+      tags:
+      - Attachments
+    post:
+      description: This method allows you to create an new attachment.
+      operationId: createAttachment
+      requestBody:
+        content:
+          'multipart/form-data:':
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+                private:
+                  enum:
+                  - "true"
+                  - =1
+                  type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Success
+        422:
+          description: Compose is not supported on this source (compose_disabled_on_source)
+      summary: Creating an attachment
+      tags:
+      - Attachments
+  /attachments/{attachmentId}:
+    get:
+      description: This method renders an attachment from given id.
+      operationId: getAttachment
+      parameters:
+      - explode: false
+        in: path
+        name: attachmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Success
+      summary: Getting an attachment from its id
+      tags:
+      - Attachments
   /communities:
     get:
       description: This method renders communities ordered by creation date (ascending).
@@ -1119,6 +1203,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
           description: Success
+        422:
+          description: Unprocessable Entity
       summary: Inviting a user
       tags:
       - Users
@@ -1170,6 +1256,48 @@ paths:
       - Users
 components:
   schemas:
+    Attachment:
+      example:
+        foreign_id: foreign_id
+        video_metadata:
+        - video_metadata
+        - video_metadata
+        filename: filename
+        content_type: content_type
+        size: 5
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        created_at: 2000-01-23T04:56:07.000+00:00
+        embed: true
+        id: id
+        public?: true
+        url: url
+      properties:
+        content_type:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        embed:
+          type: boolean
+        filename:
+          type: string
+        foreign_id:
+          type: string
+        id:
+          type: string
+        public?:
+          type: boolean
+        size:
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
+        url:
+          type: string
+        video_metadata:
+          items:
+            type: string
+          type: array
     Community:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -1230,6 +1358,52 @@ components:
           type: string
       required:
       - id
+    GetAllAttachmentsResponse:
+      example:
+        offset: 1
+        records:
+        - foreign_id: foreign_id
+          video_metadata:
+          - video_metadata
+          - video_metadata
+          filename: filename
+          content_type: content_type
+          size: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          embed: true
+          id: id
+          public?: true
+          url: url
+        - foreign_id: foreign_id
+          video_metadata:
+          - video_metadata
+          - video_metadata
+          filename: filename
+          content_type: content_type
+          size: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          embed: true
+          id: id
+          public?: true
+          url: url
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Attachment'
+          type: array
     GetAllCommunitiesResponse:
       example:
         offset: 1

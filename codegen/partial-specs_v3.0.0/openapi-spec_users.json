@@ -333,10 +333,10 @@
                   "$ref":"#/components/schemas/User"
                 }
               }
-            },
-            "422":{
-              "description":"Unprocessable Entity"
             }
+          },
+          "422":{
+            "description":"Unprocessable Entity"
           }
         }
       }
