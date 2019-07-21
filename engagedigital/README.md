@@ -52,6 +52,11 @@ Class | Method | HTTP request | Description
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
 *SourcesApi* | [**UpdateSource**](docs/SourcesApi.md#updatesource) | **Put** /content_sources/{sourceId} | Updating a source
+*TagsApi* | [**CreateTag**](docs/TagsApi.md#createtag) | **Post** /tags | Creating a tag
+*TagsApi* | [**DeleteTag**](docs/TagsApi.md#deletetag) | **Delete** /tags/{tagId} | Deleting a tag
+*TagsApi* | [**GetAllTags**](docs/TagsApi.md#getalltags) | **Get** /tags | Getting all tags
+*TagsApi* | [**GetTag**](docs/TagsApi.md#gettag) | **Get** /tags/{tagId} | Getting a tag from its id
+*TagsApi* | [**UpdateTag**](docs/TagsApi.md#updatetag) | **Put** /tags/{tagId} | Updating a tag
 *TeamsApi* | [**CreateTeam**](docs/TeamsApi.md#createteam) | **Post** /teams | Creating a team
 *TeamsApi* | [**DeleteTeam**](docs/TeamsApi.md#deleteteam) | **Delete** /teams/{teamId} | Deleting a team
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
@@ -77,6 +82,7 @@ Class | Method | HTTP request | Description
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
+ - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [Identity](docs/Identity.md)
@@ -84,6 +90,7 @@ Class | Method | HTTP request | Description
  - [Restriction](docs/Restriction.md)
  - [Role](docs/Role.md)
  - [Source](docs/Source.md)
+ - [Tag](docs/Tag.md)
  - [Team](docs/Team.md)
  - [Timezone](docs/Timezone.md)
  - [User](docs/User.md)

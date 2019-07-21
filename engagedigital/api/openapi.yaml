@@ -1753,6 +1753,141 @@ paths:
       summary: Updating a role
       tags:
       - Roles
+  /tags:
+    get:
+      description: This method renders tags ordered by name (ascending).
+      operationId: getAllTags
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllTagsResponse'
+          description: Success
+      summary: Getting all tags
+      tags:
+      - Tags
+    post:
+      description: This method creates a new tag. In case of success it renders the
+        created tag, otherwise, it renders an error (422 HTTP code).
+      operationId: createTag
+      parameters:
+      - description: Tag name (mandatory).
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: Success
+      summary: Creating a tag
+      tags:
+      - Tags
+  /tags/{tagId}:
+    delete:
+      description: |-
+        This method destroys an existing tag. It renders tag itself. It renders a 404 if id is invalid.
+
+        Authorization​: only users that are able to destroy tags.
+      operationId: deleteTag
+      parameters:
+      - explode: false
+        in: path
+        name: tagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: Success
+      summary: Deleting a tag
+      tags:
+      - Tags
+    get:
+      description: This method renders a tag from given id.
+      operationId: getTag
+      parameters:
+      - explode: false
+        in: path
+        name: tagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: Success
+      summary: Getting a tag from its id
+      tags:
+      - Tags
+    put:
+      description: |-
+        This method updates an existing tag from given attributes and renders it in case of success.
+
+        Authorization​: only users that are able to update tags.
+      operationId: updateTag
+      parameters:
+      - explode: false
+        in: path
+        name: tagId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Tag’s label.
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: Success
+      summary: Updating a tag
+      tags:
+      - Tags
   /teams:
     get:
       description: This method renders teams ordered by creation date (ascending).
@@ -3067,6 +3202,34 @@ components:
           items:
             $ref: '#/components/schemas/Source'
           type: array
+    GetAllTagsResponse:
+      example:
+        offset: 1
+        records:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
     GetAllTeamsResponse:
       example:
         offset: 1
@@ -3615,6 +3778,26 @@ components:
           items:
             type: string
           type: array
+    Tag:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
     Team:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00

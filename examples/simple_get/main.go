@@ -148,6 +148,24 @@ func main() {
 			}
 			fmtutil.PrintJSON(info)
 		}
+	case "tag":
+		if len(opts.Id) > 0 {
+			info, resp, err := client.TagsApi.GetTag(context.Background(), opts.Id)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		} else {
+			info, resp, err := client.TagsApi.GetAllTags(context.Background(), nil)
+			if err != nil {
+				log.Fatal(err)
+			} else if resp.StatusCode != 200 {
+				log.Fatal(resp.StatusCode)
+			}
+			fmtutil.PrintJSON(info)
+		}
 	case "team":
 		if len(opts.Id) > 0 {
 			info, resp, err := client.TeamsApi.GetTeam(context.Background(), opts.Id)
