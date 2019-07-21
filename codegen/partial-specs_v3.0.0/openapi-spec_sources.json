@@ -37,7 +37,7 @@
             "description":"The max number of records to return. Default value is 30, max value is 150.",
             "required":false,
             "schema":{
-              "type":"string",
+              "type":"integer",
               "format":"int32"
             }
           }
