@@ -40,6 +40,9 @@ Class | Method | HTTP request | Description
 *CategoriesApi* | [**GetAllCategories**](docs/CategoriesApi.md#getallcategories) | **Get** /categories | Getting all categories
 *CategoriesApi* | [**GetCategory**](docs/CategoriesApi.md#getcategory) | **Get** /categories/{categoryId} | Getting a category from its id
 *CategoriesApi* | [**UpdateCategory**](docs/CategoriesApi.md#updatecategory) | **Put** /categories/{categoryId} | Updating a category
+*ChannelsApi* | [**GetAllChannels**](docs/ChannelsApi.md#getallchannels) | **Get** /channels | Getting all channels
+*ChannelsApi* | [**GetChannel**](docs/ChannelsApi.md#getchannel) | **Get** /channels/{channelId} | Getting a channel from its id
+*ChannelsApi* | [**UpdateChannel**](docs/ChannelsApi.md#updatechannel) | **Put** /channels/{channelId} | Updating a channel
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
 *FoldersApi* | [**CreateFolder**](docs/FoldersApi.md#createfolder) | **Post** /folders | Creating a folder
@@ -80,10 +83,12 @@ Class | Method | HTTP request | Description
 
  - [Attachment](docs/Attachment.md)
  - [Category](docs/Category.md)
+ - [Channel](docs/Channel.md)
  - [Community](docs/Community.md)
  - [Folder](docs/Folder.md)
  - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
  - [GetAllCategoriesResponse](docs/GetAllCategoriesResponse.md)
+ - [GetAllChannelsResponse](docs/GetAllChannelsResponse.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)

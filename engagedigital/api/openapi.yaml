@@ -371,6 +371,129 @@ paths:
       summary: Updating a category
       tags:
       - Categories
+  /channels:
+    get:
+      description: This method renders all channels ordered by date of creation.
+      operationId: getAllChannels
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllChannelsResponse'
+          description: Success
+      summary: Getting all channels
+      tags:
+      - Channels
+  /channels/{channelId}:
+    get:
+      description: This method renders a channel from given id.
+      operationId: getChannel
+      parameters:
+      - explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: Success
+      summary: Getting a channel from its id
+      tags:
+      - Channels
+    put:
+      description: |-
+        This method updates an existing channel from given attributes and renders it in case of success.
+
+        Authorization​: only users that are able to update channels.
+      operationId: updateChannel
+      parameters:
+      - explode: false
+        in: path
+        name: channelId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the channel.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An array containing id of each source assigned to a channel (multiple).
+        explode: true
+        in: query
+        name: source_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Number of tasks that can be assigned to agent by the routing
+          before they are considered "occupied".
+        explode: true
+        in: query
+        name: soft_capability
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: M​aximum number of tasks that can be assigned to agents.
+        explode: true
+        in: query
+        name: hard_capability
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: this field defines the time before a task expires (in seconds).
+        explode: true
+        in: query
+        name: task_timeout_seconds
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+          description: Success
+      summary: Updating a channel
+      tags:
+      - Channels
   /communities:
     get:
       description: This method renders communities ordered by creation date (ascending).
@@ -3031,6 +3154,42 @@ components:
           type: string
       required:
       - id
+    Channel:
+      example:
+        source_ids:
+        - source_ids
+        - source_ids
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        soft_capability: 5
+        id: id
+        label: label
+        task_timeout_seconds: 2
+        hard_capability: 5
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        hard_capability:
+          type: integer
+        id:
+          type: string
+        label:
+          type: string
+        name:
+          type: string
+        soft_capability:
+          type: integer
+        source_ids:
+          items:
+            type: string
+          type: array
+        task_timeout_seconds:
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
     Community:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -3182,6 +3341,48 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Category'
+          type: array
+    GetAllChannelsResponse:
+      example:
+        offset: 1
+        records:
+        - source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          soft_capability: 5
+          id: id
+          label: label
+          task_timeout_seconds: 2
+          hard_capability: 5
+        - source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          soft_capability: 5
+          id: id
+          label: label
+          task_timeout_seconds: 2
+          hard_capability: 5
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Channel'
           type: array
     GetAllCommunitiesResponse:
       example:

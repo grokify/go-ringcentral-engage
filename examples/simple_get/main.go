@@ -54,6 +54,12 @@ func main() {
 		} else {
 			handleRepsonse(client.CategoriesApi.GetAllCategories(context.Background(), nil))
 		}
+	case "channel":
+		if len(opts.Id) > 0 {
+			handleRepsonse(client.ChannelsApi.GetChannel(context.Background(), opts.Id))
+		} else {
+			handleRepsonse(client.ChannelsApi.GetAllChannels(context.Background(), nil))
+		}
 	case "community":
 		if len(opts.Id) > 0 {
 			handleRepsonse(client.CommunitiesApi.GetCommunity(context.Background(), opts.Id))

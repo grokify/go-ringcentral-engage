@@ -150,6 +150,15 @@ doc = '
 ● unselectable: root category is unselectable (Boolean).
 ● source_ids[]: List of source id. | array:string
 '
+
+doc = '
+● name: The name of the channel.
+● source_ids: An array containing id of each source assigned to a channel (multiple). | array:string
+● soft_capability: Number of tasks that can be assigned to agent by the routing before they are considered "occupied". | integer
+● hard_capability: M​aximum number of tasks that can be assigned to agents. | integer
+● task_timeout_seconds: this field defines the time before a task expires (in seconds). | integer
+'
+
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|
@@ -186,7 +195,7 @@ doc.split("\n").each_with_index do |line,i|
     end
     param[:required] = false
     desc.gsub!(/\s*\(mandatory\)/,'')
-    param[:description] = desc
+    param[:description] = desc.strip
     if type.length > 0
       param[:schema] = {} unless param.key? :schema
       param[:schema][:type] = type
