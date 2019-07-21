@@ -37,7 +37,7 @@ $ go get github.com/grokify/go-ringcental-engage/...
 
 ## Usage
 
-See the `examples` folder for usage.
+See the [`examples`](examples) folder for usage.
 
 ## Documentation
 
