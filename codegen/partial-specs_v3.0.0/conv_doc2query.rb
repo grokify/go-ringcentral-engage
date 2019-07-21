@@ -121,6 +121,24 @@ doc = '
 ● update_user
 ● use_emoji
 '
+
+doc = '
+● category_ids[]: User list of category ids (multiple).
+● email: User email (mandatory).
+● enabled: Whether the user is enabled or not (boolean).
+● external_id: User external id, used for SSO.
+● firstname: User firstname (mandatory).
+● gender: User gender ("man" or "woman").
+● identity_ids[]: User list of identity ids (multiple).
+● lastname: User lastname (mandatory).
+● locale: Language for the user interface.
+● nickname: User nickname.
+● password: User plain password (mandatory).
+● role_id: User role id (mandatory).
+● team_ids[]: User list of team ids (multiple).
+● timezone: Use the timezone endpoint to get the timezone name (String), default is empty for domain timezone.
+● spoken_languages[]: List of locales corresponding to the languages spoken by the user (multiple).
+'
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|
@@ -155,6 +173,8 @@ doc.split("\n").each_with_index do |line,i|
         type = type_raw
       end
     end
+    param[:required] = false
+    desc.gsub!(/\s*\(mandatory\)/,'')
     param[:description] = desc
     if type.length > 0
       param[:schema] = {} unless param.key? :schema

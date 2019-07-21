@@ -58,10 +58,12 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
 *TeamsApi* | [**UpdateTeam**](docs/TeamsApi.md#updateteam) | **Put** /teams/{teamId} | Updating a team
 *TimezonesApi* | [**GetAllTimezones**](docs/TimezonesApi.md#getalltimezones) | **Get** /timezones | Getting all timezones
+*UsersApi* | [**CreateUser**](docs/UsersApi.md#createuser) | **Post** /users | Creating a user
 *UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Deleting a user
 *UsersApi* | [**GetAllUsers**](docs/UsersApi.md#getallusers) | **Get** /users | Getting all users
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Getting a user from its id
 *UsersApi* | [**InviteUser**](docs/UsersApi.md#inviteuser) | **Post** /users/invite | Inviting a user
+*UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Updating a user
 
 
 ## Documentation For Models

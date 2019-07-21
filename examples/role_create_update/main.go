@@ -18,7 +18,7 @@ import (
 type options struct {
 	Site   string `short:"s" long:"site" description:"A site" required:"true"`
 	Token  string `short:"t" long:"token" description:"A token" required:"true"`
-	Action string `short:"a" long:"action" description:"A action(create|update" required:"true"`
+	Action string `short:"a" long:"action" description:"A action(create|update)" required:"true"`
 }
 
 func GetRole(client *engagedigital.APIClient, roleName string) (engagedigital.Role, error) {

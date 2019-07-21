@@ -2033,6 +2033,154 @@ paths:
       summary: Getting all users
       tags:
       - Users
+    post:
+      description: This method creates a new user. In case of success it renders the
+        created user, otherwise, it renders an error (422 HTTP code).
+      operationId: createUser
+      parameters:
+      - description: User list of category ids (multiple).
+        explode: true
+        in: query
+        name: category_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: User email (mandatory).
+        explode: true
+        in: query
+        name: email
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Whether the user is enabled or not (boolean).
+        explode: true
+        in: query
+        name: enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: User external id, used for SSO.
+        explode: true
+        in: query
+        name: external_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User firstname (mandatory).
+        explode: true
+        in: query
+        name: firstname
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: User gender ("man" or "woman").
+        explode: true
+        in: query
+        name: gender
+        required: false
+        schema:
+          enum:
+          - man
+          - woman
+          type: string
+        style: form
+      - description: User list of identity ids (multiple).
+        explode: true
+        in: query
+        name: identity_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: User lastname (mandatory).
+        explode: true
+        in: query
+        name: lastname
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Language for the user interface.
+        explode: true
+        in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User nickname.
+        explode: true
+        in: query
+        name: nickname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User plain password (mandatory).
+        explode: true
+        in: query
+        name: password
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: User role id (mandatory).
+        explode: true
+        in: query
+        name: role_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: User list of team ids (multiple).
+        explode: true
+        in: query
+        name: team_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Use the timezone endpoint to get the timezone name (String),
+          default is empty for domain timezone.
+        explode: true
+        in: query
+        name: timezone
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: List of locales corresponding to the languages spoken by the
+          user (multiple).
+        explode: true
+        in: query
+        name: spoken_languages[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+      summary: Creating a user
+      tags:
+      - Users
   /users/invite:
     post:
       description: |-
@@ -2222,6 +2370,163 @@ paths:
                 $ref: '#/components/schemas/User'
           description: Success
       summary: Getting a user from its id
+      tags:
+      - Users
+    put:
+      description: |-
+        This method updates users from given attributes and renders it in case of success.
+
+        Authorization​: only users that can update users. If the user affiliated to the token has the `manage_users_of_my_teams` permission, the updated user will need to belong to at least one of the teams he’s the leader of. The teams the user affiliated to the token is the leader of will be the only ones which can be added or removed.
+      operationId: updateUser
+      parameters:
+      - explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: User list of category ids (multiple).
+        explode: true
+        in: query
+        name: category_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: User email.
+        explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Whether the user is enabled or not (boolean).
+        explode: true
+        in: query
+        name: enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: User external id, used for SSO.
+        explode: true
+        in: query
+        name: external_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User firstname.
+        explode: true
+        in: query
+        name: firstname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User gender ("man" or "woman").
+        explode: true
+        in: query
+        name: gender
+        required: false
+        schema:
+          enum:
+          - man
+          - woman
+          type: string
+        style: form
+      - description: User list of identity ids (multiple).
+        explode: true
+        in: query
+        name: identity_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: User lastname.
+        explode: true
+        in: query
+        name: lastname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Language for the user interface.
+        explode: true
+        in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User nickname.
+        explode: true
+        in: query
+        name: nickname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User plain password.
+        explode: true
+        in: query
+        name: password
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User role id.
+        explode: true
+        in: query
+        name: role_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: User list of team ids (multiple).
+        explode: true
+        in: query
+        name: team_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Use the timezone endpoint to get the timezone name (String),
+          default is empty for domain timezone.
+        explode: true
+        in: query
+        name: timezone
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: List of locales corresponding to the languages spoken by the
+          user (multiple).
+        explode: true
+        in: query
+        name: spoken_languages[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+      summary: Updating a user
       tags:
       - Users
 components:

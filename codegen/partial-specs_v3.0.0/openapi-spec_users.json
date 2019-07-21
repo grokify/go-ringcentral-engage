@@ -108,6 +108,179 @@
             }
           }
         }
+      },
+      "post":{
+        "tags":[
+          "Users"
+        ],
+        "summary":"Creating a user",
+        "operationId":"createUser",
+        "description":"This method creates a new user. In case of success it renders the created user, otherwise, it renders an error (422 HTTP code).",
+        "parameters":[
+          {
+            "name":"category_ids[]",
+            "in":"query",
+            "required":false,
+            "description":"User list of category ids (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          },
+          {
+            "name":"email",
+            "in":"query",
+            "required":true,
+            "description":"User email (mandatory).",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"enabled",
+            "in":"query",
+            "required":false,
+            "description":"Whether the user is enabled or not (boolean).",
+            "schema":{
+              "type":"boolean"
+            }
+          },
+          {
+            "name":"external_id",
+            "in":"query",
+            "required":false,
+            "description":"User external id, used for SSO.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"firstname",
+            "in":"query",
+            "required":true,
+            "description":"User firstname (mandatory).",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"gender",
+            "in":"query",
+            "required":false,
+            "description":"User gender (\"man\" or \"woman\").",
+            "schema":{
+              "type":"string",
+              "enum":[
+                "man",
+                "woman"
+              ]
+            }
+          },
+          {
+            "name":"identity_ids[]",
+            "in":"query",
+            "required":false,
+            "description":"User list of identity ids (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          },
+          {
+            "name":"lastname",
+            "in":"query",
+            "required":true,
+            "description":"User lastname (mandatory).",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"locale",
+            "in":"query",
+            "required":false,
+            "description":"Language for the user interface.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"nickname",
+            "in":"query",
+            "required":false,
+            "description":"User nickname.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"password",
+            "in":"query",
+            "required":true,
+            "description":"User plain password (mandatory).",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"role_id",
+            "in":"query",
+            "required":true,
+            "description":"User role id (mandatory).",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"team_ids[]",
+            "in":"query",
+            "required":false,
+            "description":"User list of team ids (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          },
+          {
+            "name":"timezone",
+            "in":"query",
+            "required":false,
+            "description":"Use the timezone endpoint to get the timezone name (String), default is empty for domain timezone.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"spoken_languages[]",
+            "in":"query",
+            "required":false,
+            "description":"List of locales corresponding to the languages spoken by the user (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/{userId}":{
@@ -125,6 +298,187 @@
             "required":true,
             "schema":{
               "type":"string"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Success",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put":{
+        "tags":[
+          "Users"
+        ],
+        "summary":"Updating a user",
+        "operationId":"updateUser",
+        "description":"This method updates users from given attributes and renders it in case of success.\n\nAuthorization​: only users that can update users. If the user affiliated to the token has the `manage_users_of_my_teams` permission, the updated user will need to belong to at least one of the teams he’s the leader of. The teams the user affiliated to the token is the leader of will be the only ones which can be added or removed.",
+        "parameters":[
+          {
+            "name":"userId",
+            "in":"path",
+            "required":true,
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"category_ids[]",
+            "in":"query",
+            "required":false,
+            "description":"User list of category ids (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          },
+          {
+            "name":"email",
+            "in":"query",
+            "required":false,
+            "description":"User email.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"enabled",
+            "in":"query",
+            "required":false,
+            "description":"Whether the user is enabled or not (boolean).",
+            "schema":{
+              "type":"boolean"
+            }
+          },
+          {
+            "name":"external_id",
+            "in":"query",
+            "required":false,
+            "description":"User external id, used for SSO.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"firstname",
+            "in":"query",
+            "required":false,
+            "description":"User firstname.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"gender",
+            "in":"query",
+            "required":false,
+            "description":"User gender (\"man\" or \"woman\").",
+            "schema":{
+              "type":"string",
+              "enum":[
+                "man",
+                "woman"
+              ]
+            }
+          },
+          {
+            "name":"identity_ids[]",
+            "in":"query",
+            "required":false,
+            "description":"User list of identity ids (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          },
+          {
+            "name":"lastname",
+            "in":"query",
+            "required":false,
+            "description":"User lastname.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"locale",
+            "in":"query",
+            "required":false,
+            "description":"Language for the user interface.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"nickname",
+            "in":"query",
+            "required":false,
+            "description":"User nickname.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"password",
+            "in":"query",
+            "required":false,
+            "description":"User plain password.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"role_id",
+            "in":"query",
+            "required":false,
+            "description":"User role id.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"team_ids[]",
+            "in":"query",
+            "required":false,
+            "description":"User list of team ids (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
+            }
+          },
+          {
+            "name":"timezone",
+            "in":"query",
+            "required":false,
+            "description":"Use the timezone endpoint to get the timezone name (String), default is empty for domain timezone.",
+            "schema":{
+              "type":"string"
+            }
+          },
+          {
+            "name":"spoken_languages[]",
+            "in":"query",
+            "required":false,
+            "description":"List of locales corresponding to the languages spoken by the user (multiple).",
+            "schema":{
+              "type":"array",
+              "items":{
+                "type":"string"
+              }
             }
           }
         ],
