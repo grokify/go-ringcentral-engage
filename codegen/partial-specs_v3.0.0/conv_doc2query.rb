@@ -54,9 +54,77 @@ doc = '● category_ids: User list of category ids (multiple).
 domain timezone.
 ● spoken_languages: List of locales corresponding to the languages spoken by the user (multiple).'
 
+doc = '
+● access_help_center
+● access_previous_messages
+● access_pull_mode
+● admin_stamp_answer
+● approve_content
+● assign_intervention
+● author_block_content
+● close_content_thread
+● create_and_destroy_extension
+● create_community
+● create_content_source
+● create_user
+● delay_export_content
+● delete_content_thread
+● impersonate_user
+● invite_user
+● manage_api_access_tokens
+● manage_app_sdk_applications
+● manage_automatic_exports_tasks *
+● manage_categories
+● manage_chat
+● manage_custom_fields
+● manage_custom_notifications
+● manage_emails_templates
+● manage_folders
+● manage_ice
+● manage_identities
+● manage_own_notifications
+● manage_reply_assistant *
+● manage_roles
+● manage_rules_engine_rules *
+● manage_surveys *
+● manage_tags
+● manage_teams
+● manage_topologies
+● manage_users_of_my_teams
+● monitor_tasks
+● monitor_team_tasks
+● mute_content
+● open_content_thread
+● publish_content
+● read_community
+● read_content_source
+● read_event
+● read_export
+● read_identity
+● read_own_stats
+● read_presence
+● read_stats
+● read_surveys *
+● read_user
+● receive_tasks
+● reply_with_assistant *
+● search_contents
+● search_event
+● update_community
+● update_content_source
+● update_extension
+● update_identity
+● update_intervention
+● update_own_intervention
+● update_settings
+● update_time_sheet
+● update_user
+● use_emoji
+'
 parameters = []
 
-doc.split("\n").each do |line|
+doc.split("\n").each_with_index do |line,i|
+  puts "LINE[#{i}] " + line
   if line =~ /^●?\s*([\w\[\]]+)\s*:\s*(.+)\s*$/
     name = $1
     desc = $2.strip
@@ -103,6 +171,17 @@ doc.split("\n").each do |line|
         param[:schema][:items] = items
       end
     end
+    parameters.push param
+  elsif line =~ /^●?\s*(\w+)(\s*\*\s*)?$/
+    name = $1.strip
+    desc = $2 || ''
+    desc.strip!
+    param = {name: name, in: 'query', required: false}
+    if desc == "*"
+      param[:description] = "permission only available with the corresponding extension enabled"
+    end
+    param[:schema] = {} unless param.key? :schema
+    param[:schema][:type] = 'boolean'
     parameters.push param
   else
     puts "E_NO_MATCH: " + line

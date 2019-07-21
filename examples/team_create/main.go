@@ -8,14 +8,10 @@ import (
 
 	"github.com/antihax/optional"
 	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/oauth2more"
 	"github.com/jessevdk/go-flags"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital"
-)
-
-const (
-	ApiUrlFormat = `https://%s.api.engagement.dimelo.com/1.0`
+	"github.com/grokify/go-ringcentral-engage/utils"
 )
 
 type options struct {
@@ -24,13 +20,6 @@ type options struct {
 	Update []bool `short:"u" long:"update" description:"Update team"`
 	//Object string `short:"o" long:"object" description:"An object" required:"true"`
 	//Id     string `short:"i" long:"id" description:"An object id" required:"false"`
-}
-
-func NewApiClient(site, token string) *engagedigital.APIClient {
-	cfg := engagedigital.NewConfiguration()
-	cfg.HTTPClient = oauth2more.NewClientBearerTokenSimple(token)
-	cfg.BasePath = fmt.Sprintf(ApiUrlFormat, site)
-	return engagedigital.NewAPIClient(cfg)
 }
 
 func getUsers(client *engagedigital.APIClient) (engagedigital.GetAllUsersResponse, error) {
@@ -64,7 +53,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client := NewApiClient(opts.Site, opts.Token)
+	client := utils.NewApiClient(opts.Site, opts.Token)
 
 	usersApiResp, err := getUsers(client)
 	if err != nil {

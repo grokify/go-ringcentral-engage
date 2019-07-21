@@ -45,8 +45,10 @@ Class | Method | HTTP request | Description
 *IdentitiesApi* | [**GetAllIdentities**](docs/IdentitiesApi.md#getallidentities) | **Get** /identities | Getting all identities
 *IdentitiesApi* | [**GetIdentity**](docs/IdentitiesApi.md#getidentity) | **Get** /identities/{identityId} | Getting an identity from its id
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
+*RolesApi* | [**CreateRole**](docs/RolesApi.md#createrole) | **Post** /roles | Creating a role
 *RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
 *RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
+*RolesApi* | [**UpdateRole**](docs/RolesApi.md#updaterole) | **Put** /roles/{roleId} | Updating a role
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
 *SourcesApi* | [**UpdateSource**](docs/SourcesApi.md#updatesource) | **Put** /content_sources/{sourceId} | Updating a source
@@ -87,7 +89,21 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Authorization
 
- Endpoints do not require authorization.
+
+
+## bearerAuth
+
+- **Type**: HTTP basic authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextBasicAuth, sw.BasicAuth{
+    UserName: "username",
+    Password: "password",
+})
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Author

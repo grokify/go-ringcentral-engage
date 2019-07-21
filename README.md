@@ -9,7 +9,7 @@
 [![Twitter][twitter-svg]][twitter-link]
 
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-29%2F127%20%3D%2022%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-31%2F127%20%3D%2024%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -45,7 +45,7 @@ See the `examples` folder for usage.
 
 ## Coverage
 
-29/127 APIs - 22%
+31/127 APIs - 24%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -63,11 +63,11 @@ See the `examples` folder for usage.
   - [x] PUT /1.0/folders/:id
   - [x] DELETE /1.0/folders/:id
 
-- [ ] Roles
+- [x] Roles
   - [x] GET /1.0/roles
   - [x] GET /1.0/roles/:id
-  - [ ] POST /1.0/roles
-  - [ ] PUT /1.0/roles/:id
+  - [x] POST /1.0/roles
+  - [x] PUT /1.0/roles/:id
 
 - [ ] Categories
   - [ ] GET /1.0/categories

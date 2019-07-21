@@ -7,27 +7,16 @@ import (
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/net/smtputil"
-	"github.com/grokify/oauth2more"
 	"github.com/jessevdk/go-flags"
 	"github.com/pkg/errors"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital"
-)
-
-const (
-	ApiUrlFormat = `https://%s.api.engagement.dimelo.com/1.0`
+	"github.com/grokify/go-ringcentral-engage/utils"
 )
 
 type options struct {
 	Site  string `short:"s" long:"site" description:"A site" required:"true"`
 	Token string `short:"t" long:"token" description:"A token" required:"true"`
-}
-
-func NewApiClient(site, token string) *engagedigital.APIClient {
-	cfg := engagedigital.NewConfiguration()
-	cfg.HTTPClient = oauth2more.NewClientBearerTokenSimple(token)
-	cfg.BasePath = fmt.Sprintf(ApiUrlFormat, site)
-	return engagedigital.NewAPIClient(cfg)
 }
 
 func GetRole(client *engagedigital.APIClient, roleName string) (engagedigital.Role, error) {
@@ -53,7 +42,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client := NewApiClient(opts.Site, opts.Token)
+	client := utils.NewApiClient(opts.Site, opts.Token)
 
 	roleName := "Agent"
 	userEmail, err := smtputil.GmailAddressPlusTime("example")
