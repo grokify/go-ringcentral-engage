@@ -25,37 +25,47 @@ var (
 	_ context.Context
 )
 
-type TeamsApiService service
+type CategoriesApiService service
 
 /*
-TeamsApiService Creating a team
-This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).
+CategoriesApiService Creating a category
+This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).  Note: The fields ​&#x60;mandatory&#x60;,​ &#x60;​multiple&#x60;,​ ​&#x60;post_qualification​&#x60;, &#x60;s​ource_ids&#x60;​ and &#x60;u​nselectable​&#x60; are accounted for only if the Category has no parent.  Authorization​: only users that can manage teams.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CreateTeamOpts - Optional Parameters:
- * @param "Name" (optional.String) -  Team name.
- * @param "LeaderIds" (optional.Interface of []string) -  List of user id as leaders
- * @param "UserIds" (optional.Interface of []string) -  List of user id as team members.
-@return Team
+ * @param optional nil or *CreateCategoryOpts - Optional Parameters:
+ * @param "Name" (optional.String) -  Category name.
+ * @param "ParentId" (optional.String) -  ID of parent category.
+ * @param "Color" (optional.Int32) -  displayed color for the category, see Category colors.
+ * @param "Mandatory" (optional.Bool) -  mandatory categorization (Boolean).
+ * @param "Multiple" (optional.Bool) -  allow to assign multiple child categories (Boolean).
+ * @param "PostQualification" (optional.Bool) -  post qualification (Boolean).
+ * @param "Unselectable" (optional.Bool) -  root category is unselectable (Boolean).
+ * @param "SourceIds" (optional.Interface of []string) -  List of source id.
+@return Category
 */
 
-type CreateTeamOpts struct {
-	Name      optional.String
-	LeaderIds optional.Interface
-	UserIds   optional.Interface
+type CreateCategoryOpts struct {
+	Name              optional.String
+	ParentId          optional.String
+	Color             optional.Int32
+	Mandatory         optional.Bool
+	Multiple          optional.Bool
+	PostQualification optional.Bool
+	Unselectable      optional.Bool
+	SourceIds         optional.Interface
 }
 
-func (a *TeamsApiService) CreateTeam(ctx context.Context, localVarOptionals *CreateTeamOpts) (Team, *http.Response, error) {
+func (a *CategoriesApiService) CreateCategory(ctx context.Context, localVarOptionals *CreateCategoryOpts) (Category, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Team
+		localVarReturnValue  Category
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/teams"
+	localVarPath := a.client.cfg.BasePath + "/categories"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -64,26 +74,33 @@ func (a *TeamsApiService) CreateTeam(ctx context.Context, localVarOptionals *Cre
 	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
 		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.LeaderIds.IsSet() {
-		t := localVarOptionals.LeaderIds.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("leader_ids[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("leader_ids[]", parameterToString(t, "multi"))
-		}
+	if localVarOptionals != nil && localVarOptionals.ParentId.IsSet() {
+		localVarQueryParams.Add("parent_id", parameterToString(localVarOptionals.ParentId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.UserIds.IsSet() {
-		t := localVarOptionals.UserIds.Value()
+	if localVarOptionals != nil && localVarOptionals.Color.IsSet() {
+		localVarQueryParams.Add("color", parameterToString(localVarOptionals.Color.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Mandatory.IsSet() {
+		localVarQueryParams.Add("mandatory", parameterToString(localVarOptionals.Mandatory.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Multiple.IsSet() {
+		localVarQueryParams.Add("multiple", parameterToString(localVarOptionals.Multiple.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PostQualification.IsSet() {
+		localVarQueryParams.Add("post_qualification", parameterToString(localVarOptionals.PostQualification.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Unselectable.IsSet() {
+		localVarQueryParams.Add("unselectable", parameterToString(localVarOptionals.Unselectable.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceIds.IsSet() {
+		t := localVarOptionals.SourceIds.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("user_ids[]", parameterToString(s.Index(i), "multi"))
+				localVarQueryParams.Add("source_ids[]", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("user_ids[]", parameterToString(t, "multi"))
+			localVarQueryParams.Add("source_ids[]", parameterToString(t, "multi"))
 		}
 	}
 	// to determine the Content-Type header
@@ -125,7 +142,7 @@ func (a *TeamsApiService) CreateTeam(ctx context.Context, localVarOptionals *Cre
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Team
+			var v Category
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -150,32 +167,32 @@ func (a *TeamsApiService) CreateTeam(ctx context.Context, localVarOptionals *Cre
 }
 
 /*
-TeamsApiService Deleting a team
-This method destroys an existing team. It renders the team itself. It renders a 404 if id is invalid.
+CategoriesApiService Deleting a category
+This method destroys an existing category. It renders the category itself. It renders a 404 if id is invalid.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param teamId
- * @param optional nil or *DeleteTeamOpts - Optional Parameters:
+ * @param categoryId
+ * @param optional nil or *DeleteCategoryOpts - Optional Parameters:
  * @param "TakeOverCategoryId" (optional.String) -  ID of a category to recategorize (optional).
-@return Team
+@return Category
 */
 
-type DeleteTeamOpts struct {
+type DeleteCategoryOpts struct {
 	TakeOverCategoryId optional.String
 }
 
-func (a *TeamsApiService) DeleteTeam(ctx context.Context, teamId string, localVarOptionals *DeleteTeamOpts) (Team, *http.Response, error) {
+func (a *CategoriesApiService) DeleteCategory(ctx context.Context, categoryId string, localVarOptionals *DeleteCategoryOpts) (Category, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Team
+		localVarReturnValue  Category
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/teams/{teamId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"teamId"+"}", fmt.Sprintf("%v", teamId), -1)
+	localVarPath := a.client.cfg.BasePath + "/categories/{categoryId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"categoryId"+"}", fmt.Sprintf("%v", categoryId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -223,7 +240,7 @@ func (a *TeamsApiService) DeleteTeam(ctx context.Context, teamId string, localVa
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Team
+			var v Category
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -248,37 +265,42 @@ func (a *TeamsApiService) DeleteTeam(ctx context.Context, teamId string, localVa
 }
 
 /*
-TeamsApiService Getting all teams
-This method renders teams ordered by creation date (ascending).
+CategoriesApiService Getting all categories
+This method renders categories ordered by creation date (ascending).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GetAllTeamsOpts - Optional Parameters:
+ * @param optional nil or *GetAllCategoriesOpts - Optional Parameters:
+ * @param "ParentId" (optional.String) -  To filter categories on given category parent id.
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
  * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
-@return GetAllTeamsResponse
+@return GetAllCategoriesResponse
 */
 
-type GetAllTeamsOpts struct {
-	Offset optional.Int32
-	Limit  optional.Int32
+type GetAllCategoriesOpts struct {
+	ParentId optional.String
+	Offset   optional.Int32
+	Limit    optional.Int32
 }
 
-func (a *TeamsApiService) GetAllTeams(ctx context.Context, localVarOptionals *GetAllTeamsOpts) (GetAllTeamsResponse, *http.Response, error) {
+func (a *CategoriesApiService) GetAllCategories(ctx context.Context, localVarOptionals *GetAllCategoriesOpts) (GetAllCategoriesResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  GetAllTeamsResponse
+		localVarReturnValue  GetAllCategoriesResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/teams"
+	localVarPath := a.client.cfg.BasePath + "/categories"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.ParentId.IsSet() {
+		localVarQueryParams.Add("parent_id", parameterToString(localVarOptionals.ParentId.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
 		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
 	}
@@ -324,7 +346,7 @@ func (a *TeamsApiService) GetAllTeams(ctx context.Context, localVarOptionals *Ge
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v GetAllTeamsResponse
+			var v GetAllCategoriesResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -349,25 +371,25 @@ func (a *TeamsApiService) GetAllTeams(ctx context.Context, localVarOptionals *Ge
 }
 
 /*
-TeamsApiService Getting a team from its id
-This method renders a team from given id.
+CategoriesApiService Getting a category from its id
+This method renders a category from given id.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param teamId
-@return Team
+ * @param categoryId
+@return Category
 */
-func (a *TeamsApiService) GetTeam(ctx context.Context, teamId string) (Team, *http.Response, error) {
+func (a *CategoriesApiService) GetCategory(ctx context.Context, categoryId string) (Category, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Team
+		localVarReturnValue  Category
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/teams/{teamId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"teamId"+"}", fmt.Sprintf("%v", teamId), -1)
+	localVarPath := a.client.cfg.BasePath + "/categories/{categoryId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"categoryId"+"}", fmt.Sprintf("%v", categoryId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -412,7 +434,7 @@ func (a *TeamsApiService) GetTeam(ctx context.Context, teamId string) (Team, *ht
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Team
+			var v Category
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -437,36 +459,46 @@ func (a *TeamsApiService) GetTeam(ctx context.Context, teamId string) (Team, *ht
 }
 
 /*
-TeamsApiService Updating a team
-This method updates an existing team from given attributes and renders it in case of success.
+CategoriesApiService Updating a category
+This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).  Note: The fields ​&#x60;mandatory&#x60;,​ ​&#x60;multiple&#x60;,​ ​&#x60;post_qualification​&#x60;, &#x60;s​ource_ids​&#x60; and &#x60;u​nselectable​&#x60; are accounted for only if the Category has no parent.  Authorization​: only users that can manage teams.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param teamId
- * @param optional nil or *UpdateTeamOpts - Optional Parameters:
- * @param "Name" (optional.String) -  Team name.
- * @param "LeaderIds" (optional.Interface of []string) -  List of user id as leaders
- * @param "UserIds" (optional.Interface of []string) -  List of user id as team members.
-@return Team
+ * @param categoryId
+ * @param optional nil or *UpdateCategoryOpts - Optional Parameters:
+ * @param "Name" (optional.String) -  Category name.
+ * @param "ParentId" (optional.String) -  ID of parent category.
+ * @param "Color" (optional.Int32) -  displayed color for the category, see Category colors.
+ * @param "Mandatory" (optional.Bool) -  mandatory categorization (Boolean).
+ * @param "Multiple" (optional.Bool) -  allow to assign multiple child categories (Boolean).
+ * @param "PostQualification" (optional.Bool) -  post qualification (Boolean).
+ * @param "Unselectable" (optional.Bool) -  root category is unselectable (Boolean).
+ * @param "SourceIds" (optional.Interface of []string) -  List of source id.
+@return Category
 */
 
-type UpdateTeamOpts struct {
-	Name      optional.String
-	LeaderIds optional.Interface
-	UserIds   optional.Interface
+type UpdateCategoryOpts struct {
+	Name              optional.String
+	ParentId          optional.String
+	Color             optional.Int32
+	Mandatory         optional.Bool
+	Multiple          optional.Bool
+	PostQualification optional.Bool
+	Unselectable      optional.Bool
+	SourceIds         optional.Interface
 }
 
-func (a *TeamsApiService) UpdateTeam(ctx context.Context, teamId string, localVarOptionals *UpdateTeamOpts) (Team, *http.Response, error) {
+func (a *CategoriesApiService) UpdateCategory(ctx context.Context, categoryId string, localVarOptionals *UpdateCategoryOpts) (Category, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Team
+		localVarReturnValue  Category
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/teams/{teamId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"teamId"+"}", fmt.Sprintf("%v", teamId), -1)
+	localVarPath := a.client.cfg.BasePath + "/categories/{categoryId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"categoryId"+"}", fmt.Sprintf("%v", categoryId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -475,26 +507,33 @@ func (a *TeamsApiService) UpdateTeam(ctx context.Context, teamId string, localVa
 	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
 		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.LeaderIds.IsSet() {
-		t := localVarOptionals.LeaderIds.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("leader_ids[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("leader_ids[]", parameterToString(t, "multi"))
-		}
+	if localVarOptionals != nil && localVarOptionals.ParentId.IsSet() {
+		localVarQueryParams.Add("parent_id", parameterToString(localVarOptionals.ParentId.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.UserIds.IsSet() {
-		t := localVarOptionals.UserIds.Value()
+	if localVarOptionals != nil && localVarOptionals.Color.IsSet() {
+		localVarQueryParams.Add("color", parameterToString(localVarOptionals.Color.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Mandatory.IsSet() {
+		localVarQueryParams.Add("mandatory", parameterToString(localVarOptionals.Mandatory.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Multiple.IsSet() {
+		localVarQueryParams.Add("multiple", parameterToString(localVarOptionals.Multiple.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.PostQualification.IsSet() {
+		localVarQueryParams.Add("post_qualification", parameterToString(localVarOptionals.PostQualification.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Unselectable.IsSet() {
+		localVarQueryParams.Add("unselectable", parameterToString(localVarOptionals.Unselectable.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SourceIds.IsSet() {
+		t := localVarOptionals.SourceIds.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("user_ids[]", parameterToString(s.Index(i), "multi"))
+				localVarQueryParams.Add("source_ids[]", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("user_ids[]", parameterToString(t, "multi"))
+			localVarQueryParams.Add("source_ids[]", parameterToString(t, "multi"))
 		}
 	}
 	// to determine the Content-Type header
@@ -536,7 +575,7 @@ func (a *TeamsApiService) UpdateTeam(ctx context.Context, teamId string, localVa
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Team
+			var v Category
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

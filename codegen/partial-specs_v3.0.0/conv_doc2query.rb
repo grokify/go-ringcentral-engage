@@ -139,6 +139,17 @@ doc = '
 ● timezone: Use the timezone endpoint to get the timezone name (String), default is empty for domain timezone.
 ● spoken_languages[]: List of locales corresponding to the languages spoken by the user (multiple).
 '
+
+doc = '
+● name: Category name.
+● parent_id: ID of parent category.
+● color: displayed color for the category, see Category colors. | integer
+● mandatory: mandatory categorization (Boolean).
+● multiple: allow to assign multiple child categories (Boolean).
+● post_qualification: post qualification (Boolean).
+● unselectable: root category is unselectable (Boolean).
+● source_ids[]: List of source id. | array:string
+'
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

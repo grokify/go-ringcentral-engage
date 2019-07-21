@@ -32,13 +32,13 @@ This method renders communities ordered by creation date (ascending).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetAllCommunitiesOpts - Optional Parameters:
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
- * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
+ * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
 @return GetAllCommunitiesResponse
 */
 
 type GetAllCommunitiesOpts struct {
 	Offset optional.Int32
-	Limit  optional.String
+	Limit  optional.Int32
 }
 
 func (a *CommunitiesApiService) GetAllCommunities(ctx context.Context, localVarOptionals *GetAllCommunitiesOpts) (GetAllCommunitiesResponse, *http.Response, error) {

@@ -33,13 +33,13 @@ This method renders sources ordered by creation date (ascending).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetAllSourcesOpts - Optional Parameters:
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
- * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
+ * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
 @return GetAllSourcesResponse
 */
 
 type GetAllSourcesOpts struct {
 	Offset optional.Int32
-	Limit  optional.String
+	Limit  optional.Int32
 }
 
 func (a *SourcesApiService) GetAllSources(ctx context.Context, localVarOptionals *GetAllSourcesOpts) (GetAllSourcesResponse, *http.Response, error) {

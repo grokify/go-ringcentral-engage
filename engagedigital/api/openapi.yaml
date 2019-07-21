@@ -30,7 +30,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -92,6 +92,285 @@ paths:
       summary: Getting an attachment from its id
       tags:
       - Attachments
+  /categories:
+    get:
+      description: This method renders categories ordered by creation date (ascending).
+      operationId: getAllCategories
+      parameters:
+      - description: To filter categories on given category parent id.
+        explode: true
+        in: query
+        name: parent_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllCategoriesResponse'
+          description: Success
+      summary: Getting all categories
+      tags:
+      - Categories
+    post:
+      description: |-
+        This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).
+
+        Note: The fields ​`mandatory`,​ `​multiple`,​ ​`post_qualification​`, `s​ource_ids`​ and `u​nselectable​` are accounted for only if the Category has no parent.
+
+        Authorization​: only users that can manage teams.
+      operationId: createCategory
+      parameters:
+      - description: Category name.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: ID of parent category.
+        explode: true
+        in: query
+        name: parent_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'displayed color for the category, see Category colors. '
+        explode: true
+        in: query
+        name: color
+        required: false
+        schema:
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          type: integer
+        style: form
+      - description: mandatory categorization (Boolean).
+        explode: true
+        in: query
+        name: mandatory
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: allow to assign multiple child categories (Boolean).
+        explode: true
+        in: query
+        name: multiple
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: post qualification (Boolean).
+        explode: true
+        in: query
+        name: post_qualification
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: root category is unselectable (Boolean).
+        explode: true
+        in: query
+        name: unselectable
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: List of source id.
+        explode: true
+        in: query
+        name: source_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Success
+      summary: Creating a category
+      tags:
+      - Categories
+  /categories/{categoryId}:
+    delete:
+      description: This method destroys an existing category. It renders the category
+        itself. It renders a 404 if id is invalid.
+      operationId: deleteCategory
+      parameters:
+      - explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: ID of a category to recategorize (optional).
+        explode: true
+        in: query
+        name: take_over_category_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Success
+      summary: Deleting a category
+      tags:
+      - Categories
+    get:
+      description: This method renders a category from given id.
+      operationId: getCategory
+      parameters:
+      - explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Success
+      summary: Getting a category from its id
+      tags:
+      - Categories
+    put:
+      description: |-
+        This method creates a new team. In case of success it renders the created tag, otherwise, it renders an error (422 HTTP code).
+
+        Note: The fields ​`mandatory`,​ ​`multiple`,​ ​`post_qualification​`, `s​ource_ids​` and `u​nselectable​` are accounted for only if the Category has no parent.
+
+        Authorization​: only users that can manage teams.
+      operationId: updateCategory
+      parameters:
+      - explode: false
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Category name.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: ID of parent category.
+        explode: true
+        in: query
+        name: parent_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'displayed color for the category, see Category colors. '
+        explode: true
+        in: query
+        name: color
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: mandatory categorization (Boolean).
+        explode: true
+        in: query
+        name: mandatory
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: allow to assign multiple child categories (Boolean).
+        explode: true
+        in: query
+        name: multiple
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: post qualification (Boolean).
+        explode: true
+        in: query
+        name: post_qualification
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: root category is unselectable (Boolean).
+        explode: true
+        in: query
+        name: unselectable
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: List of source id.
+        explode: true
+        in: query
+        name: source_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Success
+      summary: Updating a category
+      tags:
+      - Categories
   /communities:
     get:
       description: This method renders communities ordered by creation date (ascending).
@@ -114,7 +393,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -170,7 +449,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -376,7 +655,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -672,7 +951,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -746,7 +1025,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -1775,7 +2054,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -1910,7 +2189,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -2156,7 +2435,7 @@ paths:
         required: false
         schema:
           format: int32
-          type: string
+          type: integer
         style: form
       responses:
         200:
@@ -2708,6 +2987,50 @@ components:
           items:
             type: string
           type: array
+    Category:
+      example:
+        source_ids:
+        - source_ids
+        - source_ids
+        color: 5
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        parent_id: parent_id
+        multiple: true
+        name: name
+        unselectable: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        post_qualification: true
+        id: id
+        mandatory: true
+      properties:
+        color:
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        mandatory:
+          type: boolean
+        multiple:
+          type: boolean
+        name:
+          type: string
+        parent_id:
+          type: string
+        post_qualification:
+          type: boolean
+        source_ids:
+          items:
+            type: string
+          type: array
+        unselectable:
+          type: boolean
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
     Community:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -2813,6 +3136,52 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Attachment'
+          type: array
+    GetAllCategoriesResponse:
+      example:
+        offset: 1
+        records:
+        - source_ids:
+          - source_ids
+          - source_ids
+          color: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          parent_id: parent_id
+          multiple: true
+          name: name
+          unselectable: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          post_qualification: true
+          id: id
+          mandatory: true
+        - source_ids:
+          - source_ids
+          - source_ids
+          color: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          parent_id: parent_id
+          multiple: true
+          name: name
+          unselectable: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          post_qualification: true
+          id: id
+          mandatory: true
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Category'
           type: array
     GetAllCommunitiesResponse:
       example:

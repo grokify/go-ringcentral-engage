@@ -38,7 +38,7 @@ This method renders identities ordered by creation date (descending). Only ident
  * @param "ForeignId" (optional.String) -  To filter identities on given user id
  * @param "Uuid" (optional.String) -  To filter identities on given uuid
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
- * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
+ * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
 @return GetAllIdentitiesResponse
 */
 
@@ -50,7 +50,7 @@ type GetAllIdentitiesOpts struct {
 	ForeignId       optional.String
 	Uuid            optional.String
 	Offset          optional.Int32
-	Limit           optional.String
+	Limit           optional.Int32
 }
 
 func (a *IdentitiesApiService) GetAllIdentities(ctx context.Context, localVarOptionals *GetAllIdentitiesOpts) (GetAllIdentitiesResponse, *http.Response, error) {

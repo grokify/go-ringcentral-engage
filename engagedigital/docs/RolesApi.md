@@ -142,7 +142,7 @@ Optional parameters are passed through a pointer to a GetAllRolesOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **offset** | **optional.Int32**| The record index to start. Default value is 0. | 
- **limit** | **optional.String**| The max number of records to return. Default value is 30, max value is 150. | 
+ **limit** | **optional.Int32**| The max number of records to return. Default value is 30, max value is 150. | 
 
 ### Return type
 

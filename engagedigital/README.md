@@ -35,6 +35,11 @@ Class | Method | HTTP request | Description
 *AttachmentsApi* | [**CreateAttachment**](docs/AttachmentsApi.md#createattachment) | **Post** /attachments | Creating an attachment
 *AttachmentsApi* | [**GetAllAttachments**](docs/AttachmentsApi.md#getallattachments) | **Get** /attachments | Getting all attachments
 *AttachmentsApi* | [**GetAttachment**](docs/AttachmentsApi.md#getattachment) | **Get** /attachments/{attachmentId} | Getting an attachment from its id
+*CategoriesApi* | [**CreateCategory**](docs/CategoriesApi.md#createcategory) | **Post** /categories | Creating a category
+*CategoriesApi* | [**DeleteCategory**](docs/CategoriesApi.md#deletecategory) | **Delete** /categories/{categoryId} | Deleting a category
+*CategoriesApi* | [**GetAllCategories**](docs/CategoriesApi.md#getallcategories) | **Get** /categories | Getting all categories
+*CategoriesApi* | [**GetCategory**](docs/CategoriesApi.md#getcategory) | **Get** /categories/{categoryId} | Getting a category from its id
+*CategoriesApi* | [**UpdateCategory**](docs/CategoriesApi.md#updatecategory) | **Put** /categories/{categoryId} | Updating a category
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
 *FoldersApi* | [**CreateFolder**](docs/FoldersApi.md#createfolder) | **Post** /folders | Creating a folder
@@ -74,9 +79,11 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Attachment](docs/Attachment.md)
+ - [Category](docs/Category.md)
  - [Community](docs/Community.md)
  - [Folder](docs/Folder.md)
  - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
+ - [GetAllCategoriesResponse](docs/GetAllCategoriesResponse.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)

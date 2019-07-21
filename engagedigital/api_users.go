@@ -310,7 +310,7 @@ This method renders users ordered by creation date (descending).  Authorizationâ
  * @param "RoleId" (optional.String) -  To filter users on given role id.
  * @param "TeamId" (optional.String) -  To filter users on given team id.
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
- * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
+ * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
 @return GetAllUsersResponse
 */
 
@@ -322,7 +322,7 @@ type GetAllUsersOpts struct {
 	RoleId     optional.String
 	TeamId     optional.String
 	Offset     optional.Int32
-	Limit      optional.String
+	Limit      optional.Int32
 }
 
 func (a *UsersApiService) GetAllUsers(ctx context.Context, localVarOptionals *GetAllUsersOpts) (GetAllUsersResponse, *http.Response, error) {

@@ -38,7 +38,7 @@ Name | Type | Description  | Notes
  **foreignId** | **optional.String**| To filter identities on given user id | 
  **uuid** | **optional.String**| To filter identities on given uuid | 
  **offset** | **optional.Int32**| The record index to start. Default value is 0. | 
- **limit** | **optional.String**| The max number of records to return. Default value is 30, max value is 150. | 
+ **limit** | **optional.Int32**| The max number of records to return. Default value is 30, max value is 150. | 
 
 ### Return type
 

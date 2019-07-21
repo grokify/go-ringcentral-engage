@@ -263,13 +263,13 @@ This method renders folders.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetAllFoldersOpts - Optional Parameters:
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
- * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
+ * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
 @return GetAllFoldersResponse
 */
 
 type GetAllFoldersOpts struct {
 	Offset optional.Int32
-	Limit  optional.String
+	Limit  optional.Int32
 }
 
 func (a *FoldersApiService) GetAllFolders(ctx context.Context, localVarOptionals *GetAllFoldersOpts) (GetAllFoldersResponse, *http.Response, error) {

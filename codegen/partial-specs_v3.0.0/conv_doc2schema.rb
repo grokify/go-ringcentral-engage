@@ -129,6 +129,19 @@ doc = '
 
 }
 '
+doc = '
+{
+  "id": "60944e5702bdafb74ec96142",
+  "parent_id": "eb3c62690ec9025845fd3495",
+  "name": "Technical",
+  "created_at": "2012-05-23T01:12:49Z",
+  "updated_at": "2012-05-23T01:12:49Z",
+  "color": 0,
+  "mandatory": false,
+  "multiple": true,
+  "post_qualification": false,
+  "source_ids": [],
+  "unselectable": false  }'
 
 properties = {}
 
@@ -144,6 +157,8 @@ object.each do |name,v|
 
   if !!v == v
     prop[:type] = 'boolean'
+  elsif v.is_a? Integer
+    prop[:type] = 'integer'
   end
   if v.kind_of?(Array)
     prop[:type] = 'array'

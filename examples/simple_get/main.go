@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
 	"strings"
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
@@ -17,6 +18,15 @@ type options struct {
 	Token  string `short:"t" long:"token" description:"A token" required:"true"`
 	Object string `short:"o" long:"object" description:"An object" required:"true"`
 	Id     string `short:"i" long:"id" description:"An object id" required:"false"`
+}
+
+func handleRepsonse(info interface{}, resp *http.Response, err error) {
+	if err != nil {
+		log.Fatal(err)
+	} else if resp.StatusCode != 200 {
+		log.Fatal(resp.StatusCode)
+	}
+	fmtutil.PrintJSON(info)
 }
 
 func main() {
@@ -34,173 +44,65 @@ func main() {
 	switch opts.Object {
 	case "attachment":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.AttachmentsApi.GetAttachment(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.AttachmentsApi.GetAttachment(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.AttachmentsApi.GetAllAttachments(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.AttachmentsApi.GetAllAttachments(context.Background(), nil))
+		}
+	case "category":
+		if len(opts.Id) > 0 {
+			handleRepsonse(client.CategoriesApi.GetCategory(context.Background(), opts.Id))
+		} else {
+			handleRepsonse(client.CategoriesApi.GetAllCategories(context.Background(), nil))
 		}
 	case "community":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.CommunitiesApi.GetCommunity(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.CommunitiesApi.GetCommunity(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.CommunitiesApi.GetAllCommunities(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.CommunitiesApi.GetAllCommunities(context.Background(), nil))
 		}
 	case "folder":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.FoldersApi.GetFolder(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.FoldersApi.GetFolder(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.FoldersApi.GetAllFolders(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.FoldersApi.GetAllFolders(context.Background(), nil))
 		}
 	case "identity":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.IdentitiesApi.GetIdentity(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.IdentitiesApi.GetIdentity(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.IdentitiesApi.GetAllIdentities(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.IdentitiesApi.GetAllIdentities(context.Background(), nil))
 		}
 	case "locale":
-		info, resp, err := client.LocalesApi.GetAllLocales(context.Background())
-		if err != nil {
-			log.Fatal(err)
-		} else if resp.StatusCode != 200 {
-			log.Fatal(resp.StatusCode)
-		}
-		fmtutil.PrintJSON(info)
+		handleRepsonse(client.LocalesApi.GetAllLocales(context.Background()))
 	case "source":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.SourcesApi.GetSource(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.SourcesApi.GetSource(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.SourcesApi.GetAllSources(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.SourcesApi.GetAllSources(context.Background(), nil))
 		}
 	case "role":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.RolesApi.GetRole(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.RolesApi.GetRole(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.RolesApi.GetAllRoles(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.RolesApi.GetAllRoles(context.Background(), nil))
 		}
 	case "tag":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.TagsApi.GetTag(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.TagsApi.GetTag(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.TagsApi.GetAllTags(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.TagsApi.GetAllTags(context.Background(), nil))
 		}
 	case "team":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.TeamsApi.GetTeam(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.TeamsApi.GetTeam(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.TeamsApi.GetAllTeams(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.TeamsApi.GetAllTeams(context.Background(), nil))
 		}
 	case "user":
 		if len(opts.Id) > 0 {
-			info, resp, err := client.UsersApi.GetUser(context.Background(), opts.Id)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.UsersApi.GetUser(context.Background(), opts.Id))
 		} else {
-			info, resp, err := client.UsersApi.GetAllUsers(context.Background(), nil)
-			if err != nil {
-				log.Fatal(err)
-			} else if resp.StatusCode != 200 {
-				log.Fatal(resp.StatusCode)
-			}
-			fmtutil.PrintJSON(info)
+			handleRepsonse(client.UsersApi.GetAllUsers(context.Background(), nil))
 		}
 	}
 

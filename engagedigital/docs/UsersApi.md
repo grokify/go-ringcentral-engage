@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
  **roleId** | **optional.String**| To filter users on given role id. | 
  **teamId** | **optional.String**| To filter users on given team id. | 
  **offset** | **optional.Int32**| The record index to start. Default value is 0. | 
- **limit** | **optional.String**| The max number of records to return. Default value is 30, max value is 150. | 
+ **limit** | **optional.Int32**| The max number of records to return. Default value is 30, max value is 150. | 
 
 ### Return type
 

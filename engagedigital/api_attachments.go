@@ -146,13 +146,13 @@ This method renders attachments ordered by creation date (descending).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetAllAttachmentsOpts - Optional Parameters:
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
- * @param "Limit" (optional.String) -  The max number of records to return. Default value is 30, max value is 150.
+ * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
 @return GetAllAttachmentsResponse
 */
 
 type GetAllAttachmentsOpts struct {
 	Offset optional.Int32
-	Limit  optional.String
+	Limit  optional.Int32
 }
 
 func (a *AttachmentsApiService) GetAllAttachments(ctx context.Context, localVarOptionals *GetAllAttachmentsOpts) (GetAllAttachmentsResponse, *http.Response, error) {
