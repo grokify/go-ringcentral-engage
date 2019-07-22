@@ -45,6 +45,11 @@ Class | Method | HTTP request | Description
 *ChannelsApi* | [**UpdateChannel**](docs/ChannelsApi.md#updatechannel) | **Put** /channels/{channelId} | Updating a channel
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
+*CustomFieldsApi* | [**CreateCustomField**](docs/CustomFieldsApi.md#createcustomfield) | **Post** /custom_fields | Creating a custom field
+*CustomFieldsApi* | [**DeleteCustomField**](docs/CustomFieldsApi.md#deletecustomfield) | **Delete** /custom_fields/{customFieldId} | Deleting a custom field
+*CustomFieldsApi* | [**GetAllCustomFields**](docs/CustomFieldsApi.md#getallcustomfields) | **Get** /custom_fields | Getting all custom fields
+*CustomFieldsApi* | [**GetCustomField**](docs/CustomFieldsApi.md#getcustomfield) | **Get** /custom_fields/{customFieldId} | Getting a custom field from its id
+*CustomFieldsApi* | [**UpdateCustomField**](docs/CustomFieldsApi.md#updatecustomfield) | **Put** /custom_fields/{customFieldId} | Updating a custom field
 *FoldersApi* | [**CreateFolder**](docs/FoldersApi.md#createfolder) | **Post** /folders | Creating a folder
 *FoldersApi* | [**DeleteFolder**](docs/FoldersApi.md#deletefolder) | **Delete** /folders/{folderId} | Deleting a folder
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
@@ -90,11 +95,13 @@ Class | Method | HTTP request | Description
  - [Category](docs/Category.md)
  - [Channel](docs/Channel.md)
  - [Community](docs/Community.md)
+ - [CustomField](docs/CustomField.md)
  - [Folder](docs/Folder.md)
  - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
  - [GetAllCategoriesResponse](docs/GetAllCategoriesResponse.md)
  - [GetAllChannelsResponse](docs/GetAllChannelsResponse.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
+ - [GetAllCustomFieldsResponse](docs/GetAllCustomFieldsResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
  - [GetAllPresenceStatusesResponse](docs/GetAllPresenceStatusesResponse.md)

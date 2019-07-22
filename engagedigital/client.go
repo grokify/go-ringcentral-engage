@@ -53,6 +53,8 @@ type APIClient struct {
 
 	CommunitiesApi *CommunitiesApiService
 
+	CustomFieldsApi *CustomFieldsApiService
+
 	FoldersApi *FoldersApiService
 
 	IdentitiesApi *IdentitiesApiService
@@ -94,6 +96,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CategoriesApi = (*CategoriesApiService)(&c.common)
 	c.ChannelsApi = (*ChannelsApiService)(&c.common)
 	c.CommunitiesApi = (*CommunitiesApiService)(&c.common)
+	c.CustomFieldsApi = (*CustomFieldsApiService)(&c.common)
 	c.FoldersApi = (*FoldersApiService)(&c.common)
 	c.IdentitiesApi = (*IdentitiesApiService)(&c.common)
 	c.LocalesApi = (*LocalesApiService)(&c.common)

@@ -9,7 +9,7 @@
 [![Twitter][twitter-svg]][twitter-link]
 
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-51%2F127%20%3D%2040%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-56%2F127%20%3D%2044%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -37,7 +37,32 @@ $ go get github.com/grokify/go-ringcental-engage/...
 
 ## Usage
 
-See the [`examples`](examples) folder for usage.
+### Pre-requisites
+
+You need the following:
+
+1. RingCentral Engage Digital / Dimelo Account and the URL subdomain, e.g. `my-subdomain` in the following URL: `https://my-subdomain.engagement.dimelo.com`
+1. An API Access Token. You can retrive this at the following URL, using your own domain in place of `my-subdomain`: `https://my-subdomain.engagement.dimelo.com/admin/api_access_tokens`
+
+### Execution
+
+The main SDK is in the `engagedigital` folder. The `utils` folder provides a helper function to instantiate the SDK:
+
+```go
+import("github.com/grokify/go-ringcentral-engage/utils")
+
+func main() {
+    apiClient := utils.NewApiClient("my-subdomain", "my-access-token")
+
+    // helper function to get access to raw `*http.Client`
+    httpClient := apiClient.HTTPClient()
+}
+```
+
+For information on how to use the apiClient objec, see:
+
+1. [`examples`](examples) folder for usage. [`examples/simple_get`](examples/simple_get) includes a simple functions for a lot of the `GET` APIs.
+1. [engagedigital/README.md](https://github.com/grokify/go-ringcentral-engage/blob/master/engagedigital/README.md) for SDK documentation.
 
 ## Documentation
 
@@ -45,7 +70,7 @@ See the [`examples`](examples) folder for usage.
 
 ## Coverage
 
-51/127 APIs - 40%
+56/127 APIs - 44%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -112,12 +137,12 @@ See the [`examples`](examples) folder for usage.
   - [ ] GET /1.0/identity_groups/:id
   - [ ] PUT /1.0/identity_groups/:id
 
-- [ ] Custom Fields
-  - [ ] GET /1.0/custom_fields
-  - [ ] GET /1.0/custom_fields/:id
-  - [ ] POST /1.0/custom_fields
-  - [ ] PUT /1.0/custom_fields/:id
-  - [ ] DELETE /1.0/custom_fields/:id
+- [x] Custom Fields
+  - [x] GET /1.0/custom_fields
+  - [x] GET /1.0/custom_fields/:id
+  - [x] POST /1.0/custom_fields
+  - [x] PUT /1.0/custom_fields/:id
+  - [x] DELETE /1.0/custom_fields/:id
 
 - [ ] Threads
   - [ ] GET /1.0/content_threads

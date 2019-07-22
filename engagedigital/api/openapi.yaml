@@ -756,6 +756,235 @@ paths:
       summary: Updating a source
       tags:
       - Sources
+  /custom_fields:
+    get:
+      description: |-
+        This method renders custom fields ordered by position (ascending).
+
+        Authorization​: only users that can see custom fields in administration section.
+      operationId: getAllCustomFields
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllCustomFieldsResponse'
+          description: Success
+      summary: Getting all custom fields
+      tags:
+      - CustomFields
+    post:
+      description: |-
+        This method creates a custom field. In case of success it renders the custom field, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that can create custom fields.
+      operationId: createCustomField
+      parameters:
+      - description: The associated type of custom field. It can be IdentityGroup
+          or Intervention.
+        explode: true
+        in: query
+        name: associated_type_name
+        required: true
+        schema:
+          enum:
+          - IdentityGroup
+          - Intervention
+          type: string
+        style: form
+      - description: The label of the custom field.
+        explode: true
+        in: query
+        name: label
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: 'The key of the custom field (example: customer_id). This is
+          used to determine how it is stored on identity groups.'
+        explode: true
+        in: query
+        name: key
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The type of the custom field. It can be string, boolean, text,
+          integer, float, single_choice,
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - string
+          - boolean
+          - text
+          - integer
+          - float
+          - single_choice
+          - multiple_choice
+          type: string
+        style: form
+      - description: A list of choices to be for single_choice, or multiple_choice
+          types. This must be given
+        explode: true
+        in: query
+        name: choices
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: true or false, this as no effect on single_choice, multiple_choice
+          or boolean types
+        explode: true
+        in: query
+        name: multiple
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: 'an integer that indicates custom field’s position between others
+          (default: -1).'
+        explode: true
+        in: query
+        name: position
+        required: false
+        schema:
+          default: -1
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+          description: Success
+      summary: Creating a custom field
+      tags:
+      - CustomFields
+  /custom_fields/{customFieldId}:
+    delete:
+      description: |-
+        This method destroys an existing custom field. It renders custom field itself. It renders a 404 if id is invalid.
+
+        Authorization​: only users that are able to destroy custom fields..
+      operationId: deleteCustomField
+      parameters:
+      - explode: false
+        in: path
+        name: customFieldId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+          description: Success
+      summary: Deleting a custom field
+      tags:
+      - CustomFields
+    get:
+      description: |-
+        This method renders a custom field from given id.
+
+        Authorization​: only users that can see custom fields in administration section.
+      operationId: getCustomField
+      parameters:
+      - explode: false
+        in: path
+        name: customFieldId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+          description: Success
+      summary: Getting a custom field from its id
+      tags:
+      - CustomFields
+    put:
+      description: |-
+        This method updates an existing custom field from given attributes and renders it in case of success.
+
+        Authorization​: only users that are able to update custom fields.
+      operationId: updateCustomField
+      parameters:
+      - explode: false
+        in: path
+        name: customFieldId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Custom field’s label.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: choices
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Custom field’s position.
+        explode: true
+        in: query
+        name: position
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomField'
+          description: Success
+      summary: Updating a custom field
+      tags:
+      - CustomFields
   /folders:
     get:
       description: This method renders folders.
@@ -3354,6 +3583,41 @@ components:
         updated_at:
           format: date-time
           type: string
+    CustomField:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        multiple: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        label: label
+        position: 5
+        type: type
+        associated_type_name: associated_type_name
+        key: key
+      properties:
+        associated_type_name:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        key:
+          type: string
+        label:
+          type: string
+        multiple:
+          type: boolean
+        position:
+          type: integer
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - label
     Folder:
       example:
         render_threads_count: true
@@ -3556,6 +3820,44 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Community'
+          type: array
+    GetAllCustomFieldsResponse:
+      example:
+        offset: 1
+        records:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          multiple: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          label: label
+          position: 5
+          type: type
+          associated_type_name: associated_type_name
+          key: key
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          multiple: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          label: label
+          position: 5
+          type: type
+          associated_type_name: associated_type_name
+          key: key
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/CustomField'
           type: array
     GetAllFoldersResponse:
       example:

@@ -159,6 +159,20 @@ doc = '
 ● task_timeout_seconds: this field defines the time before a task expires (in seconds). | integer
 '
 
+doc = '
+● associated_type_name: The associated type of custom field. It can be IdentityGroup or Intervention.
+● label: The label of the custom field (mandatory).
+● key: The key of the custom field (example: customer_id). This is used to determine how it is
+stored on identity groups.
+● type: The type of the custom field. It can be string, boolean, text, integer, float, single_choice,
+or multiple_choice (default: string).
+● choices: A list of choices to be for single_choice, or multiple_choice types. This must be given
+as array. | array:string
+● multiple: true or false, this as no effect on single_choice, multiple_choice or boolean types
+(default: false). | boolean
+● position: an integer that indicates custom field’s position between others (default: -1). | integer
+'
+
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

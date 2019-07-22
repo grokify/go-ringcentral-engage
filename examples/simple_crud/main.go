@@ -6,6 +6,7 @@ import (
 	"log"
 	"strings"
 
+	"github.com/antihax/optional"
 	"github.com/jessevdk/go-flags"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital"
@@ -20,6 +21,65 @@ type options struct {
 	Action string `short:"a" long:"action" description:"An action (create|update|delete)" required:"true"`
 	Name   string `short:"n" long:"name" description:"A tag name" required:"false"`
 	Id     string `short:"i" long:"id" description:"A tag id" required:"false"`
+}
+
+func main() {
+	opts := options{}
+	_, err := flags.Parse(&opts)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	client := utils.NewApiClient(opts.Site, opts.Token)
+
+	switch opts.Object {
+	case "customField":
+		handleCustomField(client, opts)
+	case "presenceStatus":
+		handlePresenceStatus(client, opts)
+	case "tag":
+		handleTag(client, opts)
+	default:
+		log.Fatal(fmt.Sprintf("E_OBJECT_NOT_SUPPORTED [%v]", opts.Object))
+	}
+
+	fmt.Println("DONE")
+}
+
+func handleCustomField(client *engagedigital.APIClient, opts options) {
+	switch opts.Action {
+	case "create":
+		fmt.Println("I_CREATING_CUSTOM_FIELD")
+		opts.Name = strings.TrimSpace(opts.Name)
+		if len(opts.Name) == 0 {
+			log.Fatal("E_CREATE_CUSTOM_FIELD_NO_NAME")
+		}
+		ex.HandleApiResponse(client.CustomFieldsApi.CreateCustomField(
+			context.Background(), "Intervention", opts.Name, nil))
+	case "read":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.CustomFieldsApi.GetCustomField(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.CustomFieldsApi.GetAllCustomFields(context.Background(), nil))
+		}
+	case "update":
+		opts.Id = strings.TrimSpace(opts.Id)
+		opts.Name = strings.TrimSpace(opts.Name)
+		apiOpts := &engagedigital.UpdateCustomFieldOpts{
+			Label: optional.NewString(opts.Name)}
+		if len(opts.Name) == 0 || len(opts.Id) == 0 {
+			log.Fatal("E_UPDATE_CUSTOM_FIELD_NO_ID_OR_NAME")
+		}
+		ex.HandleApiResponse(client.CustomFieldsApi.UpdateCustomField(
+			context.Background(), opts.Id, apiOpts))
+	case "delete":
+		opts.Id = strings.TrimSpace(opts.Id)
+		if len(opts.Id) == 0 {
+			log.Fatal("E_DELETE_CUSTOM_FIELD_NO_ID")
+		}
+		ex.HandleApiResponse(client.CustomFieldsApi.DeleteCustomField(
+			context.Background(), opts.Id))
+	}
 }
 
 func handlePresenceStatus(client *engagedigital.APIClient, opts options) {
@@ -90,23 +150,4 @@ func handleTag(client *engagedigital.APIClient, opts options) {
 		ex.HandleApiResponse(client.TagsApi.DeleteTag(
 			context.Background(), opts.Id))
 	}
-}
-
-func main() {
-	opts := options{}
-	_, err := flags.Parse(&opts)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	client := utils.NewApiClient(opts.Site, opts.Token)
-
-	switch opts.Object {
-	case "presenceStatus":
-		handlePresenceStatus(client, opts)
-	case "tag":
-		handleTag(client, opts)
-	}
-
-	fmt.Println("DONE")
 }
