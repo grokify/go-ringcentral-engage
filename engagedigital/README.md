@@ -53,6 +53,11 @@ Class | Method | HTTP request | Description
 *IdentitiesApi* | [**GetAllIdentities**](docs/IdentitiesApi.md#getallidentities) | **Get** /identities | Getting all identities
 *IdentitiesApi* | [**GetIdentity**](docs/IdentitiesApi.md#getidentity) | **Get** /identities/{identityId} | Getting an identity from its id
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
+*PresenceStatusesApi* | [**CreatePresenceStatus**](docs/PresenceStatusesApi.md#createpresencestatus) | **Post** /presence_status | Creating a presence status
+*PresenceStatusesApi* | [**DeletePresenceStatus**](docs/PresenceStatusesApi.md#deletepresencestatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
+*PresenceStatusesApi* | [**GetAllPresenceStatuses**](docs/PresenceStatusesApi.md#getallpresencestatuses) | **Get** /presence_status | Getting all presence statuses
+*PresenceStatusesApi* | [**GetPresenceStatus**](docs/PresenceStatusesApi.md#getpresencestatus) | **Get** /presence_status/{presenceStatusId} | Getting a presence status from its id
+*PresenceStatusesApi* | [**UpdatePresenceStatus**](docs/PresenceStatusesApi.md#updatepresencestatus) | **Put** /presence_status/{presenceStatusId} | Updating a presence status
 *RolesApi* | [**CreateRole**](docs/RolesApi.md#createrole) | **Post** /roles | Creating a role
 *RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
 *RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
@@ -92,6 +97,7 @@ Class | Method | HTTP request | Description
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
+ - [GetAllPresenceStatusesResponse](docs/GetAllPresenceStatusesResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
@@ -99,6 +105,7 @@ Class | Method | HTTP request | Description
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [Identity](docs/Identity.md)
  - [Locale](docs/Locale.md)
+ - [PresenceStatus](docs/PresenceStatus.md)
  - [Restriction](docs/Restriction.md)
  - [Role](docs/Role.md)
  - [Source](docs/Source.md)

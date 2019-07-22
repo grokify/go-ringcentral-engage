@@ -9,7 +9,7 @@
 [![Twitter][twitter-svg]][twitter-link]
 
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-46%2F127%20%3D%2036%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-51%2F127%20%3D%2040%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -45,7 +45,7 @@ See the [`examples`](examples) folder for usage.
 
 ## Coverage
 
-46/127 APIs - 36%
+51/127 APIs - 40%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -193,12 +193,12 @@ See the [`examples`](examples) folder for usage.
 - [x] Timezones
   - [x] GET /1.0/timezones
 
-- [ ] Presence statuses
-  - [ ] GET /1.0/presence_status
-  - [ ] GET /1.0/presence_status/:id
-  - [ ] POST /1.0/presence_status
-  - [ ] PUT /1.0/presence_status/:id
-  - [ ] DELETE /1.0/presence_status/:id
+- [x] Presence statuses
+  - [x] GET /1.0/presence_status
+  - [x] GET /1.0/presence_status/:id
+  - [x] POST /1.0/presence_status
+  - [x] PUT /1.0/presence_status/:id
+  - [x] DELETE /1.0/presence_status/:id
 
 - [ ] Tasks
   - [ ] GET /1.0/tasks

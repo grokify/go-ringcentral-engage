@@ -1126,6 +1126,147 @@ paths:
       summary: Getting all locales
       tags:
       - Locales
+  /presence_status:
+    get:
+      description: This method renders all presence statuses ordered by name (in alphabetical
+        order).
+      operationId: getAllPresenceStatuses
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllPresenceStatusesResponse'
+          description: Success
+      summary: Getting all presence statuses
+      tags:
+      - PresenceStatuses
+    post:
+      description: |-
+        This method creates a presence status. In case of success it renders the presence status, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: createPresenceStatus
+      parameters:
+      - description: The name of the presence status.
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresenceStatus'
+          description: Success
+      summary: Creating a presence status
+      tags:
+      - PresenceStatuses
+  /presence_status/{presenceStatusId}:
+    delete:
+      description: |-
+        This method destroys an existing presence status. It renders presence status itself. It renders a 404 if id is invalid.
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: deletePresenceStatus
+      parameters:
+      - explode: false
+        in: path
+        name: presenceStatusId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresenceStatus'
+          description: Success
+      summary: Deleting a presence status
+      tags:
+      - PresenceStatuses
+    get:
+      description: |-
+        This method renders a presence status from given id.
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: getPresenceStatus
+      parameters:
+      - explode: false
+        in: path
+        name: presenceStatusId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresenceStatus'
+          description: Success
+      summary: Getting a presence status from its id
+      tags:
+      - PresenceStatuses
+    put:
+      description: |-
+        This method updates an existing presence status from given attributes and renders it in case of success.
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: updatePresenceStatus
+      parameters:
+      - explode: false
+        in: path
+        name: presenceStatusId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the presence status.
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PresenceStatus'
+          description: Success
+      summary: Updating a presence status
+      tags:
+      - PresenceStatuses
   /roles:
     get:
       description: This method renders roles ordered by creation date (ascending).
@@ -3526,6 +3667,34 @@ components:
           items:
             $ref: '#/components/schemas/Identity'
           type: array
+    GetAllPresenceStatusesResponse:
+      example:
+        offset: 1
+        records:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/PresenceStatus'
+          type: array
     GetAllRolesResponse:
       example:
         offset: 1
@@ -4003,6 +4172,26 @@ components:
           type: boolean
         name:
           type: string
+    PresenceStatus:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
     Restriction:
       example:
         only:
