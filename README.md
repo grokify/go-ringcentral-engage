@@ -29,6 +29,13 @@ This currently provides a minimal Go SDK for RingCentral Engage Digital, formerl
 
 https://www.dimelo.com
 
+## Pre-requisites
+
+You need the following:
+
+1. RingCentral Engage Digital / Dimelo Account and the URL subdomain, e.g. `my-subdomain` in the following URL: `https://my-subdomain.engagement.dimelo.com`
+1. An API Access Token. You can retrive this at the following URL, using your own domain in place of `my-subdomain`: `https://my-subdomain.engagement.dimelo.com/admin/api_access_tokens`
+
 ## Installation
 
 ```
@@ -36,15 +43,6 @@ $ go get github.com/grokify/go-ringcental-engage/...
 ```
 
 ## Usage
-
-### Pre-requisites
-
-You need the following:
-
-1. RingCentral Engage Digital / Dimelo Account and the URL subdomain, e.g. `my-subdomain` in the following URL: `https://my-subdomain.engagement.dimelo.com`
-1. An API Access Token. You can retrive this at the following URL, using your own domain in place of `my-subdomain`: `https://my-subdomain.engagement.dimelo.com/admin/api_access_tokens`
-
-### Execution
 
 The main SDK is in the `engagedigital` folder. The `utils` folder provides a helper function to instantiate the SDK:
 
