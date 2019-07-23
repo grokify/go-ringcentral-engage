@@ -46,6 +46,10 @@ func main() {
 	fmt.Println("DONE")
 }
 
+func formatRespStatusCodeError(statusCode int) string {
+	return fmt.Sprintf("E_API_ERROR [%v]", statusCode)
+}
+
 func handleCustomField(client *engagedigital.APIClient, opts options) {
 	switch opts.Action {
 	case "create":
@@ -151,3 +155,64 @@ func handleTag(client *engagedigital.APIClient, opts options) {
 			context.Background(), opts.Id))
 	}
 }
+
+/*
+func handleTopology(client *engagedigital.APIClient, opts options) {
+	logSlug := "TOPOLOGY"
+	switch opts.Action {
+	case "create":
+		all, resp, err := client.TopologiesApi.GetAllTopologies(context.Background(), nil)
+		if err != nil {
+			log.Fatal(err)
+		} else if resp.StatusCode != 200 {
+			log.Fatal(formatRespStatusCodeError(resp.StatusCode))
+		}
+		defTop, err := utils.FindDefaultTopology(all.Records)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Printf("I_CREATING_%s", logSlug)
+		opts.Name = strings.TrimSpace(opts.Name)
+		if len(opts.Name) == 0 {
+			log.Fatal(fmt.Sprintf("E_CREATE_%s_NO_NAME", logSlug))
+		}
+		newTop := engagedigital.Topology{Config: defTop.Config}
+		newTopString, err := json.Marshal(newTop)
+		if err != nil {
+			log.Fatal(err)
+		}
+		apiOpts := &engagedigital.CreateTopologyOpts{
+			JsonConfig: optional.NewString(string(newTopString))}
+
+		ex.HandleApiResponse(client.TopologiesApi.CreateTopology(
+			context.Background(), opts.Name, apiOpts))
+	case "read":
+
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.TopologiesApi.GetTopology(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.TopologiesApi.GetAllTopologies(context.Background(), nil))
+		}
+
+			case "update":
+				opts.Id = strings.TrimSpace(opts.Id)
+				opts.Name = strings.TrimSpace(opts.Name)
+				apiOpts := &engagedigital.UpdateCustomFieldOpts{
+					Label: optional.NewString(opts.Name)}
+				if len(opts.Name) == 0 || len(opts.Id) == 0 {
+					log.Fatal(fmt.Sprintf("E_UPDATE_%s_NO_ID_OR_NAME", logSlug))
+				}
+				ex.HandleApiResponse(client.CustomFieldsApi.UpdateCustomField(
+					context.Background(), opts.Id, apiOpts))
+			case "delete":
+				opts.Id = strings.TrimSpace(opts.Id)
+				if len(opts.Id) == 0 {
+					log.Fatal(fmt.Sprintf("E_DELETE_%s_NO_ID", logSlug))
+				}
+				ex.HandleApiResponse(client.CustomFieldsApi.DeleteCustomField(
+					context.Background(), opts.Id))
+
+	}
+}
+*/

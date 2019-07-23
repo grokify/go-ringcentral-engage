@@ -9,7 +9,7 @@
 [![Twitter][twitter-svg]][twitter-link]
 
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-56%2F127%20%3D%2044%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-56%2F121%20%3D%2046%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -68,7 +68,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-56/127 APIs - 44%
+56/121 APIs - 46%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -228,14 +228,6 @@ For information on how to use the apiClient objec, see:
   - [ ] GET /1.0/tasks/:id
   - [ ] POST /1.0/tasks/:id/transfer
   - [ ] POST /1.0/tasks/:id/move
-
-- [ ] Topologies
-  - [ ] GET /1.0/topologies
-  - [ ] GET /1.0/topologies/:id
-  - [ ] POST /1.0/topologies
-  - [ ] PUT /1.0/topologies/:id
-  - [ ] PUT /1.0/topologies/:id/activate
-  - [ ] DELETE /1.0/presence_status/:id
 
 - [ ] Reply Assistant - Entries
   - [ ] GET /1.0/reply_assistant/entries
