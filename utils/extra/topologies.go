@@ -1,5 +1,6 @@
 package utils
 
+/*
 import (
 	"fmt"
 	"strings"
@@ -21,3 +22,4 @@ func FindDefaultTopology(tops []engagedigital.Topology) (engagedigital.Topology,
 	return engagedigital.Topology{}, fmt.Errorf("E_DEFAULT_TOPOLOGY_NOT_FOUND default [%s] found [%s]",
 		DefaultTopologyName, strings.Join(topNames, ","))
 }
+*/
