@@ -3855,6 +3855,417 @@ paths:
       summary: Updating a user
       tags:
       - Users
+  /webhooks:
+    get:
+      description: |-
+        This method renders webhooks ordered by active and staging_use (descending).
+
+        Authorization​: users having manage_api_access_tokens permission can see all webhooks / users don’t having the manage_api_access_tokens permission can see only the webhooks belonging to access token created by them.
+      operationId: getAllWebhooks
+      parameters:
+      - description: Access token.
+        explode: true
+        in: query
+        name: access_token
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllWebhooksResponse'
+          description: Success
+      summary: Getting all webhooks
+      tags:
+      - Webhooks
+    post:
+      description: |-
+        This method creates a webhook. In case of success it renders the webhook, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: All users having the manage_api_access_tokens permission or all users having an api access token.
+      operationId: createWebhook
+      parameters:
+      - description: Access token.
+        explode: true
+        in: query
+        name: access_token
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: true or false, this field is used to enable/disable a webhook.
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The label of the webhook.
+        explode: true
+        in: query
+        name: label
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: true or false, this field is used to determine if a webhook will
+          be run in staging
+        explode: true
+        in: query
+        name: staging_use
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The url of a webhook. This is used to determine the endpoint
+          of your webhook, where
+        explode: true
+        in: query
+        name: url
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The token used in your webhook.
+        explode: true
+        in: query
+        name: verify_token
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The secret key that will be served as a ​`X-Dimelo-Secret​` header
+          in every request.
+        explode: true
+        in: query
+        name: secret
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An array containing all the events that your webhook wants to
+          subscribe.
+        explode: true
+        in: query
+        name: registered_events[]
+        required: true
+        schema:
+          items:
+            enum:
+            - api_access_token.created
+            - api_access_token.destroyed
+            - api_access_token.updated
+            - automatic_exports_task.created
+            - automatic_exports_task.destroyed
+            - automatic_exports_task.failed
+            - automatic_exports_task.succeed
+            - automatic_exports_task.updated
+            - category.created
+            - category.destroyed
+            - category.updated
+            - community.created
+            - community.destroyed
+            - community.updated
+            - content.admin_stamped
+            - content.approved
+            - content.author_blocked
+            - content.author_stamped
+            - content.author_unblocked
+            - content.auto_categorization_infirmed
+            - content.auto_categorization_not_precise
+            - content.auto_categorized
+            - content.auto_ignored
+            - content.categorized
+            - content.destroyed
+            - content.discussion_initiated
+            - content.discussion_planned
+            - content.ice_nth_content_ignored
+            - content.ignored
+            - content.imported
+            - content.liked
+            - content.moderated_ban
+            - content.moderated_modif
+            - content.moderated_nok
+            - content.moderated_ok
+            - content.planned_discussion_synchronized
+            - content.published
+            - content.recategorized
+            - content.replied
+            - content.reply_assistant_used
+            - content.retried_synchronization
+            - content.retweeted
+            - content.source_changed
+            - content.stared
+            - content.thread_closed
+            - content.thread_opened
+            - content.unliked
+            - content.unpublished
+            - content.unstamped
+            - content.unstared
+            - content.updated
+            - content_source.created
+            - content_source.destroyed
+            - content_source.updated
+            - content_thread.categorized
+            - content_thread.destroyed
+            - content_thread.recategorized
+            - custom_field.created
+            - custom_field.destroyed
+            - custom_field.updated
+            - expired_data_purge.deleted
+            - extension.created
+            - extension.destroyed
+            - extension.updated
+            - folder.created
+            - folder.destroyed
+            - folder.updated
+            - identity.followed
+            - identity.unfollowed
+            - identity.updated
+            - intervention.assigned
+            - intervention.canceled
+            - intervention.closed
+            - intervention.deferred
+            - intervention.opened
+            - intervention.recategorized
+            - intervention.reopened
+            - intervention.updated
+            - intervention.user_updated
+            - intervention_comment.created
+            - intervention_comment.destroyed
+            - reply_assistant_knowledge_base_entry.created
+            - reply_assistant_knowledge_base_entry.destroyed
+            - reply_assistant_knowledge_base_entry.updated
+            - reply_assistant_knowledge_base_version.created
+            - reply_assistant_knowledge_base_version.destroyed
+            - reply_assistant_knowledge_base_version.updated
+            - reply_assistant_sentence_entry.created
+            - reply_assistant_sentence_entry.destroyed
+            - reply_assistant_sentence_entry.updated
+            - reply_assistant_sentence_version.created
+            - reply_assistant_sentence_version.destroyed
+            - reply_assistant_sentence_version.updated
+            - reply_assistant_version_permalink.created
+            - reply_assistant_version_permalink.destroyed
+            - reply_assistant_version_permalink.updated
+            - role.created
+            - role.destroyed
+            - role.updated
+            - security.updated
+            - session.created
+            - session.destroyed
+            - settings.updated
+            - survey.created
+            - survey.destroyed
+            - survey.updated
+            - tag.created
+            - tag.destroyed
+            - tag.updated
+            - team.created
+            - team.destroyed
+            - team.updated
+            - user.created
+            - user.destroyed
+            - user.disconnected
+            - user.impersonated
+            - user.invited
+            - user.notifications_updated
+            - user.updated
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Success
+      summary: Creating a webhook
+      tags:
+      - Webhooks
+  /webhooks/{webhookId}:
+    delete:
+      description: |-
+        This method destroys an existing webhook. It renders webhook itself. It renders a 404 if id is invalid.
+
+        Authorization​: All users having the manage_api_access_tokens permission or all users having an api access token belonging to the webhook you’re deleting.
+      operationId: deleteWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Access token.
+        explode: true
+        in: query
+        name: access_token
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Success
+      summary: Deleting a webhook
+      tags:
+      - Webhooks
+    get:
+      description: |-
+        This method renders a webhook from given id.
+
+        Authorization​: users having manage_api_access_tokens permission can see any webhook / users don’t having the `manage_api_access_tokens` permission can see only the webhook in case the webhook is associated to an access token created by them.
+      operationId: getWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Access token.
+        explode: true
+        in: query
+        name: access_token
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Success
+      summary: Getting a webhook from its id
+      tags:
+      - Webhooks
+    put:
+      description: |-
+        This method updates an existing webhook from given attributes and renders it in case of success.
+
+        Authorization​: All users having the manage_api_access_tokens permission or all users having an api access token belonging to the webhook you’re updating.
+      operationId: updateWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Access token.
+        explode: true
+        in: query
+        name: access_token
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: true or false, this field is used to enable/disable a webhook.
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The label of the webhook.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: true or false, this field is used to determine if a webhook will
+          be run in staging
+        explode: true
+        in: query
+        name: staging_use
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The url of a webhook. This is used to determine the endpoint
+          of your webhook, where
+        explode: true
+        in: query
+        name: url
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The token used in your webhook.
+        explode: true
+        in: query
+        name: verify_token
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The secret key that will be served as a ​`X-Dimelo-Secret​` header
+          in every request.
+        explode: true
+        in: query
+        name: secret
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An array containing all the events that your webhook wants to
+          subscribe.
+        explode: true
+        in: query
+        name: registered_events[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Success
+      summary: Updating a webhook
+      tags:
+      - Webhooks
 components:
   schemas:
     Attachment:
@@ -4928,6 +5339,50 @@ components:
           items:
             $ref: '#/components/schemas/User'
           type: array
+    GetAllWebhooksResponse:
+      example:
+        offset: 1
+        records:
+        - registered_events:
+          - registered_events
+          - registered_events
+          staging_use: true
+          active: true
+          api_access_token:
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            created_at: 2000-01-23T04:56:07.000+00:00
+            id: id
+          id: id
+          verify_token: verify_token
+          url: url
+        - registered_events:
+          - registered_events
+          - registered_events
+          staging_use: true
+          active: true
+          api_access_token:
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            created_at: 2000-01-23T04:56:07.000+00:00
+            id: id
+          id: id
+          verify_token: verify_token
+          url: url
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Webhook'
+          type: array
     Identity:
       example:
         home_phone: home_phone
@@ -5651,6 +6106,55 @@ components:
             type: string
           type: array
         timezone:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+    Webhook:
+      example:
+        registered_events:
+        - registered_events
+        - registered_events
+        staging_use: true
+        active: true
+        api_access_token:
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        id: id
+        verify_token: verify_token
+        url: url
+      properties:
+        active:
+          type: boolean
+        api_access_token:
+          $ref: '#/components/schemas/WebhookAccessToken'
+        id:
+          type: string
+        registered_events:
+          items:
+            type: string
+          type: array
+        staging_use:
+          type: boolean
+        url:
+          type: string
+        verify_token:
+          type: string
+      required:
+      - id
+    WebhookAccessToken:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
           type: string
         updated_at:
           format: date-time

@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-63%2F121%20%3D%2052%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-68%2F121%20%3D%2056%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -67,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-63/121 APIs - 52%
+68/121 APIs - 56%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -186,12 +186,12 @@ For information on how to use the apiClient objec, see:
   - [ ] GET /1.0/status/:agent_id
   - [ ] PUT /1.0/status/:agent_id
 
-- [ ] Webhook
-  - [ ] GET /1.0/webhooks
-  - [ ] GET /1.0/webhooks/:id
-  - [ ] POST /1.0/webhooks
-  - [ ] PUT /1.0/webhooks/:id
-  - [ ] DELETE /1.0/webhooks/:id
+- [x] Webhook
+  - [x] GET /1.0/webhooks
+  - [x] GET /1.0/webhooks/:id
+  - [x] POST /1.0/webhooks
+  - [x] PUT /1.0/webhooks/:id
+  - [x] DELETE /1.0/webhooks/:id
 
 - [ ] Time Sheet
   - [ ] GET /1.0/time_sheets

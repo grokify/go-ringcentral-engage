@@ -78,6 +78,8 @@ type APIClient struct {
 	TimezonesApi *TimezonesApiService
 
 	UsersApi *UsersApiService
+
+	WebhooksApi *WebhooksApiService
 }
 
 type service struct {
@@ -113,6 +115,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.TeamsApi = (*TeamsApiService)(&c.common)
 	c.TimezonesApi = (*TimezonesApiService)(&c.common)
 	c.UsersApi = (*UsersApiService)(&c.common)
+	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 
 	return c
 }

@@ -124,6 +124,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.UsersApi.GetAllUsers(context.Background(), nil))
 		}
+	case "webhook":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.WebhooksApi.GetWebhook(context.Background(), opts.Id, opts.Token))
+		} else {
+			ex.HandleApiResponse(client.WebhooksApi.GetAllWebhooks(context.Background(), opts.Token, nil))
+		}
 	}
 
 	fmt.Println("DONE")

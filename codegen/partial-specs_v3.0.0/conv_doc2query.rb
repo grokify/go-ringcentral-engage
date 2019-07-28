@@ -193,6 +193,16 @@ agent_ids need to be provided and the other parameters will be ignored.
 ● team_ids: Filter agents receiving the task depending on their teams.
 ● comment: Add a comment to the task.'
 
+doc = '● active: true or false, this field is used to enable/disable a webhook.
+● label: The label of the webhook (mandatory).
+● staging_use: true or false, this field is used to determine if a webhook will be run in staging
+or production.
+● url: The url of a webhook. This is used to determine the endpoint of your webhook, where
+the data will be submitted.
+● verify_token: The token used in your webhook.
+● secret: The secret key that will be served as a ​X-Dimelo-Secret​ header in every request.
+● registered_events: An array containing all the events that your webhook wants to subscribe.
+'
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

@@ -94,6 +94,11 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**GetUser**](docs/UsersApi.md#getuser) | **Get** /users/{userId} | Getting a user from its id
 *UsersApi* | [**InviteUser**](docs/UsersApi.md#inviteuser) | **Post** /users/invite | Inviting a user
 *UsersApi* | [**UpdateUser**](docs/UsersApi.md#updateuser) | **Put** /users/{userId} | Updating a user
+*WebhooksApi* | [**CreateWebhook**](docs/WebhooksApi.md#createwebhook) | **Post** /webhooks | Creating a webhook
+*WebhooksApi* | [**DeleteWebhook**](docs/WebhooksApi.md#deletewebhook) | **Delete** /webhooks/{webhookId} | Deleting a webhook
+*WebhooksApi* | [**GetAllWebhooks**](docs/WebhooksApi.md#getallwebhooks) | **Get** /webhooks | Getting all webhooks
+*WebhooksApi* | [**GetWebhook**](docs/WebhooksApi.md#getwebhook) | **Get** /webhooks/{webhookId} | Getting a webhook from its id
+*WebhooksApi* | [**UpdateWebhook**](docs/WebhooksApi.md#updatewebhook) | **Put** /webhooks/{webhookId} | Updating a webhook
 
 
 ## Documentation For Models
@@ -119,6 +124,7 @@ Class | Method | HTTP request | Description
  - [GetAllTasksResponse](docs/GetAllTasksResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
+ - [GetAllWebhooksResponse](docs/GetAllWebhooksResponse.md)
  - [Identity](docs/Identity.md)
  - [IdentityGroup](docs/IdentityGroup.md)
  - [Locale](docs/Locale.md)
@@ -131,6 +137,8 @@ Class | Method | HTTP request | Description
  - [Team](docs/Team.md)
  - [Timezone](docs/Timezone.md)
  - [User](docs/User.md)
+ - [Webhook](docs/Webhook.md)
+ - [WebhookAccessToken](docs/WebhookAccessToken.md)
 
 
 ## Documentation For Authorization
