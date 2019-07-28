@@ -8,8 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
-
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-56%2F121%20%3D%2046%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-59%2F121%20%3D%2048%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -68,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-56/121 APIs - 46%
+59/121 APIs - 48%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -130,10 +129,10 @@ For information on how to use the apiClient objec, see:
   - [x] GET /1.0/identities
   - [x] GET /1.0/identities/:id
 
-- [ ] Identity Groups
-  - [ ] GET /1.0/identity_groups
-  - [ ] GET /1.0/identity_groups/:id
-  - [ ] PUT /1.0/identity_groups/:id
+- [x] Identity Groups
+  - [x] GET /1.0/identity_groups
+  - [x] GET /1.0/identity_groups/:id
+  - [x] PUT /1.0/identity_groups/:id
 
 - [x] Custom Fields
   - [x] GET /1.0/custom_fields
