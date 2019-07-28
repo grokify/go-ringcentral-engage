@@ -78,6 +78,10 @@ Class | Method | HTTP request | Description
 *TagsApi* | [**GetAllTags**](docs/TagsApi.md#getalltags) | **Get** /tags | Getting all tags
 *TagsApi* | [**GetTag**](docs/TagsApi.md#gettag) | **Get** /tags/{tagId} | Getting a tag from its id
 *TagsApi* | [**UpdateTag**](docs/TagsApi.md#updatetag) | **Put** /tags/{tagId} | Updating a tag
+*TasksApi* | [**GetAllTasks**](docs/TasksApi.md#getalltasks) | **Get** /tasks | Getting all tasks
+*TasksApi* | [**GetTask**](docs/TasksApi.md#gettask) | **Get** /tasks/{taskId} | Getting a task from its id
+*TasksApi* | [**MoveTask**](docs/TasksApi.md#movetask) | **Delete** /tasks/{taskId}/move | Move a task to another queue
+*TasksApi* | [**TransferTask**](docs/TasksApi.md#transfertask) | **Put** /tasks/{taskId}/transfer | Transferring a task
 *TeamsApi* | [**CreateTeam**](docs/TeamsApi.md#createteam) | **Post** /teams | Creating a team
 *TeamsApi* | [**DeleteTeam**](docs/TeamsApi.md#deleteteam) | **Delete** /teams/{teamId} | Deleting a team
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
@@ -112,6 +116,7 @@ Class | Method | HTTP request | Description
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
+ - [GetAllTasksResponse](docs/GetAllTasksResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [Identity](docs/Identity.md)
@@ -122,6 +127,7 @@ Class | Method | HTTP request | Description
  - [Role](docs/Role.md)
  - [Source](docs/Source.md)
  - [Tag](docs/Tag.md)
+ - [Task](docs/Task.md)
  - [Team](docs/Team.md)
  - [Timezone](docs/Timezone.md)
  - [User](docs/User.md)

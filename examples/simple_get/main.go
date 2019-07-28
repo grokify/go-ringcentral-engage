@@ -106,6 +106,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.TagsApi.GetAllTags(context.Background(), nil))
 		}
+	case "task":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.TasksApi.GetTask(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.TasksApi.GetAllTasks(context.Background(), nil))
+		}
 	case "team":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.TeamsApi.GetTeam(context.Background(), opts.Id))

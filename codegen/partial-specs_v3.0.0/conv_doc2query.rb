@@ -185,6 +185,14 @@ can be multiple if custom field is multiple or is has multiple_choice type.
 ● notes: Identity notes.
 ● tag_ids: Identity tag ids (multiple).'
 
+doc = '● agent_ids: List of agents to transfer the task to (multiple).
+● bypass: Force the transfer to the first agent in agent_ids if set. When bypass is used,
+agent_ids need to be provided and the other parameters will be ignored.
+● category_ids: Filter agents receiving the task depending on their categories.
+● language: Filter agents receiving the task depending on their spoken languages.
+● team_ids: Filter agents receiving the task depending on their teams.
+● comment: Add a comment to the task.'
+
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

@@ -2878,6 +2878,207 @@ paths:
       summary: Updating a tag
       tags:
       - Tags
+  /tasks:
+    get:
+      description: |-
+        This method renders tasks ordered by priority (highest first) and then by creation date (latest first).
+
+        Authorization​: only users that can read tasks.
+      operationId: getAllTasks
+      parameters:
+      - description: 'To filter tasks on given queue name (filters on the “global”
+          queue by default).The most commonly used queues are: “global” (contains
+          every task pending assignation), “workbin_{agent_id}” (contains every tasks
+          assigned to the {agent_id} agent, “history” (contains every processed tasks),
+          and “undelivered” (contains every undelivered tasks). If queue is set to
+          “workbins” all the tasks currently in a workbin will be returned.'
+        explode: true
+        in: query
+        name: queue
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter tasks on given channel id.
+        explode: true
+        in: query
+        name: channel_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter tasks on the step they’re currently in.
+        explode: true
+        in: query
+        name: step
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllTasksResponse'
+          description: Success
+      summary: Getting all tasks
+      tags:
+      - Tasks
+  /tasks/{taskId}:
+    get:
+      description: This method renders a task from given id.
+      operationId: getTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Success
+      summary: Getting a task from its id
+      tags:
+      - Tasks
+  /tasks/{taskId}/move:
+    delete:
+      description: |-
+        This method changes a task queue and renders it in case of success. Only accepts “undelivered” and special queue defined in topology (e.g. triage).
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: moveTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Name of the queue task has to be moved in.
+        explode: true
+        in: query
+        name: queue
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Success
+      summary: Move a task to another queue
+      tags:
+      - Tasks
+  /tasks/{taskId}/transfer:
+    put:
+      description: |-
+        This method transfers an existing task and renders it in case of success.
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: transferTask
+      parameters:
+      - explode: false
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: List of agents to transfer the task to (multiple).
+        explode: true
+        in: query
+        name: agent_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Force the transfer to the first agent in agent_ids if set. When
+          bypass is used,
+        explode: true
+        in: query
+        name: bypass
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter agents receiving the task depending on their categories.
+        explode: true
+        in: query
+        name: category_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Filter agents receiving the task depending on their spoken languages.
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter agents receiving the task depending on their teams.
+        explode: true
+        in: query
+        name: team_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Add a comment to the task.
+        explode: true
+        in: query
+        name: comment
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Success
+      summary: Transferring a task
+      tags:
+      - Tasks
   /teams:
     get:
       description: This method renders teams ordered by creation date (ascending).
@@ -4559,6 +4760,60 @@ components:
           items:
             $ref: '#/components/schemas/Tag'
           type: array
+    GetAllTasksResponse:
+      example:
+        offset: 1
+        records:
+        - intervention_id: intervention_id
+          content_id: content_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          transfered_at: 2000-01-23T04:56:07.000+00:00
+          priority: 5
+          accepted_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          thread_id: thread_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          locked_at: 2000-01-23T04:56:07.000+00:00
+          expire_at: 2000-01-23T04:56:07.000+00:00
+          step: step
+          id: id
+          channel_id: channel_id
+          agent_ids:
+          - agent_ids
+          - agent_ids
+        - intervention_id: intervention_id
+          content_id: content_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          transfered_at: 2000-01-23T04:56:07.000+00:00
+          priority: 5
+          accepted_at: 2000-01-23T04:56:07.000+00:00
+          completed_at: 2000-01-23T04:56:07.000+00:00
+          thread_id: thread_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          locked_at: 2000-01-23T04:56:07.000+00:00
+          expire_at: 2000-01-23T04:56:07.000+00:00
+          step: step
+          id: id
+          channel_id: channel_id
+          agent_ids:
+          - agent_ids
+          - agent_ids
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
     GetAllTeamsResponse:
       example:
         offset: 1
@@ -5219,6 +5474,67 @@ components:
       required:
       - id
       - name
+    Task:
+      example:
+        intervention_id: intervention_id
+        content_id: content_id
+        created_at: 2000-01-23T04:56:07.000+00:00
+        transfered_at: 2000-01-23T04:56:07.000+00:00
+        priority: 5
+        accepted_at: 2000-01-23T04:56:07.000+00:00
+        completed_at: 2000-01-23T04:56:07.000+00:00
+        thread_id: thread_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        locked_at: 2000-01-23T04:56:07.000+00:00
+        expire_at: 2000-01-23T04:56:07.000+00:00
+        step: step
+        id: id
+        channel_id: channel_id
+        agent_ids:
+        - agent_ids
+        - agent_ids
+      properties:
+        accepted_at:
+          format: date-time
+          type: string
+        agent_ids:
+          items:
+            type: string
+          type: array
+        channel_id:
+          type: string
+        completed_at:
+          format: date-time
+          type: string
+        content_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        expire_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        intervention_id:
+          type: string
+        locked_at:
+          format: date-time
+          type: string
+        priority:
+          type: integer
+        step:
+          type: string
+        thread_id:
+          type: string
+        transfered_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
     Team:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
