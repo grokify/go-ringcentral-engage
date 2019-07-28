@@ -1339,6 +1339,224 @@ paths:
       summary: Getting an identity from its id
       tags:
       - Identities
+  /identity_groups:
+    get:
+      description: |-
+        This method renders identity groups ordered by creation date (descending). Note that identity_group are created in a lazily only when data are manually added to an identity OR a two identity are merged altogether. That means that some identity DON’T have identity_group, and identity_group do not cover all identities.
+
+        Authorization​: no.
+      operationId: getAllIdentityGroups
+      parameters:
+      - description: To filter groups on given firstname.
+        explode: true
+        in: query
+        name: firstname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter groups on given lastname.
+        explode: true
+        in: query
+        name: lastname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter groups that have given email.
+        explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter groups that have given uuid.
+        explode: true
+        in: query
+        name: uuid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To change the criteria chosen to sort the identities. The value
+          can be “created_at” or “updated_at”.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at
+          - updated_at
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllIdentityGroupsResponse'
+          description: Success
+      summary: Getting all identity groups
+      tags:
+      - Identity Groups
+  /identity_groups/{identityGroupId}:
+    get:
+      description: This method renders an identity group from given id.
+      operationId: getIdentityGroup
+      parameters:
+      - explode: false
+        in: path
+        name: identityGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityGroup'
+          description: Success
+      summary: Getting an identity group from its id
+      tags:
+      - Identity Groups
+    put:
+      description: |-
+        This method updates an identity group from given attributes and renders it in case of success.
+
+        Authorization​: no.
+      operationId: updateIdentityGroup
+      parameters:
+      - explode: false
+        in: path
+        name: identityGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Identity company.
+        explode: true
+        in: query
+        name: company
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Identity custom field with key « custom_field_key ». It
+        explode: true
+        in: query
+        name: custom_field_values[custom_field_key]
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Identity emails (multiple).
+        explode: true
+        in: query
+        name: emails
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Identity firstname.
+        explode: true
+        in: query
+        name: firstname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Identity’s gender. It can be "man", "woman" or empty.
+        explode: true
+        in: query
+        name: gender
+        required: false
+        schema:
+          enum:
+          - man
+          - woman
+          type: string
+        style: form
+      - description: Identity home phones (mutiple).
+        explode: true
+        in: query
+        name: home_phones
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Identity lastname.
+        explode: true
+        in: query
+        name: lastname
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Identity mobile phones (multiple).
+        explode: true
+        in: query
+        name: mobile_phones
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Identity notes.
+        explode: true
+        in: query
+        name: notes
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Identity tag ids (multiple).
+        explode: true
+        in: query
+        name: tag_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityGroup'
+          description: Success
+      summary: Updating an identity group
+      tags:
+      - Identity Groups
   /locales:
     get:
       description: This method renders all available locales.
@@ -3969,6 +4187,76 @@ components:
           items:
             $ref: '#/components/schemas/Identity'
           type: array
+    GetAllIdentityGroupsResponse:
+      example:
+        offset: 1
+        records:
+        - firstname: firstname
+          tag_ids:
+          - tag_ids
+          - tag_ids
+          notes: notes
+          gender: gender
+          identity_ids:
+          - identity_ids
+          - identity_ids
+          created_at: 2000-01-23T04:56:07.000+00:00
+          mobile_phones:
+          - mobile_phones
+          - mobile_phones
+          lastname: lastname
+          emails:
+          - emails
+          - emails
+          home_phones:
+          - home_phones
+          - home_phones
+          avatar_url: avatar_url
+          custom_field_values: '{}'
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          company: company
+          id: id
+        - firstname: firstname
+          tag_ids:
+          - tag_ids
+          - tag_ids
+          notes: notes
+          gender: gender
+          identity_ids:
+          - identity_ids
+          - identity_ids
+          created_at: 2000-01-23T04:56:07.000+00:00
+          mobile_phones:
+          - mobile_phones
+          - mobile_phones
+          lastname: lastname
+          emails:
+          - emails
+          - emails
+          home_phones:
+          - home_phones
+          - home_phones
+          avatar_url: avatar_url
+          custom_field_values: '{}'
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          company: company
+          id: id
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/IdentityGroup'
+          type: array
     GetAllPresenceStatusesResponse:
       example:
         offset: 1
@@ -4462,6 +4750,78 @@ components:
           type: array
         uuid:
           type: string
+    IdentityGroup:
+      example:
+        firstname: firstname
+        tag_ids:
+        - tag_ids
+        - tag_ids
+        notes: notes
+        gender: gender
+        identity_ids:
+        - identity_ids
+        - identity_ids
+        created_at: 2000-01-23T04:56:07.000+00:00
+        mobile_phones:
+        - mobile_phones
+        - mobile_phones
+        lastname: lastname
+        emails:
+        - emails
+        - emails
+        home_phones:
+        - home_phones
+        - home_phones
+        avatar_url: avatar_url
+        custom_field_values: '{}'
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        company: company
+        id: id
+      properties:
+        avatar_url:
+          type: string
+        company:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        custom_field_values:
+          type: object
+        emails:
+          items:
+            type: string
+          type: array
+        firstname:
+          type: string
+        gender:
+          type: string
+        home_phones:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        identity_ids:
+          items:
+            type: string
+          type: array
+        lastname:
+          type: string
+        mobile_phones:
+          items:
+            type: string
+          type: array
+        notes:
+          type: string
+        tag_ids:
+          items:
+            type: string
+          type: array
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
     Locale:
       example:
         code: code

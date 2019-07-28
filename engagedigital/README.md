@@ -57,6 +57,9 @@ Class | Method | HTTP request | Description
 *FoldersApi* | [**UpdateFolder**](docs/FoldersApi.md#updatefolder) | **Put** /folders/{folderId} | Updating a folder
 *IdentitiesApi* | [**GetAllIdentities**](docs/IdentitiesApi.md#getallidentities) | **Get** /identities | Getting all identities
 *IdentitiesApi* | [**GetIdentity**](docs/IdentitiesApi.md#getidentity) | **Get** /identities/{identityId} | Getting an identity from its id
+*IdentityGroupsApi* | [**GetAllIdentityGroups**](docs/IdentityGroupsApi.md#getallidentitygroups) | **Get** /identity_groups | Getting all identity groups
+*IdentityGroupsApi* | [**GetIdentityGroup**](docs/IdentityGroupsApi.md#getidentitygroup) | **Get** /identity_groups/{identityGroupId} | Getting an identity group from its id
+*IdentityGroupsApi* | [**UpdateIdentityGroup**](docs/IdentityGroupsApi.md#updateidentitygroup) | **Put** /identity_groups/{identityGroupId} | Updating an identity group
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
 *PresenceStatusesApi* | [**CreatePresenceStatus**](docs/PresenceStatusesApi.md#createpresencestatus) | **Post** /presence_status | Creating a presence status
 *PresenceStatusesApi* | [**DeletePresenceStatus**](docs/PresenceStatusesApi.md#deletepresencestatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
@@ -104,6 +107,7 @@ Class | Method | HTTP request | Description
  - [GetAllCustomFieldsResponse](docs/GetAllCustomFieldsResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
+ - [GetAllIdentityGroupsResponse](docs/GetAllIdentityGroupsResponse.md)
  - [GetAllPresenceStatusesResponse](docs/GetAllPresenceStatusesResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
@@ -111,6 +115,7 @@ Class | Method | HTTP request | Description
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [Identity](docs/Identity.md)
+ - [IdentityGroup](docs/IdentityGroup.md)
  - [Locale](docs/Locale.md)
  - [PresenceStatus](docs/PresenceStatus.md)
  - [Restriction](docs/Restriction.md)

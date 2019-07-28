@@ -173,6 +173,18 @@ as array. | array:string
 ● position: an integer that indicates custom field’s position between others (default: -1). | integer
 '
 
+doc = '● company: Identity company.
+● custom_field_values[custom_field_key]: Identity custom field with key « custom_field_key ». It
+can be multiple if custom field is multiple or is has multiple_choice type.
+● emails: Identity emails (multiple).
+● firstname: Identity firstname.
+● gender: Identity’s gender. It can be "man", "woman" or empty.
+● home_phones: Identity home phones (mutiple).
+● lastname: Identity lastname.
+● mobile_phones: Identity mobile phones (multiple).
+● notes: Identity notes.
+● tag_ids: Identity tag ids (multiple).'
+
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

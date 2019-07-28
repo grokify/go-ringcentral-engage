@@ -74,6 +74,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.IdentitiesApi.GetAllIdentities(context.Background(), nil))
 		}
+	case "identityGroup":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.IdentityGroupsApi.GetIdentityGroup(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.IdentityGroupsApi.GetAllIdentityGroups(context.Background(), nil))
+		}
 	case "locale":
 		ex.HandleApiResponse(client.LocalesApi.GetAllLocales(context.Background()))
 	case "source":

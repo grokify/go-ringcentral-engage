@@ -59,6 +59,8 @@ type APIClient struct {
 
 	IdentitiesApi *IdentitiesApiService
 
+	IdentityGroupsApi *IdentityGroupsApiService
+
 	LocalesApi *LocalesApiService
 
 	PresenceStatusesApi *PresenceStatusesApiService
@@ -99,6 +101,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CustomFieldsApi = (*CustomFieldsApiService)(&c.common)
 	c.FoldersApi = (*FoldersApiService)(&c.common)
 	c.IdentitiesApi = (*IdentitiesApiService)(&c.common)
+	c.IdentityGroupsApi = (*IdentityGroupsApiService)(&c.common)
 	c.LocalesApi = (*LocalesApiService)(&c.common)
 	c.PresenceStatusesApi = (*PresenceStatusesApiService)(&c.common)
 	c.RolesApi = (*RolesApiService)(&c.common)
