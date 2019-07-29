@@ -39,6 +39,8 @@ func main() {
 		handlePresenceStatus(client, opts)
 	case "tag":
 		handleTag(client, opts)
+	case "settings":
+		handleSettings(client, opts)
 	default:
 		log.Fatal(fmt.Sprintf("E_OBJECT_NOT_SUPPORTED [%v]", opts.Object))
 	}
@@ -48,6 +50,27 @@ func main() {
 
 func formatRespStatusCodeError(statusCode int) string {
 	return fmt.Sprintf("E_API_ERROR [%v]", statusCode)
+}
+
+func handleSettings(client *engagedigital.APIClient, opts options) {
+	switch opts.Action {
+	case "read":
+		ex.HandleApiResponse(client.SettingsApi.GetAllSettings(context.Background()))
+	case "update":
+		info, resp, err := client.SettingsApi.GetAllSettings(context.Background())
+		if err != nil {
+			log.Fatal(err)
+		} else if resp.StatusCode != 200 {
+			log.Fatal(fmt.Sprintf("Status Code [%v]", resp.StatusCode))
+		}
+		apiOpts := &engagedigital.UpdateSettingsOpts{}
+		if info.Locale == "en" {
+			apiOpts.Locale = optional.NewString("fr")
+		} else {
+			apiOpts.Locale = optional.NewString("en")
+		}
+		ex.HandleApiResponse(client.SettingsApi.UpdateSettings(context.Background(), apiOpts))
+	}
 }
 
 func handleCustomField(client *engagedigital.APIClient, opts options) {

@@ -203,6 +203,46 @@ the data will be submitted.
 ● secret: The secret key that will be served as a ​X-Dimelo-Secret​ header in every request.
 ● registered_events: An array containing all the events that your webhook wants to subscribe.
 '
+
+doc = '● activity_presence_threshold: (in hours). | integer
+● activity_tracking: ​Enable activity tracking (Boolean)
+● beginning_of_week: (Day of week)
+● category_tagging: A​ ctivate the forced categorization by source.​ (Boolean)
+● content_languages: (See format)
+● dashboard: Activate the dashboard (Boolean)
+● deny_iframe_integration: Prevent the DD to be embed by other websites (Boolean)
+● disable_password_autocomplete: (Boolean)
+● expire_password_after: password expiration delay (in seconds) | integer
+● expire_password_enabled: enable password expiration (Boolean)
+● export_in_seconds: provide durations in seconds in export (Boolean)
+● fold_useless_contents: fold archived contents (Boolean)
+● fte_duration: FTE data period (in hours) | integer
+● identity_merge: enable identity merge (Boolean)
+● intervention_defer_rates[]: (Array of times in seconds) | array:integer
+● intervention_defer_threshold: (in seconds) | integer
+● intervention_rates: (Array of times in seconds) | array:integer
+● locale: locale code (String)
+● multi_lang: activate multi language support for messages (Boolean)
+● name: Name of the Dimelo Digital (String)
+● password_archivable_enabled: prohibit reusing old passwords (Boolean)
+● password_archivable_size: number of archived passwords | integer
+● password_min_length: minimum character length | integer
+● password_non_word: should contain at least 1 non alphanumeric char (Boolean)
+● password_numbers: should contain at least 1 number (Boolean)
+● password_recovery_disabled: disable password recovery by email (Boolean)
+● push_enabled: Enable push mode (Boolean)
+● reply_as_any_identity: Enable reply as any identity (Boolean)
+● rtl_support: Enable right to left support (Boolean)
+● self_approval_required: ​Allow authors to ask approval of their messages (Boolean)
+● session_timeout: Session timeout (in minutes) | integer
+● spellchecking: Enable spellchecking (Boolean)
+● style: Defines the DD’s design (String)
+● third_party_services_disabled: Disable third-party services (tracking...) (Boolean)
+● timezone: Use the timezone endpoint to get the timezone name (String)
+● track_js: Track JS errors (Boolean)
+● type: Can be ‘demo’, ‘production’ or ‘archived’
+● urgent_task_threshold: Chat max response time (in seconds) | integer
+● use_system_font: Experimental (Boolean)'
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

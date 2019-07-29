@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-68%2F121%20%3D%2056%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-70%2F121%20%3D%2057%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -67,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-68/121 APIs - 56%
+70/121 APIs - 57%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -205,9 +205,9 @@ For information on how to use the apiClient objec, see:
   - [x] GET /1.0/channels/:id
   - [x] PUT /1.0/channels/:id
 
-- [ ] Settings
-  - [ ] GET /1.0/settings
-  - [ ] PUT /1.0/settings
+- [x] Settings
+  - [x] GET /1.0/settings
+  - [x] PUT /1.0/settings
 
 - [x] Locales
   - [x] GET /1.0/locales

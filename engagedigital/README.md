@@ -70,6 +70,8 @@ Class | Method | HTTP request | Description
 *RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
 *RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
 *RolesApi* | [**UpdateRole**](docs/RolesApi.md#updaterole) | **Put** /roles/{roleId} | Updating a role
+*SettingsApi* | [**GetAllSettings**](docs/SettingsApi.md#getallsettings) | **Get** /settings | Getting all settings
+*SettingsApi* | [**UpdateSettings**](docs/SettingsApi.md#updatesettings) | **Put** /settings | Updating settings
 *SourcesApi* | [**GetAllSources**](docs/SourcesApi.md#getallsources) | **Get** /content_sources | Getting all sources
 *SourcesApi* | [**GetSource**](docs/SourcesApi.md#getsource) | **Get** /content_sources/{sourceId} | Getting a source from its id
 *SourcesApi* | [**UpdateSource**](docs/SourcesApi.md#updatesource) | **Put** /content_sources/{sourceId} | Updating a source
@@ -131,6 +133,7 @@ Class | Method | HTTP request | Description
  - [PresenceStatus](docs/PresenceStatus.md)
  - [Restriction](docs/Restriction.md)
  - [Role](docs/Role.md)
+ - [Settings](docs/Settings.md)
  - [Source](docs/Source.md)
  - [Tag](docs/Tag.md)
  - [Task](docs/Task.md)

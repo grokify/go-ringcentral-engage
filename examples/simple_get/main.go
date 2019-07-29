@@ -100,6 +100,8 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.PresenceStatusesApi.GetAllPresenceStatuses(context.Background(), nil))
 		}
+	case "settings":
+		ex.HandleApiResponse(client.SettingsApi.GetAllSettings(context.Background()))
 	case "tag":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.TagsApi.GetTag(context.Background(), opts.Id))

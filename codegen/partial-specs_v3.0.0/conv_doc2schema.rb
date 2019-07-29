@@ -143,6 +143,62 @@ doc = '
   "source_ids": [],
   "unselectable": false  }'
 
+doc = '{
+  "id":"5c8bf22b14bf8a84c44c773b",
+  "created_at":"2019-03-15T18:42:51Z",
+  "updated_at":"2019-07-24T09:26:42Z",
+  "activity_presence_threshold":45,
+  "activity_tracking":true,
+  "beginning_of_week":"monday",
+  "content_languages":[
+    "en"
+  ],
+  "deny_iframe_integration":false,
+  "disable_password_autocomplete":false,
+  "dump_in_preprod":false,
+  "expire_password_after":7776000,
+  "expire_password_enabled":false,
+  "fte_duration":7,
+  "identity_merge":true,
+  "intervention_defer_rates":[
+    1800,
+    86400,
+    259200
+  ],
+  "intervention_defer_threshold":86400,
+  "intervention_rates":[
+    3600,
+    10800,
+    86400,
+    259200
+  ],
+  "locale":"en",
+  "multi_lang":false,
+  "name":"rc-platform",
+  "password_archivable_enabled":false,
+  "password_archivable_size":5,
+  "password_min_length":6,
+  "password_non_word":false,
+  "password_numbers":false,
+  "password_recovery_disabled":false,
+  "push_enabled":true,
+  "reply_as_any_identity":false,
+  "rtl_support":false,
+  "self_approval_required":false,
+  "session_timeout":240,
+  "sharding_key":"rc_platform",
+  "spellchecking":false,
+  "style":"ringcentral",
+  "third_party_services_disabled":false,
+  "timezone":"Pacific Time (US & Canada)",
+  "type":"demo",
+  "urgent_task_threshold":60,
+  "browser_notifications_disabled":false,
+  "display_only_unknown_bbcode":false,
+  "intervention_closing_period":432000,
+  "use_two_letters_avatars":true
+}'
+
 properties = {}
 
 object = MultiJson.load doc

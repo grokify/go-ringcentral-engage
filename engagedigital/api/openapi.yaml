@@ -2743,6 +2743,360 @@ paths:
       summary: Updating a role
       tags:
       - Roles
+  /settings:
+    get:
+      description: |-
+        This method renders all settings of your domain.
+
+        Authorization​: only users that can update settings.
+      operationId: getAllSettings
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: Success
+      summary: Getting all settings
+      tags:
+      - Settings
+    put:
+      description: |-
+        This method updates the current domain settings.
+
+        Authorization​: only users that can update settings.
+      operationId: updateSettings
+      parameters:
+      - description: (in hours).
+        explode: true
+        in: query
+        name: activity_presence_threshold
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: ​Enable activity tracking (Boolean)
+        explode: true
+        in: query
+        name: activity_tracking
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: (Day of week)
+        explode: true
+        in: query
+        name: beginning_of_week
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A​ ctivate the forced categorization by source.​ (Boolean)
+        explode: true
+        in: query
+        name: category_tagging
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: (See format)
+        explode: true
+        in: query
+        name: content_languages
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Activate the dashboard (Boolean)
+        explode: true
+        in: query
+        name: dashboard
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Prevent the DD to be embed by other websites (Boolean)
+        explode: true
+        in: query
+        name: deny_iframe_integration
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: (Boolean)
+        explode: true
+        in: query
+        name: disable_password_autocomplete
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: password expiration delay (in seconds)
+        explode: true
+        in: query
+        name: expire_password_after
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: enable password expiration (Boolean)
+        explode: true
+        in: query
+        name: expire_password_enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: provide durations in seconds in export (Boolean)
+        explode: true
+        in: query
+        name: export_in_seconds
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: fold archived contents (Boolean)
+        explode: true
+        in: query
+        name: fold_useless_contents
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: FTE data period (in hours)
+        explode: true
+        in: query
+        name: fte_duration
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: enable identity merge (Boolean)
+        explode: true
+        in: query
+        name: identity_merge
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: (Array of times in seconds)
+        explode: true
+        in: query
+        name: intervention_defer_rates[]
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: (in seconds)
+        explode: true
+        in: query
+        name: intervention_defer_threshold
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: (Array of times in seconds)
+        explode: true
+        in: query
+        name: intervention_rates
+        required: false
+        schema:
+          items:
+            type: integer
+          type: array
+        style: form
+      - description: locale code (String)
+        explode: true
+        in: query
+        name: locale
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: activate multi language support for messages (Boolean)
+        explode: true
+        in: query
+        name: multi_lang
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Name of the Dimelo Digital (String)
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: prohibit reusing old passwords (Boolean)
+        explode: true
+        in: query
+        name: password_archivable_enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: number of archived passwords
+        explode: true
+        in: query
+        name: password_archivable_size
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: minimum character length
+        explode: true
+        in: query
+        name: password_min_length
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: should contain at least 1 non alphanumeric char (Boolean)
+        explode: true
+        in: query
+        name: password_non_word
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: should contain at least 1 number (Boolean)
+        explode: true
+        in: query
+        name: password_numbers
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: disable password recovery by email (Boolean)
+        explode: true
+        in: query
+        name: password_recovery_disabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Enable push mode (Boolean)
+        explode: true
+        in: query
+        name: push_enabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Enable reply as any identity (Boolean)
+        explode: true
+        in: query
+        name: reply_as_any_identity
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Enable right to left support (Boolean)
+        explode: true
+        in: query
+        name: rtl_support
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: ​Allow authors to ask approval of their messages (Boolean)
+        explode: true
+        in: query
+        name: self_approval_required
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Session timeout (in minutes)
+        explode: true
+        in: query
+        name: session_timeout
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Enable spellchecking (Boolean)
+        explode: true
+        in: query
+        name: spellchecking
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Defines the DD’s design (String)
+        explode: true
+        in: query
+        name: style
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Disable third-party services (tracking...) (Boolean)
+        explode: true
+        in: query
+        name: third_party_services_disabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Use the timezone endpoint to get the timezone name (String)
+        explode: true
+        in: query
+        name: timezone
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Track JS errors (Boolean)
+        explode: true
+        in: query
+        name: track_js
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Can be ‘demo’, ‘production’ or ‘archived’
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - demo
+          - production
+          - archived
+          type: string
+        style: form
+      - description: Chat max response time (in seconds)
+        explode: true
+        in: query
+        name: urgent_task_threshold
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Experimental (Boolean)
+        explode: true
+        in: query
+        name: use_system_font
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+          description: Success
+      summary: Updating settings
+      tags:
+      - Settings
   /tags:
     get:
       description: This method renders tags ordered by name (ascending).
@@ -5791,6 +6145,149 @@ components:
         use_cobrowsing:
           type: boolean
         use_emoji:
+          type: boolean
+    Settings:
+      example:
+        intervention_defer_threshold: 2
+        password_non_word: true
+        multi_lang: true
+        activity_tracking: true
+        rtl_support: true
+        spellchecking: true
+        timezone: timezone
+        beginning_of_week: beginning_of_week
+        created_at: 2000-01-23T04:56:07.000+00:00
+        expire_password_after: 6
+        locale: locale
+        type: type
+        sharding_key: sharding_key
+        intervention_rates:
+        - 7
+        - 7
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        password_min_length: 3
+        password_numbers: true
+        intervention_defer_rates:
+        - 5
+        - 5
+        password_archivable_enabled: true
+        browser_notifications_disabled: true
+        dump_in_preprod: true
+        id: id
+        self_approval_required: true
+        use_two_letters_avatars: true
+        third_party_services_disabled: true
+        disable_password_autocomplete: true
+        deny_iframe_integration: true
+        password_recovery_disabled: true
+        urgent_task_threshold: 4
+        activity_presence_threshold: 0
+        fte_duration: 1
+        push_enabled: true
+        display_only_unknown_bbcode: true
+        identity_merge: true
+        name: name
+        content_languages[]:
+        - content_languages[]
+        - content_languages[]
+        style: style
+        reply_as_any_identity: true
+        password_archivable_size: 9
+        session_timeout: 2
+        expire_password_enabled: true
+        intervention_closing_period: 5
+      properties:
+        activity_presence_threshold:
+          type: integer
+        activity_tracking:
+          type: boolean
+        beginning_of_week:
+          type: string
+        browser_notifications_disabled:
+          type: boolean
+        content_languages[]:
+          items:
+            type: string
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        deny_iframe_integration:
+          type: boolean
+        disable_password_autocomplete:
+          type: boolean
+        display_only_unknown_bbcode:
+          type: boolean
+        dump_in_preprod:
+          type: boolean
+        expire_password_after:
+          type: integer
+        expire_password_enabled:
+          type: boolean
+        fte_duration:
+          type: integer
+        id:
+          type: string
+        identity_merge:
+          type: boolean
+        intervention_closing_period:
+          type: integer
+        intervention_defer_rates:
+          items:
+            type: integer
+          type: array
+        intervention_defer_threshold:
+          type: integer
+        intervention_rates:
+          items:
+            type: integer
+          type: array
+        locale:
+          type: string
+        multi_lang:
+          type: boolean
+        name:
+          type: string
+        password_archivable_enabled:
+          type: boolean
+        password_archivable_size:
+          type: integer
+        password_min_length:
+          type: integer
+        password_non_word:
+          type: boolean
+        password_numbers:
+          type: boolean
+        password_recovery_disabled:
+          type: boolean
+        push_enabled:
+          type: boolean
+        reply_as_any_identity:
+          type: boolean
+        rtl_support:
+          type: boolean
+        self_approval_required:
+          type: boolean
+        session_timeout:
+          type: integer
+        sharding_key:
+          type: string
+        spellchecking:
+          type: boolean
+        style:
+          type: string
+        third_party_services_disabled:
+          type: boolean
+        timezone:
+          type: string
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        urgent_task_threshold:
+          type: integer
+        use_two_letters_avatars:
           type: boolean
     Source:
       example:
