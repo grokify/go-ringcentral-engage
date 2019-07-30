@@ -3686,6 +3686,14 @@ paths:
         name: holidays_region
         required: false
         schema:
+          enum:
+          - de
+          - es
+          - fr
+          - gb
+          - it
+          - nl
+          - us
           type: string
         style: form
       - description: An array containing one or more hash of holidays, a holiday must

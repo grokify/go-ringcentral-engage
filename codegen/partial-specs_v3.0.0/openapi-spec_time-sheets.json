@@ -99,7 +99,16 @@
             "required":false,
             "description":"A string containing the first two letters of your country (example: \"fr\"/\"en\"/\"es\"), useful to bootstrap default holidays following to a country.",
             "schema":{
-              "type":"string"
+              "type":"string",
+              "enum":[
+                "de",
+                "es",
+                "fr",
+                "gb",
+                "it",
+                "nl",
+                "us"
+              ]
             }
           },
           {
