@@ -243,6 +243,20 @@ doc = '● activity_presence_threshold: (in hours). | integer
 ● type: Can be ‘demo’, ‘production’ or ‘archived’
 ● urgent_task_threshold: Chat max response time (in seconds) | integer
 ● use_system_font: Experimental (Boolean)'
+
+doc = 'active: true or false, this field is used to enable/disable a time sheet. | boolean
+● label: The label of the time sheet (mandatory).
+● source_ids: An array containing id of each source using your time sheet. | array:string
+● holidays_region: A string containing the first two letters of your country (example: "fr"/"en"/"es"), useful to bootstrap default holidays following to a country.
+● holidays: An array containing one or more hash of holidays, a holiday must contain a name (string) and a date (string), the date must be in a valid format, a valid format is a format corresponding to your domain’s locale).
+● monday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. For example: “a-b,c-d”: “a” is the beginning of the first interval of the day, “b” is the ending of the first interval of the day, “c” is the beginning of the second interval of the day, “d” is the ending of the second interval of the day
+● tuesday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. See `monday_hours` for the format.
+● wednesday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. See `monday_hours` for the format.
+● thursday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. See `monday_hours` for the format.
+● friday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. See `monday_hours` for the format.
+● saturday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. See `monday_hours` for the format.
+● sunday_hours: this field define the time intervals of the day (in secs). An empty string means that there are no business hours on this day. See `monday_hours` for the format.
+'
 parameters = []
 
 doc.split("\n").each_with_index do |line,i|

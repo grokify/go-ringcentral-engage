@@ -120,6 +120,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.TeamsApi.GetAllTeams(context.Background(), nil))
 		}
+	case "timesheet":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.TimeSheetsApi.GetTimeSheet(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.TimeSheetsApi.GetAllTimeSheets(context.Background(), nil))
+		}
 	case "user":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.UsersApi.GetUser(context.Background(), opts.Id))

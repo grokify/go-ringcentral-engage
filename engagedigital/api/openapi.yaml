@@ -3612,6 +3612,353 @@ paths:
       summary: Updating a team
       tags:
       - Teams
+  /time_sheets:
+    get:
+      description: This method renders time sheets ordered by active and label.
+      operationId: getAllTimeSheets
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllTimeSheetsResponse'
+          description: Success
+      summary: Getting all time sheets
+      tags:
+      - Time Sheets
+    post:
+      description: |-
+        This method creates a time sheet. In case of success it renders the time sheet, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that can create time sheet.
+      operationId: createTimeSheet
+      parameters:
+      - description: true or false, this field is used to enable/disable a time sheet.
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The label of the time sheet.
+        explode: true
+        in: query
+        name: label
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: An array containing id of each source using your time sheet.
+        explode: true
+        in: query
+        name: source_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: 'A string containing the first two letters of your country (example:
+          "fr"/"en"/"es"), useful to bootstrap default holidays following to a country.'
+        explode: true
+        in: query
+        name: holidays_region
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An array containing one or more hash of holidays, a holiday must
+          contain a name (string) and a date (string), the date must be in a valid
+          format, a valid format is a format corresponding to your domain’s locale).
+        explode: true
+        in: query
+        name: holidays
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. For example:
+          “a-b,c-d”: “a” is the beginning of the first interval of the day, “b” is
+          the ending of the first interval of the day, “c” is the beginning of the
+          second interval of the day, “d” is the ending of the second interval of
+          the day'
+        explode: true
+        in: query
+        name: monday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: tuesday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: wednesday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: thursday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: friday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: saturday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: sunday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+          description: Success
+      summary: Creating a time sheet
+      tags:
+      - Time Sheets
+  /time_sheets/{timeSheetId}:
+    delete:
+      description: This method destroys an existing time sheet. It renders time sheet
+        itself. It renders a 404 if id is invalid.
+      operationId: deleteTimeSheet
+      parameters:
+      - explode: false
+        in: path
+        name: timeSheetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+          description: Success
+      summary: Deleting a time sheet
+      tags:
+      - Time Sheets
+    get:
+      description: |-
+        This method renders a time sheet from given id.
+
+        Authorization​: only users that can see time sheets in administration section.
+      operationId: getTimeSheet
+      parameters:
+      - explode: false
+        in: path
+        name: timeSheetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+          description: Success
+      summary: Getting a time sheet from its id
+      tags:
+      - Time Sheets
+    put:
+      description: This method updates an existing team from given attributes and
+        renders it in case of success.
+      operationId: updateTimeSheet
+      parameters:
+      - explode: false
+        in: path
+        name: timeSheetId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: true or false, this field is used to enable/disable a time sheet.
+        explode: true
+        in: query
+        name: active
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: The label of the time sheet.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An array containing id of each source using your time sheet.
+        explode: true
+        in: query
+        name: source_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: An array containing one or more hash of holidays, a holiday must
+          contain a name (string) and a date (string), the date must be in a valid
+          format, a valid format is a format corresponding to your domain’s locale).
+        explode: true
+        in: query
+        name: holidays
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. For example:
+          “a-b,c-d”: “a” is the beginning of the first interval of the day, “b” is
+          the ending of the first interval of the day, “c” is the beginning of the
+          second interval of the day, “d” is the ending of the second interval of
+          the day'
+        explode: true
+        in: query
+        name: monday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: tuesday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: wednesday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: thursday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: friday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: saturday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: this field define the time intervals of the day (in secs). An
+          empty string means that there are no business hours on this day. See `monday_hours`
+          for the format.
+        explode: true
+        in: query
+        name: sunday_hours
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSheet'
+          description: Success
+      summary: Updating a time sheet
+      tags:
+      - Time Sheets
   /timezones:
     get:
       description: This method renders all available timezones.
@@ -5619,6 +5966,68 @@ components:
           items:
             $ref: '#/components/schemas/Team'
           type: array
+    GetAllTimeSheetsResponse:
+      example:
+        offset: 1
+        records:
+        - saturday_hours: saturday_hours
+          wednesday_hours: wednesday_hours
+          thursday_hours: thursday_hours
+          monday_hours: monday_hours
+          timezone: timezone
+          friday_hours: friday_hours
+          active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          label: label
+          sunday_hours: sunday_hours
+          tuesday_hours: tuesday_hours
+          source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          holidays[]:
+          - date: date
+            name: name
+          - date: date
+            name: name
+        - saturday_hours: saturday_hours
+          wednesday_hours: wednesday_hours
+          thursday_hours: thursday_hours
+          monday_hours: monday_hours
+          timezone: timezone
+          friday_hours: friday_hours
+          active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          label: label
+          sunday_hours: sunday_hours
+          tuesday_hours: tuesday_hours
+          source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          holidays[]:
+          - date: date
+            name: name
+          - date: date
+            name: name
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/TimeSheet'
+          type: array
     GetAllUsersResponse:
       example:
         offset: 1
@@ -6520,6 +6929,77 @@ components:
           type: array
       required:
       - id
+    TimeSheet:
+      example:
+        saturday_hours: saturday_hours
+        wednesday_hours: wednesday_hours
+        thursday_hours: thursday_hours
+        monday_hours: monday_hours
+        timezone: timezone
+        friday_hours: friday_hours
+        active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        label: label
+        sunday_hours: sunday_hours
+        tuesday_hours: tuesday_hours
+        source_ids:
+        - source_ids
+        - source_ids
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        holidays[]:
+        - date: date
+          name: name
+        - date: date
+          name: name
+      properties:
+        active:
+          type: boolean
+        created_at:
+          format: date-time
+          type: string
+        friday_hours:
+          type: string
+        holidays[]:
+          items:
+            $ref: '#/components/schemas/TimeSheetHoliday'
+          type: array
+        id:
+          type: string
+        label:
+          type: string
+        monday_hours:
+          type: string
+        saturday_hours:
+          type: string
+        source_ids:
+          items:
+            type: string
+          type: array
+        sunday_hours:
+          type: string
+        thursday_hours:
+          type: string
+        timezone:
+          type: string
+        tuesday_hours:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        wednesday_hours:
+          type: string
+      required:
+      - id
+    TimeSheetHoliday:
+      example:
+        date: date
+        name: name
+      properties:
+        date:
+          type: string
+        name:
+          type: string
     Timezone:
       example:
         utc_offset: ""

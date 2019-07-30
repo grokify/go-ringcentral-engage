@@ -89,6 +89,11 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
 *TeamsApi* | [**UpdateTeam**](docs/TeamsApi.md#updateteam) | **Put** /teams/{teamId} | Updating a team
+*TimeSheetsApi* | [**CreateTimeSheet**](docs/TimeSheetsApi.md#createtimesheet) | **Post** /time_sheets | Creating a time sheet
+*TimeSheetsApi* | [**DeleteTimeSheet**](docs/TimeSheetsApi.md#deletetimesheet) | **Delete** /time_sheets/{timeSheetId} | Deleting a time sheet
+*TimeSheetsApi* | [**GetAllTimeSheets**](docs/TimeSheetsApi.md#getalltimesheets) | **Get** /time_sheets | Getting all time sheets
+*TimeSheetsApi* | [**GetTimeSheet**](docs/TimeSheetsApi.md#gettimesheet) | **Get** /time_sheets/{timeSheetId} | Getting a time sheet from its id
+*TimeSheetsApi* | [**UpdateTimeSheet**](docs/TimeSheetsApi.md#updatetimesheet) | **Put** /time_sheets/{timeSheetId} | Updating a time sheet
 *TimezonesApi* | [**GetAllTimezones**](docs/TimezonesApi.md#getalltimezones) | **Get** /timezones | Getting all timezones
 *UsersApi* | [**CreateUser**](docs/UsersApi.md#createuser) | **Post** /users | Creating a user
 *UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{userId} | Deleting a user
@@ -125,6 +130,7 @@ Class | Method | HTTP request | Description
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
  - [GetAllTasksResponse](docs/GetAllTasksResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
+ - [GetAllTimeSheetsResponse](docs/GetAllTimeSheetsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [GetAllWebhooksResponse](docs/GetAllWebhooksResponse.md)
  - [Identity](docs/Identity.md)
@@ -138,6 +144,8 @@ Class | Method | HTTP request | Description
  - [Tag](docs/Tag.md)
  - [Task](docs/Task.md)
  - [Team](docs/Team.md)
+ - [TimeSheet](docs/TimeSheet.md)
+ - [TimeSheetHoliday](docs/TimeSheetHoliday.md)
  - [Timezone](docs/Timezone.md)
  - [User](docs/User.md)
  - [Webhook](docs/Webhook.md)

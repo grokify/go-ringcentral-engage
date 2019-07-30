@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"time"
 
 	"github.com/antihax/optional"
 	"github.com/jessevdk/go-flags"
@@ -12,6 +13,7 @@ import (
 	"github.com/grokify/go-ringcentral-engage/engagedigital"
 	ex "github.com/grokify/go-ringcentral-engage/examples"
 	"github.com/grokify/go-ringcentral-engage/utils"
+	"github.com/grokify/gotilla/time/timeutil"
 )
 
 type options struct {
@@ -41,6 +43,8 @@ func main() {
 		handleTag(client, opts)
 	case "settings":
 		handleSettings(client, opts)
+	case "timesheet":
+		handleTimeSheet(client, opts)
 	default:
 		log.Fatal(fmt.Sprintf("E_OBJECT_NOT_SUPPORTED [%v]", opts.Object))
 	}
@@ -50,6 +54,54 @@ func main() {
 
 func formatRespStatusCodeError(statusCode int) string {
 	return fmt.Sprintf("E_API_ERROR [%v]", statusCode)
+}
+
+func handleTimeSheet(client *engagedigital.APIClient, opts options) {
+	switch opts.Action {
+	case "create":
+		dt := time.Now()
+		label := "TestTimeSheet2-" + dt.Format(timeutil.DT14)
+		opts.Id = strings.TrimSpace(opts.Id)
+		/*if len(opts.Id) == 0 {
+			log.Fatal("E_CREATE_TIMESHEET_NO_SOURCE_ID")
+		}*/
+		fmt.Println(label)
+		apiOpts := &engagedigital.CreateTimeSheetOpts{
+			Active:         optional.NewBool(false),
+			HolidaysRegion: optional.NewString("us"),
+			SourceIds:      optional.NewInterface([]string{opts.Id}),
+			MondayHours:    optional.NewString("28800-72000")}
+		ex.HandleApiResponse(client.TimeSheetsApi.CreateTimeSheet(context.Background(), label, apiOpts))
+	case "read":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.TimeSheetsApi.GetTimeSheet(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.TimeSheetsApi.GetAllTimeSheets(context.Background(), nil))
+		}
+	case "update":
+		if len(opts.Id) == 0 {
+			log.Fatal("E_UPDATE_TIMESHEET_NO_ID")
+		}
+		info, resp, err := client.TimeSheetsApi.GetTimeSheet(context.Background(), opts.Id)
+		if err != nil {
+			log.Fatal(err)
+		} else if resp.StatusCode != 200 {
+			log.Fatal(fmt.Sprintf("STATUS_CODE [%v]", resp.StatusCode))
+		}
+		apiOpts := &engagedigital.UpdateTimeSheetOpts{}
+		if info.MondayHours == "28800-72000" {
+			apiOpts.MondayHours = optional.NewString("0-86400")
+		} else {
+			apiOpts.MondayHours = optional.NewString("28800-72000")
+		}
+		ex.HandleApiResponse(client.TimeSheetsApi.UpdateTimeSheet(context.Background(), opts.Id, apiOpts))
+	case "delete":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.TimeSheetsApi.DeleteTimeSheet(context.Background(), opts.Id))
+		} else {
+			log.Fatal("E_DELETE_TIMESHEET_NO_ID")
+		}
+	}
 }
 
 func handleSettings(client *engagedigital.APIClient, opts options) {
