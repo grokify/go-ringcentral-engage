@@ -55,6 +55,8 @@ Class | Method | HTTP request | Description
 *CustomFieldsApi* | [**GetAllCustomFields**](docs/CustomFieldsApi.md#getallcustomfields) | **Get** /custom_fields | Getting all custom fields
 *CustomFieldsApi* | [**GetCustomField**](docs/CustomFieldsApi.md#getcustomfield) | **Get** /custom_fields/{customFieldId} | Getting a custom field from its id
 *CustomFieldsApi* | [**UpdateCustomField**](docs/CustomFieldsApi.md#updatecustomfield) | **Put** /custom_fields/{customFieldId} | Updating a custom field
+*EventsApi* | [**GetAllEvents**](docs/EventsApi.md#getallevents) | **Get** /events | Getting all events
+*EventsApi* | [**GetEvent**](docs/EventsApi.md#getevent) | **Get** /events/{eventId} | Getting an event from its id
 *FoldersApi* | [**CreateFolder**](docs/FoldersApi.md#createfolder) | **Post** /folders | Creating a folder
 *FoldersApi* | [**DeleteFolder**](docs/FoldersApi.md#deletefolder) | **Delete** /folders/{folderId} | Deleting a folder
 *FoldersApi* | [**GetAllFolders**](docs/FoldersApi.md#getallfolders) | **Get** /folders | Getting all folders
@@ -123,6 +125,8 @@ Class | Method | HTTP request | Description
  - [ContentAttachment](docs/ContentAttachment.md)
  - [ContentBodyFormatted](docs/ContentBodyFormatted.md)
  - [CustomField](docs/CustomField.md)
+ - [Event](docs/Event.md)
+ - [EventExtraInfo](docs/EventExtraInfo.md)
  - [Folder](docs/Folder.md)
  - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
  - [GetAllCategoriesResponse](docs/GetAllCategoriesResponse.md)
@@ -130,6 +134,7 @@ Class | Method | HTTP request | Description
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
  - [GetAllContentsResponse](docs/GetAllContentsResponse.md)
  - [GetAllCustomFieldsResponse](docs/GetAllCustomFieldsResponse.md)
+ - [GetAllEventsResponse](docs/GetAllEventsResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
  - [GetAllIdentityGroupsResponse](docs/GetAllIdentityGroupsResponse.md)

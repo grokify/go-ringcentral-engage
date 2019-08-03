@@ -1249,6 +1249,80 @@ paths:
       summary: Updating a custom field
       tags:
       - CustomFields
+  /events:
+    get:
+      description: |-
+        This method renders events ordered by creation date (descending).
+
+        Authorization​: Only users whose role can search event permission.
+      operationId: getAllEvents
+      parameters:
+      - description: |-
+          To filter events on given query. Query works exactly like threads query but only have those keywords: content, content_thread, name_in, created_before, created_after, user. Order can be created_at.desc (default) or created_at.asc. e.g. q=name_in:"content.replied"%20content_thread:"7f946431b6eebffafae642cc"%20created_after:"2014-03-20"%20user:"4ee91f197aa58d01b500000f"%20order:"created_at.asc"
+          * DateTime parameters should be ISO-8601
+          * you can specify multiple value for a given keyword: q=name_in:’content.replied’&name_in:’content.ignored’
+          Please refer to ​Search & filtering parameters​ for more details.
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllEventsResponse'
+          description: Success
+      summary: Getting all events
+      tags:
+      - Events
+  /events/{eventId}:
+    get:
+      description: |-
+        This method renders an event from given id. If token’s user role does not have “search event” permission a 404 HTTP response will be returned.
+
+        Authorization​: Only users who’s role can search event permission.
+      operationId: getEvent
+      parameters:
+      - explode: false
+        in: path
+        name: eventId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: Success
+      summary: Getting an event from its id
+      tags:
+      - Events
   /folders:
     get:
       description: This method renders folders.
@@ -5573,6 +5647,99 @@ components:
       required:
       - id
       - label
+    Event:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        extra_infos:
+          intervention_id: intervention_id
+          request_ip: request_ip
+          authentication_strategy: authentication_strategy
+          business/time_sheet_id: business/time_sheet_id
+          content_id: content_id
+          deletions: '{}'
+          deferred_duration: deferred_duration
+          task_id: task_id
+          closed_automatically: closed_automatically
+          content_thread_id: content_thread_id
+          foreign_id: foreign_id
+          user_id: user_id
+          content_source_id: content_source_id
+          category_ids:
+          - category_ids
+          - category_ids
+        user_id: user_id
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        extra_infos:
+          $ref: '#/components/schemas/EventExtraInfo'
+        id:
+          type: string
+        name:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          type: string
+      required:
+      - id
+    EventExtraInfo:
+      description: attributes in extra_infos are optional and unspecified/not guaranteed,
+        don’t rely on it for critical tasks, this is provided as information only
+      example:
+        intervention_id: intervention_id
+        request_ip: request_ip
+        authentication_strategy: authentication_strategy
+        business/time_sheet_id: business/time_sheet_id
+        content_id: content_id
+        deletions: '{}'
+        deferred_duration: deferred_duration
+        task_id: task_id
+        closed_automatically: closed_automatically
+        content_thread_id: content_thread_id
+        foreign_id: foreign_id
+        user_id: user_id
+        content_source_id: content_source_id
+        category_ids:
+        - category_ids
+        - category_ids
+      properties:
+        authentication_strategy:
+          type: string
+        business/time_sheet_id:
+          type: string
+        category_ids:
+          items:
+            type: string
+          type: array
+        closed_automatically:
+          type: string
+        content_id:
+          type: string
+        content_source_id:
+          type: string
+        content_thread_id:
+          type: string
+        deferred_duration:
+          type: string
+        deletions:
+          type: object
+        foreign_id:
+          description: can be null
+          type: string
+        intervention_id:
+          type: string
+        request_ip:
+          type: string
+        task_id:
+          type: string
+        user_id:
+          type: string
     Folder:
       example:
         render_threads_count: true
@@ -5905,6 +6072,70 @@ components:
         records:
           items:
             $ref: '#/components/schemas/CustomField'
+          type: array
+    GetAllEventsResponse:
+      example:
+        offset: 1
+        records:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          extra_infos:
+            intervention_id: intervention_id
+            request_ip: request_ip
+            authentication_strategy: authentication_strategy
+            business/time_sheet_id: business/time_sheet_id
+            content_id: content_id
+            deletions: '{}'
+            deferred_duration: deferred_duration
+            task_id: task_id
+            closed_automatically: closed_automatically
+            content_thread_id: content_thread_id
+            foreign_id: foreign_id
+            user_id: user_id
+            content_source_id: content_source_id
+            category_ids:
+            - category_ids
+            - category_ids
+          user_id: user_id
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          extra_infos:
+            intervention_id: intervention_id
+            request_ip: request_ip
+            authentication_strategy: authentication_strategy
+            business/time_sheet_id: business/time_sheet_id
+            content_id: content_id
+            deletions: '{}'
+            deferred_duration: deferred_duration
+            task_id: task_id
+            closed_automatically: closed_automatically
+            content_thread_id: content_thread_id
+            foreign_id: foreign_id
+            user_id: user_id
+            content_source_id: content_source_id
+            category_ids:
+            - category_ids
+            - category_ids
+          user_id: user_id
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Event'
           type: array
     GetAllFoldersResponse:
       example:

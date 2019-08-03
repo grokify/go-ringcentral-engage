@@ -68,6 +68,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.CustomFieldsApi.GetAllCustomFields(context.Background(), nil))
 		}
+	case "event":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.EventsApi.GetEvent(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.EventsApi.GetAllEvents(context.Background(), nil))
+		}
 	case "folder":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.FoldersApi.GetFolder(context.Background(), opts.Id))
