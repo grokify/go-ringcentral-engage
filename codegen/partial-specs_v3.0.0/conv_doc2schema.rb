@@ -199,6 +199,52 @@ doc = '{
   "use_two_letters_avatars":true
 }'
 
+doc = '{"id": "73f1cb2938229d7fa222d096",
+"source_id": "d19c81948c137d86dac77216",
+"source_url": "http://domain-test.answers.dimelo.com/questions/42",
+"source_type": "answers",
+"thread_id": "26c56bc5b71c5193b6f8c656",
+"in_reply_to_id": "58bc74bc920026b30196fdf4",
+"in_reply_to_author_id": "57ea9a7f13047d506e65289d",
+"author_id": "4f0aa52d656a3d75867f784c",
+"creator_id": "ac24dc966bc7ecb74017c0cd",
+"foreign_id": "7789",
+"type": "question",
+"created_from": "synchronizer",
+"private_message": false,
+"status": "replied",
+"intervention_id": "7f946431b6eebffafae642cc",
+"language": "fr",
+"body": "Hello,\n\nHow to unlock my nokia 3210?\n\nThanks!",
+"body_formatted": {
+  "text": "Hello,\n\nHow to unlock my nokia 3210?\n\nThanks!",
+  "html": "<p>Hello,</p>\n\n<p>How to unlock my nokia 3210?</p>\n\n<p>Thanks!</p>"
+ },
+"body_input_format": "text",
+"title": "Nokia 3210 unlocking",
+"attachments_count": 1, "attachments": [{
+"id":"5464b5c04d61639684110000", "created_at":"2011-05-05T22:00:00Z",
+ "updated_at":"2011-05-05T22:00:00Z", 
+ "content_type": "application/pdf", "size": 174784,
+"filename":"sso.pdf",
+"foreign_id":"123",
+"embed":"false",
+"public?":"true",
+"url":"h​ ttp://domain-test.engagement.dimelo.dev/attachments/5464b5c04d61639684110000​"
+}],
+"synchronization_status": "success",
+"category_ids": [
+  "4d0fb475b242228033cbdf6d", "60944e5702bdafb74ac96141"],
+   "created_at": "2012-05-24T04:00:44Z",
+"updated_at": "2012-05-24T04:00:44Z",
+"approval_required": false,
+"remotely_deleted": false,
+"published": true,
+"context_data": {
+"customer_id": 1214 
+}
+}
+'
 properties = {}
 
 object = MultiJson.load doc

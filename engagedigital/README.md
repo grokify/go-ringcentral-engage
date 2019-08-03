@@ -45,6 +45,11 @@ Class | Method | HTTP request | Description
 *ChannelsApi* | [**UpdateChannel**](docs/ChannelsApi.md#updatechannel) | **Put** /channels/{channelId} | Updating a channel
 *CommunitiesApi* | [**GetAllCommunities**](docs/CommunitiesApi.md#getallcommunities) | **Get** /communities | Getting all communities
 *CommunitiesApi* | [**GetCommunity**](docs/CommunitiesApi.md#getcommunity) | **Get** /communities/{communityId} | Getting a community from its id
+*ContentsApi* | [**CategorizeContent**](docs/ContentsApi.md#categorizecontent) | **Put** /contents/{contentId}/update_categories | Categorizing a content
+*ContentsApi* | [**CreateContent**](docs/ContentsApi.md#createcontent) | **Post** /contents | Creating a content
+*ContentsApi* | [**GetAllContents**](docs/ContentsApi.md#getallcontents) | **Get** /contents | Contents
+*ContentsApi* | [**GetContent**](docs/ContentsApi.md#getcontent) | **Get** /contents/{contentId} | Getting a content from its id
+*ContentsApi* | [**IgnoreContent**](docs/ContentsApi.md#ignorecontent) | **Put** /contents/{contentId}/ignore | Ignoring a content
 *CustomFieldsApi* | [**CreateCustomField**](docs/CustomFieldsApi.md#createcustomfield) | **Post** /custom_fields | Creating a custom field
 *CustomFieldsApi* | [**DeleteCustomField**](docs/CustomFieldsApi.md#deletecustomfield) | **Delete** /custom_fields/{customFieldId} | Deleting a custom field
 *CustomFieldsApi* | [**GetAllCustomFields**](docs/CustomFieldsApi.md#getallcustomfields) | **Get** /custom_fields | Getting all custom fields
@@ -114,12 +119,16 @@ Class | Method | HTTP request | Description
  - [Category](docs/Category.md)
  - [Channel](docs/Channel.md)
  - [Community](docs/Community.md)
+ - [Content](docs/Content.md)
+ - [ContentAttachment](docs/ContentAttachment.md)
+ - [ContentBodyFormatted](docs/ContentBodyFormatted.md)
  - [CustomField](docs/CustomField.md)
  - [Folder](docs/Folder.md)
  - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
  - [GetAllCategoriesResponse](docs/GetAllCategoriesResponse.md)
  - [GetAllChannelsResponse](docs/GetAllChannelsResponse.md)
  - [GetAllCommunitiesResponse](docs/GetAllCommunitiesResponse.md)
+ - [GetAllContentsResponse](docs/GetAllContentsResponse.md)
  - [GetAllCustomFieldsResponse](docs/GetAllCustomFieldsResponse.md)
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)

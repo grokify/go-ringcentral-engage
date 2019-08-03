@@ -56,6 +56,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.CommunitiesApi.GetAllCommunities(context.Background(), nil))
 		}
+	case "content":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ContentsApi.GetContent(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ContentsApi.GetAllContents(context.Background(), nil))
+		}
 	case "customFields":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.CustomFieldsApi.GetCustomField(context.Background(), opts.Id))
@@ -122,7 +128,7 @@ func main() {
 		}
 	case "timesheet":
 		if len(opts.Id) > 0 {
-			ex.HandleApiResponse(client.TimeSheetsApi.GetTimeSheet(context.Background(), opts.Id))
+			ex.HandleApiResponse(client.TimeSheetsApi.GetTimeSheet(context.Background(), "me"))
 		} else {
 			ex.HandleApiResponse(client.TimeSheetsApi.GetAllTimeSheets(context.Background(), nil))
 		}
@@ -132,12 +138,24 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.UsersApi.GetAllUsers(context.Background(), nil))
 		}
+	/*case "usersourcespermissions":
+	info, resp, err := client.UsersApi.GetUser(context.Background(), "me")
+	if err != nil {
+		log.Fatal(err)
+	} else if resp.StatusCode != 200 {
+		log.Fatal(resp.StatusCode)
+	}
+	fmt.Println(info.Id)
+	ex.HandleApiResponse(client.UserSourcesPermissionsApi.GetUserSourcesPermission(
+		context.Background(), info.Id))*/
 	case "webhook":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.WebhooksApi.GetWebhook(context.Background(), opts.Id, opts.Token))
 		} else {
 			ex.HandleApiResponse(client.WebhooksApi.GetAllWebhooks(context.Background(), opts.Token, nil))
 		}
+	default:
+		log.Fatal(fmt.Sprintf("E_ACTION_NOT_FOUND [%s]", opts.Object))
 	}
 
 	fmt.Println("DONE")

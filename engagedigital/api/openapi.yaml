@@ -756,6 +756,270 @@ paths:
       summary: Updating a source
       tags:
       - Sources
+  /contents:
+    get:
+      description: |-
+        This method renders contents ordered by creation date (descending). Only contents in sources where token’s user has “read” permission are returned.
+
+        Authorization​: no.
+      operationId: getAllContents
+      parameters:
+      - description: 'To filter contents on given query. Query works exactly like
+          threads query but only have those keywords: intervention,identity, identity_group,
+          source, status_in, thread or text. Order can be created_at.desc (default)
+          or created_at.asc. e.g. q=intervention:"7f946431b6eebffafae642cc"%20source:"d19c81948c137d86dac77216"
+          Please refer to ​Search & filtering parameters​ for more details.'
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllContentsResponse'
+          description: Success
+      summary: Contents
+      tags:
+      - Contents
+    post:
+      description: |-
+        This method allows you to create an new content. It can be a reply to another content or a content that initiate discussion. It use token’s user as content user if he is authorized. Content will be created in Dimelo Digital and pushed asynchronously to the source.
+
+        Replying to a customer content is usually possible (unless the source/conversation is read only).
+
+        Composing a content on the contrary depend on the source itself:
+        * The source may not support it (and be purely reactive like Instagram, Messenger ...)
+        * Some sources (usually public account) like Twitter or Facebook page allows to publish content without targeting specific individuals.
+        * Some sources (usually non public media) require specific targeting (phone number for SMS, email address for email, customer_id ...) to be able to create a content. This is source specific and detailed under the generic parameters.
+
+        Authorization​: only users that can reply or initiate discussion (= compose) on given source. it renders also an error if in_reply_to isn’t synchronized or if in_reply_to content is not under an ​open intervention.
+      operationId: createContent
+      parameters:
+      - description: The identity id of content. This parameter is not mandatory,
+          by default it use the token’s user first identity on source.
+        explode: true
+        in: query
+        name: author_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The content’s body. This parameter is mandatory.
+        explode: true
+        in: query
+        name: body
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The content’s id you want to reply to. If omitted, a new discussion
+          will be created. If source does not support to initiate discussion this
+          parameter is mandatory.
+        explode: true
+        in: query
+        name: in_reply_to_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Created contents are public by default, set this parameter to
+          "1" in order to create a private reply. It is NOT supported on every source.
+        explode: true
+        in: query
+        name: private
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The source to create content to. If you specify `in_reply_to_id`
+          parameter, source will be determined from it. Otherwise, this parameter
+          is mandatory.
+        explode: true
+        in: query
+        name: source_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: An array containing the attachments’ ids that need to be attached
+          to this content.
+        explode: true
+        in: query
+        name: attachment_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: For an email source. The subject of the email. This parameter
+          is mandatory when initiating a discussion.
+        explode: true
+        in: query
+        name: title
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'For an email or SMS source. For an email, an array containing
+          the email addresses used in the “To” section of the email. This parameter
+          is mandatory when initiating a discussion. For a SMS, the number the SMS
+          will be sent to. It must start with 00 or +, example: +33634231224 or 0033634231224.
+          This parameter is mandatory when initiating a discussion.'
+        explode: true
+        in: query
+        name: to[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: For an email source. An array containing the email addresses
+          used in the “Cc” section of the email.
+        explode: true
+        in: query
+        name: cc[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: For an email source. An array containing the email addresses
+          used in the “Bcc” section of the email.
+        explode: true
+        in: query
+        name: bcc[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Success
+        422:
+          description: Unprocessable Entity
+      summary: Creating a content
+      tags:
+      - Contents
+  /contents/{contentId}:
+    get:
+      description: |-
+        This method renders a content from given id. If token’s user does not have “read” on content’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: getContent
+      parameters:
+      - explode: false
+        in: path
+        name: contentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Success
+      summary: Getting a content from its id
+      tags:
+      - Contents
+  /contents/{contentId}/ignore:
+    put:
+      description: |-
+        Ignores a content. If token’s user does not have “read” on content’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: ignoreContent
+      parameters:
+      - explode: false
+        in: path
+        name: contentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Success
+        404:
+          description: Not Found
+      summary: Ignoring a content
+      tags:
+      - Contents
+  /contents/{contentId}/update_categories:
+    put:
+      description: |-
+        This method updates the categories of a content. If token’s user does not have “read” on this content’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: categorizeContent
+      parameters:
+      - explode: false
+        in: path
+        name: contentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: An array containing the new categories to set on the content.
+        explode: true
+        in: query
+        name: category_ids[]
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+          description: Success
+      summary: Categorizing a content
+      tags:
+      - Contents
   /custom_fields:
     get:
       description: |-
@@ -5122,6 +5386,158 @@ components:
         updated_at:
           format: date-time
           type: string
+    Content:
+      example:
+        private_message: true
+        intervention_id: intervention_id
+        attachments:
+        - attachments
+        - attachments
+        in_reply_to_id: in_reply_to_id
+        created_at: 2000-01-23T04:56:07.000+00:00
+        language: language
+        body: body
+        title: title
+        type: type
+        source_url: source_url
+        synchronization_status: synchronization_status
+        thread_id: thread_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        body_input_format: text
+        category_ids:
+        - category_ids
+        - category_ids
+        id: id
+        remotely_deleted: true
+        approval_required: true
+        source_type: source_type
+        published: true
+        body_formatted:
+          html: html
+          text: text
+        foreign_id: foreign_id
+        context_data: '{}'
+        in_reply_to_author_id: in_reply_to_author_id
+        creator_id: creator_id
+        attachments_count: 5
+        source_id: source_id
+        author_id: author_id
+        created_from: created_from
+        status: status
+      properties:
+        approval_required:
+          type: boolean
+        attachments:
+          items:
+            type: string
+          type: array
+        attachments_count:
+          type: integer
+        author_id:
+          type: string
+        body:
+          type: string
+        body_formatted:
+          $ref: '#/components/schemas/ContentBodyFormatted'
+        body_input_format:
+          description: 'values can be: text or html.'
+          enum:
+          - text
+          - html
+          type: string
+        category_ids:
+          description: are content categories if none, they are default to intervention
+            categories or thread categories
+          items:
+            type: string
+          type: array
+        context_data:
+          description: is present only if the content has context_data associated.
+            The context_data hash keys are the custom fields keys.
+          type: object
+        created_at:
+          format: date-time
+          type: string
+        created_from:
+          type: string
+        creator_id:
+          type: string
+        foreign_id:
+          type: string
+        id:
+          type: string
+        in_reply_to_author_id:
+          type: string
+        in_reply_to_id:
+          type: string
+        intervention_id:
+          type: string
+        language:
+          type: string
+        private_message:
+          type: boolean
+        published:
+          type: boolean
+        remotely_deleted:
+          type: boolean
+        source_id:
+          type: string
+        source_type:
+          type: string
+        source_url:
+          type: string
+        status:
+          type: string
+        synchronization_status:
+          type: string
+        thread_id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+    ContentAttachment:
+      properties:
+        content_type:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        embed:
+          type: string
+        filename:
+          type: string
+        foreign_id:
+          type: string
+        id:
+          type: string
+        public?:
+          type: string
+        size:
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
+        url:
+          description: 'You can download the attachments by using an API access token
+            with the following URL: https://[your-domain].engagement.dimelo.com/attachments/[attachment_id]?access_token=[your_​
+            access_token]'
+          type: string
+    ContentBodyFormatted:
+      description: always contains text a​nd​ html versions.
+      example:
+        html: html
+        text: text
+      properties:
+        html:
+          type: string
+        text:
+          type: string
     CustomField:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -5359,6 +5775,98 @@ components:
         records:
           items:
             $ref: '#/components/schemas/Community'
+          type: array
+    GetAllContentsResponse:
+      example:
+        offset: 1
+        records:
+        - private_message: true
+          intervention_id: intervention_id
+          attachments:
+          - attachments
+          - attachments
+          in_reply_to_id: in_reply_to_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          language: language
+          body: body
+          title: title
+          type: type
+          source_url: source_url
+          synchronization_status: synchronization_status
+          thread_id: thread_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          body_input_format: text
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          remotely_deleted: true
+          approval_required: true
+          source_type: source_type
+          published: true
+          body_formatted:
+            html: html
+            text: text
+          foreign_id: foreign_id
+          context_data: '{}'
+          in_reply_to_author_id: in_reply_to_author_id
+          creator_id: creator_id
+          attachments_count: 5
+          source_id: source_id
+          author_id: author_id
+          created_from: created_from
+          status: status
+        - private_message: true
+          intervention_id: intervention_id
+          attachments:
+          - attachments
+          - attachments
+          in_reply_to_id: in_reply_to_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          language: language
+          body: body
+          title: title
+          type: type
+          source_url: source_url
+          synchronization_status: synchronization_status
+          thread_id: thread_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          body_input_format: text
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          remotely_deleted: true
+          approval_required: true
+          source_type: source_type
+          published: true
+          body_formatted:
+            html: html
+            text: text
+          foreign_id: foreign_id
+          context_data: '{}'
+          in_reply_to_author_id: in_reply_to_author_id
+          creator_id: creator_id
+          attachments_count: 5
+          source_id: source_id
+          author_id: author_id
+          created_from: created_from
+          status: status
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Content'
           type: array
     GetAllCustomFieldsResponse:
       example:
