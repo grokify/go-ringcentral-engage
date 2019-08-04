@@ -92,6 +92,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.IdentityGroupsApi.GetAllIdentityGroups(context.Background(), nil))
 		}
+	case "intervention":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.InterventionsApi.GetIntervention(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.InterventionsApi.GetAllInterventions(context.Background(), nil))
+		}
 	case "locale":
 		ex.HandleApiResponse(client.LocalesApi.GetAllLocales(context.Background()))
 	case "presenceStatus":

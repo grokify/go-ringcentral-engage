@@ -2104,6 +2104,280 @@ paths:
       summary: Updating an identity group
       tags:
       - Identity Groups
+  /interventions:
+    get:
+      description: |-
+        This method renders interventions ordered by creation date (descending). Only interventions in sources where token’s user has “read” permission are returned.
+
+        Authorization​: no.
+      operationId: getAllInterventions
+      parameters:
+      - description: To filter interventions on given thread id.
+        explode: true
+        in: query
+        name: thread_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter interventions on given user id.
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter interventions on given identity_group_id. This will
+          return interventions associated to any identity in the indentity_group.
+        explode: true
+        in: query
+        name: identity_group_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter interventions on given identity_id(s). Can be a single
+          value or an array.
+        explode: true
+        in: query
+        name: identity_id
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: To change the criteria chosen to sort the interventions. The
+          value can be “created_at” or “updated_at”.
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at
+          - updated_at
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllInterventionsResponse'
+          description: Success
+      summary: Getting all interventions
+      tags:
+      - Interventions
+    post:
+      description: |-
+        This method creates a new intervention or reopen it. In case of success it renders the intervention, otherwise, it renders an error (422 HTTP code). This method opens intervention as access token’s user.
+
+        Authorization​: no, but it renders an error if intervention can’t be created or reopened (already opened, etc.).
+      operationId: createIntervention
+      parameters:
+      - description: The content to create intervention on (mandatory).
+        explode: true
+        in: query
+        name: content_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllInterventionsResponse'
+          description: Success
+        422:
+          description: Unprocessable Entity
+      summary: Creating an intervention
+      tags:
+      - Interventions
+  /interventions/{interventionId}:
+    get:
+      description: |-
+        This method renders an intervention from given id. If token’s user does not have “read” on intervention’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: getIntervention
+      parameters:
+      - explode: false
+        in: path
+        name: interventionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Intervention'
+          description: Success
+      summary: Getting an intervention from its id
+      tags:
+      - Interventions
+  /interventions/{interventionId}/cancel:
+    delete:
+      description: |-
+        This method cancels (destroys) an intervention. It renders intervention itself. If token’s user does not have “read” on intervention’s source a 404 HTTP response will be returned.
+
+        Caveats:
+
+        * If the intervention is already being canceled, it will return a 409 error.
+        * To be able to close an intervention, it must meet the following criteria otherwise a 403 will be raised:
+          * Intervention MUST NOT already be closed
+         * Intervention MUST NOT have agent replies
+          * Access-Token agent MUST have read access on the source
+
+        Authorization​: no, but it renders an error if intervention can’t be destroyed (see caveats).
+      operationId: cancelIntervention
+      parameters:
+      - explode: false
+        in: path
+        name: interventionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Intervention'
+          description: Success
+      summary: Cancelling an intervention
+      tags:
+      - Interventions
+  /interventions/{interventionId}/close:
+    put:
+      description: |-
+        This method closes an intervention. Caveats:
+
+        * If the intervention is already being closed, it will return a 409 error.
+        * To be able to close an intervention, it must meet the following criteria otherwise a 403 will be raised:
+
+          * Intervention MUST NOT already be closed
+
+          * Intervention MUST have agent replies
+          * Access-Token agent MUST be the owner of the intervention or have the permission to edit permissions
+
+          * Access-Token agent MUST have read access on the source
+
+        Authorization​: no, but it renders an error if intervention can’t be closed (see caveats)
+      operationId: closeIntervention
+      parameters:
+      - explode: false
+        in: path
+        name: interventionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Intervention'
+          description: Success
+        409:
+          description: If the intervention is already being closed, it will return
+            a 409 error.
+      summary: Closing an intervention
+      tags:
+      - Interventions
+  /interventions/{interventionId}/reassign:
+    put:
+      description: |-
+        This method updates the user in charge of the intervention
+
+        Authorization​: Only users who can update interventions.
+      operationId: reassignIntervention
+      parameters:
+      - explode: false
+        in: path
+        name: interventionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: user_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Intervention'
+          description: Success
+      summary: Reassigning an intervention
+      tags:
+      - Interventions
+  /interventions/{interventionId}/update_categories:
+    put:
+      description: |-
+        This method updates the categories of an intervention. If token’s user does not have “read” on the intervention’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: categorizeIntervention
+      parameters:
+      - explode: false
+        in: path
+        name: interventionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: category_ids[]
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Intervention'
+          description: Success
+      summary: Categorizing an intervention
+      tags:
+      - Interventions
   /locales:
     get:
       description: This method renders all available locales.
@@ -5674,8 +5948,26 @@ components:
         private_message: true
         intervention_id: intervention_id
         attachments:
-        - attachments
-        - attachments
+        - foreign_id: foreign_id
+          filename: filename
+          content_type: content_type
+          size: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          embed: embed
+          id: id
+          public?: public?
+          url: url
+        - foreign_id: foreign_id
+          filename: filename
+          content_type: content_type
+          size: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          created_at: 2000-01-23T04:56:07.000+00:00
+          embed: embed
+          id: id
+          public?: public?
+          url: url
         in_reply_to_id: in_reply_to_id
         created_at: 2000-01-23T04:56:07.000+00:00
         language: language
@@ -5712,7 +6004,7 @@ components:
           type: boolean
         attachments:
           items:
-            type: string
+            $ref: '#/components/schemas/ContentAttachment'
           type: array
         attachments_count:
           type: integer
@@ -5785,6 +6077,17 @@ components:
       required:
       - id
     ContentAttachment:
+      example:
+        foreign_id: foreign_id
+        filename: filename
+        content_type: content_type
+        size: 5
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        created_at: 2000-01-23T04:56:07.000+00:00
+        embed: embed
+        id: id
+        public?: public?
+        url: url
       properties:
         content_type:
           type: string
@@ -6159,8 +6462,26 @@ components:
         - private_message: true
           intervention_id: intervention_id
           attachments:
-          - attachments
-          - attachments
+          - foreign_id: foreign_id
+            filename: filename
+            content_type: content_type
+            size: 5
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            created_at: 2000-01-23T04:56:07.000+00:00
+            embed: embed
+            id: id
+            public?: public?
+            url: url
+          - foreign_id: foreign_id
+            filename: filename
+            content_type: content_type
+            size: 5
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            created_at: 2000-01-23T04:56:07.000+00:00
+            embed: embed
+            id: id
+            public?: public?
+            url: url
           in_reply_to_id: in_reply_to_id
           created_at: 2000-01-23T04:56:07.000+00:00
           language: language
@@ -6195,8 +6516,26 @@ components:
         - private_message: true
           intervention_id: intervention_id
           attachments:
-          - attachments
-          - attachments
+          - foreign_id: foreign_id
+            filename: filename
+            content_type: content_type
+            size: 5
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            created_at: 2000-01-23T04:56:07.000+00:00
+            embed: embed
+            id: id
+            public?: public?
+            url: url
+          - foreign_id: foreign_id
+            filename: filename
+            content_type: content_type
+            size: 5
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            created_at: 2000-01-23T04:56:07.000+00:00
+            embed: embed
+            id: id
+            public?: public?
+            url: url
           in_reply_to_id: in_reply_to_id
           created_at: 2000-01-23T04:56:07.000+00:00
           language: language
@@ -6525,6 +6864,78 @@ components:
         records:
           items:
             $ref: '#/components/schemas/IdentityGroup'
+          type: array
+    GetAllInterventionsResponse:
+      example:
+        offset: 1
+        records:
+        - closed_at: 2000-01-23T04:56:07.000+00:00
+          deferred_at: 2000-01-23T04:56:07.000+00:00
+          content_id: content_id
+          identity_id: identity_id
+          custom_fields: '{}'
+          created_at: 2000-01-23T04:56:07.000+00:00
+          first_user_reply_in_bh: 2
+          last_user_reply_in_bh: 9
+          thread_id: thread_id
+          first_user_reply_id: first_user_reply_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          last_user_reply_in: 7
+          user_id: user_id
+          comments_count: 5
+          user_replies_count: 3
+          closed: true
+          first_user_reply_in: 5
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          source_id: source_id
+          user_reply_in_average_count: 7
+          user_reply_in_average: 2
+          status: status
+          user_reply_in_average_bh: 4
+        - closed_at: 2000-01-23T04:56:07.000+00:00
+          deferred_at: 2000-01-23T04:56:07.000+00:00
+          content_id: content_id
+          identity_id: identity_id
+          custom_fields: '{}'
+          created_at: 2000-01-23T04:56:07.000+00:00
+          first_user_reply_in_bh: 2
+          last_user_reply_in_bh: 9
+          thread_id: thread_id
+          first_user_reply_id: first_user_reply_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          last_user_reply_in: 7
+          user_id: user_id
+          comments_count: 5
+          user_replies_count: 3
+          closed: true
+          first_user_reply_in: 5
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          source_id: source_id
+          user_reply_in_average_count: 7
+          user_reply_in_average: 2
+          status: status
+          user_reply_in_average_bh: 4
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Intervention'
           type: array
     GetAllPresenceStatusesResponse:
       example:
@@ -7301,6 +7712,91 @@ components:
         updated_at:
           format: date-time
           type: string
+      required:
+      - id
+    Intervention:
+      example:
+        closed_at: 2000-01-23T04:56:07.000+00:00
+        deferred_at: 2000-01-23T04:56:07.000+00:00
+        content_id: content_id
+        identity_id: identity_id
+        custom_fields: '{}'
+        created_at: 2000-01-23T04:56:07.000+00:00
+        first_user_reply_in_bh: 2
+        last_user_reply_in_bh: 9
+        thread_id: thread_id
+        first_user_reply_id: first_user_reply_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        last_user_reply_in: 7
+        user_id: user_id
+        comments_count: 5
+        user_replies_count: 3
+        closed: true
+        first_user_reply_in: 5
+        category_ids:
+        - category_ids
+        - category_ids
+        id: id
+        source_id: source_id
+        user_reply_in_average_count: 7
+        user_reply_in_average: 2
+        status: status
+        user_reply_in_average_bh: 4
+      properties:
+        category_ids:
+          items:
+            type: string
+          type: array
+        closed:
+          type: boolean
+        closed_at:
+          format: date-time
+          type: string
+        comments_count:
+          type: integer
+        content_id:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        custom_fields:
+          type: object
+        deferred_at:
+          format: date-time
+          type: string
+        first_user_reply_id:
+          type: string
+        first_user_reply_in:
+          type: integer
+        first_user_reply_in_bh:
+          type: integer
+        id:
+          type: string
+        identity_id:
+          type: string
+        last_user_reply_in:
+          type: integer
+        last_user_reply_in_bh:
+          type: integer
+        source_id:
+          type: string
+        status:
+          type: string
+        thread_id:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          type: string
+        user_replies_count:
+          type: integer
+        user_reply_in_average:
+          type: integer
+        user_reply_in_average_bh:
+          type: integer
+        user_reply_in_average_count:
+          type: integer
       required:
       - id
     Locale:

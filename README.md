@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-88%2F121%20%3D%2072%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-95%2F121%20%3D%2078%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -67,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-88/121 APIs - 72%
+95/121 APIs - 78%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -166,14 +166,14 @@ For information on how to use the apiClient objec, see:
   - [x] GET /1.0/events/:id
 
 - [ ] Interventions
-  - [ ] GET /1.0/interventions
-  - [ ] GET /1.0/interventions/:id
-  - [ ] POST /1.0/interventions
+  - [x] GET /1.0/interventions
+  - [x] GET /1.0/interventions/:id
+  - [x] POST /1.0/interventions
   - [ ] PUT /1.0/interventions/:id
-  - [ ] PUT /1.0/interventions/:id/reassign
-  - [ ] PUT /1.0/interventions/:id/close
-  - [ ] PUT /1.0/interventions/:id/update_categories
-  - [ ] DELETE /1.0/interventions/:id
+  - [x] PUT /1.0/interventions/:id/close
+  - [x] PUT /1.0/interventions/:id/reassign
+  - [x] PUT /1.0/interventions/:id/update_categories
+  - [x] DELETE /1.0/interventions/:id/cancel
 
 - [ ] Intervention comments
   - [ ] GET /1.0/intervention_comments

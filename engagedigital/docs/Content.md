@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApprovalRequired** | **bool** |  | [optional] 
-**Attachments** | **[]string** |  | [optional] 
+**Attachments** | [**[]ContentAttachment**](ContentAttachment.md) |  | [optional] 
 **AttachmentsCount** | **int32** |  | [optional] 
 **AuthorId** | **string** |  | [optional] 
 **Body** | **string** |  | [optional] 

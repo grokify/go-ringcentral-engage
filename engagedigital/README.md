@@ -67,6 +67,13 @@ Class | Method | HTTP request | Description
 *IdentityGroupsApi* | [**GetAllIdentityGroups**](docs/IdentityGroupsApi.md#getallidentitygroups) | **Get** /identity_groups | Getting all identity groups
 *IdentityGroupsApi* | [**GetIdentityGroup**](docs/IdentityGroupsApi.md#getidentitygroup) | **Get** /identity_groups/{identityGroupId} | Getting an identity group from its id
 *IdentityGroupsApi* | [**UpdateIdentityGroup**](docs/IdentityGroupsApi.md#updateidentitygroup) | **Put** /identity_groups/{identityGroupId} | Updating an identity group
+*InterventionsApi* | [**CancelIntervention**](docs/InterventionsApi.md#cancelintervention) | **Delete** /interventions/{interventionId}/cancel | Cancelling an intervention
+*InterventionsApi* | [**CategorizeIntervention**](docs/InterventionsApi.md#categorizeintervention) | **Put** /interventions/{interventionId}/update_categories | Categorizing an intervention
+*InterventionsApi* | [**CloseIntervention**](docs/InterventionsApi.md#closeintervention) | **Put** /interventions/{interventionId}/close | Closing an intervention
+*InterventionsApi* | [**CreateIntervention**](docs/InterventionsApi.md#createintervention) | **Post** /interventions | Creating an intervention
+*InterventionsApi* | [**GetAllInterventions**](docs/InterventionsApi.md#getallinterventions) | **Get** /interventions | Getting all interventions
+*InterventionsApi* | [**GetIntervention**](docs/InterventionsApi.md#getintervention) | **Get** /interventions/{interventionId} | Getting an intervention from its id
+*InterventionsApi* | [**ReassignIntervention**](docs/InterventionsApi.md#reassignintervention) | **Put** /interventions/{interventionId}/reassign | Reassigning an intervention
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
 *PresenceStatusesApi* | [**CreatePresenceStatus**](docs/PresenceStatusesApi.md#createpresencestatus) | **Post** /presence_status | Creating a presence status
 *PresenceStatusesApi* | [**DeletePresenceStatus**](docs/PresenceStatusesApi.md#deletepresencestatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
@@ -144,6 +151,7 @@ Class | Method | HTTP request | Description
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
  - [GetAllIdentityGroupsResponse](docs/GetAllIdentityGroupsResponse.md)
+ - [GetAllInterventionsResponse](docs/GetAllInterventionsResponse.md)
  - [GetAllPresenceStatusesResponse](docs/GetAllPresenceStatusesResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
@@ -156,6 +164,7 @@ Class | Method | HTTP request | Description
  - [GetAllWebhooksResponse](docs/GetAllWebhooksResponse.md)
  - [Identity](docs/Identity.md)
  - [IdentityGroup](docs/IdentityGroup.md)
+ - [Intervention](docs/Intervention.md)
  - [Locale](docs/Locale.md)
  - [PresenceStatus](docs/PresenceStatus.md)
  - [Restriction](docs/Restriction.md)

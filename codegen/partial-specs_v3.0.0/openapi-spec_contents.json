@@ -414,7 +414,7 @@
           "attachments":{
             "type":"array",
             "items":{
-              "type":"string"
+              "$ref":"#/components/schemas/ContentAttachment"
             }
           },
           "synchronization_status":{

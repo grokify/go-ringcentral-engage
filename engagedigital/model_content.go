@@ -15,7 +15,7 @@ import (
 
 type Content struct {
 	ApprovalRequired bool                 `json:"approval_required,omitempty"`
-	Attachments      []string             `json:"attachments,omitempty"`
+	Attachments      []ContentAttachment  `json:"attachments,omitempty"`
 	AttachmentsCount int32                `json:"attachments_count,omitempty"`
 	AuthorId         string               `json:"author_id,omitempty"`
 	Body             string               `json:"body,omitempty"`
