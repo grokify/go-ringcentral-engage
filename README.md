@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-82%2F121%20%3D%2067%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-88%2F121%20%3D%2072%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -67,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-82/121 APIs - 67%
+88/121 APIs - 72%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -141,13 +141,13 @@ For information on how to use the apiClient objec, see:
   - [x] PUT /1.0/custom_fields/:id
   - [x] DELETE /1.0/custom_fields/:id
 
-- [ ] Threads
-  - [ ] GET /1.0/content_threads
-  - [ ] GET /1.0/content_threads/:id
-  - [ ] PUT /1.0/content_threads/:id/update_categories
-  - [ ] PUT /1.0/content_threads/:id/ignore
-  - [ ] PUT /1.0/content_threads/:id/close
-  - [ ] GET /1.0/content_threads/:id/open
+- [x] Threads
+  - [x] GET /1.0/content_threads
+  - [x] GET /1.0/content_threads/:id
+  - [x] PUT /1.0/content_threads/:id/update_categories
+  - [x] PUT /1.0/content_threads/:id/ignore
+  - [x] PUT /1.0/content_threads/:id/close
+  - [x] GET /1.0/content_threads/:id/open
 
 - [x] Contents
   - [x] GET /1.0/contents

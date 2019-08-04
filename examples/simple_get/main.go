@@ -94,11 +94,11 @@ func main() {
 		}
 	case "locale":
 		ex.HandleApiResponse(client.LocalesApi.GetAllLocales(context.Background()))
-	case "source":
+	case "presenceStatus":
 		if len(opts.Id) > 0 {
-			ex.HandleApiResponse(client.SourcesApi.GetSource(context.Background(), opts.Id))
+			ex.HandleApiResponse(client.PresenceStatusesApi.GetPresenceStatus(context.Background(), opts.Id))
 		} else {
-			ex.HandleApiResponse(client.SourcesApi.GetAllSources(context.Background(), nil))
+			ex.HandleApiResponse(client.PresenceStatusesApi.GetAllPresenceStatuses(context.Background(), nil))
 		}
 	case "role":
 		if len(opts.Id) > 0 {
@@ -106,14 +106,14 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.RolesApi.GetAllRoles(context.Background(), nil))
 		}
-	case "presenceStatus":
-		if len(opts.Id) > 0 {
-			ex.HandleApiResponse(client.PresenceStatusesApi.GetPresenceStatus(context.Background(), opts.Id))
-		} else {
-			ex.HandleApiResponse(client.PresenceStatusesApi.GetAllPresenceStatuses(context.Background(), nil))
-		}
 	case "settings":
 		ex.HandleApiResponse(client.SettingsApi.GetAllSettings(context.Background()))
+	case "source":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.SourcesApi.GetSource(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.SourcesApi.GetAllSources(context.Background(), nil))
+		}
 	case "tag":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.TagsApi.GetTag(context.Background(), opts.Id))
@@ -131,6 +131,12 @@ func main() {
 			ex.HandleApiResponse(client.TeamsApi.GetTeam(context.Background(), opts.Id))
 		} else {
 			ex.HandleApiResponse(client.TeamsApi.GetAllTeams(context.Background(), nil))
+		}
+	case "thread":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ThreadsApi.GetThread(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ThreadsApi.GetAllThreads(context.Background(), nil))
 		}
 	case "timesheet":
 		if len(opts.Id) > 0 {

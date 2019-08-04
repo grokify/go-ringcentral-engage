@@ -96,6 +96,12 @@ Class | Method | HTTP request | Description
 *TeamsApi* | [**GetAllTeams**](docs/TeamsApi.md#getallteams) | **Get** /teams | Getting all teams
 *TeamsApi* | [**GetTeam**](docs/TeamsApi.md#getteam) | **Get** /teams/{teamId} | Getting a team from its id
 *TeamsApi* | [**UpdateTeam**](docs/TeamsApi.md#updateteam) | **Put** /teams/{teamId} | Updating a team
+*ThreadsApi* | [**ArchiveThread**](docs/ThreadsApi.md#archivethread) | **Put** /content_threads/{threadId}/ignore | Archiving a thread
+*ThreadsApi* | [**CategorizeThread**](docs/ThreadsApi.md#categorizethread) | **Put** /content_threads/{threadId}/update_categories | Categorizing a thread
+*ThreadsApi* | [**CloseThread**](docs/ThreadsApi.md#closethread) | **Put** /content_threads/{threadId}/close | Close a thread
+*ThreadsApi* | [**GetAllThreads**](docs/ThreadsApi.md#getallthreads) | **Get** /content_threads | Getting all threads
+*ThreadsApi* | [**GetThread**](docs/ThreadsApi.md#getthread) | **Get** /content_threads/{threadId} | Getting a thread from its id
+*ThreadsApi* | [**OpenThread**](docs/ThreadsApi.md#openthread) | **Get** /content_threads/{threadId}/open | Open a thread
 *TimeSheetsApi* | [**CreateTimeSheet**](docs/TimeSheetsApi.md#createtimesheet) | **Post** /time_sheets | Creating a time sheet
 *TimeSheetsApi* | [**DeleteTimeSheet**](docs/TimeSheetsApi.md#deletetimesheet) | **Delete** /time_sheets/{timeSheetId} | Deleting a time sheet
 *TimeSheetsApi* | [**GetAllTimeSheets**](docs/TimeSheetsApi.md#getalltimesheets) | **Get** /time_sheets | Getting all time sheets
@@ -144,6 +150,7 @@ Class | Method | HTTP request | Description
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
  - [GetAllTasksResponse](docs/GetAllTasksResponse.md)
  - [GetAllTeamsResponse](docs/GetAllTeamsResponse.md)
+ - [GetAllThreadsResponse](docs/GetAllThreadsResponse.md)
  - [GetAllTimeSheetsResponse](docs/GetAllTimeSheetsResponse.md)
  - [GetAllUsersResponse](docs/GetAllUsersResponse.md)
  - [GetAllWebhooksResponse](docs/GetAllWebhooksResponse.md)
@@ -158,6 +165,7 @@ Class | Method | HTTP request | Description
  - [Tag](docs/Tag.md)
  - [Task](docs/Task.md)
  - [Team](docs/Team.md)
+ - [Thread](docs/Thread.md)
  - [TimeSheet](docs/TimeSheet.md)
  - [TimeSheetHoliday](docs/TimeSheetHoliday.md)
  - [Timezone](docs/Timezone.md)

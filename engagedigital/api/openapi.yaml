@@ -756,6 +756,215 @@ paths:
       summary: Updating a source
       tags:
       - Sources
+  /content_threads:
+    get:
+      description: |-
+        This method renders threads ordered by last content date (descending). Only threads in sources where token’s user has “read” permission are returned.
+
+        Authorization​: no.
+      operationId: getAllThreads
+      parameters:
+      - description: A search query to filter threads. Please refer to ​Search & filtering
+          parameters​ for more details.
+        explode: true
+        in: query
+        name: q
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllThreadsResponse'
+          description: Success
+      summary: Getting all threads
+      tags:
+      - Threads
+  /content_threads/{threadId}:
+    get:
+      description: |-
+        This method renders a thread from given id. If token’s user does not have “read” on thread’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: getThread
+      parameters:
+      - explode: false
+        in: path
+        name: threadId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+          description: Success
+      summary: Getting a thread from its id
+      tags:
+      - Threads
+  /content_threads/{threadId}/close:
+    put:
+      description: |-
+        Thread closure/opening is only available for the following sources:
+        * Emails
+        * Answers
+        * Ideas
+        * Facebook Messenger
+        * Google+
+        * Lithium
+        * Mobile Messaging
+
+        Starts a job to close a thread. It returns the thread but as the job is asynchronous, the state of the “close” attribute in the returned object do not is the one when the job started.
+
+        If token’s user does not have “read” on thread’s source a 404 HTTP response will be returned. Returns a 403 if the thread cannot be closed or if the user does not have the permission to close a thread.
+
+        Authorization​: no.
+      operationId: closeThread
+      parameters:
+      - explode: false
+        in: path
+        name: threadId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+          description: Success
+      summary: Close a thread
+      tags:
+      - Threads
+  /content_threads/{threadId}/ignore:
+    put:
+      description: |-
+        Archives the contents of a thread. If token’s user does not have “read” on thread’s source a 404 HTTP response will be returned.
+
+        If the thread is already being archived, a 409 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: archiveThread
+      parameters:
+      - explode: false
+        in: path
+        name: threadId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+          description: Success
+      summary: Archiving a thread
+      tags:
+      - Threads
+  /content_threads/{threadId}/open:
+    get:
+      description: |-
+        Thread closure/opening is only available for the following sources:
+
+        * Emails
+        * Answers
+        * Ideas
+        * Facebook Messenger
+        * Google+
+        * Lithium
+        * Mobile Messaging
+
+        Starts a job to open a thread. It returns the thread but as the job is asynchronous, the state of the “close” attribute in the returned object is the one when the job started.
+
+        If token’s user does not have “read” on thread’s source a 404 HTTP response will be returned. Returns a 403 if the thread cannot be opened or if the user does not have the permission to open a thread.
+
+        Authorization​: no.
+      operationId: openThread
+      parameters:
+      - explode: false
+        in: path
+        name: threadId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+          description: Success
+      summary: Open a thread
+      tags:
+      - Threads
+  /content_threads/{threadId}/update_categories:
+    put:
+      description: |-
+        This method updates the categories of a thread. If token’s user does not have “read” on thread’s source a 404 HTTP response will be returned.
+
+        If the thread is already being categorized, a 409 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: categorizeThread
+      parameters:
+      - explode: false
+        in: path
+        name: threadId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: An array containing the new categories to set on the thread.
+        explode: true
+        in: query
+        name: thread_category_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+          description: Success
+      summary: Categorizing a thread
+      tags:
+      - Threads
   /contents:
     get:
       description: |-
@@ -6713,6 +6922,58 @@ components:
           items:
             $ref: '#/components/schemas/Team'
           type: array
+    GetAllThreadsResponse:
+      example:
+        offset: 1
+        records:
+        - foreign_id: foreign_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          extra_data: '{}'
+          interventions_count: 5
+          thread_category_ids:
+          - thread_category_ids
+          - thread_category_ids
+          closed: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          source_id: source_id
+          title: title
+          contents_count: 5
+        - foreign_id: foreign_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          extra_data: '{}'
+          interventions_count: 5
+          thread_category_ids:
+          - thread_category_ids
+          - thread_category_ids
+          closed: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          source_id: source_id
+          title: title
+          contents_count: 5
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/Thread'
+          type: array
     GetAllTimeSheetsResponse:
       example:
         offset: 1
@@ -7674,6 +7935,57 @@ components:
           items:
             type: string
           type: array
+      required:
+      - id
+    Thread:
+      example:
+        foreign_id: foreign_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        extra_data: '{}'
+        interventions_count: 5
+        thread_category_ids:
+        - thread_category_ids
+        - thread_category_ids
+        closed: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        category_ids:
+        - category_ids
+        - category_ids
+        id: id
+        source_id: source_id
+        title: title
+        contents_count: 5
+      properties:
+        category_ids:
+          items:
+            type: string
+          type: array
+        closed:
+          type: boolean
+        contents_count:
+          type: integer
+        created_at:
+          format: date-time
+          type: string
+        extra_data:
+          type: object
+        foreign_id:
+          type: string
+        id:
+          type: string
+        interventions_count:
+          type: integer
+        source_id:
+          type: string
+        thread_category_ids:
+          items:
+            type: string
+          type: array
+        title:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
       required:
       - id
     TimeSheet:
