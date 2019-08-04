@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-95%2F121%20%3D%2078%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-99%2F121%20%3D%2082%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -67,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-95/121 APIs - 78%
+99/121 APIs - 82%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -175,11 +175,11 @@ For information on how to use the apiClient objec, see:
   - [x] PUT /1.0/interventions/:id/update_categories
   - [x] DELETE /1.0/interventions/:id/cancel
 
-- [ ] Intervention comments
-  - [ ] GET /1.0/intervention_comments
-  - [ ] GET /1.0/intervention_comments/:id
-  - [ ] POST /1.0/intervention_comments
-  - [ ] DELETE /1.0/intervention_comments/:id
+- [x] Intervention comments
+  - [x] GET /1.0/intervention_comments
+  - [x] GET /1.0/intervention_comments/:id
+  - [x] POST /1.0/intervention_comments
+  - [x] DELETE /1.0/intervention_comments/:id
 
 - [ ] Status (task view)
   - [ ] GET /1.0/status

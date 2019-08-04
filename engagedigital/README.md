@@ -67,6 +67,10 @@ Class | Method | HTTP request | Description
 *IdentityGroupsApi* | [**GetAllIdentityGroups**](docs/IdentityGroupsApi.md#getallidentitygroups) | **Get** /identity_groups | Getting all identity groups
 *IdentityGroupsApi* | [**GetIdentityGroup**](docs/IdentityGroupsApi.md#getidentitygroup) | **Get** /identity_groups/{identityGroupId} | Getting an identity group from its id
 *IdentityGroupsApi* | [**UpdateIdentityGroup**](docs/IdentityGroupsApi.md#updateidentitygroup) | **Put** /identity_groups/{identityGroupId} | Updating an identity group
+*InterventionCommentsApi* | [**CreateInterventionComment**](docs/InterventionCommentsApi.md#createinterventioncomment) | **Post** /intervention_comments | Creating an intervention comment
+*InterventionCommentsApi* | [**DeleteInterventionComment**](docs/InterventionCommentsApi.md#deleteinterventioncomment) | **Delete** /intervention_comments/{interventionCommentId} | Deleting an intervention comment
+*InterventionCommentsApi* | [**GetAllInterventionComments**](docs/InterventionCommentsApi.md#getallinterventioncomments) | **Get** /intervention_comments | Getting all intervention comments
+*InterventionCommentsApi* | [**GetInterventionComment**](docs/InterventionCommentsApi.md#getinterventioncomment) | **Get** /intervention_comments/{interventionCommentId} | Getting an intervention comment from its id
 *InterventionsApi* | [**CancelIntervention**](docs/InterventionsApi.md#cancelintervention) | **Delete** /interventions/{interventionId}/cancel | Cancelling an intervention
 *InterventionsApi* | [**CategorizeIntervention**](docs/InterventionsApi.md#categorizeintervention) | **Put** /interventions/{interventionId}/update_categories | Categorizing an intervention
 *InterventionsApi* | [**CloseIntervention**](docs/InterventionsApi.md#closeintervention) | **Put** /interventions/{interventionId}/close | Closing an intervention
@@ -151,6 +155,7 @@ Class | Method | HTTP request | Description
  - [GetAllFoldersResponse](docs/GetAllFoldersResponse.md)
  - [GetAllIdentitiesResponse](docs/GetAllIdentitiesResponse.md)
  - [GetAllIdentityGroupsResponse](docs/GetAllIdentityGroupsResponse.md)
+ - [GetAllInterventionCommentsResponse](docs/GetAllInterventionCommentsResponse.md)
  - [GetAllInterventionsResponse](docs/GetAllInterventionsResponse.md)
  - [GetAllPresenceStatusesResponse](docs/GetAllPresenceStatusesResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
@@ -165,6 +170,7 @@ Class | Method | HTTP request | Description
  - [Identity](docs/Identity.md)
  - [IdentityGroup](docs/IdentityGroup.md)
  - [Intervention](docs/Intervention.md)
+ - [InterventionComment](docs/InterventionComment.md)
  - [Locale](docs/Locale.md)
  - [PresenceStatus](docs/PresenceStatus.md)
  - [Restriction](docs/Restriction.md)

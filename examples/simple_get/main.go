@@ -31,7 +31,7 @@ func main() {
 	opts.Id = strings.TrimSpace(opts.Id)
 	opts.Object = strings.ToLower(strings.TrimSpace(opts.Object))
 
-	switch opts.Object {
+	switch strings.ToLower(opts.Object) {
 	case "attachment":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.AttachmentsApi.GetAttachment(context.Background(), opts.Id))
@@ -62,7 +62,7 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.ContentsApi.GetAllContents(context.Background(), nil))
 		}
-	case "customFields":
+	case "customfields":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.CustomFieldsApi.GetCustomField(context.Background(), opts.Id))
 		} else {
@@ -86,7 +86,7 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.IdentitiesApi.GetAllIdentities(context.Background(), nil))
 		}
-	case "identityGroup":
+	case "identitygroup":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.IdentityGroupsApi.GetIdentityGroup(context.Background(), opts.Id))
 		} else {
@@ -98,9 +98,15 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.InterventionsApi.GetAllInterventions(context.Background(), nil))
 		}
+	case "interventioncomment":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.InterventionCommentsApi.GetInterventionComment(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.InterventionCommentsApi.GetAllInterventionComments(context.Background(), nil))
+		}
 	case "locale":
 		ex.HandleApiResponse(client.LocalesApi.GetAllLocales(context.Background()))
-	case "presenceStatus":
+	case "presencestatus":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.PresenceStatusesApi.GetPresenceStatus(context.Background(), opts.Id))
 		} else {

@@ -2104,6 +2104,164 @@ paths:
       summary: Updating an identity group
       tags:
       - Identity Groups
+  /intervention_comments:
+    get:
+      description: |-
+        This method renders interventions comments ordered by creation date (descending). Only comments in sources where token’s user has “read” permission are returned.
+
+        Authorization​: no.
+      operationId: getAllInterventionComments
+      parameters:
+      - description: To filter comments on given intervention id.
+        explode: true
+        in: query
+        name: intervention_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter comments on given thread id.
+        explode: true
+        in: query
+        name: thread_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter comments on given user id.
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To filter comments on given identity id.
+        explode: true
+        in: query
+        name: identity_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllInterventionCommentsResponse'
+          description: Success
+      summary: Getting all intervention comments
+      tags:
+      - Intervention Comments
+    post:
+      description: This method creates a new intervention comment. In case of success
+        it renders the created comment, otherwise, it renders an error (422 HTTP code).
+        It creates comment as token’s user. If token’s user does not have “read” on
+        given intervention’s source a 404 HTTP response will be returned.
+      operationId: createInterventionComment
+      parameters:
+      - description: The comment body (mandatory).
+        explode: true
+        in: query
+        name: body
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The comment intervention id (mandatory).
+        explode: true
+        in: query
+        name: intervention_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The comment user id (mandatory).
+        explode: true
+        in: query
+        name: user_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterventionComment'
+          description: Success
+      summary: Creating an intervention comment
+      tags:
+      - Intervention Comments
+  /intervention_comments/{interventionCommentId}:
+    delete:
+      description: |-
+        This method destroys an intervention comment. It renders comment itself. If token’s user does not have “read” on comment’s source a 404 HTTP response will be returned.
+
+        Authorization​: no.
+      operationId: deleteInterventionComment
+      parameters:
+      - explode: false
+        in: path
+        name: interventionCommentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterventionComment'
+          description: Success
+      summary: Deleting an intervention comment
+      tags:
+      - Intervention Comments
+    get:
+      description: This method renders an intervention comment from given id. If token’s
+        user does not have “read” on comment’s source a 404 HTTP response will be
+        returned.
+      operationId: getInterventionComment
+      parameters:
+      - explode: false
+        in: path
+        name: interventionCommentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InterventionComment'
+          description: Success
+      summary: Getting an intervention comment from its id
+      tags:
+      - Intervention Comments
   /interventions:
     get:
       description: |-
@@ -6865,6 +7023,42 @@ components:
           items:
             $ref: '#/components/schemas/IdentityGroup'
           type: array
+    GetAllInterventionCommentsResponse:
+      example:
+        offset: 1
+        records:
+        - intervention_id: intervention_id
+          thread_id: thread_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          user_id: user_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          body: body
+          videntity_id: videntity_id
+        - intervention_id: intervention_id
+          thread_id: thread_id
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          user_id: user_id
+          created_at: 2000-01-23T04:56:07.000+00:00
+          id: id
+          body: body
+          videntity_id: videntity_id
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/InterventionComment'
+          type: array
     GetAllInterventionsResponse:
       example:
         offset: 1
@@ -7799,6 +7993,35 @@ components:
           type: integer
       required:
       - id
+    InterventionComment:
+      example:
+        intervention_id: intervention_id
+        thread_id: thread_id
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: user_id
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: id
+        body: body
+        videntity_id: videntity_id
+      properties:
+        body:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          type: string
+        intervention_id:
+          type: string
+        thread_id:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          type: string
+        videntity_id:
+          type: string
     Locale:
       example:
         code: code
