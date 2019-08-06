@@ -45,6 +45,8 @@ type APIClient struct {
 
 	// API Services
 
+	AgentStatusApi *AgentStatusApiService
+
 	AttachmentsApi *AttachmentsApiService
 
 	CategoriesApi *CategoriesApiService
@@ -71,7 +73,7 @@ type APIClient struct {
 
 	LocalesApi *LocalesApiService
 
-	PresenceStatusesApi *PresenceStatusesApiService
+	PresenceStatusApi *PresenceStatusApiService
 
 	RolesApi *RolesApiService
 
@@ -112,6 +114,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AgentStatusApi = (*AgentStatusApiService)(&c.common)
 	c.AttachmentsApi = (*AttachmentsApiService)(&c.common)
 	c.CategoriesApi = (*CategoriesApiService)(&c.common)
 	c.ChannelsApi = (*ChannelsApiService)(&c.common)
@@ -125,7 +128,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.InterventionCommentsApi = (*InterventionCommentsApiService)(&c.common)
 	c.InterventionsApi = (*InterventionsApiService)(&c.common)
 	c.LocalesApi = (*LocalesApiService)(&c.common)
-	c.PresenceStatusesApi = (*PresenceStatusesApiService)(&c.common)
+	c.PresenceStatusApi = (*PresenceStatusApiService)(&c.common)
 	c.RolesApi = (*RolesApiService)(&c.common)
 	c.SettingsApi = (*SettingsApiService)(&c.common)
 	c.SourcesApi = (*SourcesApiService)(&c.common)

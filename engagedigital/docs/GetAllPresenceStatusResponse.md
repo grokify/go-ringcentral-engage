@@ -1,4 +1,4 @@
-# GetAllPresenceStatusesResponse
+# GetAllPresenceStatusResponse
 
 ## Properties
 

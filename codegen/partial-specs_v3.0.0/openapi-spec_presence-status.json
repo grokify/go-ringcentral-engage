@@ -8,17 +8,17 @@
   },
   "tags": [
     {
-      "name": "PresenceStatuses"
+      "name": "Presence Status"
     }
   ],
   "paths": {
     "/presence_status": {
       "get": {
         "tags": [
-          "PresenceStatuses"
+          "Presence Status"
         ],
         "summary": "Getting all presence statuses",
-        "operationId": "getAllPresenceStatuses",
+        "operationId": "getAllPresenceStatus",
         "description": "This method renders all presence statuses ordered by name (in alphabetical order).",
         "parameters": [
           {
@@ -48,7 +48,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetAllPresenceStatusesResponse"
+                  "$ref": "#/components/schemas/GetAllPresenceStatusResponse"
                 }
               }
             }
@@ -57,7 +57,7 @@
       },
       "post": {
         "tags": [
-          "PresenceStatuses"
+          "Presence Status"
         ],
         "summary": "Creating a presence status",
         "operationId": "createPresenceStatus",
@@ -90,7 +90,7 @@
     "/presence_status/{presenceStatusId}": {
       "get": {
         "tags": [
-          "PresenceStatuses"
+          "Presence Status"
         ],
         "summary": "Getting a presence status from its id",
         "operationId": "getPresenceStatus",
@@ -120,7 +120,7 @@
       },
       "put": {
         "tags": [
-          "PresenceStatuses"
+          "Presence Status"
         ],
         "summary": "Updating a presence status",
         "operationId": "updatePresenceStatus",
@@ -159,7 +159,7 @@
       },
       "delete": {
         "tags": [
-          "PresenceStatuses"
+          "Presence Status"
         ],
         "summary": "Deleting a presence status",
         "operationId": "deletePresenceStatus",
@@ -196,7 +196,7 @@
   ],
   "components": {
     "schemas": {
-      "GetAllPresenceStatusesResponse": {
+      "GetAllPresenceStatusResponse": {
         "properties": {
           "count": {
             "type": "integer",

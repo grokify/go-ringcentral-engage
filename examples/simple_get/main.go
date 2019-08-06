@@ -32,6 +32,12 @@ func main() {
 	opts.Object = strings.ToLower(strings.TrimSpace(opts.Object))
 
 	switch strings.ToLower(opts.Object) {
+	case "agentstatus":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.AgentStatusApi.GetAgentStatus(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.AgentStatusApi.GetAllAgentStatus(context.Background()))
+		}
 	case "attachment":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.AttachmentsApi.GetAttachment(context.Background(), opts.Id))
@@ -108,9 +114,9 @@ func main() {
 		ex.HandleApiResponse(client.LocalesApi.GetAllLocales(context.Background()))
 	case "presencestatus":
 		if len(opts.Id) > 0 {
-			ex.HandleApiResponse(client.PresenceStatusesApi.GetPresenceStatus(context.Background(), opts.Id))
+			ex.HandleApiResponse(client.PresenceStatusApi.GetPresenceStatus(context.Background(), opts.Id))
 		} else {
-			ex.HandleApiResponse(client.PresenceStatusesApi.GetAllPresenceStatuses(context.Background(), nil))
+			ex.HandleApiResponse(client.PresenceStatusApi.GetAllPresenceStatus(context.Background(), nil))
 		}
 	case "role":
 		if len(opts.Id) > 0 {

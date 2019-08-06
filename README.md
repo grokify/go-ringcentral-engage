@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-99%2F121%20%3D%2082%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-101%2F121%20%3D%2083%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -56,7 +56,7 @@ func main() {
 }
 ```
 
-For information on how to use the apiClient objec, see:
+For information on how to use the `apiClient` object, see:
 
 1. [`examples`](examples) folder for usage. [`examples/simple_get`](examples/simple_get) includes a simple functions for a lot of the `GET` APIs.
 1. [engagedigital/README.md](https://github.com/grokify/go-ringcentral-engage/blob/master/engagedigital/README.md) for SDK documentation.
@@ -67,7 +67,7 @@ For information on how to use the apiClient objec, see:
 
 ## Coverage
 
-99/121 APIs - 82%
+101/121 APIs - 83%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -181,9 +181,9 @@ For information on how to use the apiClient objec, see:
   - [x] POST /1.0/intervention_comments
   - [x] DELETE /1.0/intervention_comments/:id
 
-- [ ] Status (task view)
-  - [ ] GET /1.0/status
-  - [ ] GET /1.0/status/:agent_id
+- [x] Agent Status (task view)
+  - [x] GET /1.0/status
+  - [x] GET /1.0/status/:agent_id
   - [ ] PUT /1.0/status/:agent_id
 
 - [x] Webhook

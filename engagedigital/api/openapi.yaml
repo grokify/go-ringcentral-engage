@@ -6,7 +6,7 @@ info:
 servers:
 - url: https://DOMAIN.api.engagement.dimelo.com/1.0
 tags:
-- name: Attachments
+- name: Agent Status
 paths:
   /attachments:
     get:
@@ -2556,7 +2556,7 @@ paths:
     get:
       description: This method renders all presence statuses ordered by name (in alphabetical
         order).
-      operationId: getAllPresenceStatuses
+      operationId: getAllPresenceStatus
       parameters:
       - description: The record index to start. Default value is 0.
         explode: true
@@ -2582,11 +2582,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAllPresenceStatusesResponse'
+                $ref: '#/components/schemas/GetAllPresenceStatusResponse'
           description: Success
       summary: Getting all presence statuses
       tags:
-      - PresenceStatuses
+      - Presence Status
     post:
       description: |-
         This method creates a presence status. In case of success it renders the presence status, otherwise, it renders an error (422 HTTP code).
@@ -2611,7 +2611,7 @@ paths:
           description: Success
       summary: Creating a presence status
       tags:
-      - PresenceStatuses
+      - Presence Status
   /presence_status/{presenceStatusId}:
     delete:
       description: |-
@@ -2636,7 +2636,7 @@ paths:
           description: Success
       summary: Deleting a presence status
       tags:
-      - PresenceStatuses
+      - Presence Status
     get:
       description: |-
         This method renders a presence status from given id.
@@ -2660,7 +2660,7 @@ paths:
           description: Success
       summary: Getting a presence status from its id
       tags:
-      - PresenceStatuses
+      - Presence Status
     put:
       description: |-
         This method updates an existing presence status from given attributes and renders it in case of success.
@@ -2692,7 +2692,7 @@ paths:
           description: Success
       summary: Updating a presence status
       tags:
-      - PresenceStatuses
+      - Presence Status
   /roles:
     get:
       description: This method renders roles ordered by creation date (ascending).
@@ -4076,6 +4076,90 @@ paths:
       summary: Updating settings
       tags:
       - Settings
+  /status:
+    get:
+      description: |-
+        This method get all currently connected agents & their status.
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: getAllAgentStatus
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AgentStatus'
+                type: array
+          description: Success
+      summary: Get all connected agents status
+      tags:
+      - Agent Status
+  /status/{agentId}:
+    get:
+      description: |-
+        This method get the status of a connected agent. Returns a 404 if the user does not exist (not_found) or if he’s not connected (disconnected).
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: getAgentStatus
+      parameters:
+      - explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentStatus'
+          description: Success
+      summary: Get a connected agent status
+      tags:
+      - Agent Status
+    put:
+      description: |-
+        This method updates an agent's availability. Can be used to set either channels statuses OR custom  status. If both parameters are provided, ignores custom status.The status parameter​ **MUST** b​e either “away” or “available”.
+
+        Authorization​: only users that have the right to monitor the task view.
+      operationId: changeAgentStatus
+      parameters:
+      - explode: false
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: A hash of channel_id => availability (must contain all channels).
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: id of presence status (optional)
+        explode: true
+        in: query
+        name: custom_status_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentStatus'
+          description: Success
+      summary: Changing an agent's status
+      tags:
+      - Agent Status
   /tags:
     get:
       description: This method renders tags ordered by name (ascending).
@@ -5956,6 +6040,59 @@ paths:
       - Webhooks
 components:
   schemas:
+    AgentCustomStatus:
+      description: |-
+        The "custom_status" attribute represent the custom "away" status selected, it can either be:
+        * 1. null — ​The agent is available or in the generic "Away" status
+        2. { "id":"5582b1f4776562af9b000008" } — ​The id of the custom status
+      example:
+        id: id
+      properties:
+        id:
+          type: string
+    AgentStatus:
+      example:
+        agent_id: agent_id
+        channels:
+        - busyness: unoccupied
+          name: name
+          id: id
+          status: status
+        - busyness: unoccupied
+          name: name
+          id: id
+          status: status
+        custom_status:
+          id: id
+      properties:
+        agent_id:
+          type: string
+        channels:
+          items:
+            $ref: '#/components/schemas/AgentStatusChannel'
+          type: array
+        custom_status:
+          $ref: '#/components/schemas/AgentCustomStatus'
+    AgentStatusChannel:
+      example:
+        busyness: unoccupied
+        name: name
+        id: id
+        status: status
+      properties:
+        busyness:
+          enum:
+          - unoccupied
+          - ok
+          - busy
+          - full
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
     Attachment:
       example:
         foreign_id: foreign_id
@@ -6447,6 +6584,21 @@ components:
           type: string
       required:
       - id
+    GetAllAgentStatusResponse:
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/AgentStatus'
+          type: array
     GetAllAttachmentsResponse:
       example:
         offset: 1
@@ -7131,7 +7283,7 @@ components:
           items:
             $ref: '#/components/schemas/Intervention'
           type: array
-    GetAllPresenceStatusesResponse:
+    GetAllPresenceStatusResponse:
       example:
         offset: 1
         records:

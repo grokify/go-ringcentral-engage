@@ -24,16 +24,16 @@ var (
 	_ context.Context
 )
 
-type PresenceStatusesApiService service
+type PresenceStatusApiService service
 
 /*
-PresenceStatusesApiService Creating a presence status
+PresenceStatusApiService Creating a presence status
 This method creates a presence status. In case of success it renders the presence status, otherwise, it renders an error (422 HTTP code).  Authorization​: only users that have the right to monitor the task view.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param name The name of the presence status.
 @return PresenceStatus
 */
-func (a *PresenceStatusesApiService) CreatePresenceStatus(ctx context.Context, name string) (PresenceStatus, *http.Response, error) {
+func (a *PresenceStatusApiService) CreatePresenceStatus(ctx context.Context, name string) (PresenceStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -115,13 +115,13 @@ func (a *PresenceStatusesApiService) CreatePresenceStatus(ctx context.Context, n
 }
 
 /*
-PresenceStatusesApiService Deleting a presence status
+PresenceStatusApiService Deleting a presence status
 This method destroys an existing presence status. It renders presence status itself. It renders a 404 if id is invalid.  Authorization​: only users that have the right to monitor the task view.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param presenceStatusId
 @return PresenceStatus
 */
-func (a *PresenceStatusesApiService) DeletePresenceStatus(ctx context.Context, presenceStatusId string) (PresenceStatus, *http.Response, error) {
+func (a *PresenceStatusApiService) DeletePresenceStatus(ctx context.Context, presenceStatusId string) (PresenceStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -203,28 +203,28 @@ func (a *PresenceStatusesApiService) DeletePresenceStatus(ctx context.Context, p
 }
 
 /*
-PresenceStatusesApiService Getting all presence statuses
+PresenceStatusApiService Getting all presence statuses
 This method renders all presence statuses ordered by name (in alphabetical order).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GetAllPresenceStatusesOpts - Optional Parameters:
+ * @param optional nil or *GetAllPresenceStatusOpts - Optional Parameters:
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
  * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
-@return GetAllPresenceStatusesResponse
+@return GetAllPresenceStatusResponse
 */
 
-type GetAllPresenceStatusesOpts struct {
+type GetAllPresenceStatusOpts struct {
 	Offset optional.Int32
 	Limit  optional.Int32
 }
 
-func (a *PresenceStatusesApiService) GetAllPresenceStatuses(ctx context.Context, localVarOptionals *GetAllPresenceStatusesOpts) (GetAllPresenceStatusesResponse, *http.Response, error) {
+func (a *PresenceStatusApiService) GetAllPresenceStatus(ctx context.Context, localVarOptionals *GetAllPresenceStatusOpts) (GetAllPresenceStatusResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  GetAllPresenceStatusesResponse
+		localVarReturnValue  GetAllPresenceStatusResponse
 	)
 
 	// create path and map variables
@@ -279,7 +279,7 @@ func (a *PresenceStatusesApiService) GetAllPresenceStatuses(ctx context.Context,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v GetAllPresenceStatusesResponse
+			var v GetAllPresenceStatusResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -304,13 +304,13 @@ func (a *PresenceStatusesApiService) GetAllPresenceStatuses(ctx context.Context,
 }
 
 /*
-PresenceStatusesApiService Getting a presence status from its id
+PresenceStatusApiService Getting a presence status from its id
 This method renders a presence status from given id.  Authorization​: only users that have the right to monitor the task view.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param presenceStatusId
 @return PresenceStatus
 */
-func (a *PresenceStatusesApiService) GetPresenceStatus(ctx context.Context, presenceStatusId string) (PresenceStatus, *http.Response, error) {
+func (a *PresenceStatusApiService) GetPresenceStatus(ctx context.Context, presenceStatusId string) (PresenceStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -392,14 +392,14 @@ func (a *PresenceStatusesApiService) GetPresenceStatus(ctx context.Context, pres
 }
 
 /*
-PresenceStatusesApiService Updating a presence status
+PresenceStatusApiService Updating a presence status
 This method updates an existing presence status from given attributes and renders it in case of success.  Authorization​: only users that have the right to monitor the task view.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param presenceStatusId
  * @param name The name of the presence status.
 @return PresenceStatus
 */
-func (a *PresenceStatusesApiService) UpdatePresenceStatus(ctx context.Context, presenceStatusId string, name string) (PresenceStatus, *http.Response, error) {
+func (a *PresenceStatusApiService) UpdatePresenceStatus(ctx context.Context, presenceStatusId string, name string) (PresenceStatus, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}

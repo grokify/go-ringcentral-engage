@@ -32,6 +32,9 @@ All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AgentStatusApi* | [**ChangeAgentStatus**](docs/AgentStatusApi.md#changeagentstatus) | **Put** /status/{agentId} | Changing an agent&#39;s status
+*AgentStatusApi* | [**GetAgentStatus**](docs/AgentStatusApi.md#getagentstatus) | **Get** /status/{agentId} | Get a connected agent status
+*AgentStatusApi* | [**GetAllAgentStatus**](docs/AgentStatusApi.md#getallagentstatus) | **Get** /status | Get all connected agents status
 *AttachmentsApi* | [**CreateAttachment**](docs/AttachmentsApi.md#createattachment) | **Post** /attachments | Creating an attachment
 *AttachmentsApi* | [**GetAllAttachments**](docs/AttachmentsApi.md#getallattachments) | **Get** /attachments | Getting all attachments
 *AttachmentsApi* | [**GetAttachment**](docs/AttachmentsApi.md#getattachment) | **Get** /attachments/{attachmentId} | Getting an attachment from its id
@@ -79,11 +82,11 @@ Class | Method | HTTP request | Description
 *InterventionsApi* | [**GetIntervention**](docs/InterventionsApi.md#getintervention) | **Get** /interventions/{interventionId} | Getting an intervention from its id
 *InterventionsApi* | [**ReassignIntervention**](docs/InterventionsApi.md#reassignintervention) | **Put** /interventions/{interventionId}/reassign | Reassigning an intervention
 *LocalesApi* | [**GetAllLocales**](docs/LocalesApi.md#getalllocales) | **Get** /locales | Getting all locales
-*PresenceStatusesApi* | [**CreatePresenceStatus**](docs/PresenceStatusesApi.md#createpresencestatus) | **Post** /presence_status | Creating a presence status
-*PresenceStatusesApi* | [**DeletePresenceStatus**](docs/PresenceStatusesApi.md#deletepresencestatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
-*PresenceStatusesApi* | [**GetAllPresenceStatuses**](docs/PresenceStatusesApi.md#getallpresencestatuses) | **Get** /presence_status | Getting all presence statuses
-*PresenceStatusesApi* | [**GetPresenceStatus**](docs/PresenceStatusesApi.md#getpresencestatus) | **Get** /presence_status/{presenceStatusId} | Getting a presence status from its id
-*PresenceStatusesApi* | [**UpdatePresenceStatus**](docs/PresenceStatusesApi.md#updatepresencestatus) | **Put** /presence_status/{presenceStatusId} | Updating a presence status
+*PresenceStatusApi* | [**CreatePresenceStatus**](docs/PresenceStatusApi.md#createpresencestatus) | **Post** /presence_status | Creating a presence status
+*PresenceStatusApi* | [**DeletePresenceStatus**](docs/PresenceStatusApi.md#deletepresencestatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
+*PresenceStatusApi* | [**GetAllPresenceStatus**](docs/PresenceStatusApi.md#getallpresencestatus) | **Get** /presence_status | Getting all presence statuses
+*PresenceStatusApi* | [**GetPresenceStatus**](docs/PresenceStatusApi.md#getpresencestatus) | **Get** /presence_status/{presenceStatusId} | Getting a presence status from its id
+*PresenceStatusApi* | [**UpdatePresenceStatus**](docs/PresenceStatusApi.md#updatepresencestatus) | **Put** /presence_status/{presenceStatusId} | Updating a presence status
 *RolesApi* | [**CreateRole**](docs/RolesApi.md#createrole) | **Post** /roles | Creating a role
 *RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
 *RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
@@ -134,6 +137,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AgentCustomStatus](docs/AgentCustomStatus.md)
+ - [AgentStatus](docs/AgentStatus.md)
+ - [AgentStatusChannel](docs/AgentStatusChannel.md)
  - [Attachment](docs/Attachment.md)
  - [Category](docs/Category.md)
  - [Channel](docs/Channel.md)
@@ -145,6 +151,7 @@ Class | Method | HTTP request | Description
  - [Event](docs/Event.md)
  - [EventExtraInfo](docs/EventExtraInfo.md)
  - [Folder](docs/Folder.md)
+ - [GetAllAgentStatusResponse](docs/GetAllAgentStatusResponse.md)
  - [GetAllAttachmentsResponse](docs/GetAllAttachmentsResponse.md)
  - [GetAllCategoriesResponse](docs/GetAllCategoriesResponse.md)
  - [GetAllChannelsResponse](docs/GetAllChannelsResponse.md)
@@ -157,7 +164,7 @@ Class | Method | HTTP request | Description
  - [GetAllIdentityGroupsResponse](docs/GetAllIdentityGroupsResponse.md)
  - [GetAllInterventionCommentsResponse](docs/GetAllInterventionCommentsResponse.md)
  - [GetAllInterventionsResponse](docs/GetAllInterventionsResponse.md)
- - [GetAllPresenceStatusesResponse](docs/GetAllPresenceStatusesResponse.md)
+ - [GetAllPresenceStatusResponse](docs/GetAllPresenceStatusResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)

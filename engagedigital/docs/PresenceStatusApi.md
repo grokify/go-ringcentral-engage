@@ -1,14 +1,14 @@
-# \PresenceStatusesApi
+# \PresenceStatusApi
 
 All URIs are relative to *https://DOMAIN.api.engagement.dimelo.com/1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreatePresenceStatus**](PresenceStatusesApi.md#CreatePresenceStatus) | **Post** /presence_status | Creating a presence status
-[**DeletePresenceStatus**](PresenceStatusesApi.md#DeletePresenceStatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
-[**GetAllPresenceStatuses**](PresenceStatusesApi.md#GetAllPresenceStatuses) | **Get** /presence_status | Getting all presence statuses
-[**GetPresenceStatus**](PresenceStatusesApi.md#GetPresenceStatus) | **Get** /presence_status/{presenceStatusId} | Getting a presence status from its id
-[**UpdatePresenceStatus**](PresenceStatusesApi.md#UpdatePresenceStatus) | **Put** /presence_status/{presenceStatusId} | Updating a presence status
+[**CreatePresenceStatus**](PresenceStatusApi.md#CreatePresenceStatus) | **Post** /presence_status | Creating a presence status
+[**DeletePresenceStatus**](PresenceStatusApi.md#DeletePresenceStatus) | **Delete** /presence_status/{presenceStatusId} | Deleting a presence status
+[**GetAllPresenceStatus**](PresenceStatusApi.md#GetAllPresenceStatus) | **Get** /presence_status | Getting all presence statuses
+[**GetPresenceStatus**](PresenceStatusApi.md#GetPresenceStatus) | **Get** /presence_status/{presenceStatusId} | Getting a presence status from its id
+[**UpdatePresenceStatus**](PresenceStatusApi.md#UpdatePresenceStatus) | **Put** /presence_status/{presenceStatusId} | Updating a presence status
 
 
 
@@ -78,9 +78,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## GetAllPresenceStatuses
+## GetAllPresenceStatus
 
-> GetAllPresenceStatusesResponse GetAllPresenceStatuses(ctx, optional)
+> GetAllPresenceStatusResponse GetAllPresenceStatus(ctx, optional)
 Getting all presence statuses
 
 This method renders all presence statuses ordered by name (in alphabetical order).
@@ -91,11 +91,11 @@ This method renders all presence statuses ordered by name (in alphabetical order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***GetAllPresenceStatusesOpts** | optional parameters | nil if no parameters
+ **optional** | ***GetAllPresenceStatusOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a GetAllPresenceStatusesOpts struct
+Optional parameters are passed through a pointer to a GetAllPresenceStatusOpts struct
 
 
 Name | Type | Description  | Notes
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetAllPresenceStatusesResponse**](GetAllPresenceStatusesResponse.md)
+[**GetAllPresenceStatusResponse**](GetAllPresenceStatusResponse.md)
 
 ### Authorization
 

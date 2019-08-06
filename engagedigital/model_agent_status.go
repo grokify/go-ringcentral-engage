@@ -9,9 +9,8 @@
 
 package engagedigital
 
-type GetAllPresenceStatusesResponse struct {
-	Count   int32            `json:"count,omitempty"`
-	Limit   int32            `json:"limit,omitempty"`
-	Offset  int32            `json:"offset,omitempty"`
-	Records []PresenceStatus `json:"records,omitempty"`
+type AgentStatus struct {
+	AgentId      string               `json:"agent_id,omitempty"`
+	Channels     []AgentStatusChannel `json:"channels,omitempty"`
+	CustomStatus AgentCustomStatus    `json:"custom_status,omitempty"`
 }

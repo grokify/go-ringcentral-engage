@@ -169,14 +169,14 @@ func handlePresenceStatus(client *engagedigital.APIClient, opts options) {
 		if len(opts.Name) == 0 {
 			log.Fatal("E_CREATE_PRESENCE_STATUS_NO_NAME")
 		}
-		ex.HandleApiResponse(client.PresenceStatusesApi.CreatePresenceStatus(
+		ex.HandleApiResponse(client.PresenceStatusApi.CreatePresenceStatus(
 			context.Background(),
 			opts.Name))
 	case "read":
 		if len(opts.Id) > 0 {
-			ex.HandleApiResponse(client.PresenceStatusesApi.GetPresenceStatus(context.Background(), opts.Id))
+			ex.HandleApiResponse(client.PresenceStatusApi.GetPresenceStatus(context.Background(), opts.Id))
 		} else {
-			ex.HandleApiResponse(client.PresenceStatusesApi.GetAllPresenceStatuses(context.Background(), nil))
+			ex.HandleApiResponse(client.PresenceStatusApi.GetAllPresenceStatus(context.Background(), nil))
 		}
 	case "update":
 		opts.Id = strings.TrimSpace(opts.Id)
@@ -184,14 +184,14 @@ func handlePresenceStatus(client *engagedigital.APIClient, opts options) {
 		if len(opts.Name) == 0 || len(opts.Id) == 0 {
 			log.Fatal("E_UPDATE_PRESENCE_STATUS_NO_ID_OR_NAME")
 		}
-		ex.HandleApiResponse(client.PresenceStatusesApi.UpdatePresenceStatus(
+		ex.HandleApiResponse(client.PresenceStatusApi.UpdatePresenceStatus(
 			context.Background(), opts.Id, opts.Name))
 	case "delete":
 		opts.Id = strings.TrimSpace(opts.Id)
 		if len(opts.Id) == 0 {
 			log.Fatal("E_DELETE_PRESENCE_STATUS_NO_ID")
 		}
-		ex.HandleApiResponse(client.PresenceStatusesApi.DeletePresenceStatus(
+		ex.HandleApiResponse(client.PresenceStatusApi.DeletePresenceStatus(
 			context.Background(), opts.Id))
 	}
 }
