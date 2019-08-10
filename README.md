@@ -235,12 +235,12 @@ For information on how to use the `apiClient` object, see:
   - [x] PUT /1.0/reply_assistant/entries/:id
   - [x] DELETE /1.0/reply_assistant/entries/:id
 
-- [ ] Reply Assistant - Versions
-  - [ ] GET /1.0/reply_assistant/versions
-  - [ ] GET /1.0/reply_assistant/versions/:id
-  - [ ] POST /1.0/reply_assistant/versions
-  - [ ] PUT /1.0/reply_assistant/versions/:id
-  - [ ] DELETE /1.0/reply_assistant/versions/:id
+- [x] Reply Assistant - Versions
+  - [x] GET /1.0/reply_assistant/versions
+  - [x] GET /1.0/reply_assistant/versions/:id
+  - [x] POST /1.0/reply_assistant/versions
+  - [x] PUT /1.0/reply_assistant/versions/:id
+  - [x] DELETE /1.0/reply_assistant/versions/:id
 
 - [ ] Reply Assistant - Groups
   - [ ] GET /1.0/reply_assistant/groups
