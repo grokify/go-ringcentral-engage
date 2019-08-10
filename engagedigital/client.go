@@ -77,6 +77,8 @@ type APIClient struct {
 
 	ReplyAssistantEntriesApi *ReplyAssistantEntriesApiService
 
+	ReplyAssistantGroupsApi *ReplyAssistantGroupsApiService
+
 	ReplyAssistantVersionsApi *ReplyAssistantVersionsApiService
 
 	RolesApi *RolesApiService
@@ -134,6 +136,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.LocalesApi = (*LocalesApiService)(&c.common)
 	c.PresenceStatusApi = (*PresenceStatusApiService)(&c.common)
 	c.ReplyAssistantEntriesApi = (*ReplyAssistantEntriesApiService)(&c.common)
+	c.ReplyAssistantGroupsApi = (*ReplyAssistantGroupsApiService)(&c.common)
 	c.ReplyAssistantVersionsApi = (*ReplyAssistantVersionsApiService)(&c.common)
 	c.RolesApi = (*RolesApiService)(&c.common)
 	c.SettingsApi = (*SettingsApiService)(&c.common)

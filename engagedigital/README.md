@@ -92,6 +92,11 @@ Class | Method | HTTP request | Description
 *ReplyAssistantEntriesApi* | [**GetAllReplyAssistantEntries**](docs/ReplyAssistantEntriesApi.md#getallreplyassistantentries) | **Get** /reply_assistant/entries | Getting​ a​ll​ reply assistant e​ntries
 *ReplyAssistantEntriesApi* | [**GetReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#getreplyassistantentry) | **Get** /reply_assistant/entries/{replyAssistantEntryId} | Getting a reply assistant entry from its id
 *ReplyAssistantEntriesApi* | [**UpdateReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#updatereplyassistantentry) | **Put** /reply_assistant/entries/{replyAssistantEntryId} | Updating a reply assistant entry
+*ReplyAssistantGroupsApi* | [**CreateReplyAssistantGroup**](docs/ReplyAssistantGroupsApi.md#createreplyassistantgroup) | **Post** /reply_assistant/groups | Creating a reply assistant group
+*ReplyAssistantGroupsApi* | [**DeleteReplyAssistantGroup**](docs/ReplyAssistantGroupsApi.md#deletereplyassistantgroup) | **Delete** /reply_assistant/groups/{replyAssistantGroupId} | Deleting a reply assistant group
+*ReplyAssistantGroupsApi* | [**GetAllReplyAssistantGroups**](docs/ReplyAssistantGroupsApi.md#getallreplyassistantgroups) | **Get** /reply_assistant/groups | Getting​ a​ll​ reply assistant groups
+*ReplyAssistantGroupsApi* | [**GetReplyAssistantGroup**](docs/ReplyAssistantGroupsApi.md#getreplyassistantgroup) | **Get** /reply_assistant/groups/{replyAssistantGroupId} | Getting a reply assistant group from its id
+*ReplyAssistantGroupsApi* | [**UpdateReplyAssistantGroup**](docs/ReplyAssistantGroupsApi.md#updatereplyassistantgroup) | **Put** /reply_assistant/groups/{replyAssistantGroupId} | Updating a reply assistant group
 *ReplyAssistantVersionsApi* | [**CreateReplyAssistantVersion**](docs/ReplyAssistantVersionsApi.md#createreplyassistantversion) | **Post** /reply_assistant/versions | Creating a reply assistant version
 *ReplyAssistantVersionsApi* | [**DeleteReplyAssistantVersion**](docs/ReplyAssistantVersionsApi.md#deletereplyassistantversion) | **Delete** /reply_assistant/versions/{replyAssistantVersionId} | Deleting a reply assistant version
 *ReplyAssistantVersionsApi* | [**GetAllReplyAssistantVersions**](docs/ReplyAssistantVersionsApi.md#getallreplyassistantversions) | **Get** /reply_assistant/versions | Getting​ a​ll​ reply assistant versions
@@ -176,6 +181,7 @@ Class | Method | HTTP request | Description
  - [GetAllInterventionsResponse](docs/GetAllInterventionsResponse.md)
  - [GetAllPresenceStatusResponse](docs/GetAllPresenceStatusResponse.md)
  - [GetAllReplyAssistantEntriesResponse](docs/GetAllReplyAssistantEntriesResponse.md)
+ - [GetAllReplyAssistantGroupsResponse](docs/GetAllReplyAssistantGroupsResponse.md)
  - [GetAllReplyAssistantVersionsResponse](docs/GetAllReplyAssistantVersionsResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
@@ -193,6 +199,7 @@ Class | Method | HTTP request | Description
  - [Locale](docs/Locale.md)
  - [PresenceStatus](docs/PresenceStatus.md)
  - [ReplyAssistantEntry](docs/ReplyAssistantEntry.md)
+ - [ReplyAssistantGroup](docs/ReplyAssistantGroup.md)
  - [ReplyAssistantVersion](docs/ReplyAssistantVersion.md)
  - [Restriction](docs/Restriction.md)
  - [Role](docs/Role.md)

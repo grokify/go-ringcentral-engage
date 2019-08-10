@@ -43,6 +43,8 @@ func main() {
 		handleTag(client, opts)
 	case "replyassistantentry":
 		handleReplyAssistantEntry(client, opts)
+	case "replyassistantgroup":
+		handleReplyAssistantGroup(client, opts)
 	case "replyassistantversion":
 		handleReplyAssistantVersion(client, opts)
 	case "settings":
@@ -58,6 +60,37 @@ func main() {
 
 func formatRespStatusCodeError(statusCode int) string {
 	return fmt.Sprintf("E_API_ERROR [%v]", statusCode)
+}
+
+func handleReplyAssistantGroup(client *engagedigital.APIClient, opts options) {
+	switch opts.Action {
+	case "create":
+		dt := time.Now()
+		name := "New Reply Assistant Group Name " + dt.Format(time.RFC3339)
+		ex.HandleApiResponse(client.ReplyAssistantGroupsApi.CreateReplyAssistantGroup(context.Background(), name, nil))
+	case "read":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantGroupsApi.GetReplyAssistantGroup(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ReplyAssistantGroupsApi.GetAllReplyAssistantGroups(context.Background(), nil))
+		}
+	case "update":
+		if len(opts.Id) > 0 {
+			dt := time.Now()
+			name := "Updated Reply Assistant Group Name " + dt.Format(time.RFC3339)
+			apiOpts := &engagedigital.UpdateReplyAssistantGroupOpts{
+				Name: optional.NewString(name)}
+			ex.HandleApiResponse(client.ReplyAssistantGroupsApi.UpdateReplyAssistantGroup(context.Background(), opts.Id, apiOpts))
+		} else {
+			log.Fatal("E_REPLYASSISTANTENTRY_UPDATE_ID_NOT_PRESENT")
+		}
+	case "delete":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantGroupsApi.DeleteReplyAssistantGroup(context.Background(), opts.Id))
+		} else {
+			log.Fatal("E_REPLYASSISTANTGROUP_DELETE_ID_NOT_PRESENT")
+		}
+	}
 }
 
 func handleReplyAssistantVersion(client *engagedigital.APIClient, opts options) {

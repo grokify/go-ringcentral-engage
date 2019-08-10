@@ -174,7 +174,7 @@ No authorization required
 > ReplyAssistantVersion UpdateReplyAssistantVersion(ctx, replyAssistantVersionId, optional)
 Updating a reply assistant version
 
-This method updates an existing version from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage topologies.
+This method updates an existing version from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage reply assistant.
 
 ### Required Parameters
 

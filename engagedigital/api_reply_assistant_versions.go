@@ -424,7 +424,7 @@ func (a *ReplyAssistantVersionsApiService) GetReplyAssistantVersion(ctx context.
 
 /*
 ReplyAssistantVersionsApiService Updating a reply assistant version
-This method updates an existing version from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage topologies.
+This method updates an existing version from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage reply assistant.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param replyAssistantVersionId
  * @param optional nil or *UpdateReplyAssistantVersionOpts - Optional Parameters:

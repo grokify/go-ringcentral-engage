@@ -2808,7 +2808,7 @@ paths:
       description: |-
         This method updates an existing entry from given attributes and renders it in case of success.
 
-        Authorization​: only users that have the right to manage topologies.
+        Authorization​: only users that have the right to manage reply assistant.
       operationId: updateReplyAssistantEntry
       parameters:
       - explode: false
@@ -2885,6 +2885,203 @@ paths:
       summary: Updating a reply assistant entry
       tags:
       - Reply Assistant Entries
+  /reply_assistant/groups:
+    get:
+      description: |-
+        This method renders all groups ordered by creation date (ascending).
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: getAllReplyAssistantGroups
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllReplyAssistantGroupsResponse'
+          description: Success
+      summary: Getting​ a​ll​ reply assistant groups
+      tags:
+      - Reply Assistant Groups
+    post:
+      description: |-
+        This method creates an entry group. In case of success it renders the group, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: createReplyAssistantGroup
+      parameters:
+      - description: The name of the group.
+        explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: List of the reply assistant entries in this group.
+        explode: true
+        in: query
+        name: entry_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Used for autocompletion in chat.
+        explode: true
+        in: query
+        name: autocomplete
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Used to determine the order of the groups in the interface, in
+          ascending order.
+        explode: true
+        in: query
+        name: position
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantGroup'
+          description: Success
+      summary: Creating a reply assistant group
+      tags:
+      - Reply Assistant Groups
+  /reply_assistant/groups/{replyAssistantGroupId}:
+    delete:
+      description: |-
+        This method destroys an existing group. It renders the group itself. It renders a 404 if id is invalid.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: deleteReplyAssistantGroup
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantGroup'
+          description: Success
+      summary: Deleting a reply assistant group
+      tags:
+      - Reply Assistant Groups
+    get:
+      description: |-
+        This method renders an entry group from given id.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: getReplyAssistantGroup
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantGroup'
+          description: Success
+      summary: Getting a reply assistant group from its id
+      tags:
+      - Reply Assistant Groups
+    put:
+      description: |-
+        This method updates an existing group from given attributes and renders it in case of success.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: updateReplyAssistantGroup
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the group.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: List of the reply assistant entries in this group.
+        explode: true
+        in: query
+        name: entry_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Used for autocompletion in chat.
+        explode: true
+        in: query
+        name: autocomplete
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Used to determine the order of the groups in the interface, in
+          ascending order.
+        explode: true
+        in: query
+        name: position
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantGroup'
+          description: Success
+      summary: Updating a reply assistant group
+      tags:
+      - Reply Assistant Groups
   /reply_assistant/versions:
     get:
       description: |-
@@ -3037,7 +3234,7 @@ paths:
       description: |-
         This method updates an existing version from given attributes and renders it in case of success.
 
-        Authorization​: only users that have the right to manage topologies.
+        Authorization​: only users that have the right to manage reply assistant.
       operationId: updateReplyAssistantVersion
       parameters:
       - explode: false
@@ -7772,6 +7969,44 @@ components:
           items:
             $ref: '#/components/schemas/ReplyAssistantEntry'
           type: array
+    GetAllReplyAssistantGroupsResponse:
+      example:
+        offset: 1
+        records:
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          autocomplete: true
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          entry_ids:
+          - entry_ids
+          - entry_ids
+          id: id
+          position: 5
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          autocomplete: true
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          entry_ids:
+          - entry_ids
+          - entry_ids
+          id: id
+          position: 5
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/ReplyAssistantGroup'
+          type: array
     GetAllReplyAssistantVersionsResponse:
       example:
         offset: 1
@@ -8756,6 +8991,38 @@ components:
           items:
             type: string
           type: array
+      required:
+      - id
+    ReplyAssistantGroup:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        autocomplete: true
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        entry_ids:
+        - entry_ids
+        - entry_ids
+        id: id
+        position: 5
+      properties:
+        autocomplete:
+          type: boolean
+        created_at:
+          format: date-time
+          type: string
+        entry_ids:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+        position:
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
       required:
       - id
     ReplyAssistantVersion:

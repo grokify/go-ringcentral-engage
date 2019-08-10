@@ -25,33 +25,61 @@ var (
 	_ context.Context
 )
 
-type ReplyAssistantEntriesApiService service
+type ReplyAssistantGroupsApiService service
 
 /*
-ReplyAssistantEntriesApiService Creating an entry
-This method creates a reply assistant entry. In case of success it renders the entry, otherwise, it renders an error (422 HTTP code).  Authorization​: only users that have the right to manage reply assistant.
+ReplyAssistantGroupsApiService Creating a reply assistant group
+This method creates an entry group. In case of success it renders the group, otherwise, it renders an error (422 HTTP code).  Authorization​: only users that have the right to manage reply assistant.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param label The name of the entry.
-@return ReplyAssistantEntry
+ * @param name The name of the group.
+ * @param optional nil or *CreateReplyAssistantGroupOpts - Optional Parameters:
+ * @param "EntryIds" (optional.Interface of []string) -  List of the reply assistant entries in this group.
+ * @param "Autocomplete" (optional.Bool) -  Used for autocompletion in chat.
+ * @param "Position" (optional.Int32) -  Used to determine the order of the groups in the interface, in ascending order.
+@return ReplyAssistantGroup
 */
-func (a *ReplyAssistantEntriesApiService) CreateReplyAssistantEntry(ctx context.Context, label string) (ReplyAssistantEntry, *http.Response, error) {
+
+type CreateReplyAssistantGroupOpts struct {
+	EntryIds     optional.Interface
+	Autocomplete optional.Bool
+	Position     optional.Int32
+}
+
+func (a *ReplyAssistantGroupsApiService) CreateReplyAssistantGroup(ctx context.Context, name string, localVarOptionals *CreateReplyAssistantGroupOpts) (ReplyAssistantGroup, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ReplyAssistantEntry
+		localVarReturnValue  ReplyAssistantGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/reply_assistant/entries"
+	localVarPath := a.client.cfg.BasePath + "/reply_assistant/groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("label", parameterToString(label, ""))
+	localVarQueryParams.Add("name", parameterToString(name, ""))
+	if localVarOptionals != nil && localVarOptionals.EntryIds.IsSet() {
+		t := localVarOptionals.EntryIds.Value()
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("entry_ids[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("entry_ids[]", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.Autocomplete.IsSet() {
+		localVarQueryParams.Add("autocomplete", parameterToString(localVarOptionals.Autocomplete.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Position.IsSet() {
+		localVarQueryParams.Add("position", parameterToString(localVarOptionals.Position.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
 
@@ -91,7 +119,7 @@ func (a *ReplyAssistantEntriesApiService) CreateReplyAssistantEntry(ctx context.
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ReplyAssistantEntry
+			var v ReplyAssistantGroup
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -116,25 +144,25 @@ func (a *ReplyAssistantEntriesApiService) CreateReplyAssistantEntry(ctx context.
 }
 
 /*
-ReplyAssistantEntriesApiService Deleting a reply assistant entry
-This method destroys an existing entry. It renders the entry itself. It renders a 404 if id is invalid.  Authorization​: only users that have the right to manage reply assistant.
+ReplyAssistantGroupsApiService Deleting a reply assistant group
+This method destroys an existing group. It renders the group itself. It renders a 404 if id is invalid.  Authorization​: only users that have the right to manage reply assistant.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param replyAssistantEntryId
-@return ReplyAssistantEntry
+ * @param replyAssistantGroupId
+@return ReplyAssistantGroup
 */
-func (a *ReplyAssistantEntriesApiService) DeleteReplyAssistantEntry(ctx context.Context, replyAssistantEntryId string) (ReplyAssistantEntry, *http.Response, error) {
+func (a *ReplyAssistantGroupsApiService) DeleteReplyAssistantGroup(ctx context.Context, replyAssistantGroupId string) (ReplyAssistantGroup, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ReplyAssistantEntry
+		localVarReturnValue  ReplyAssistantGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/reply_assistant/entries/{replyAssistantEntryId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"replyAssistantEntryId"+"}", fmt.Sprintf("%v", replyAssistantEntryId), -1)
+	localVarPath := a.client.cfg.BasePath + "/reply_assistant/groups/{replyAssistantGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"replyAssistantGroupId"+"}", fmt.Sprintf("%v", replyAssistantGroupId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -179,7 +207,7 @@ func (a *ReplyAssistantEntriesApiService) DeleteReplyAssistantEntry(ctx context.
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ReplyAssistantEntry
+			var v ReplyAssistantGroup
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -204,32 +232,32 @@ func (a *ReplyAssistantEntriesApiService) DeleteReplyAssistantEntry(ctx context.
 }
 
 /*
-ReplyAssistantEntriesApiService Getting​ a​ll​ reply assistant e​ntries
-This method renders all entries ordered by creation date (ascending).  Authorization​: only users that have the right to manage reply assistant.
+ReplyAssistantGroupsApiService Getting​ a​ll​ reply assistant groups
+This method renders all groups ordered by creation date (ascending).  Authorization​: only users that have the right to manage reply assistant.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GetAllReplyAssistantEntriesOpts - Optional Parameters:
+ * @param optional nil or *GetAllReplyAssistantGroupsOpts - Optional Parameters:
  * @param "Offset" (optional.Int32) -  The record index to start. Default value is 0.
  * @param "Limit" (optional.Int32) -  The max number of records to return. Default value is 30, max value is 150.
-@return GetAllReplyAssistantEntriesResponse
+@return GetAllReplyAssistantGroupsResponse
 */
 
-type GetAllReplyAssistantEntriesOpts struct {
+type GetAllReplyAssistantGroupsOpts struct {
 	Offset optional.Int32
 	Limit  optional.Int32
 }
 
-func (a *ReplyAssistantEntriesApiService) GetAllReplyAssistantEntries(ctx context.Context, localVarOptionals *GetAllReplyAssistantEntriesOpts) (GetAllReplyAssistantEntriesResponse, *http.Response, error) {
+func (a *ReplyAssistantGroupsApiService) GetAllReplyAssistantGroups(ctx context.Context, localVarOptionals *GetAllReplyAssistantGroupsOpts) (GetAllReplyAssistantGroupsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  GetAllReplyAssistantEntriesResponse
+		localVarReturnValue  GetAllReplyAssistantGroupsResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/reply_assistant/entries"
+	localVarPath := a.client.cfg.BasePath + "/reply_assistant/groups"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -280,7 +308,7 @@ func (a *ReplyAssistantEntriesApiService) GetAllReplyAssistantEntries(ctx contex
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v GetAllReplyAssistantEntriesResponse
+			var v GetAllReplyAssistantGroupsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -305,25 +333,25 @@ func (a *ReplyAssistantEntriesApiService) GetAllReplyAssistantEntries(ctx contex
 }
 
 /*
-ReplyAssistantEntriesApiService Getting a reply assistant entry from its id
-This method renders an entry from given id.  Authorization​: only users that have the right to manage reply assistant.
+ReplyAssistantGroupsApiService Getting a reply assistant group from its id
+This method renders an entry group from given id.  Authorization​: only users that have the right to manage reply assistant.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param replyAssistantEntryId
-@return ReplyAssistantEntry
+ * @param replyAssistantGroupId
+@return ReplyAssistantGroup
 */
-func (a *ReplyAssistantEntriesApiService) GetReplyAssistantEntry(ctx context.Context, replyAssistantEntryId string) (ReplyAssistantEntry, *http.Response, error) {
+func (a *ReplyAssistantGroupsApiService) GetReplyAssistantGroup(ctx context.Context, replyAssistantGroupId string) (ReplyAssistantGroup, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ReplyAssistantEntry
+		localVarReturnValue  ReplyAssistantGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/reply_assistant/entries/{replyAssistantEntryId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"replyAssistantEntryId"+"}", fmt.Sprintf("%v", replyAssistantEntryId), -1)
+	localVarPath := a.client.cfg.BasePath + "/reply_assistant/groups/{replyAssistantGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"replyAssistantGroupId"+"}", fmt.Sprintf("%v", replyAssistantGroupId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -368,7 +396,7 @@ func (a *ReplyAssistantEntriesApiService) GetReplyAssistantEntry(ctx context.Con
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ReplyAssistantEntry
+			var v ReplyAssistantGroup
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -393,88 +421,62 @@ func (a *ReplyAssistantEntriesApiService) GetReplyAssistantEntry(ctx context.Con
 }
 
 /*
-ReplyAssistantEntriesApiService Updating a reply assistant entry
-This method updates an existing entry from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage reply assistant.
+ReplyAssistantGroupsApiService Updating a reply assistant group
+This method updates an existing group from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage reply assistant.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param replyAssistantEntryId
- * @param optional nil or *UpdateReplyAssistantEntryOpts - Optional Parameters:
- * @param "Label" (optional.String) -  The name of the entry.
- * @param "ForeignId" (optional.String) -  The internal/company id of the entry. This is used to match Engage Digital entry’s id with the company one. Example: KB042.
- * @param "CategoryIds" (optional.Interface of []string) -  To restrict the entry to a set of Engage Digital categories. Then, KB entries that do not match message’s categories to which you are replying will not be suggested.
- * @param "Shortcuts" (optional.Interface of []string) -  entry shortcuts
- * @param "EntryGroupId" (optional.String) -  Entry group id.
- * @param "SourceIds" (optional.Interface of []string) -  Source ids (array)
-@return ReplyAssistantEntry
+ * @param replyAssistantGroupId
+ * @param optional nil or *UpdateReplyAssistantGroupOpts - Optional Parameters:
+ * @param "Name" (optional.String) -  The name of the group.
+ * @param "EntryIds" (optional.Interface of []string) -  List of the reply assistant entries in this group.
+ * @param "Autocomplete" (optional.Bool) -  Used for autocompletion in chat.
+ * @param "Position" (optional.Int32) -  Used to determine the order of the groups in the interface, in ascending order.
+@return ReplyAssistantGroup
 */
 
-type UpdateReplyAssistantEntryOpts struct {
-	Label        optional.String
-	ForeignId    optional.String
-	CategoryIds  optional.Interface
-	Shortcuts    optional.Interface
-	EntryGroupId optional.String
-	SourceIds    optional.Interface
+type UpdateReplyAssistantGroupOpts struct {
+	Name         optional.String
+	EntryIds     optional.Interface
+	Autocomplete optional.Bool
+	Position     optional.Int32
 }
 
-func (a *ReplyAssistantEntriesApiService) UpdateReplyAssistantEntry(ctx context.Context, replyAssistantEntryId string, localVarOptionals *UpdateReplyAssistantEntryOpts) (ReplyAssistantEntry, *http.Response, error) {
+func (a *ReplyAssistantGroupsApiService) UpdateReplyAssistantGroup(ctx context.Context, replyAssistantGroupId string, localVarOptionals *UpdateReplyAssistantGroupOpts) (ReplyAssistantGroup, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ReplyAssistantEntry
+		localVarReturnValue  ReplyAssistantGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/reply_assistant/entries/{replyAssistantEntryId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"replyAssistantEntryId"+"}", fmt.Sprintf("%v", replyAssistantEntryId), -1)
+	localVarPath := a.client.cfg.BasePath + "/reply_assistant/groups/{replyAssistantGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"replyAssistantGroupId"+"}", fmt.Sprintf("%v", replyAssistantGroupId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Label.IsSet() {
-		localVarQueryParams.Add("label", parameterToString(localVarOptionals.Label.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
+		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ForeignId.IsSet() {
-		localVarQueryParams.Add("foreign_id", parameterToString(localVarOptionals.ForeignId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CategoryIds.IsSet() {
-		t := localVarOptionals.CategoryIds.Value()
+	if localVarOptionals != nil && localVarOptionals.EntryIds.IsSet() {
+		t := localVarOptionals.EntryIds.Value()
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("category_ids[]", parameterToString(s.Index(i), "multi"))
+				localVarQueryParams.Add("entry_ids[]", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("category_ids[]", parameterToString(t, "multi"))
+			localVarQueryParams.Add("entry_ids[]", parameterToString(t, "multi"))
 		}
 	}
-	if localVarOptionals != nil && localVarOptionals.Shortcuts.IsSet() {
-		t := localVarOptionals.Shortcuts.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("shortcuts[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("shortcuts[]", parameterToString(t, "multi"))
-		}
+	if localVarOptionals != nil && localVarOptionals.Autocomplete.IsSet() {
+		localVarQueryParams.Add("autocomplete", parameterToString(localVarOptionals.Autocomplete.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.EntryGroupId.IsSet() {
-		localVarQueryParams.Add("entry_group_id", parameterToString(localVarOptionals.EntryGroupId.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SourceIds.IsSet() {
-		t := localVarOptionals.SourceIds.Value()
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("source_ids[]", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("source_ids[]", parameterToString(t, "multi"))
-		}
+	if localVarOptionals != nil && localVarOptionals.Position.IsSet() {
+		localVarQueryParams.Add("position", parameterToString(localVarOptionals.Position.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -515,7 +517,7 @@ func (a *ReplyAssistantEntriesApiService) UpdateReplyAssistantEntry(ctx context.
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v ReplyAssistantEntry
+			var v ReplyAssistantGroup
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

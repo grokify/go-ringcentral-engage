@@ -159,7 +159,7 @@ No authorization required
 > ReplyAssistantEntry UpdateReplyAssistantEntry(ctx, replyAssistantEntryId, optional)
 Updating a reply assistant entry
 
-This method updates an existing entry from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage topologies.
+This method updates an existing entry from given attributes and renders it in case of success.  Authorization​: only users that have the right to manage reply assistant.
 
 ### Required Parameters
 
