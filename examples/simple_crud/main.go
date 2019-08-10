@@ -43,6 +43,8 @@ func main() {
 		handleTag(client, opts)
 	case "replyassistantentry":
 		handleReplyAssistantEntry(client, opts)
+	case "replyassistantversion":
+		handleReplyAssistantVersion(client, opts)
 	case "settings":
 		handleSettings(client, opts)
 	case "timesheet":
@@ -58,11 +60,47 @@ func formatRespStatusCodeError(statusCode int) string {
 	return fmt.Sprintf("E_API_ERROR [%v]", statusCode)
 }
 
+func handleReplyAssistantVersion(client *engagedigital.APIClient, opts options) {
+	switch opts.Action {
+	case "create":
+		if len(opts.Id) > 0 {
+			dt := time.Now()
+			body := "New Reply Assistant Version Body " + dt.Format(time.RFC3339)
+			apiOpts := &engagedigital.CreateReplyAssistantVersionOpts{}
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.CreateReplyAssistantVersion(context.Background(), body, opts.Id, apiOpts))
+		} else {
+			log.Fatal("E_REPLYASSISTANTVERSION_CREATE_NO_ENTRY_ID")
+		}
+	case "read":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.GetReplyAssistantVersion(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.GetAllReplyAssistantVersions(context.Background(), nil))
+		}
+	case "update":
+		if len(opts.Id) > 0 {
+			dt := time.Now()
+			body := "Updated Reply Assistant Version Body " + dt.Format(time.RFC3339)
+			apiOpts := &engagedigital.UpdateReplyAssistantVersionOpts{
+				Body: optional.NewString(body)}
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.UpdateReplyAssistantVersion(context.Background(), opts.Id, apiOpts))
+		} else {
+			log.Fatal("E_REPLYASSISTANTENTRY_UPDATE_ID_NOT_PRESENT")
+		}
+	case "delete":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.DeleteReplyAssistantVersion(context.Background(), opts.Id))
+		} else {
+			log.Fatal("E_REPLYASSISTANTVERSION_DELETE_ID_NOT_PRESENT")
+		}
+	}
+}
+
 func handleReplyAssistantEntry(client *engagedigital.APIClient, opts options) {
 	switch opts.Action {
 	case "create":
 		dt := time.Now()
-		label := "New Reply Assistant Label " + dt.Format(time.RFC3339)
+		label := "New Reply Assistant Entry Label " + dt.Format(time.RFC3339)
 		ex.HandleApiResponse(client.ReplyAssistantEntriesApi.CreateReplyAssistantEntry(context.Background(), label))
 	case "read":
 		if len(opts.Id) > 0 {

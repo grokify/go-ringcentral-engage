@@ -2885,6 +2885,223 @@ paths:
       summary: Updating a reply assistant entry
       tags:
       - Reply Assistant Entries
+  /reply_assistant/versions:
+    get:
+      description: |-
+        This method renders all reply assistant versions ordered by creation date (ascending).
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: getAllReplyAssistantVersions
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllReplyAssistantVersionsResponse'
+          description: Success
+      summary: Getting​ a​ll​ reply assistant versions
+      tags:
+      - Reply Assistant Versions
+    post:
+      description: |-
+        This method creates a reply assistant version. In case of success it renders the version, otherwise, it renders an error (422 HTTP code, 404 if the entry_id is invalid).
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: createReplyAssistantVersion
+      parameters:
+      - description: Body of the version
+        explode: true
+        in: query
+        name: body
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Reply assistant entry id (mandatory)
+        explode: true
+        in: query
+        name: entry_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Source ids (array)
+        explode: true
+        in: query
+        name: source_ids
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Either “text” or “html”
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          enum:
+          - text
+          - html
+          type: string
+        style: form
+      - description: 'Language (ex: “fr”)'
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantVersion'
+          description: Success
+      summary: Creating a reply assistant version
+      tags:
+      - Reply Assistant Versions
+  /reply_assistant/versions/{replyAssistantVersionId}:
+    delete:
+      description: |-
+        This method destroys an existing version. It renders the version itself. It renders a 404 if id is invalid.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: deleteReplyAssistantVersion
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantVersionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantVersion'
+          description: Success
+      summary: Deleting a reply assistant version
+      tags:
+      - Reply Assistant Versions
+    get:
+      description: |-
+        This method renders a version from given id.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: getReplyAssistantVersion
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantVersionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantVersion'
+          description: Success
+      summary: Getting a reply assistant version from its id
+      tags:
+      - Reply Assistant Versions
+    put:
+      description: |-
+        This method updates an existing version from given attributes and renders it in case of success.
+
+        Authorization​: only users that have the right to manage topologies.
+      operationId: updateReplyAssistantVersion
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantVersionId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Body of the version
+        explode: true
+        in: query
+        name: body
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Reply assistant entry id.
+        explode: true
+        in: query
+        name: entry_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Source ids (array)
+        explode: true
+        in: query
+        name: source_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Either “text” or “html”
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          enum:
+          - text
+          - html
+          type: string
+        style: form
+      - description: 'Language (ex: “fr”)'
+        explode: true
+        in: query
+        name: language
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantVersion'
+          description: Success
+      summary: Updating a reply assistant version
+      tags:
+      - Reply Assistant Versions
   /roles:
     get:
       description: This method renders roles ordered by creation date (ascending).
@@ -7555,6 +7772,48 @@ components:
           items:
             $ref: '#/components/schemas/ReplyAssistantEntry'
           type: array
+    GetAllReplyAssistantVersionsResponse:
+      example:
+        offset: 1
+        records:
+        - source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          format: text
+          created_at: 2000-01-23T04:56:07.000+00:00
+          language: language
+          attachments_count: 5
+          id: id
+          body: body
+          entry_id: entry_id
+        - source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          format: text
+          created_at: 2000-01-23T04:56:07.000+00:00
+          language: language
+          attachments_count: 5
+          id: id
+          body: body
+          entry_id: entry_id
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/ReplyAssistantVersion'
+          type: array
     GetAllRolesResponse:
       example:
         offset: 1
@@ -8497,6 +8756,47 @@ components:
           items:
             type: string
           type: array
+      required:
+      - id
+    ReplyAssistantVersion:
+      example:
+        source_ids:
+        - source_ids
+        - source_ids
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        format: text
+        created_at: 2000-01-23T04:56:07.000+00:00
+        language: language
+        attachments_count: 5
+        id: id
+        body: body
+        entry_id: entry_id
+      properties:
+        attachments_count:
+          type: integer
+        body:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        entry_id:
+          type: string
+        format:
+          enum:
+          - text
+          - html
+          type: string
+        id:
+          type: string
+        language:
+          type: string
+        source_ids:
+          items:
+            type: string
+          type: array
+        updated_at:
+          format: date-time
+          type: string
       required:
       - id
     Restriction:

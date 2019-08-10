@@ -124,6 +124,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.GetAllReplyAssistantEntries(context.Background(), nil))
 		}
+	case "replyassistantversion":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.GetReplyAssistantVersion(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ReplyAssistantVersionsApi.GetAllReplyAssistantVersions(context.Background(), nil))
+		}
 	case "role":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.RolesApi.GetRole(context.Background(), opts.Id))

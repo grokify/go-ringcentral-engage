@@ -92,6 +92,11 @@ Class | Method | HTTP request | Description
 *ReplyAssistantEntriesApi* | [**GetAllReplyAssistantEntries**](docs/ReplyAssistantEntriesApi.md#getallreplyassistantentries) | **Get** /reply_assistant/entries | Getting​ a​ll​ reply assistant e​ntries
 *ReplyAssistantEntriesApi* | [**GetReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#getreplyassistantentry) | **Get** /reply_assistant/entries/{replyAssistantEntryId} | Getting a reply assistant entry from its id
 *ReplyAssistantEntriesApi* | [**UpdateReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#updatereplyassistantentry) | **Put** /reply_assistant/entries/{replyAssistantEntryId} | Updating a reply assistant entry
+*ReplyAssistantVersionsApi* | [**CreateReplyAssistantVersion**](docs/ReplyAssistantVersionsApi.md#createreplyassistantversion) | **Post** /reply_assistant/versions | Creating a reply assistant version
+*ReplyAssistantVersionsApi* | [**DeleteReplyAssistantVersion**](docs/ReplyAssistantVersionsApi.md#deletereplyassistantversion) | **Delete** /reply_assistant/versions/{replyAssistantVersionId} | Deleting a reply assistant version
+*ReplyAssistantVersionsApi* | [**GetAllReplyAssistantVersions**](docs/ReplyAssistantVersionsApi.md#getallreplyassistantversions) | **Get** /reply_assistant/versions | Getting​ a​ll​ reply assistant versions
+*ReplyAssistantVersionsApi* | [**GetReplyAssistantVersion**](docs/ReplyAssistantVersionsApi.md#getreplyassistantversion) | **Get** /reply_assistant/versions/{replyAssistantVersionId} | Getting a reply assistant version from its id
+*ReplyAssistantVersionsApi* | [**UpdateReplyAssistantVersion**](docs/ReplyAssistantVersionsApi.md#updatereplyassistantversion) | **Put** /reply_assistant/versions/{replyAssistantVersionId} | Updating a reply assistant version
 *RolesApi* | [**CreateRole**](docs/RolesApi.md#createrole) | **Post** /roles | Creating a role
 *RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
 *RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
@@ -171,6 +176,7 @@ Class | Method | HTTP request | Description
  - [GetAllInterventionsResponse](docs/GetAllInterventionsResponse.md)
  - [GetAllPresenceStatusResponse](docs/GetAllPresenceStatusResponse.md)
  - [GetAllReplyAssistantEntriesResponse](docs/GetAllReplyAssistantEntriesResponse.md)
+ - [GetAllReplyAssistantVersionsResponse](docs/GetAllReplyAssistantVersionsResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
@@ -187,6 +193,7 @@ Class | Method | HTTP request | Description
  - [Locale](docs/Locale.md)
  - [PresenceStatus](docs/PresenceStatus.md)
  - [ReplyAssistantEntry](docs/ReplyAssistantEntry.md)
+ - [ReplyAssistantVersion](docs/ReplyAssistantVersion.md)
  - [Restriction](docs/Restriction.md)
  - [Role](docs/Role.md)
  - [Settings](docs/Settings.md)
