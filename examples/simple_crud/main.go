@@ -34,13 +34,15 @@ func main() {
 
 	client := utils.NewApiClient(opts.Site, opts.Token)
 
-	switch opts.Object {
-	case "customField":
+	switch strings.ToLower(opts.Object) {
+	case "customfield":
 		handleCustomField(client, opts)
-	case "presenceStatus":
+	case "presencestatus":
 		handlePresenceStatus(client, opts)
 	case "tag":
 		handleTag(client, opts)
+	case "replyassistantentry":
+		handleReplyAssistantEntry(client, opts)
 	case "settings":
 		handleSettings(client, opts)
 	case "timesheet":
@@ -54,6 +56,37 @@ func main() {
 
 func formatRespStatusCodeError(statusCode int) string {
 	return fmt.Sprintf("E_API_ERROR [%v]", statusCode)
+}
+
+func handleReplyAssistantEntry(client *engagedigital.APIClient, opts options) {
+	switch opts.Action {
+	case "create":
+		dt := time.Now()
+		label := "New Reply Assistant Label " + dt.Format(time.RFC3339)
+		ex.HandleApiResponse(client.ReplyAssistantEntriesApi.CreateReplyAssistantEntry(context.Background(), label))
+	case "read":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.GetReplyAssistantEntry(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.GetAllReplyAssistantEntries(context.Background(), nil))
+		}
+	case "update":
+		if len(opts.Id) > 0 {
+			dt := time.Now()
+			label := "Updated Reply Assistant Label " + dt.Format(time.RFC3339)
+			apiOpts := &engagedigital.UpdateReplyAssistantEntryOpts{
+				Label: optional.NewString(label)}
+			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.UpdateReplyAssistantEntry(context.Background(), opts.Id, apiOpts))
+		} else {
+			log.Fatal("E_REPLYASSISTANTENTRY_UPDATE_ID_NOT_PRESENT")
+		}
+	case "delete":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.DeleteReplyAssistantEntry(context.Background(), opts.Id))
+		} else {
+			log.Fatal("E_REPLYASSISTANTENTRY_DELETE_ID_NOT_PRESENT")
+		}
+	}
 }
 
 func handleTimeSheet(client *engagedigital.APIClient, opts options) {

@@ -87,6 +87,11 @@ Class | Method | HTTP request | Description
 *PresenceStatusApi* | [**GetAllPresenceStatus**](docs/PresenceStatusApi.md#getallpresencestatus) | **Get** /presence_status | Getting all presence statuses
 *PresenceStatusApi* | [**GetPresenceStatus**](docs/PresenceStatusApi.md#getpresencestatus) | **Get** /presence_status/{presenceStatusId} | Getting a presence status from its id
 *PresenceStatusApi* | [**UpdatePresenceStatus**](docs/PresenceStatusApi.md#updatepresencestatus) | **Put** /presence_status/{presenceStatusId} | Updating a presence status
+*ReplyAssistantEntriesApi* | [**CreateReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#createreplyassistantentry) | **Post** /reply_assistant/entries | Creating an entry
+*ReplyAssistantEntriesApi* | [**DeleteReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#deletereplyassistantentry) | **Delete** /reply_assistant/entries/{replyAssistantEntryId} | Deleting a reply assistant entry
+*ReplyAssistantEntriesApi* | [**GetAllReplyAssistantEntries**](docs/ReplyAssistantEntriesApi.md#getallreplyassistantentries) | **Get** /reply_assistant/entries | Getting​ a​ll​ reply assistant e​ntries
+*ReplyAssistantEntriesApi* | [**GetReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#getreplyassistantentry) | **Get** /reply_assistant/entries/{replyAssistantEntryId} | Getting a reply assistant entry from its id
+*ReplyAssistantEntriesApi* | [**UpdateReplyAssistantEntry**](docs/ReplyAssistantEntriesApi.md#updatereplyassistantentry) | **Put** /reply_assistant/entries/{replyAssistantEntryId} | Updating a reply assistant entry
 *RolesApi* | [**CreateRole**](docs/RolesApi.md#createrole) | **Post** /roles | Creating a role
 *RolesApi* | [**GetAllRoles**](docs/RolesApi.md#getallroles) | **Get** /roles | Getting all roles
 *RolesApi* | [**GetRole**](docs/RolesApi.md#getrole) | **Get** /roles/{roleId} | Getting a role from its id
@@ -165,6 +170,7 @@ Class | Method | HTTP request | Description
  - [GetAllInterventionCommentsResponse](docs/GetAllInterventionCommentsResponse.md)
  - [GetAllInterventionsResponse](docs/GetAllInterventionsResponse.md)
  - [GetAllPresenceStatusResponse](docs/GetAllPresenceStatusResponse.md)
+ - [GetAllReplyAssistantEntriesResponse](docs/GetAllReplyAssistantEntriesResponse.md)
  - [GetAllRolesResponse](docs/GetAllRolesResponse.md)
  - [GetAllSourcesResponse](docs/GetAllSourcesResponse.md)
  - [GetAllTagsResponse](docs/GetAllTagsResponse.md)
@@ -180,6 +186,7 @@ Class | Method | HTTP request | Description
  - [InterventionComment](docs/InterventionComment.md)
  - [Locale](docs/Locale.md)
  - [PresenceStatus](docs/PresenceStatus.md)
+ - [ReplyAssistantEntry](docs/ReplyAssistantEntry.md)
  - [Restriction](docs/Restriction.md)
  - [Role](docs/Role.md)
  - [Settings](docs/Settings.md)

@@ -2693,6 +2693,198 @@ paths:
       summary: Updating a presence status
       tags:
       - Presence Status
+  /reply_assistant/entries:
+    get:
+      description: |-
+        This method renders all entries ordered by creation date (ascending).
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: getAllReplyAssistantEntries
+      parameters:
+      - description: The record index to start. Default value is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: The max number of records to return. Default value is 30, max
+          value is 150.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllReplyAssistantEntriesResponse'
+          description: Success
+      summary: Getting​ a​ll​ reply assistant e​ntries
+      tags:
+      - Reply Assistant Entries
+    post:
+      description: |-
+        This method creates a reply assistant entry. In case of success it renders the entry, otherwise, it renders an error (422 HTTP code).
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: createReplyAssistantEntry
+      parameters:
+      - description: The name of the entry.
+        explode: true
+        in: query
+        name: label
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantEntry'
+          description: Success
+      summary: Creating an entry
+      tags:
+      - Reply Assistant Entries
+  /reply_assistant/entries/{replyAssistantEntryId}:
+    delete:
+      description: |-
+        This method destroys an existing entry. It renders the entry itself. It renders a 404 if id is invalid.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: deleteReplyAssistantEntry
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantEntryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantEntry'
+          description: Success
+      summary: Deleting a reply assistant entry
+      tags:
+      - Reply Assistant Entries
+    get:
+      description: |-
+        This method renders an entry from given id.
+
+        Authorization​: only users that have the right to manage reply assistant.
+      operationId: getReplyAssistantEntry
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantEntryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantEntry'
+          description: Success
+      summary: Getting a reply assistant entry from its id
+      tags:
+      - Reply Assistant Entries
+    put:
+      description: |-
+        This method updates an existing entry from given attributes and renders it in case of success.
+
+        Authorization​: only users that have the right to manage topologies.
+      operationId: updateReplyAssistantEntry
+      parameters:
+      - explode: false
+        in: path
+        name: replyAssistantEntryId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The name of the entry.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'The internal/company id of the entry. This is used to match
+          Engage Digital entry’s id with the company one. Example: KB042.'
+        explode: true
+        in: query
+        name: foreign_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: To restrict the entry to a set of Engage Digital categories.
+          Then, KB entries that do not match message’s categories to which you are
+          replying will not be suggested.
+        explode: true
+        in: query
+        name: category_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: entry shortcuts
+        explode: true
+        in: query
+        name: shortcuts[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Entry group id.
+        explode: true
+        in: query
+        name: entry_group_id
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Source ids (array)
+        explode: true
+        in: query
+        name: source_ids[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplyAssistantEntry'
+          description: Success
+      summary: Updating a reply assistant entry
+      tags:
+      - Reply Assistant Entries
   /roles:
     get:
       description: This method renders roles ordered by creation date (ascending).
@@ -7311,6 +7503,58 @@ components:
           items:
             $ref: '#/components/schemas/PresenceStatus'
           type: array
+    GetAllReplyAssistantEntriesResponse:
+      example:
+        offset: 1
+        records:
+        - foreign_id: foreign_id
+          source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          entry_group_id: entry_group_id
+          version_ids:
+          - version_ids
+          - version_ids
+          shortcuts: shortcuts
+          created_at: 2000-01-23T04:56:07.000+00:00
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          label: label
+        - foreign_id: foreign_id
+          source_ids:
+          - source_ids
+          - source_ids
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          entry_group_id: entry_group_id
+          version_ids:
+          - version_ids
+          - version_ids
+          shortcuts: shortcuts
+          created_at: 2000-01-23T04:56:07.000+00:00
+          category_ids:
+          - category_ids
+          - category_ids
+          id: id
+          label: label
+        count: 0
+        limit: 6
+      properties:
+        count:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        records:
+          items:
+            $ref: '#/components/schemas/ReplyAssistantEntry'
+          type: array
     GetAllRolesResponse:
       example:
         offset: 1
@@ -8206,6 +8450,55 @@ components:
       required:
       - id
       - name
+    ReplyAssistantEntry:
+      example:
+        foreign_id: foreign_id
+        source_ids:
+        - source_ids
+        - source_ids
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        entry_group_id: entry_group_id
+        version_ids:
+        - version_ids
+        - version_ids
+        shortcuts: shortcuts
+        created_at: 2000-01-23T04:56:07.000+00:00
+        category_ids:
+        - category_ids
+        - category_ids
+        id: id
+        label: label
+      properties:
+        category_ids:
+          items:
+            type: string
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        entry_group_id:
+          type: string
+        foreign_id:
+          type: string
+        id:
+          type: string
+        label:
+          type: string
+        shortcuts:
+          type: string
+        source_ids:
+          items:
+            type: string
+          type: array
+        updated_at:
+          format: date-time
+          type: string
+        version_ids:
+          items:
+            type: string
+          type: array
+      required:
+      - id
     Restriction:
       example:
         only:

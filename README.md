@@ -8,7 +8,7 @@
 [![Stack Overflow][stackoverflow-svg]][stackoverflow-link]
 [![Twitter][twitter-svg]][twitter-link]
 
- [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-101%2F121%20%3D%2083%25-yellow.svg
+ [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-106%2F121%20%3D%2087%25-yellow.svg
  [build-status-svg]: https://api.travis-ci.org/grokify/go-ringcentral-engage.svg?branch=master
  [build-status-link]: https://travis-ci.org/grokify/go-ringcentral-engage
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
@@ -67,7 +67,7 @@ For information on how to use the `apiClient` object, see:
 
 ## Coverage
 
-101/121 APIs - 83%
+106/121 APIs - 87%
 
 - [x] Communities
   - [x] GET /1.0/communities
@@ -228,12 +228,12 @@ For information on how to use the `apiClient` object, see:
   - [x] POST /1.0/tasks/:id/transfer
   - [x] POST /1.0/tasks/:id/move
 
-- [ ] Reply Assistant - Entries
-  - [ ] GET /1.0/reply_assistant/entries
-  - [ ] GET /1.0/reply_assistant/entries/:id
-  - [ ] POST /1.0/reply_assistant/entries
-  - [ ] PUT /1.0/reply_assistant/entries/:id
-  - [ ] DELETE /1.0/reply_assistant/entries/:id
+- [x] Reply Assistant - Entries
+  - [x] GET /1.0/reply_assistant/entries
+  - [x] GET /1.0/reply_assistant/entries/:id
+  - [x] POST /1.0/reply_assistant/entries
+  - [x] PUT /1.0/reply_assistant/entries/:id
+  - [x] DELETE /1.0/reply_assistant/entries/:id
 
 - [ ] Reply Assistant - Versions
   - [ ] GET /1.0/reply_assistant/versions

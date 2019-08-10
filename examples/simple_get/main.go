@@ -118,6 +118,12 @@ func main() {
 		} else {
 			ex.HandleApiResponse(client.PresenceStatusApi.GetAllPresenceStatus(context.Background(), nil))
 		}
+	case "replyassistantentry":
+		if len(opts.Id) > 0 {
+			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.GetReplyAssistantEntry(context.Background(), opts.Id))
+		} else {
+			ex.HandleApiResponse(client.ReplyAssistantEntriesApi.GetAllReplyAssistantEntries(context.Background(), nil))
+		}
 	case "role":
 		if len(opts.Id) > 0 {
 			ex.HandleApiResponse(client.RolesApi.GetRole(context.Background(), opts.Id))
