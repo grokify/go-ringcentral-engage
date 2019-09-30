@@ -8,8 +8,6 @@ curl -XGET https://rc-platform.api.engagement.dimelo.com/1.0/reply_assistant/ent
 
 curl -XGET https://rc-platform.api.engagement.dimelo.com/1.0/webhooks/myHookId?access_token=mytoken -H 'Authorization: Bearer mytoken'
 
-survey_responses
-
 curl -XGET https://rc-platform.api.engagement.dimelo.com/1.0/reply_assistant/groups -H 'Authorization: Bearer mytoken'
 
 curl -XPOST https://rc-platform.api.engagement.dimelo.com/1.0/reply_assistant/groups?name=abc -H 'Authorization: Bearer mytoken'
