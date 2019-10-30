@@ -39,7 +39,7 @@ func main() {
 
 	fmtutil.PrintJSON(paths)
 
-	err = table.WriteCSVSimple([]string{"Tag", "Operation", "URL"}, paths, "api_paths.csv")
+	err = table.WriteCSVSimple([]string{"Tag", "Operation", "URL", "Summary"}, paths, "api_paths.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -61,16 +61,16 @@ func getEndpointsMetaFlat(spec *oas3.Swagger) [][]string {
 	return paths
 }
 
-func appendPathsPathInfo(method, url string, info *oas3.Operation, paths [][]string) [][]string {
-	if info == nil {
+func appendPathsPathInfo(method, url string, op *oas3.Operation, paths [][]string) [][]string {
+	if op == nil {
 		return paths
 	}
-	if len(info.Tags) > 0 {
-		for _, tag := range info.Tags {
-			paths = append(paths, []string{tag, method, url})
+	if len(op.Tags) > 0 {
+		for _, tag := range op.Tags {
+			paths = append(paths, []string{tag, method, url, op.Summary})
 		}
 	} else {
-		paths = append(paths, []string{"", method, url})
+		paths = append(paths, []string{"", method, url, op.Summary})
 	}
 	return paths
 }
