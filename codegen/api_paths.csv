@@ -1,0 +1,57 @@
+Tag,Operation,URL
+Tasks,GET,/tasks/{taskId}
+Threads,GET,/content_threads/{threadId}/open
+Contents,GET,/contents
+Teams,GET,/teams
+Categories,GET,/categories/{categoryId}
+Channels,GET,/channels
+Presence Status,GET,/presence_status/{presenceStatusId}
+Tasks,GET,/tasks
+Attachments,GET,/attachments/{attachmentId}
+Folders,GET,/folders
+Identities,GET,/identities/{identityId}
+Roles,GET,/roles
+Roles,GET,/roles/{roleId}
+Webhooks,GET,/webhooks
+Attachments,GET,/attachments
+Channels,GET,/channels/{channelId}
+Agent Status,GET,/status/{agentId}
+Reply Assistant Entries,GET,/reply_assistant/entries/{replyAssistantEntryId}
+Reply Assistant Groups,GET,/reply_assistant/groups
+Time Sheets,GET,/time_sheets
+Teams,GET,/teams/{teamId}
+Interventions,GET,/interventions/{interventionId}
+Reply Assistant Entries,GET,/reply_assistant/entries
+Communities,GET,/communities
+Identity Groups,GET,/identity_groups
+Time Sheets,GET,/time_sheets/{timeSheetId}
+Reply Assistant Versions,GET,/reply_assistant/versions
+Settings,GET,/settings
+Agent Status,GET,/status
+Identities,GET,/identities
+Identity Groups,GET,/identity_groups/{identityGroupId}
+Webhooks,GET,/webhooks/{webhookId}
+CustomFields,GET,/custom_fields/{customFieldId}
+Timezones,GET,/timezones
+Threads,GET,/content_threads/{threadId}
+CustomFields,GET,/custom_fields
+Reply Assistant Groups,GET,/reply_assistant/groups/{replyAssistantGroupId}
+Users,GET,/users
+Categories,GET,/categories
+Sources,GET,/content_sources/{sourceId}
+Folders,GET,/folders/{folderId}
+Intervention Comments,GET,/intervention_comments/{interventionCommentId}
+Interventions,GET,/interventions
+Reply Assistant Versions,GET,/reply_assistant/versions/{replyAssistantVersionId}
+Sources,GET,/content_sources
+Events,GET,/events
+Events,GET,/events/{eventId}
+Intervention Comments,GET,/intervention_comments
+Users,GET,/users/{userId}
+Communities,GET,/communities/{communityId}
+Threads,GET,/content_threads
+Locales,GET,/locales
+Presence Status,GET,/presence_status
+Tags,GET,/tags
+Tags,GET,/tags/{tagId}
+Contents,GET,/contents/{contentId}
