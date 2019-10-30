@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sort"
 
 	oas3 "github.com/getkin/kin-openapi/openapi3"
 	"github.com/grokify/gocharts/data/table"
@@ -34,6 +35,7 @@ func main() {
 	}
 
 	paths := getEndpointsMetaFlat(spec)
+	SortSoS(2, paths)
 
 	fmtutil.PrintJSON(paths)
 
@@ -47,7 +49,14 @@ func main() {
 func getEndpointsMetaFlat(spec *oas3.Swagger) [][]string {
 	paths := [][]string{}
 	for url, path := range spec.Paths {
+		paths = appendPathsPathInfo(http.MethodConnect, url, path.Connect, paths)
 		paths = appendPathsPathInfo(http.MethodGet, url, path.Get, paths)
+		paths = appendPathsPathInfo(http.MethodOptions, url, path.Options, paths)
+		paths = appendPathsPathInfo(http.MethodPatch, url, path.Patch, paths)
+		paths = appendPathsPathInfo(http.MethodPost, url, path.Post, paths)
+		paths = appendPathsPathInfo(http.MethodPut, url, path.Put, paths)
+		paths = appendPathsPathInfo(http.MethodDelete, url, path.Delete, paths)
+		paths = appendPathsPathInfo(http.MethodTrace, url, path.Trace, paths)
 	}
 	return paths
 }
@@ -64,4 +73,19 @@ func appendPathsPathInfo(method, url string, info *oas3.Operation, paths [][]str
 		paths = append(paths, []string{"", method, url})
 	}
 	return paths
+}
+
+func SortSoS(idx int, s [][]string) {
+	sort.Slice(s, func(i, j int) bool {
+		// edge cases
+		if len(s[i][idx]) == 0 && len(s[j][idx]) == 0 {
+			return false // two empty slices - so one is not less than other i.e. false
+		}
+		if len(s[i][idx]) == 0 || len(s[j][idx]) == 0 {
+			return len(s[i]) == 0 // empty slice listed "first" (change to != 0 to put them last)
+		}
+
+		// both slices len() > 0, so can test this now:
+		return s[i][idx][0] < s[j][idx][0]
+	})
 }

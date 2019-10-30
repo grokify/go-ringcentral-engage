@@ -1,57 +1,117 @@
 Tag,Operation,URL
-Tasks,GET,/tasks/{taskId}
-Threads,GET,/content_threads/{threadId}/open
-Contents,GET,/contents
-Teams,GET,/teams
-Categories,GET,/categories/{categoryId}
-Channels,GET,/channels
-Presence Status,GET,/presence_status/{presenceStatusId}
-Tasks,GET,/tasks
-Attachments,GET,/attachments/{attachmentId}
-Folders,GET,/folders
-Identities,GET,/identities/{identityId}
-Roles,GET,/roles
-Roles,GET,/roles/{roleId}
-Webhooks,GET,/webhooks
-Attachments,GET,/attachments
-Channels,GET,/channels/{channelId}
-Agent Status,GET,/status/{agentId}
-Reply Assistant Entries,GET,/reply_assistant/entries/{replyAssistantEntryId}
-Reply Assistant Groups,GET,/reply_assistant/groups
-Time Sheets,GET,/time_sheets
-Teams,GET,/teams/{teamId}
-Interventions,GET,/interventions/{interventionId}
-Reply Assistant Entries,GET,/reply_assistant/entries
-Communities,GET,/communities
 Identity Groups,GET,/identity_groups
-Time Sheets,GET,/time_sheets/{timeSheetId}
-Reply Assistant Versions,GET,/reply_assistant/versions
-Settings,GET,/settings
-Agent Status,GET,/status
-Identities,GET,/identities
-Identity Groups,GET,/identity_groups/{identityGroupId}
-Webhooks,GET,/webhooks/{webhookId}
-CustomFields,GET,/custom_fields/{customFieldId}
-Timezones,GET,/timezones
-Threads,GET,/content_threads/{threadId}
-CustomFields,GET,/custom_fields
-Reply Assistant Groups,GET,/reply_assistant/groups/{replyAssistantGroupId}
-Users,GET,/users
-Categories,GET,/categories
-Sources,GET,/content_sources/{sourceId}
-Folders,GET,/folders/{folderId}
-Intervention Comments,GET,/intervention_comments/{interventionCommentId}
 Interventions,GET,/interventions
-Reply Assistant Versions,GET,/reply_assistant/versions/{replyAssistantVersionId}
-Sources,GET,/content_sources
+Interventions,POST,/interventions
+Reply Assistant Groups,GET,/reply_assistant/groups
+Reply Assistant Groups,POST,/reply_assistant/groups
+Agent Status,GET,/status
+CustomFields,GET,/custom_fields/{customFieldId}
+CustomFields,PUT,/custom_fields/{customFieldId}
+CustomFields,DELETE,/custom_fields/{customFieldId}
+Folders,GET,/folders
+Folders,POST,/folders
+Reply Assistant Groups,GET,/reply_assistant/groups/{replyAssistantGroupId}
+Reply Assistant Groups,PUT,/reply_assistant/groups/{replyAssistantGroupId}
+Reply Assistant Groups,DELETE,/reply_assistant/groups/{replyAssistantGroupId}
 Events,GET,/events
-Events,GET,/events/{eventId}
-Intervention Comments,GET,/intervention_comments
-Users,GET,/users/{userId}
+Tasks,GET,/tasks/{taskId}
+Teams,GET,/teams/{teamId}
+Teams,PUT,/teams/{teamId}
+Teams,DELETE,/teams/{teamId}
+Users,GET,/users
+Users,POST,/users
 Communities,GET,/communities/{communityId}
+Presence Status,GET,/presence_status/{presenceStatusId}
+Presence Status,PUT,/presence_status/{presenceStatusId}
+Presence Status,DELETE,/presence_status/{presenceStatusId}
+Users,GET,/users/{userId}
+Users,PUT,/users/{userId}
+Users,DELETE,/users/{userId}
+Channels,GET,/channels
 Threads,GET,/content_threads
-Locales,GET,/locales
-Presence Status,GET,/presence_status
+Contents,PUT,/contents/{contentId}/update_categories
+Interventions,DELETE,/interventions/{interventionId}/cancel
+Threads,PUT,/content_threads/{threadId}/close
 Tags,GET,/tags
-Tags,GET,/tags/{tagId}
+Tags,POST,/tags
+Events,GET,/events/{eventId}
+Interventions,GET,/interventions/{interventionId}
+Interventions,PUT,/interventions/{interventionId}/close
+Interventions,PUT,/interventions/{interventionId}/update_categories
+Threads,PUT,/content_threads/{threadId}/ignore
+Reply Assistant Entries,GET,/reply_assistant/entries
+Reply Assistant Entries,POST,/reply_assistant/entries
+Roles,GET,/roles
+Roles,POST,/roles
+Tasks,PUT,/tasks/{taskId}/transfer
+Intervention Comments,GET,/intervention_comments/{interventionCommentId}
+Intervention Comments,DELETE,/intervention_comments/{interventionCommentId}
+Categories,GET,/categories
+Categories,POST,/categories
+Sources,GET,/content_sources
+Folders,GET,/folders/{folderId}
+Folders,PUT,/folders/{folderId}
+Folders,DELETE,/folders/{folderId}
+Identities,GET,/identities/{identityId}
+Reply Assistant Entries,GET,/reply_assistant/entries/{replyAssistantEntryId}
+Reply Assistant Entries,PUT,/reply_assistant/entries/{replyAssistantEntryId}
+Reply Assistant Entries,DELETE,/reply_assistant/entries/{replyAssistantEntryId}
+Teams,GET,/teams
+Teams,POST,/teams
+Channels,GET,/channels/{channelId}
+Channels,PUT,/channels/{channelId}
+Identities,GET,/identities
+Interventions,PUT,/interventions/{interventionId}/reassign
+Locales,GET,/locales
+Time Sheets,GET,/time_sheets/{timeSheetId}
+Time Sheets,PUT,/time_sheets/{timeSheetId}
+Time Sheets,DELETE,/time_sheets/{timeSheetId}
+Users,POST,/users/invite
+Webhooks,GET,/webhooks
+Webhooks,POST,/webhooks
+Threads,PUT,/content_threads/{threadId}/update_categories
+Contents,PUT,/contents/{contentId}/ignore
+Reply Assistant Versions,GET,/reply_assistant/versions
+Reply Assistant Versions,POST,/reply_assistant/versions
+Roles,GET,/roles/{roleId}
+Roles,PUT,/roles/{roleId}
+Settings,GET,/settings
+Settings,PUT,/settings
+Time Sheets,GET,/time_sheets
+Time Sheets,POST,/time_sheets
+Timezones,GET,/timezones
+Attachments,GET,/attachments/{attachmentId}
+Threads,GET,/content_threads/{threadId}/open
+CustomFields,GET,/custom_fields
+CustomFields,POST,/custom_fields
+Reply Assistant Versions,GET,/reply_assistant/versions/{replyAssistantVersionId}
+Reply Assistant Versions,PUT,/reply_assistant/versions/{replyAssistantVersionId}
+Reply Assistant Versions,DELETE,/reply_assistant/versions/{replyAssistantVersionId}
+Communities,GET,/communities
+Threads,GET,/content_threads/{threadId}
+Identity Groups,GET,/identity_groups/{identityGroupId}
+Identity Groups,PUT,/identity_groups/{identityGroupId}
+Categories,GET,/categories/{categoryId}
+Categories,PUT,/categories/{categoryId}
+Categories,DELETE,/categories/{categoryId}
+Contents,GET,/contents
+Contents,POST,/contents
+Webhooks,GET,/webhooks/{webhookId}
+Webhooks,PUT,/webhooks/{webhookId}
+Webhooks,DELETE,/webhooks/{webhookId}
+Sources,GET,/content_sources/{sourceId}
+Sources,PUT,/content_sources/{sourceId}
 Contents,GET,/contents/{contentId}
+Tasks,GET,/tasks
+Tags,GET,/tags/{tagId}
+Tags,PUT,/tags/{tagId}
+Tags,DELETE,/tags/{tagId}
+Tasks,DELETE,/tasks/{taskId}/move
+Attachments,GET,/attachments
+Attachments,POST,/attachments
+Intervention Comments,GET,/intervention_comments
+Intervention Comments,POST,/intervention_comments
+Presence Status,GET,/presence_status
+Presence Status,POST,/presence_status
+Agent Status,GET,/status/{agentId}
+Agent Status,PUT,/status/{agentId}
