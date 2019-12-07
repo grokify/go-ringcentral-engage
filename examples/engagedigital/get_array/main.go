@@ -9,7 +9,7 @@ import (
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/jessevdk/go-flags"
 
-	"github.com/grokify/go-ringcentral-engage/utils"
+	utils "github.com/grokify/go-ringcentral-engage/engagedigitalutil"
 )
 
 type options struct {

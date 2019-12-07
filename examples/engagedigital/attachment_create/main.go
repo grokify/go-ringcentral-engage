@@ -10,7 +10,7 @@ import (
 	"github.com/jessevdk/go-flags"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital"
-	"github.com/grokify/go-ringcentral-engage/utils"
+	utils "github.com/grokify/go-ringcentral-engage/engagedigitalutil"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 )
 
