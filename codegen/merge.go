@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"path/filepath"
 
 	"github.com/grokify/gotilla/io/ioutilmore"
+	"github.com/grokify/gotilla/path/filepathutil"
 	"github.com/grokify/swaggman/openapi3"
 	"github.com/grokify/swaggman/swagger2"
 	"github.com/jessevdk/go-flags"
@@ -13,7 +15,8 @@ import (
 )
 
 type options struct {
-	Version int `short:"v" long:"version" description:"OAS Version" required:"true"`
+	Directory string `short:"d" long:"directory" description:"OAS Directory" required:"true"`
+	Version   int    `short:"v" long:"version" description:"OAS Version" required:"true"`
 }
 
 func MergeOAS2(dir, outfile string) error {
@@ -60,8 +63,17 @@ func main() {
 	if opts.Version == 2 || opts.Version == 3 {
 		version = opts.Version
 	}
-	outfile := fmt.Sprintf("openapi-spec_v%d.0.0.json", version)
-	dir := fmt.Sprintf("partial-specs_v%d.0.0", version)
+	dir := opts.Directory
+
+	dir = filepathutil.TrimRight(dir)
+
+	_, leaf := filepath.Split(dir)
+
+	outfile := leaf + ".json"
+
+	//outfile := opts.Directory + ".json"
+	//outfile := fmt.Sprintf("openapi-spec_v%d.0.0.json", version)
+	//dir := fmt.Sprintf("partial-specs_v%d.0.0", version)
 
 	switch version {
 	case 2:
@@ -74,5 +86,4 @@ func main() {
 	}
 
 	fmt.Println("DONE")
-
 }
