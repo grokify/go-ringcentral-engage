@@ -43,13 +43,13 @@ $ go get github.com/grokify/go-ringcental-engage/...
 
 ## Usage
 
-The main SDK is in the `engagedigital` folder. The `utils` folder provides a helper function to instantiate the SDK:
+The main SDK is in the `engagedigital` folder. The `engagedigitalutil` folder provides a helper function to instantiate the SDK:
 
 ```go
-import("github.com/grokify/go-ringcentral-engage/utils")
+import("github.com/grokify/go-ringcentral-engage/engagedigitalutil")
 
 func main() {
-    apiClient := utils.NewApiClient("my-subdomain", "my-access-token")
+    apiClient := engagedigitalutil.NewApiClient("my-subdomain", "my-access-token")
 
     // helper function to get access to raw `*http.Client`
     httpClient := apiClient.HTTPClient()
@@ -58,7 +58,7 @@ func main() {
 
 For information on how to use the `apiClient` object, see:
 
-1. [`examples`](examples) folder for usage. [`examples/simple_get`](examples/simple_get) includes a simple functions for a lot of the `GET` APIs.
+1. [`examples/engagedigital`](examples) folder for usage. [`examples/engagedigital/simple_get`](examples/simple_get) includes a simple functions for a lot of the `GET` APIs.
 1. [engagedigital/README.md](https://github.com/grokify/go-ringcentral-engage/blob/master/engagedigital/README.md) for SDK documentation.
 
 ## Documentation
