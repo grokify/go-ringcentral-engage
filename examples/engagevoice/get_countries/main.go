@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/grokify/go-ringcentral-engage/engagevoiceutil"
 	"github.com/grokify/gotilla/config"
@@ -43,12 +45,37 @@ func main() {
 	info, resp, err := apiClient.CountriesApi.GetAvailableCountries(
 		context.Background(), opts.AccountID,
 	)
+	handleErrors(resp, err)
+	fmtutil.PrintJSON(info)
+
+	if 1 == 1 {
+		info, resp, err := apiClient.DialGroupsApi.GetDialGroups(
+			context.Background(), opts.AccountID,
+		)
+		handleErrors(resp, err)
+		fmtutil.PrintJSON(info)
+		dialGroupIds := []int64{}
+		for _, dg := range info {
+			dialGroupIds = append(dialGroupIds, dg.DialGroupId)
+		}
+		fmtutil.PrintJSON(dialGroupIds)
+		for _, dgId := range dialGroupIds {
+			info, resp, err := apiClient.CampaignsApi.GetDialGroupCampaigns(
+				context.Background(),
+				opts.AccountID,
+				strconv.Itoa(int(dgId)),
+			)
+			handleErrors(resp, err)
+			fmtutil.PrintJSON(info)
+		}
+	}
+	fmt.Println("DONE")
+}
+
+func handleErrors(resp *http.Response, err error) {
 	if err != nil {
 		log.Fatal(err)
 	} else if resp.StatusCode >= 300 {
 		log.Fatal("E_STATUS_CODE_GTE_300")
 	}
-	fmtutil.PrintJSON(info)
-
-	fmt.Println("DONE")
 }

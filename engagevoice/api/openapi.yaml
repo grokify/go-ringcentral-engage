@@ -1,13 +1,47 @@
 openapi: 3.0.0
 info:
   termsOfService: https://developers.ringcentral.com
-  title: Engage Voice API
+  title: RingCentral Engage Voice API
   version: "1.0"
 servers:
 - url: https://portal.vacd.biz/api/v1
 tags:
+- name: Campaigns
 - name: Countries
+- name: Dial Groups
+- name: Leads
 paths:
+  /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct:
+    post:
+      description: Uploads a single lead or list of leads to a new or existing list
+      operationId: uploadLoads
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: campaignId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Lead'
+                type: array
+          description: Success
+      summary: Upload Leads
+      tags:
+      - Leads
   /admin/accounts/{accountId}/countries/available:
     get:
       operationId: getAvailableCountries
@@ -31,8 +65,95 @@ paths:
       summary: Get a list of available countries
       tags:
       - Countries
+  /admin/accounts/{accountId}/dialGroups:
+    get:
+      operationId: getDialGroups
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DialGroup'
+                type: array
+          description: Success
+      summary: Returns a listing of dial groups for an account
+      tags:
+      - Dial Groups
+  /admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns:
+    get:
+      operationId: getDialGroupCampaigns
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: dialGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Campaign'
+                type: array
+          description: Success
+      summary: Returns a listing of campaigns for a dial group
+      tags:
+      - Campaigns
 components:
   schemas:
+    Campaign:
+      example:
+        campaignDesc: campaignDesc
+        dialGroup:
+          description: description
+          id: 6
+        campaignId: 0
+        permissions:
+        - '{}'
+        - '{}'
+        isActive: 1
+        campaignName: campaignName
+        script:
+          description: description
+          id: 6
+      properties:
+        campaignDesc:
+          type: string
+        campaignId:
+          format: int64
+          type: integer
+        campaignName:
+          type: string
+        dialGroup:
+          $ref: '#/components/schemas/ReferenceObject'
+        isActive:
+          format: int64
+          type: integer
+        permissions:
+          items:
+            type: object
+          type: array
+        script:
+          $ref: '#/components/schemas/ReferenceObject'
     Country:
       example:
         minUtcOffset: 5
@@ -61,6 +182,154 @@ components:
           type: integer
         minUtcOffset:
           format: int8
+          type: integer
+    DialGroup:
+      example:
+        dialGroupId: 0
+        dialGroupName: dialGroupName
+        dialMode: dialMode
+        hciEnabled: hciEnabled
+        dialGroupDesc: dialGroupDesc
+        permissions:
+        - '{}'
+        - '{}'
+        agentDialGroupMembers: '{}'
+        isActive: true
+      properties:
+        agentDialGroupMembers:
+          type: object
+        dialGroupDesc:
+          type: string
+        dialGroupId:
+          format: int64
+          type: integer
+        dialGroupName:
+          type: string
+        dialMode:
+          description: Can be `PREDICTIVE`
+          type: string
+        hciEnabled:
+          description: Can be `DISABLED`
+          type: string
+        isActive:
+          type: boolean
+        permissions:
+          items:
+            type: object
+          type: array
+    ExtendedLeadData:
+      properties:
+        important:
+          type: string
+        interested:
+          type: boolean
+    Lead:
+      example:
+        zip: zip
+        lastName: lastName
+        auxPhone: auxPhone
+        externId: 0
+        address2: address2
+        city: city
+        address1: address1
+        midName: midName
+        suffix: suffix
+        title: title
+        gateKeeper: gateKeeper
+        firstName: firstName
+        extendedLeadData: extendedLeadData
+        auxData2: auxData2
+        auxData3: auxData3
+        auxData4: auxData4
+        auxData5: auxData5
+        state: state
+        leadPhone: leadPhone
+        email: email
+        auxData1: auxData1
+      properties:
+        address1:
+          type: string
+        address2:
+          type: string
+        auxData1:
+          type: string
+        auxData2:
+          type: string
+        auxData3:
+          type: string
+        auxData4:
+          type: string
+        auxData5:
+          type: string
+        auxPhone:
+          type: string
+        city:
+          type: string
+        email:
+          type: string
+        extendedLeadData:
+          type: string
+        externId:
+          format: int64
+          type: integer
+        firstName:
+          type: string
+        gateKeeper:
+          type: string
+        lastName:
+          type: string
+        leadPhone:
+          type: string
+        midName:
+          type: string
+        state:
+          type: string
+        suffix:
+          type: string
+        title:
+          type: string
+        zip:
+          type: string
+    LeadsLoader:
+      properties:
+        description:
+          type: string
+        dialPriority:
+          description: allows you to insert a lead to the top of the dialer cache
+            for immediate dialing if you want a normal insert then do not add this
+            parameter.
+          enum:
+          - IMMEDIATE
+          type: string
+        duplicateHandling:
+          enum:
+          - RETAIN_ALL
+          - REMOVE_ALL_EXISTING
+          - REMOVE_FROM_LIST
+          type: string
+        listState:
+          enum:
+          - ACTIVE
+          type: string
+        timeZoneOption:
+          enum:
+          - NPA_NXX
+          - ZIPCODE
+          - EXPLICIT
+          type: string
+        uploadLeads:
+          items:
+            $ref: '#/components/schemas/Lead'
+          type: array
+    ReferenceObject:
+      example:
+        description: description
+        id: 6
+      properties:
+        description:
+          type: string
+        id:
+          format: int64
           type: integer
   securitySchemes:
     bearerAuth:

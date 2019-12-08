@@ -23,27 +23,30 @@ var (
 	_ context.Context
 )
 
-type CountriesApiService service
+type LeadsApiService service
 
 /*
-CountriesApiService Get a list of available countries
+LeadsApiService Upload Leads
+Uploads a single lead or list of leads to a new or existing list
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
-@return []Country
+ * @param campaignId
+@return []Lead
 */
-func (a *CountriesApiService) GetAvailableCountries(ctx context.Context, accountId string) ([]Country, *http.Response, error) {
+func (a *LeadsApiService) UploadLoads(ctx context.Context, accountId string, campaignId string) ([]Lead, *http.Response, error) {
 	var (
-		localVarHttpMethod   = http.MethodGet
+		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Country
+		localVarReturnValue  []Lead
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/admin/accounts/{accountId}/countries/available"
+	localVarPath := a.client.cfg.BasePath + "/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", fmt.Sprintf("%v", campaignId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -88,7 +91,7 @@ func (a *CountriesApiService) GetAvailableCountries(ctx context.Context, account
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Country
+			var v []Lead
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

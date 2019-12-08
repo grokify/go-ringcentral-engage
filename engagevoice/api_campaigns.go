@@ -23,27 +23,29 @@ var (
 	_ context.Context
 )
 
-type CountriesApiService service
+type CampaignsApiService service
 
 /*
-CountriesApiService Get a list of available countries
+CampaignsApiService Returns a listing of campaigns for a dial group
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
-@return []Country
+ * @param dialGroupId
+@return []Campaign
 */
-func (a *CountriesApiService) GetAvailableCountries(ctx context.Context, accountId string) ([]Country, *http.Response, error) {
+func (a *CampaignsApiService) GetDialGroupCampaigns(ctx context.Context, accountId string, dialGroupId string) ([]Campaign, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Country
+		localVarReturnValue  []Campaign
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/admin/accounts/{accountId}/countries/available"
+	localVarPath := a.client.cfg.BasePath + "/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"dialGroupId"+"}", fmt.Sprintf("%v", dialGroupId), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -88,7 +90,7 @@ func (a *CountriesApiService) GetAvailableCountries(ctx context.Context, account
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Country
+			var v []Campaign
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

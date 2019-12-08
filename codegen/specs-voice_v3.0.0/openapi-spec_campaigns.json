@@ -8,20 +8,28 @@
     },
     "tags":[
        {
-          "name":"Countries"
+          "name":"Campaigns"
        }
     ],
     "paths":{
-       "/admin/accounts/{accountId}/countries/available":{
+       "/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns":{
           "get":{
              "tags":[
-                "Countries"
+                "Campaigns"
              ],
-             "summary":"Get a list of available countries",
-             "operationId":"getAvailableCountries",
+             "summary":"Returns a listing of campaigns for a dial group",
+             "operationId":"getDialGroupCampaigns",
              "parameters":[
                 {
                    "name":"accountId",
+                   "in":"path",
+                   "required":true,
+                   "schema":{
+                      "type":"string"
+                   }
+                },
+                {
+                   "name":"dialGroupId",
                    "in":"path",
                    "required":true,
                    "schema":{
@@ -37,7 +45,7 @@
                          "schema":{
                             "type":"array",
                             "items":{
-                               "$ref":"#/components/schemas/Country"
+                               "$ref":"#/components/schemas/Campaign"
                             }
                          }
                       }
@@ -60,33 +68,44 @@
           }
        },
        "schemas":{
-          "Country":{
+          "ReferenceObject":{
              "properties":{
-                "countryId":{
-                   "type":"string",
-                   "description":"Country code i ISO 3166-1 alpha-3 format"
+                "id":{
+                   "type":"integer",
+                   "format":"int64"
                 },
-                "countryName":{
+                "description":{
+                   "type":"string"
+                }
+             }
+          },
+          "Campaign":{
+             "properties":{
+                "campaignId":{
+                   "type":"integer",
+                   "format":"int64"
+                },
+                "permissions":{
+                   "type":"array",
+                   "items":{
+                      "type":"object"
+                   }
+                },
+                "campaignName":{
                    "type":"string"
                 },
-                "countryCode":{
+                "campaignDesc":{
                    "type":"string"
                 },
-                "minUtcOffset":{
+                "isActive":{
                    "type":"integer",
-                   "format":"int8"
+                   "format":"int64"
                 },
-                "maxUtcOffset":{
-                   "type":"integer",
-                   "format":"int8"
+                "dialGroup":{
+                   "$ref":"#/components/schemas/ReferenceObject"
                 },
-                "minAniLength":{
-                   "type":"integer",
-                   "format":"int8"
-                },
-                "maxAniLength":{
-                   "type":"integer",
-                   "format":"int8"
+                "script":{
+                   "$ref":"#/components/schemas/ReferenceObject"
                 }
              }
           }

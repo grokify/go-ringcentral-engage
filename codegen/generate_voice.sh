@@ -1,4 +1,5 @@
 #perl -p -i -e 's/\s+\[Beta\]\s*$/\n/g' openapi-spec.json
+go run merge.go -d specs-voice_v3.0.0 -v 3
 export GO_POST_PROCESS_FILE="/usr/local/go/bin/gofmt -s -w"
 
 java -jar openapi-generator-cli.jar generate -i specs-voice_v3.0.0.json -g go -o engagevoice --package-name engagevoice

@@ -8,17 +8,17 @@
     },
     "tags":[
        {
-          "name":"Countries"
+          "name":"Dial Groups"
        }
     ],
     "paths":{
-       "/admin/accounts/{accountId}/countries/available":{
+       "/admin/accounts/{accountId}/dialGroups":{
           "get":{
              "tags":[
-                "Countries"
+                "Dial Groups"
              ],
-             "summary":"Get a list of available countries",
-             "operationId":"getAvailableCountries",
+             "summary":"Returns a listing of dial groups for an account",
+             "operationId":"getDialGroups",
              "parameters":[
                 {
                    "name":"accountId",
@@ -37,7 +37,7 @@
                          "schema":{
                             "type":"array",
                             "items":{
-                               "$ref":"#/components/schemas/Country"
+                               "$ref":"#/components/schemas/DialGroup"
                             }
                          }
                       }
@@ -60,33 +60,37 @@
           }
        },
        "schemas":{
-          "Country":{
+          "DialGroup":{
              "properties":{
-                "countryId":{
+                "permissions":{
+                   "type":"array",
+                   "items":{
+                      "type":"object"
+                   }
+                },
+                "dialGroupId":{
+                   "type":"integer",
+                   "format":"int64"
+                },
+                "dialGroupName":{
+                   "type":"string"
+                },
+                "dialGroupDesc":{
+                   "type":"string"
+                },
+                "dialMode":{
                    "type":"string",
-                   "description":"Country code i ISO 3166-1 alpha-3 format"
+                   "description":"Can be `PREDICTIVE`"
                 },
-                "countryName":{
-                   "type":"string"
+                "isActive":{
+                   "type":"boolean"
                 },
-                "countryCode":{
-                   "type":"string"
+                "hciEnabled":{
+                   "type":"string",
+                   "description":"Can be `DISABLED`"
                 },
-                "minUtcOffset":{
-                   "type":"integer",
-                   "format":"int8"
-                },
-                "maxUtcOffset":{
-                   "type":"integer",
-                   "format":"int8"
-                },
-                "minAniLength":{
-                   "type":"integer",
-                   "format":"int8"
-                },
-                "maxAniLength":{
-                   "type":"integer",
-                   "format":"int8"
+                "agentDialGroupMembers":{
+                   "type":"object"
                 }
              }
           }

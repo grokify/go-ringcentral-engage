@@ -23,26 +23,26 @@ var (
 	_ context.Context
 )
 
-type CountriesApiService service
+type DialGroupsApiService service
 
 /*
-CountriesApiService Get a list of available countries
+DialGroupsApiService Returns a listing of dial groups for an account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
-@return []Country
+@return []DialGroup
 */
-func (a *CountriesApiService) GetAvailableCountries(ctx context.Context, accountId string) ([]Country, *http.Response, error) {
+func (a *DialGroupsApiService) GetDialGroups(ctx context.Context, accountId string) ([]DialGroup, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Country
+		localVarReturnValue  []DialGroup
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/admin/accounts/{accountId}/countries/available"
+	localVarPath := a.client.cfg.BasePath + "/admin/accounts/{accountId}/dialGroups"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", fmt.Sprintf("%v", accountId), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -88,7 +88,7 @@ func (a *CountriesApiService) GetAvailableCountries(ctx context.Context, account
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Country
+			var v []DialGroup
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
