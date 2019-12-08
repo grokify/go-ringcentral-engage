@@ -31,9 +31,10 @@ Uploads a single lead or list of leads to a new or existing list
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param accountId
  * @param campaignId
+ * @param uploadLeadsRequest
 @return []Lead
 */
-func (a *LeadsApiService) UploadLoads(ctx context.Context, accountId string, campaignId string) ([]Lead, *http.Response, error) {
+func (a *LeadsApiService) UploadLeads(ctx context.Context, accountId string, campaignId string, uploadLeadsRequest UploadLeadsRequest) ([]Lead, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -53,7 +54,7 @@ func (a *LeadsApiService) UploadLoads(ctx context.Context, accountId string, cam
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
+	localVarHttpContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
@@ -69,11 +70,12 @@ func (a *LeadsApiService) UploadLoads(ctx context.Context, accountId string, cam
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
+	// body params
+	localVarPostBody = &uploadLeadsRequest
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
-
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
 		return localVarReturnValue, localVarHttpResponse, err
@@ -84,7 +86,7 @@ func (a *LeadsApiService) UploadLoads(ctx context.Context, accountId string, cam
 	if err != nil {
 		return localVarReturnValue, localVarHttpResponse, err
 	}
-
+	fmt.Println(string(localVarBody))
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,

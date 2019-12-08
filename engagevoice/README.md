@@ -35,7 +35,7 @@ Class | Method | HTTP request | Description
 *CampaignsApi* | [**GetDialGroupCampaigns**](docs/CampaignsApi.md#getdialgroupcampaigns) | **Get** /admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns | Returns a listing of campaigns for a dial group
 *CountriesApi* | [**GetAvailableCountries**](docs/CountriesApi.md#getavailablecountries) | **Get** /admin/accounts/{accountId}/countries/available | Get a list of available countries
 *DialGroupsApi* | [**GetDialGroups**](docs/DialGroupsApi.md#getdialgroups) | **Get** /admin/accounts/{accountId}/dialGroups | Returns a listing of dial groups for an account
-*LeadsApi* | [**UploadLoads**](docs/LeadsApi.md#uploadloads) | **Post** /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct | Upload Leads
+*LeadsApi* | [**UploadLeads**](docs/LeadsApi.md#uploadleads) | **Post** /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct | Upload Leads
 
 
 ## Documentation For Models
@@ -45,8 +45,8 @@ Class | Method | HTTP request | Description
  - [DialGroup](docs/DialGroup.md)
  - [ExtendedLeadData](docs/ExtendedLeadData.md)
  - [Lead](docs/Lead.md)
- - [LeadsLoader](docs/LeadsLoader.md)
  - [ReferenceObject](docs/ReferenceObject.md)
+ - [UploadLeadsRequest](docs/UploadLeadsRequest.md)
 
 
 ## Documentation For Authorization

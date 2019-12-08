@@ -10,25 +10,26 @@
 package engagevoice
 
 type Lead struct {
-	Address1         string `json:"address1,omitempty"`
-	Address2         string `json:"address2,omitempty"`
-	AuxData1         string `json:"auxData1,omitempty"`
-	AuxData2         string `json:"auxData2,omitempty"`
-	AuxData3         string `json:"auxData3,omitempty"`
-	AuxData4         string `json:"auxData4,omitempty"`
-	AuxData5         string `json:"auxData5,omitempty"`
-	AuxPhone         string `json:"auxPhone,omitempty"`
-	City             string `json:"city,omitempty"`
-	Email            string `json:"email,omitempty"`
-	ExtendedLeadData string `json:"extendedLeadData,omitempty"`
-	ExternId         int64  `json:"externId,omitempty"`
-	FirstName        string `json:"firstName,omitempty"`
-	GateKeeper       string `json:"gateKeeper,omitempty"`
-	LastName         string `json:"lastName,omitempty"`
-	LeadPhone        string `json:"leadPhone,omitempty"`
-	MidName          string `json:"midName,omitempty"`
-	State            string `json:"state,omitempty"`
-	Suffix           string `json:"suffix,omitempty"`
-	Title            string `json:"title,omitempty"`
-	Zip              string `json:"zip,omitempty"`
+	Address1         string           `json:"address1,omitempty"`
+	Address2         string           `json:"address2,omitempty"`
+	AuxData1         string           `json:"auxData1,omitempty"`
+	AuxData2         string           `json:"auxData2,omitempty"`
+	AuxData3         string           `json:"auxData3,omitempty"`
+	AuxData4         string           `json:"auxData4,omitempty"`
+	AuxData5         string           `json:"auxData5,omitempty"`
+	AuxPhone         string           `json:"auxPhone,omitempty"`
+	City             string           `json:"city,omitempty"`
+	Email            string           `json:"email,omitempty"`
+	ExtendedLeadData ExtendedLeadData `json:"extendedLeadData,omitempty"`
+	ExternId         int64            `json:"externId"`
+	FirstName        string           `json:"firstName,omitempty"`
+	GateKeeper       string           `json:"gateKeeper,omitempty"`
+	LastName         string           `json:"lastName,omitempty"`
+	// multiple values can be submitted with a pipe delimiter between phone numbers
+	LeadPhone string `json:"leadPhone,omitempty"`
+	MidName   string `json:"midName,omitempty"`
+	State     string `json:"state,omitempty"`
+	Suffix    string `json:"suffix,omitempty"`
+	Title     string `json:"title,omitempty"`
+	Zip       string `json:"zip,omitempty"`
 }

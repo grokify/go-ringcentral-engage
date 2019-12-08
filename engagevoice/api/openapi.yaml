@@ -14,7 +14,7 @@ paths:
   /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct:
     post:
       description: Uploads a single lead or list of leads to a new or existing list
-      operationId: uploadLoads
+      operationId: uploadLeads
       parameters:
       - explode: false
         in: path
@@ -30,6 +30,12 @@ paths:
         schema:
           type: string
         style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadLeadsRequest'
+        required: true
       responses:
         200:
           content:
@@ -218,6 +224,9 @@ components:
             type: object
           type: array
     ExtendedLeadData:
+      example:
+        important: important
+        interested: true
       properties:
         important:
           type: string
@@ -237,7 +246,9 @@ components:
         title: title
         gateKeeper: gateKeeper
         firstName: firstName
-        extendedLeadData: extendedLeadData
+        extendedLeadData:
+          important: important
+          interested: true
         auxData2: auxData2
         auxData3: auxData3
         auxData4: auxData4
@@ -268,7 +279,7 @@ components:
         email:
           type: string
         extendedLeadData:
-          type: string
+          $ref: '#/components/schemas/ExtendedLeadData'
         externId:
           format: int64
           type: integer
@@ -279,6 +290,8 @@ components:
         lastName:
           type: string
         leadPhone:
+          description: multiple values can be submitted with a pipe delimiter between
+            phone numbers
           type: string
         midName:
           type: string
@@ -290,14 +303,79 @@ components:
           type: string
         zip:
           type: string
-    LeadsLoader:
+      required:
+      - externId
+    ReferenceObject:
+      example:
+        description: description
+        id: 6
+      properties:
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
+    UploadLeadsRequest:
+      example:
+        timeZoneOption: NPA_NXX
+        uploadLeads:
+        - zip: zip
+          lastName: lastName
+          auxPhone: auxPhone
+          externId: 0
+          address2: address2
+          city: city
+          address1: address1
+          midName: midName
+          suffix: suffix
+          title: title
+          gateKeeper: gateKeeper
+          firstName: firstName
+          extendedLeadData:
+            important: important
+            interested: true
+          auxData2: auxData2
+          auxData3: auxData3
+          auxData4: auxData4
+          auxData5: auxData5
+          state: state
+          leadPhone: leadPhone
+          email: email
+          auxData1: auxData1
+        - zip: zip
+          lastName: lastName
+          auxPhone: auxPhone
+          externId: 0
+          address2: address2
+          city: city
+          address1: address1
+          midName: midName
+          suffix: suffix
+          title: title
+          gateKeeper: gateKeeper
+          firstName: firstName
+          extendedLeadData:
+            important: important
+            interested: true
+          auxData2: auxData2
+          auxData3: auxData3
+          auxData4: auxData4
+          auxData5: auxData5
+          state: state
+          leadPhone: leadPhone
+          email: email
+          auxData1: auxData1
+        dialPriority: IMMEDIATE
+        listState: ACTIVE
+        description: description
+        duplicateHandling: RETAIN_ALL
       properties:
         description:
           type: string
         dialPriority:
-          description: allows you to insert a lead to the top of the dialer cache
-            for immediate dialing if you want a normal insert then do not add this
-            parameter.
+          description: Setting this to `IMMEDIATE` allows you to insert a lead to
+            the top of the dialer cache for immediate dialing if you want a normal
+            insert then do not add this parameter.
           enum:
           - IMMEDIATE
           type: string
@@ -321,16 +399,6 @@ components:
           items:
             $ref: '#/components/schemas/Lead'
           type: array
-    ReferenceObject:
-      example:
-        description: description
-        id: 6
-      properties:
-        description:
-          type: string
-        id:
-          format: int64
-          type: integer
   securitySchemes:
     bearerAuth:
       scheme: bearer

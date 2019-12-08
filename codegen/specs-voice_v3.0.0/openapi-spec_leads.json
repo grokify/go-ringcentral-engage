@@ -19,7 +19,7 @@
              ],
              "summary":"Upload Leads",
              "description":"Uploads a single lead or list of leads to a new or existing list",
-             "operationId":"uploadLoads",
+             "operationId":"uploadLeads",
              "parameters":[
                 {
                    "name":"accountId",
@@ -38,6 +38,16 @@
                    }
                 }
              ],
+             "requestBody":{
+               "required":true,
+               "content": {
+                  "application/json":{
+                     "schema": {
+                        "$ref": "#/components/schemas/UploadLeadsRequest"
+                     }
+                  }
+               }
+             },
              "responses":{
                 "200":{
                    "description":"Success",
@@ -70,9 +80,13 @@
        },
        "schemas":{
           "Lead":{
+             "required":[
+"externId"
+             ],
              "properties":{
                 "leadPhone":{
-                   "type":"string"
+                   "type":"string",
+                   "description":                   "multiple values can be submitted with a pipe delimiter between phone numbers"
                 },
                 "externId":{
                    "type":"integer",
@@ -143,7 +157,7 @@
                    "type":"string"
                 },
                 "extendedLeadData":{
-                   "type":"string"
+                  "$ref":"#/components/schemas/ExtendedLeadData"
                 }
              }
           },
@@ -157,7 +171,7 @@
                 }
              }
           },
-          "LeadsLoader":{
+          "UploadLeadsRequest":{
              "properties":{
                 "listState":{
                    "type":"string",
@@ -189,7 +203,7 @@
                    "enum":[
                       "IMMEDIATE"
                    ],
-                   "description":"allows you to insert a lead to the top of the dialer cache for immediate dialing if you want a normal insert then do not add this parameter."
+                   "description":"Setting this to `IMMEDIATE` allows you to insert a lead to the top of the dialer cache for immediate dialing if you want a normal insert then do not add this parameter."
                 },
                 "uploadLeads":{
                    "type":"array",

@@ -4,13 +4,13 @@ All URIs are relative to *https://portal.vacd.biz/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UploadLoads**](LeadsApi.md#UploadLoads) | **Post** /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct | Upload Leads
+[**UploadLeads**](LeadsApi.md#UploadLeads) | **Post** /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct | Upload Leads
 
 
 
-## UploadLoads
+## UploadLeads
 
-> []Lead UploadLoads(ctx, accountId, campaignId)
+> []Lead UploadLeads(ctx, accountId, campaignId, uploadLeadsRequest)
 Upload Leads
 
 Uploads a single lead or list of leads to a new or existing list
@@ -23,6 +23,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **accountId** | **string**|  | 
 **campaignId** | **string**|  | 
+**uploadLeadsRequest** | [**UploadLeadsRequest**](UploadLeadsRequest.md)|  | 
 
 ### Return type
 
@@ -34,7 +35,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

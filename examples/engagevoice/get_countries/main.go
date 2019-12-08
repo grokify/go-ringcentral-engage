@@ -7,7 +7,9 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
+	"github.com/grokify/go-ringcentral-engage/engagevoice"
 	"github.com/grokify/go-ringcentral-engage/engagevoiceutil"
 	"github.com/grokify/gotilla/config"
 	"github.com/grokify/gotilla/fmt/fmtutil"
@@ -54,22 +56,59 @@ func main() {
 		)
 		handleErrors(resp, err)
 		fmtutil.PrintJSON(info)
-		dialGroupIds := []int64{}
+		dialGroupIDs := []int64{}
 		for _, dg := range info {
-			dialGroupIds = append(dialGroupIds, dg.DialGroupId)
+			dialGroupIDs = append(dialGroupIDs, dg.DialGroupId)
 		}
-		fmtutil.PrintJSON(dialGroupIds)
-		for _, dgId := range dialGroupIds {
+		fmtutil.PrintJSON(dialGroupIDs)
+		for _, dialGroupID := range dialGroupIDs {
 			info, resp, err := apiClient.CampaignsApi.GetDialGroupCampaigns(
 				context.Background(),
 				opts.AccountID,
-				strconv.Itoa(int(dgId)),
+				strconv.Itoa(int(dialGroupID)),
 			)
 			handleErrors(resp, err)
 			fmtutil.PrintJSON(info)
+			for _, campaign := range info {
+				campaignID := campaign.CampaignId
+				fmt.Printf("CAMPAIGN [%v]\n", campaignID)
+				uploadLeads(apiClient, opts.AccountID, strconv.Itoa(int(campaignID)))
+
+			}
 		}
 	}
 	fmt.Println("DONE")
+}
+
+func uploadLeads(client *engagevoice.APIClient, accountId, campaignId string) {
+	dt := time.Now()
+	leadsRequest := engagevoice.UploadLeadsRequest{
+		Description:       "Test from Go " + dt.Format(time.RFC3339),
+		DialPriority:      "IMMEDIATE",
+		DuplicateHandling: "RETAIN_ALL",
+		ListState:         "ACTIVE",
+		TimeZoneOption:    "NPA_NXX",
+		UploadLeads: []engagevoice.Lead{
+			{
+				LeadPhone: "6505550100",
+				ExternId:  1,
+				FirstName: "Jon",
+				LastName:  "Snow",
+				ExtendedLeadData: engagevoice.ExtendedLeadData{
+					Important:  "Priority 1: needs help right away",
+					Interested: true,
+				},
+			},
+		},
+	}
+	info, resp, err := client.LeadsApi.UploadLeads(
+		context.Background(),
+		accountId,
+		campaignId,
+		leadsRequest,
+	)
+	handleErrors(resp, err)
+	fmtutil.PrintJSON(info)
 }
 
 func handleErrors(resp *http.Response, err error) {
