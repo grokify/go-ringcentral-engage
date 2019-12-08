@@ -32,16 +32,16 @@ Uploads a single lead or list of leads to a new or existing list
  * @param accountId
  * @param campaignId
  * @param uploadLeadsRequest
-@return []Lead
+@return UploadLeadsResponse
 */
-func (a *LeadsApiService) UploadLeads(ctx context.Context, accountId string, campaignId string, uploadLeadsRequest UploadLeadsRequest) ([]Lead, *http.Response, error) {
+func (a *LeadsApiService) UploadLeads(ctx context.Context, accountId string, campaignId string, uploadLeadsRequest UploadLeadsRequest) (UploadLeadsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Lead
+		localVarReturnValue  UploadLeadsResponse
 	)
 
 	// create path and map variables
@@ -76,6 +76,7 @@ func (a *LeadsApiService) UploadLeads(ctx context.Context, accountId string, cam
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
+
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
 		return localVarReturnValue, localVarHttpResponse, err
@@ -86,14 +87,14 @@ func (a *LeadsApiService) UploadLeads(ctx context.Context, accountId string, cam
 	if err != nil {
 		return localVarReturnValue, localVarHttpResponse, err
 	}
-	fmt.Println(string(localVarBody))
+
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Lead
+			var v UploadLeadsResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

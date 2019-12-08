@@ -54,10 +54,7 @@
                    "content":{
                       "application/json":{
                          "schema":{
-                            "type":"array",
-                            "items":{
-                               "$ref":"#/components/schemas/Lead"
-                            }
+                               "$ref":"#/components/schemas/UploadLeadsResponse"
                          }
                       }
                    }
@@ -170,6 +167,29 @@
                    "type":"boolean"
                 }
              }
+          },
+          "UploadLeadsResponse":{
+               "hasDeletedLeads":{"type":"boolean"},
+               "required":["message","leadsSupplied","leadsConverted","leadsAccepted","leadsInserted","internalDncCount","dncUploadCount","dncReturnedCount","whitelistCount","uploadFileName","deletedCount","quotaCount","listState","timeZoneOption","hasDeletedLeads","processingResult","processingStatus"],
+            "properties":{
+               "message":{"type":"string","description":"Values can be `Your uploaded lead list has successfully completed processing` or `Your uploaded lead list file processing has failed`"},
+               "leadsSupplied":{"type":"integer","format":"int32"},
+               "leadsConverted":{"type":"integer","format":"int32"},
+               "leadsAccepted":{"type":"integer","format":"int32"},
+               "leadsInserted":{"type":"integer","format":"int32"},
+               "internalDncCount":{"type":"integer","format":"int32"},
+               "dncUploadCount":{"type":"integer","format":"int32"},
+               "dncReturnedCount":{"type":"integer","format":"int32"},
+               "whitelistCount":{"type":"integer","format":"int32"},
+               "uploadFileName":{"type":"string"},
+               "deletedCount":{"type":"integer","format":"int32"},
+               "quotaCount":{"type":"integer","format":"int32"},
+               "listState":{"type":"string"},
+               "timeZoneOption":{"type":"string"},
+               "hasDeletedLeads":{"type":"boolean"},
+               "processingResult":{"type":"string","description":"Values can be `OK` or `Failed`"},
+               "processingStatus":{"type":"string","description":"Values can be `DEFAULT_NOT_A_FAILURE` or `GENERAL_FAILURE`"}
+            }
           },
           "UploadLeadsRequest":{
              "properties":{

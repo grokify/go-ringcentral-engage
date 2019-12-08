@@ -47,6 +47,7 @@ Class | Method | HTTP request | Description
  - [Lead](docs/Lead.md)
  - [ReferenceObject](docs/ReferenceObject.md)
  - [UploadLeadsRequest](docs/UploadLeadsRequest.md)
+ - [UploadLeadsResponse](docs/UploadLeadsResponse.md)
 
 
 ## Documentation For Authorization

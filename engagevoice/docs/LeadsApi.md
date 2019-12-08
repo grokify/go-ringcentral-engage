@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## UploadLeads
 
-> []Lead UploadLeads(ctx, accountId, campaignId, uploadLeadsRequest)
+> UploadLeadsResponse UploadLeads(ctx, accountId, campaignId, uploadLeadsRequest)
 Upload Leads
 
 Uploads a single lead or list of leads to a new or existing list
@@ -27,7 +27,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Lead**](Lead.md)
+[**UploadLeadsResponse**](UploadLeadsResponse.md)
 
 ### Authorization
 

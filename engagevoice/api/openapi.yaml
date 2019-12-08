@@ -41,9 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Lead'
-                type: array
+                $ref: '#/components/schemas/UploadLeadsResponse'
           description: Success
       summary: Upload Leads
       tags:
@@ -399,6 +397,92 @@ components:
           items:
             $ref: '#/components/schemas/Lead'
           type: array
+    UploadLeadsResponse:
+      example:
+        whitelistCount: 2
+        internalDncCount: 5
+        leadsConverted: 2
+        processingResult: processingResult
+        leadsAccepted: 5
+        quotaCount: 3
+        dncReturnedCount: 6
+        message: message
+        dncUploadCount: 1
+        timeZoneOption: timeZoneOption
+        processingStatus: processingStatus
+        uploadFileName: uploadFileName
+        listState: listState
+        deletedCount: 0
+        hasDeletedLeads: true
+        leadsInserted: 7
+        leadsSupplied: 9
+      properties:
+        deletedCount:
+          format: int32
+          type: integer
+        dncReturnedCount:
+          format: int32
+          type: integer
+        dncUploadCount:
+          format: int32
+          type: integer
+        hasDeletedLeads:
+          type: boolean
+        internalDncCount:
+          format: int32
+          type: integer
+        leadsAccepted:
+          format: int32
+          type: integer
+        leadsConverted:
+          format: int32
+          type: integer
+        leadsInserted:
+          format: int32
+          type: integer
+        leadsSupplied:
+          format: int32
+          type: integer
+        listState:
+          type: string
+        message:
+          description: Values can be `Your uploaded lead list has successfully completed
+            processing` or `Your uploaded lead list file processing has failed`
+          type: string
+        processingResult:
+          description: Values can be `OK` or `Failed`
+          type: string
+        processingStatus:
+          description: Values can be `DEFAULT_NOT_A_FAILURE` or `GENERAL_FAILURE`
+          type: string
+        quotaCount:
+          format: int32
+          type: integer
+        timeZoneOption:
+          type: string
+        uploadFileName:
+          type: string
+        whitelistCount:
+          format: int32
+          type: integer
+      required:
+      - deletedCount
+      - dncReturnedCount
+      - dncUploadCount
+      - hasDeletedLeads
+      - internalDncCount
+      - leadsAccepted
+      - leadsConverted
+      - leadsInserted
+      - leadsSupplied
+      - listState
+      - message
+      - processingResult
+      - processingStatus
+      - quotaCount
+      - timeZoneOption
+      - uploadFileName
+      - whitelistCount
   securitySchemes:
     bearerAuth:
       scheme: bearer
