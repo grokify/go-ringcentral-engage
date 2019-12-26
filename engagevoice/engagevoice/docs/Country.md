@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CountryCode** | **string** |  | [optional] 
+**CountryCode** | **string** |  | 
 **CountryId** | **string** | Country code i ISO 3166-1 alpha-3 format | [optional] 
 **CountryName** | **string** |  | [optional] 
 **MaxAniLength** | **int32** |  | [optional] 

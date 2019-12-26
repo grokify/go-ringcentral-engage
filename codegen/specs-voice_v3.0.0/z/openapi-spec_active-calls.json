@@ -8,28 +8,20 @@
     },
     "tags":[
        {
-          "name":"Campaigns"
+          "name":"Active Calls"
        }
     ],
     "paths":{
-       "/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns":{
+       "/admin/accounts/{accountId}/activeCalls/list":{
           "get":{
              "tags":[
-                "Campaigns"
+                "ActiveCalls"
              ],
-             "summary":"Returns a listing of campaigns for a dial group",
-             "operationId":"getDialGroupCampaigns",
+             "summary":"Returns a listing of current active calls for a given product on an account",
+             "operationId":"getActiveCalls",
              "parameters":[
                 {
                    "name":"accountId",
-                   "in":"path",
-                   "required":true,
-                   "schema":{
-                      "type":"string"
-                   }
-                },
-                {
-                   "name":"dialGroupId",
                    "in":"path",
                    "required":true,
                    "schema":{
@@ -50,6 +42,16 @@
                          }
                       }
                    }
+                },
+                "500":{
+                    "description":"Server Error",
+                    "content":{
+                       "application/json":{
+                          "schema":{
+                             "$ref":"#/components/schemas/Error"
+                          }
+                       }
+                    }
                 }
              }
           }
@@ -68,7 +70,24 @@
           }
        },
        "schemas":{
-          "Generic":{
+          "Error":{
+            "properties":{
+                "generalMessage":{
+                    "type":"string"
+                 },
+                 "details":{
+                    "type":"string"
+                 },
+                 "requestUri":{
+                    "type":"string"
+                 },
+                "timestamp":{
+                   "type":"integer",
+                   "format":"int64"
+                }
+             }
+          },
+          "ReferenceObject":{
              "properties":{
                 "id":{
                    "type":"integer",
@@ -102,10 +121,10 @@
                    "format":"int64"
                 },
                 "dialGroup":{
-                  "$ref": "#/components/schemas/Generic"
+                   "$ref":"#/components/schemas/ReferenceObject"
                 },
                 "script":{
-                   "$ref": "#/components/schemas/Generic"
+                   "$ref":"#/components/schemas/ReferenceObject"
                 }
              }
           }

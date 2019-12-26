@@ -9,7 +9,7 @@
 
 package engagevoice
 
-type ReferenceObject struct {
+type Generic struct {
 	Description string `json:"description,omitempty"`
 	Id          int64  `json:"id,omitempty"`
 }

@@ -1,11 +1,12 @@
-# ReferenceObject
+# AgentGroup
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | **string** |  | [optional] 
-**Id** | **int64** |  | [optional] 
+**AgentGroupId** | **int64** |  | [optional] 
+**GroupName** | **string** |  | [optional] 
+**IsDefault** | **bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

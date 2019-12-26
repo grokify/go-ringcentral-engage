@@ -8,17 +8,17 @@
     },
     "tags":[
        {
-          "name":"Dial Groups"
+          "name":"Agents"
        }
     ],
     "paths":{
-       "/admin/accounts/{accountId}/dialGroups":{
+       "/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents":{
           "get":{
              "tags":[
-                "Dial Groups"
+                "Agents"
              ],
-             "summary":"Returns a listing of dial groups for an account",
-             "operationId":"getDialGroups",
+             "summary":"Returns a listing of agents for an agent group",
+             "operationId":"getAgents",
              "parameters":[
                 {
                    "name":"accountId",
@@ -27,7 +27,15 @@
                    "schema":{
                       "type":"string"
                    }
-                }
+                },
+                {
+                    "name":"agentGroupId",
+                    "in":"path",
+                    "required":true,
+                    "schema":{
+                       "type":"string"
+                    }
+                 }
              ],
              "responses":{
                 "200":{
@@ -37,11 +45,21 @@
                          "schema":{
                             "type":"array",
                             "items":{
-                               "$ref":"#/components/schemas/DialGroup"
+                               "$ref":"#/components/schemas/Agent"
                             }
                          }
                       }
                    }
+                },
+                "500":{
+                    "description":"Server Error",
+                    "content":{
+                       "application/json":{
+                          "schema":{
+                             "$ref":"#/components/schemas/Error"
+                          }
+                       }
+                    }
                 }
              }
           }
@@ -60,40 +78,23 @@
           }
        },
        "schemas":{
-          "DialGroup":{
-             "type":"object",
-             "properties":{
-                "permissions":{
-                   "type":"array",
-                   "items":{
-                      "type":"object"
-                   }
-                },
-                "dialGroupId":{
+        "Error":{
+            "properties":{
+                "generalMessage":{
+                    "type":"string"
+                 },
+                 "details":{
+                    "type":"string"
+                 },
+                 "requestUri":{
+                    "type":"string"
+                 },
+                "timestamp":{
                    "type":"integer",
                    "format":"int64"
-                },
-                "dialGroupName":{
-                   "type":"string"
-                },
-                "dialGroupDesc":{
-                   "type":"string"
-                },
-                "dialMode":{
-                   "type":"string",
-                   "description":"Can be `PREDICTIVE`"
-                },
-                "isActive":{
-                   "type":"boolean"
-                },
-                "hciEnabled":{
-                   "type":"string",
-                   "description":"Can be `DISABLED`"
-                },
-                "agentDialGroupMembers":{
-                   "type":"object"
                 }
              }
+
           }
        }
     }

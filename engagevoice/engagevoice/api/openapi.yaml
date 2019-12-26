@@ -6,11 +6,77 @@ info:
 servers:
 - url: https://portal.vacd.biz/api/v1
 tags:
+- name: Agents
 - name: Campaigns
 - name: Countries
 - name: Dial Groups
 - name: Leads
 paths:
+  /admin/accounts/{accountId}/agentGroups:
+    get:
+      operationId: getAgentGroups
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AgentGroup'
+                type: array
+          description: Success
+        500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Server Error
+      summary: Returns a listing of agent groups for an account
+      tags:
+      - Agents
+  /admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents:
+    get:
+      operationId: getAgents
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: agentGroupId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Agent'
+                type: array
+          description: Success
+        500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Server Error
+      summary: Returns a listing of agents for an agent group
+      tags:
+      - Agents
   /admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct:
     post:
       description: Uploads a single lead or list of leads to a new or existing list
@@ -124,6 +190,277 @@ paths:
       - Campaigns
 components:
   schemas:
+    Agent:
+      example:
+        directAgentExtension: directAgentExtension
+        defaultAutoAnswerOn: true
+        allowGateStats: true
+        allowLoginUpdates: true
+        rcUserId: 2
+        isActive: true
+        allowHold: true
+        allowManualIntlTransfer: false
+        ghostRnaAction: AVAILABLE
+        password: password
+        showLeadHistory: true
+        allowRequeue: true
+        initLoginBaseState: AVAILABLE
+        enableSoftphone: false
+        userManagedByRC: false
+        defaultLoginDest: defaultLoginDest
+        gatesControlAgentVisibility: false
+        allowExternalChat: false
+        allowChatVoiceConcurrent: false
+        allowLoginControl: true
+        allowOutbound: false
+        allowHangup: true
+        parentAgentId: 5
+        initLoginBaseStateId: 1
+        allowBlended: false
+        allowManualOutboundGates: false
+        transientDelete: false
+        firstName: firstName
+        allowChatStats: true
+        allowLeadInserts: false
+        allowManualCalls: true
+        allowTransfer: true
+        allowAgentStats: true
+        allowAutoAnswer: false
+        allowHistoricalDialing: true
+        lastName: lastName
+        agentId: 0
+        manualOutboundDefaultCallerId: manualOutboundDefaultCallerId
+        allowEndcallforeveryone: true
+        multiAccountAgent: false
+        agentRank: 6
+        lastLoginDate: 2000-01-23T04:56:07.000+00:00
+        allowManualPass: true
+        allowOffHook: false
+        allowCallControl: true
+        maxChats: 5
+        allowCrossGateRequeue: true
+        allowManualIntlCalls: false
+        phoneLoginPin: phoneLoginPin
+        softphoneId: 7
+        disableSupervisorMonitoring: false
+        email: email
+        allowCampStats: true
+        allowInbound: true
+        allowChat: false
+        allowAgentReports: false
+        team: team
+        transientAgent: false
+        loadBalanceEnabled: false
+        allowSelfAgentStats: false
+        allowInboundIntlTransfer: false
+        altDefaultLoginDest: altDefaultLoginDest
+        location: location
+        allowFromIpAddresses: allowFromIpAddresses
+        externalAgentId: externalAgentId
+        transientDeleteDate: 2000-01-23T04:56:07.000+00:00
+        username: username
+      properties:
+        agentId:
+          type: integer
+        agentRank:
+          default: 0
+          type: integer
+        allowAgentReports:
+          default: false
+          type: boolean
+        allowAgentStats:
+          default: true
+          type: boolean
+        allowAutoAnswer:
+          default: false
+          type: boolean
+        allowBlended:
+          default: false
+          type: boolean
+        allowCallControl:
+          default: true
+          type: boolean
+        allowCampStats:
+          default: true
+          type: boolean
+        allowChat:
+          default: false
+          type: boolean
+        allowChatStats:
+          default: true
+          type: boolean
+        allowChatVoiceConcurrent:
+          default: false
+          type: boolean
+        allowCrossGateRequeue:
+          default: true
+          type: boolean
+        allowEndcallforeveryone:
+          default: true
+          type: boolean
+        allowExternalChat:
+          default: false
+          type: boolean
+        allowFromIpAddresses:
+          type: string
+        allowGateStats:
+          default: true
+          type: boolean
+        allowHangup:
+          default: true
+          type: boolean
+        allowHistoricalDialing:
+          default: true
+          type: boolean
+        allowHold:
+          default: true
+          type: boolean
+        allowInbound:
+          default: true
+          type: boolean
+        allowInboundIntlTransfer:
+          default: false
+          type: boolean
+        allowLeadInserts:
+          default: false
+          type: boolean
+        allowLoginControl:
+          default: true
+          type: boolean
+        allowLoginUpdates:
+          default: true
+          type: boolean
+        allowManualCalls:
+          default: true
+          type: boolean
+        allowManualIntlCalls:
+          default: false
+          type: boolean
+        allowManualIntlTransfer:
+          default: false
+          type: boolean
+        allowManualOutboundGates:
+          default: false
+          type: boolean
+        allowManualPass:
+          default: true
+          type: boolean
+        allowOffHook:
+          default: false
+          type: boolean
+        allowOutbound:
+          default: false
+          type: boolean
+        allowRequeue:
+          default: true
+          type: boolean
+        allowSelfAgentStats:
+          default: false
+          type: boolean
+        allowTransfer:
+          default: true
+          type: boolean
+        altDefaultLoginDest:
+          type: string
+        defaultAutoAnswerOn:
+          default: true
+          type: boolean
+        defaultLoginDest:
+          default: ""
+          type: string
+        directAgentExtension:
+          type: string
+        disableSupervisorMonitoring:
+          default: false
+          type: boolean
+        email:
+          type: string
+        enableSoftphone:
+          default: false
+          type: boolean
+        externalAgentId:
+          type: string
+        firstName:
+          type: string
+        gatesControlAgentVisibility:
+          default: false
+          type: boolean
+        ghostRnaAction:
+          default: AVAILABLE
+          type: string
+        initLoginBaseState:
+          default: AVAILABLE
+          type: string
+        initLoginBaseStateId:
+          type: integer
+        isActive:
+          default: true
+          type: boolean
+        lastLoginDate:
+          format: date-time
+          type: string
+        lastName:
+          type: string
+        loadBalanceEnabled:
+          default: false
+          type: boolean
+        location:
+          type: string
+        manualOutboundDefaultCallerId:
+          default: ""
+          type: string
+        maxChats:
+          default: 5
+          type: integer
+        multiAccountAgent:
+          default: false
+          type: boolean
+        parentAgentId:
+          type: integer
+        password:
+          type: string
+        phoneLoginPin:
+          type: string
+        rcUserId:
+          format: int64
+          type: integer
+        showLeadHistory:
+          default: true
+          type: boolean
+        softphoneId:
+          default: 0
+          type: integer
+        team:
+          type: string
+        transientAgent:
+          default: false
+          type: boolean
+        transientDelete:
+          default: false
+          type: boolean
+        transientDeleteDate:
+          format: date-time
+          type: string
+        userManagedByRC:
+          default: false
+          type: boolean
+        username:
+          type: string
+    AgentGroup:
+      description: 'WIP: `permissions` is an array that needs definition'
+      example:
+        groupName: groupName
+        isDefault: true
+        agentGroupId: 0
+      properties:
+        agentGroupId:
+          format: int64
+          type: integer
+        groupName:
+          type: string
+        isDefault:
+          type: boolean
+      type: object
     Campaign:
       example:
         campaignDesc: campaignDesc
@@ -148,7 +485,7 @@ components:
         campaignName:
           type: string
         dialGroup:
-          $ref: '#/components/schemas/ReferenceObject'
+          $ref: '#/components/schemas/Generic'
         isActive:
           format: int64
           type: integer
@@ -157,7 +494,7 @@ components:
             type: object
           type: array
         script:
-          $ref: '#/components/schemas/ReferenceObject'
+          $ref: '#/components/schemas/Generic'
     Country:
       example:
         minUtcOffset: 5
@@ -176,17 +513,20 @@ components:
         countryName:
           type: string
         maxAniLength:
-          format: int8
+          format: int32
           type: integer
         maxUtcOffset:
-          format: int8
+          format: int32
           type: integer
         minAniLength:
-          format: int8
+          format: int32
           type: integer
         minUtcOffset:
-          format: int8
+          format: int32
           type: integer
+      required:
+      - countryCode
+      type: object
     DialGroup:
       example:
         dialGroupId: 0
@@ -221,6 +561,18 @@ components:
           items:
             type: object
           type: array
+      type: object
+    Error:
+      properties:
+        details:
+          type: string
+        generalMessage:
+          type: string
+        requestUri:
+          type: string
+        timestamp:
+          format: int64
+          type: integer
     ExtendedLeadData:
       example:
         important: important
@@ -230,6 +582,17 @@ components:
           type: string
         interested:
           type: boolean
+      type: object
+    Generic:
+      example:
+        description: description
+        id: 6
+      properties:
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
     Lead:
       example:
         zip: zip
@@ -303,16 +666,7 @@ components:
           type: string
       required:
       - externId
-    ReferenceObject:
-      example:
-        description: description
-        id: 6
-      properties:
-        description:
-          type: string
-        id:
-          format: int64
-          type: integer
+      type: object
     UploadLeadsRequest:
       example:
         timeZoneOption: NPA_NXX
@@ -397,6 +751,7 @@ components:
           items:
             $ref: '#/components/schemas/Lead'
           type: array
+      type: object
     UploadLeadsResponse:
       example:
         whitelistCount: 2
@@ -483,6 +838,7 @@ components:
       - timeZoneOption
       - uploadFileName
       - whitelistCount
+      type: object
   securitySchemes:
     bearerAuth:
       scheme: bearer

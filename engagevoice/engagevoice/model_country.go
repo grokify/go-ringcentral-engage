@@ -10,7 +10,7 @@
 package engagevoice
 
 type Country struct {
-	CountryCode string `json:"countryCode,omitempty"`
+	CountryCode string `json:"countryCode"`
 	// Country code i ISO 3166-1 alpha-3 format
 	CountryId    string `json:"countryId,omitempty"`
 	CountryName  string `json:"countryName,omitempty"`

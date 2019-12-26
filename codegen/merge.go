@@ -1,17 +1,22 @@
 package main
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"path/filepath"
 
+	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/io/ioutilmore"
 	"github.com/grokify/gotilla/path/filepathutil"
 	"github.com/grokify/swaggman/openapi3"
 	"github.com/grokify/swaggman/swagger2"
 	"github.com/jessevdk/go-flags"
 	"github.com/pkg/errors"
+
+	oas3 "github.com/getkin/kin-openapi/openapi3"
 )
 
 type options struct {
@@ -34,11 +39,46 @@ func MergeOAS2(dir, outfile string) error {
 }
 
 func MergeOAS3(dir, outfile string) error {
+	fmt.Println("START_OAS3\n")
 	spec, err := openapi3.MergeDirectory(dir)
 	if err != nil {
-		return errors.Wrap(err, "E_MERGE_FAILED")
+		return errors.Wrap(err, "E_MERGE_DIRECTORY_FAILED")
 	}
+	if 1 == 0 {
+		schemas := []string{"ReferenceObject", "Agent"}
+		for i, sch := range schemas {
+			has := openapi3.SpecHasComponentSchema(spec, sch, false)
+			hasStr := "YES"
+			if !has {
+				hasStr = "NO"
+			}
+			fmt.Printf("[%v] [%v] [%v]\n", i, sch, hasStr)
+		}
 
+		if 1 == 0 {
+			err = spec.Validate(context.Background())
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+		bytes, err := json.Marshal(spec)
+		if err != nil {
+			log.Fatal(err)
+		}
+		loader := oas3.NewSwaggerLoader()
+		spec2, err := loader.LoadSwaggerFromData(bytes)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmtutil.PrintJSON(spec2)
+		err = spec2.Validate(loader.Context)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("VALIDATED")
+		//fmtutil.PrintJSON
+		panic("Z")
+	}
 	bytes, err := spec.MarshalJSON()
 	if err != nil {
 		return errors.Wrap(err, "E_JSON_ENCODING_FAILED")
@@ -53,6 +93,45 @@ func MergeOAS3(dir, outfile string) error {
 }
 
 func main() {
+	if 1 == 0 {
+		file := "specs-voice_v3.0.0/openapi-spec_campaigns.json"
+		file = "specs-voice_v3.0.0/openapi-spec_countries.json"
+		file = "specs-example_v3.0.0.json"
+		file = "specs-voice_v3.0.0/openapi-spec_agent-groups.json"
+		file = "specs-voice_v3.0.0/openapi-spec_agents.json"
+		if 1 == 1 {
+			spec, err := openapi3.ReadFile(file, false)
+			if err != nil {
+				fmt.Println("TEST_UNMARSHAL")
+				log.Fatal(err)
+			}
+			fmtutil.PrintJSON(spec)
+			name := "Country"
+			fmtutil.PrintJSON(spec.Components.Schemas[name])
+
+			fmt.Printf("HAS [%v][%v]\n", name, openapi3.SpecHasComponentSchema(spec, name, false))
+			err = spec.Validate(context.Background())
+			if err != nil {
+				log.Fatal(err)
+			}
+			panic("READ_FILE_NEW")
+		}
+		spec, err := openapi3.ReadFileLoader(file)
+		if err != nil {
+			fmt.Println("TEST_LOADER")
+			log.Fatal(err)
+		}
+		fmtutil.PrintJSON(spec)
+		err = spec.Validate(context.Background())
+		if err != nil {
+			fmt.Println("TEST")
+			log.Fatal(err)
+		}
+		fmtutil.PrintJSON(spec)
+
+		fmt.Println("DONE")
+		panic("Z")
+	}
 	opts := options{}
 	_, err := flags.Parse(&opts)
 	if err != nil {

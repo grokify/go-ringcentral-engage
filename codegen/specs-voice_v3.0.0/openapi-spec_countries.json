@@ -61,6 +61,8 @@
        },
        "schemas":{
           "Country":{
+             "type":"object",
+             "required":["countryCode"],
              "properties":{
                 "countryId":{
                    "type":"string",
@@ -74,19 +76,19 @@
                 },
                 "minUtcOffset":{
                    "type":"integer",
-                   "format":"int8"
+                   "format":"int32"
                 },
                 "maxUtcOffset":{
                    "type":"integer",
-                   "format":"int8"
+                   "format":"int32"
                 },
                 "minAniLength":{
                    "type":"integer",
-                   "format":"int8"
+                   "format":"int32"
                 },
                 "maxAniLength":{
                    "type":"integer",
-                   "format":"int8"
+                   "format":"int32"
                 }
              }
           }

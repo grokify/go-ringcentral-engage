@@ -13,8 +13,8 @@ type Campaign struct {
 	CampaignDesc string                   `json:"campaignDesc,omitempty"`
 	CampaignId   int64                    `json:"campaignId,omitempty"`
 	CampaignName string                   `json:"campaignName,omitempty"`
-	DialGroup    ReferenceObject          `json:"dialGroup,omitempty"`
+	DialGroup    Generic                  `json:"dialGroup,omitempty"`
 	IsActive     int64                    `json:"isActive,omitempty"`
 	Permissions  []map[string]interface{} `json:"permissions,omitempty"`
-	Script       ReferenceObject          `json:"script,omitempty"`
+	Script       Generic                  `json:"script,omitempty"`
 }
