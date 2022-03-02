@@ -12,15 +12,15 @@
  [build-status-svg]: https://github.com/grokify/go-ringcentral-engage/workflows/go%20build/badge.svg?branch=master
  [build-status-url]: https://github.com/grokify/go-ringcentral-engage/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
- [goreport-link]: https://goreportcard.com/report/github.com/grokify/go-ringcentral-engage
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/go-ringcentral-engage
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
- [docs-godoc-link]: https://godoc.org/github.com/grokify/go-ringcentral-engage/engagedigital
+ [docs-godoc-url]: https://godoc.org/github.com/grokify/go-ringcentral-engage/engagedigital
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-link]: https://github.com/grokify/go-ringcentral-engage/blob/master/LICENSE
+ [license-url]: https://github.com/grokify/go-ringcentral-engage/blob/master/LICENSE
  [stackoverflow-svg]: https://img.shields.io/badge/Stack%20Overflow-ringcentral-orange.svg
- [stackoverflow-link]: https://stackoverflow.com/questions/tagged/ringcentral
+ [stackoverflow-url]: https://stackoverflow.com/questions/tagged/ringcentral
  [twitter-svg]: https://img.shields.io/twitter/follow/ringcentraldevs.svg?style=social&label=follow
- [twitter-link]: https://twitter.com/RingCentralDevs
+ [twitter-url]: https://twitter.com/RingCentralDevs
 
 ## Overview
 
