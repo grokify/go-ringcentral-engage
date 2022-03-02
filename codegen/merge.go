@@ -8,13 +8,13 @@ import (
 	"log"
 	"path/filepath"
 
+	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/path/filepathutil"
 	"github.com/grokify/spectrum/openapi2"
 	"github.com/grokify/spectrum/openapi3"
 	"github.com/jessevdk/go-flags"
-	"github.com/pkg/errors"
 
 	oas3 "github.com/getkin/kin-openapi/openapi3"
 )
@@ -27,12 +27,12 @@ type options struct {
 func MergeOAS2(dir, outfile string) error {
 	spec, err := openapi2.MergeDirectory(dir)
 	if err != nil {
-		return errors.Wrap(err, "E_MERGE_FAILED")
+		return errorsutil.Wrap(err, "E_MERGE_FAILED")
 	}
 
 	err = ioutilmore.WriteFileJSON(outfile, spec, 0644, "", "  ")
 	if err != nil {
-		return errors.Wrap(err, "E_WRITE_FAILED")
+		return errorsutil.Wrap(err, "E_WRITE_FAILED")
 	}
 	fmt.Printf("WROTE [%v]\n", outfile)
 	return nil
@@ -42,7 +42,7 @@ func MergeOAS3(dir, outfile string) error {
 	fmt.Println("START_OAS3\n")
 	spec, err := openapi3.MergeDirectory(dir)
 	if err != nil {
-		return errors.Wrap(err, "E_MERGE_DIRECTORY_FAILED")
+		return errorsutil.Wrap(err, "E_MERGE_DIRECTORY_FAILED")
 	}
 	if 1 == 0 {
 		schemas := []string{"ReferenceObject", "Agent"}
@@ -81,12 +81,12 @@ func MergeOAS3(dir, outfile string) error {
 	}
 	bytes, err := spec.MarshalJSON()
 	if err != nil {
-		return errors.Wrap(err, "E_JSON_ENCODING_FAILED")
+		return errorsutil.Wrap(err, "E_JSON_ENCODING_FAILED")
 	}
 
 	err = ioutil.WriteFile(outfile, bytes, 0644)
 	if err != nil {
-		return errors.Wrap(err, "E_WRITE_FAILED")
+		return errorsutil.Wrap(err, "E_WRITE_FAILED")
 	}
 	fmt.Printf("WROTE [%v]\n", outfile)
 	return nil

@@ -1,6 +1,7 @@
 package engagevoiceutil
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -9,7 +10,6 @@ import (
 	"time"
 
 	"github.com/grokify/mogo/net/httputilmore"
-	"github.com/pkg/errors"
 )
 
 // portal.vacd.biz:8081
