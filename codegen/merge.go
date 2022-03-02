@@ -39,15 +39,16 @@ func MergeOAS2(dir, outfile string) error {
 }
 
 func MergeOAS3(dir, outfile string) error {
-	fmt.Println("START_OAS3\n")
-	spec, err := openapi3.MergeDirectory(dir)
+	fmt.Println("START_OAS3")
+	spec, _, err := openapi3.MergeDirectory(dir, &openapi3.MergeOptions{ValidateFinal: true})
 	if err != nil {
 		return errorsutil.Wrap(err, "E_MERGE_DIRECTORY_FAILED")
 	}
+	sm := openapi3.SpecMore{Spec: spec}
 	if 1 == 0 {
 		schemas := []string{"ReferenceObject", "Agent"}
 		for i, sch := range schemas {
-			has := openapi3.SpecHasComponentSchema(spec, sch, false)
+			has := sm.HasComponentSchema(sch, false)
 			hasStr := "YES"
 			if !has {
 				hasStr = "NO"
@@ -65,8 +66,8 @@ func MergeOAS3(dir, outfile string) error {
 		if err != nil {
 			log.Fatal(err)
 		}
-		loader := oas3.NewSwaggerLoader()
-		spec2, err := loader.LoadSwaggerFromData(bytes)
+		loader := oas3.NewLoader()
+		spec2, err := loader.LoadFromData(bytes)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -109,14 +110,17 @@ func main() {
 			name := "Country"
 			fmtutil.PrintJSON(spec.Components.Schemas[name])
 
-			fmt.Printf("HAS [%v][%v]\n", name, openapi3.SpecHasComponentSchema(spec, name, false))
+			sm := openapi3.SpecMore{Spec: spec}
+
+			fmt.Printf("HAS [%v][%v]\n", name, sm.HasComponentSchema(name, false))
 			err = spec.Validate(context.Background())
 			if err != nil {
 				log.Fatal(err)
 			}
 			panic("READ_FILE_NEW")
 		}
-		spec, err := openapi3.ReadFileLoader(file)
+		loader := oas3.NewLoader()
+		spec, err := loader.LoadFromFile(file)
 		if err != nil {
 			fmt.Println("TEST_LOADER")
 			log.Fatal(err)

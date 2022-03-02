@@ -11,16 +11,17 @@ import (
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/type/stringsutil"
+	"github.com/grokify/spectrum/openapi3"
 	"github.com/grokify/spectrum/openapi3/springopenapi3"
 	log "github.com/sirupsen/logrus"
 )
 
-func ReadOas3Spec(file string, validate bool) (*oas3.Swagger, error) {
+func ReadOas3Spec(file string, validate bool) (*openapi3.Spec, error) {
 	bytes, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, errorsutil.Wrap(err, fmt.Sprintf("Filename [%v]", file))
 	}
-	swag := &oas3.Swagger{}
+	swag := &openapi3.Spec{}
 	err = swag.UnmarshalJSON(bytes)
 	if err != nil {
 		return nil, errorsutil.Wrap(err, fmt.Sprintf("Filename [%v]", file))
@@ -51,7 +52,7 @@ func main() {
 	fmt.Println(string(bytes))
 	lines := strings.Split(string(bytes), "\n")
 	fmtutil.PrintJSON(lines)
-	lines = stringsutil.SliceLinesTrim(lines, " \t", true)
+	lines = stringsutil.SliceTrim(lines, " \t", true)
 	fmtutil.PrintJSON(lines)
 	//panic("Z")
 
@@ -64,7 +65,7 @@ func main() {
 	if 1 == 0 {
 		line := "private Boolean userManagedByRC;"
 		line = "private Boolean userManagedByRC = false;"
-		name, prop, err := fromspring.ParseSpringLineToSchema(line)
+		name, prop, err := springopenapi3.ParseSpringLineToSchema(line)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -86,7 +87,7 @@ func main() {
 	}
 	fmt.Printf("WROTE [%v]\n", "_schema_agent.json")
 
-	swag2 := oas3.Swagger{
+	swag2 := oas3.T{
 		Components: oas3.Components{
 			Schemas: map[string]*oas3.SchemaRef{
 				"Agent": &oas3.SchemaRef{

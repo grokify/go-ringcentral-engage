@@ -28,8 +28,8 @@ func main() {
 		log.Fatal("E_NO_FILE")
 	}
 
-	loader := oas3.NewSwaggerLoader()
-	spec, err := loader.LoadSwaggerFromFile(opts.File)
+	loader := oas3.NewLoader()
+	spec, err := loader.LoadFromFile(opts.File)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,7 +46,7 @@ func main() {
 	fmt.Println("DONE")
 }
 
-func getEndpointsMetaFlat(spec *oas3.Swagger) [][]string {
+func getEndpointsMetaFlat(spec *oas3.T) [][]string {
 	paths := [][]string{}
 	for url, path := range spec.Paths {
 		paths = appendPathsPathInfo(http.MethodConnect, url, path.Connect, paths)

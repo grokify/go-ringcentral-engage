@@ -13,7 +13,7 @@ const (
 
 func NewApiClient(site, token string) *engagedigital.APIClient {
 	cfg := engagedigital.NewConfiguration()
-	cfg.HTTPClient = goauth.NewClientBearerTokenSimple(token)
+	cfg.HTTPClient = goauth.NewClientToken(goauth.TokenBearer, token, false)
 	cfg.BasePath = fmt.Sprintf(ApiUrlFormat, site)
 	return engagedigital.NewAPIClient(cfg)
 }
