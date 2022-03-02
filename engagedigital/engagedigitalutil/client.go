@@ -3,9 +3,8 @@ package utils
 import (
 	"fmt"
 
-	"github.com/grokify/oauth2more"
-
 	"github.com/grokify/go-ringcentral-engage/engagedigital/engagedigital"
+	"github.com/grokify/goauth"
 )
 
 const (
@@ -14,7 +13,7 @@ const (
 
 func NewApiClient(site, token string) *engagedigital.APIClient {
 	cfg := engagedigital.NewConfiguration()
-	cfg.HTTPClient = oauth2more.NewClientBearerTokenSimple(token)
+	cfg.HTTPClient = goauth.NewClientBearerTokenSimple(token)
 	cfg.BasePath = fmt.Sprintf(ApiUrlFormat, site)
 	return engagedigital.NewAPIClient(cfg)
 }
