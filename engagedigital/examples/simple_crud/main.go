@@ -8,12 +8,12 @@ import (
 	"time"
 
 	"github.com/antihax/optional"
+	"github.com/grokify/mogo/time/timeutil"
 	"github.com/jessevdk/go-flags"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital/engagedigital"
 	utils "github.com/grokify/go-ringcentral-engage/engagedigital/engagedigitalutil"
 	ex "github.com/grokify/go-ringcentral-engage/engagedigital/examples"
-	"github.com/grokify/gotilla/time/timeutil"
 )
 
 type options struct {

@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/antihax/optional"
-	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/jessevdk/go-flags"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital/engagedigital"

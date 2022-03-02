@@ -7,10 +7,10 @@ import (
 	"strings"
 
 	oas3 "github.com/getkin/kin-openapi/openapi3"
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/io/ioutilmore"
-	"github.com/grokify/gotilla/type/stringsutil"
-	"github.com/grokify/swaggman/openapi3/fromspring"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/io/ioutilmore"
+	"github.com/grokify/mogo/type/stringsutil"
+	"github.com/grokify/spectrum/openapi3/fromspring"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 )

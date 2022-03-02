@@ -6,7 +6,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/jessevdk/go-flags"
 
 	utils "github.com/grokify/go-ringcentral-engage/engagedigital/engagedigitalutil"

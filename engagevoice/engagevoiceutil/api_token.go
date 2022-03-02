@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/grokify/gotilla/net/httputilmore"
+	"github.com/grokify/mogo/net/httputilmore"
 	"github.com/pkg/errors"
 )
 

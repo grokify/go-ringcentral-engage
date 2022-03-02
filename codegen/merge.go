@@ -8,11 +8,11 @@ import (
 	"log"
 	"path/filepath"
 
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/io/ioutilmore"
-	"github.com/grokify/gotilla/path/filepathutil"
-	"github.com/grokify/swaggman/openapi3"
-	"github.com/grokify/swaggman/swagger2"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/io/ioutilmore"
+	"github.com/grokify/mogo/path/filepathutil"
+	"github.com/grokify/spectrum/openapi2"
+	"github.com/grokify/spectrum/openapi3"
 	"github.com/jessevdk/go-flags"
 	"github.com/pkg/errors"
 
@@ -25,7 +25,7 @@ type options struct {
 }
 
 func MergeOAS2(dir, outfile string) error {
-	spec, err := swagger2.MergeDirectory(dir)
+	spec, err := openapi2.MergeDirectory(dir)
 	if err != nil {
 		return errors.Wrap(err, "E_MERGE_FAILED")
 	}

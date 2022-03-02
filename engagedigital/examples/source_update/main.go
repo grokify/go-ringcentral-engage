@@ -6,9 +6,9 @@ import (
 	"log"
 
 	"github.com/antihax/optional"
-	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/mogo/errors/errorsutil"
+	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/jessevdk/go-flags"
-	"github.com/pkg/errors"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital/engagedigital"
 	utils "github.com/grokify/go-ringcentral-engage/engagedigital/engagedigitalutil"
@@ -30,7 +30,7 @@ func main() {
 
 	info, resp, err := client.SourcesApi.GetAllSources(context.Background(), nil)
 	if err != nil {
-		err = errors.Wrap(err, "E_GET_ALL_SOURCES")
+		err = errorsutil.Wrap(err, "E_GET_ALL_SOURCES")
 		log.Fatal(err)
 	} else if resp.StatusCode != 200 {
 		log.Fatal(resp.StatusCode)
@@ -50,7 +50,7 @@ func main() {
 		info, resp, err := client.SourcesApi.UpdateSource(
 			context.Background(), source.Id, opts)
 		if err != nil {
-			err = errors.Wrap(err, "E_UPDATE_SOURCE")
+			err = errorsutil.Wrap(err, "E_UPDATE_SOURCE")
 			log.Fatal(err)
 		} else if resp.StatusCode != 200 {
 			log.Fatal(resp.StatusCode)

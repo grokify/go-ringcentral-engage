@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/grokify/go-ringcentral-engage/engagedigital/engagedigital"
-	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/mogo/fmt/fmtutil"
 )
 
 func HandleApiResponse(info interface{}, resp *http.Response, err error) {
