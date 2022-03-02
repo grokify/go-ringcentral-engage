@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"strings"
 
 	oas3 "github.com/getkin/kin-openapi/openapi3"
@@ -13,7 +14,6 @@ import (
 	"github.com/grokify/mogo/type/stringsutil"
 	"github.com/grokify/spectrum/openapi3"
 	"github.com/grokify/spectrum/openapi3/springopenapi3"
-	log "github.com/sirupsen/logrus"
 )
 
 func ReadOas3Spec(file string, validate bool) (*openapi3.Spec, error) {
@@ -76,7 +76,7 @@ func main() {
 
 	mss, err := springopenapi3.ParseSpringPropertyLinesSliceToSchema(columnsRaw)
 	if err != nil {
-		log.Info("S1")
+		log.Print("S1")
 		log.Fatal(err)
 	}
 	fmtutil.PrintJSON(mss)
