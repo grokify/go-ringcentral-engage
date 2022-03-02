@@ -10,7 +10,7 @@ import (
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/type/stringsutil"
-	"github.com/grokify/spectrum/openapi3/fromspring"
+	"github.com/grokify/spectrum/openapi3/springopenapi3"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 )
@@ -55,7 +55,7 @@ func main() {
 	fmtutil.PrintJSON(lines)
 	//panic("Z")
 
-	columnsRaw := fromspring.ParseSpringCodeColumnsRaw(lines)
+	columnsRaw := springopenapi3.ParseSpringCodeColumnsRaw(lines)
 	fmtutil.PrintJSON(columnsRaw)
 
 	schema := oas3.Schema{Properties: map[string]*oas3.SchemaRef{}}
@@ -73,7 +73,7 @@ func main() {
 		panic("Z")
 	}
 
-	mss, err := fromspring.ParseSpringPropertyLinesSliceToSchema(columnsRaw)
+	mss, err := springopenapi3.ParseSpringPropertyLinesSliceToSchema(columnsRaw)
 	if err != nil {
 		log.Info("S1")
 		log.Fatal(err)
