@@ -9,8 +9,8 @@
 [![Twitter][twitter-svg]][twitter-url]
 
  [api-coverage-svg]: https://img.shields.io/badge/api%20coverage-116%2F121%20%3D%2096%25-yellow.svg
- [build-status-svg]: https://github.com/grokify/go-ringcentral-engage/workflows/go%20build/badge.svg?branch=master
- [build-status-url]: https://github.com/grokify/go-ringcentral-engage/actions
+ [build-status-svg]: https://github.com/grokify/go-ringcentral-engage/workflows/test/badge.svg
+ [build-status-url]: https://github.com/grokify/go-ringcentral-engage/actions/workflows/test.yaml
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/go-ringcentral-engage
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/go-ringcentral-engage
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
