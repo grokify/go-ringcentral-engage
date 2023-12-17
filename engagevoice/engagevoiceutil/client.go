@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/grokify/go-ringcentral-engage/engagevoice/engagevoice"
-	"github.com/grokify/mogo/net/httputilmore"
+	"github.com/grokify/mogo/net/http/httputilmore"
 )
 
 type ClientAPIs struct {
@@ -30,7 +30,7 @@ func NewHTTPClient(token string) *http.Client {
 	header.Add(EngageVoiceTokenHeader, token)
 
 	client := &http.Client{}
-	client.Transport = httputilmore.TransportWithHeaders{
+	client.Transport = httputilmore.TransportRequestModifier{
 		Transport: client.Transport,
 		Header:    header}
 	return client

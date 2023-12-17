@@ -8,9 +8,9 @@ import (
 	"log"
 	"path/filepath"
 
+	"github.com/grokify/mogo/encoding/jsonutil"
 	"github.com/grokify/mogo/errors/errorsutil"
 	"github.com/grokify/mogo/fmt/fmtutil"
-	"github.com/grokify/mogo/io/ioutilmore"
 	"github.com/grokify/mogo/path/filepathutil"
 	"github.com/grokify/spectrum/openapi2"
 	"github.com/grokify/spectrum/openapi3"
@@ -30,7 +30,7 @@ func MergeOAS2(dir, outfile string) error {
 		return errorsutil.Wrap(err, "E_MERGE_FAILED")
 	}
 
-	err = ioutilmore.WriteFileJSON(outfile, spec, 0644, "", "  ")
+	err = jsonutil.WriteFile(outfile, spec, "", "  ", 0600)
 	if err != nil {
 		return errorsutil.Wrap(err, "E_WRITE_FAILED")
 	}

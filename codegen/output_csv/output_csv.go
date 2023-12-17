@@ -7,7 +7,7 @@ import (
 	"sort"
 
 	oas3 "github.com/getkin/kin-openapi/openapi3"
-	"github.com/grokify/gocharts/data/table"
+	"github.com/grokify/gocharts/v2/data/table"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/jessevdk/go-flags"
 )
@@ -48,7 +48,8 @@ func main() {
 
 func getEndpointsMetaFlat(spec *oas3.T) [][]string {
 	paths := [][]string{}
-	for url, path := range spec.Paths {
+	pathsMap := spec.Paths.Map()
+	for url, path := range pathsMap {
 		paths = appendPathsPathInfo(http.MethodConnect, url, path.Connect, paths)
 		paths = appendPathsPathInfo(http.MethodGet, url, path.Get, paths)
 		paths = appendPathsPathInfo(http.MethodOptions, url, path.Options, paths)

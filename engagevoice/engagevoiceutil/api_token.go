@@ -10,15 +10,15 @@ import (
 	"time"
 
 	"github.com/grokify/mogo/encoding/jsonutil"
-	"github.com/grokify/mogo/net/httputilmore"
+	"github.com/grokify/mogo/net/http/httputilmore"
 )
 
 // portal.vacd.biz:8081
 
 const (
-	EngageVoiceBaseUri     string = "https://portal.vacd.biz"
-	EngageVoiceLoginUri    string = "https://portal.vacd.biz/api/v1/auth/login"
-	EngageVoiceTokenUri    string = "https://portal.vacd.biz/api/v1/admin/token"
+	EngageVoiceBaseURI     string = "https://portal.vacd.biz"
+	EngageVoiceLoginURI    string = "https://portal.vacd.biz/api/v1/auth/login"
+	EngageVoiceTokenURI    string = "https://portal.vacd.biz/api/v1/admin/token"
 	EngageVoiceTokenHeader string = "x-auth-token"
 )
 
@@ -106,7 +106,7 @@ func GenerateAPIToken(username, password string) (string, *LoginSuccess, error) 
 }
 
 func ExchangeAPIToken(authToken string) (string, error) {
-	req, err := http.NewRequest(http.MethodPost, EngageVoiceTokenUri, nil)
+	req, err := http.NewRequest(http.MethodPost, EngageVoiceTokenURI, nil)
 	if err != nil {
 		return "", err
 	}
@@ -134,7 +134,7 @@ func RequestAuthToken(username, password string) (*LoginSuccess, *LoginError, *h
 	data.Set("username", username)
 	data.Set("password", password)
 
-	resp, err := httputilmore.SendWwwFormUrlEncodedSimple(http.MethodPost, EngageVoiceLoginUri, data)
+	resp, err := httputilmore.SendWWWFormURLEncodedSimple(http.MethodPost, EngageVoiceLoginURI, data)
 	if err != nil {
 		return nil, nil, resp, err
 	}
@@ -161,10 +161,14 @@ func ListTokens(authOrApiToken string) ([]string, error) {
 		return tokens, errors.New("E_NO_TOKEN")
 	}
 
-	resp, err := httputilmore.GetJsonSimple(EngageVoiceTokenUri,
+	_, resp, err := httputilmore.DoJSON(
+		nil,
+		http.MethodGet,
+		EngageVoiceTokenURI,
 		http.Header(map[string][]string{
 			EngageVoiceTokenHeader: []string{authOrApiToken},
 		}),
+		nil,
 		&tokens)
 	if err != nil {
 		return tokens, err
