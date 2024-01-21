@@ -9,7 +9,7 @@ require (
 	github.com/getkin/kin-openapi v0.122.0
 	github.com/grokify/goauth v0.20.8
 	github.com/grokify/gocharts/v2 v2.16.2
-	github.com/grokify/mogo v0.62.6
+	github.com/grokify/mogo v0.62.8
 	github.com/grokify/spectrum v1.18.1
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.16.0
@@ -45,7 +45,7 @@ require (
 	github.com/xuri/excelize/v2 v2.8.0 // indirect
 	github.com/xuri/nfp v0.0.0-20230919160717-d98342af3f05 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
-	golang.org/x/exp v0.0.0-20231219180239-dc181d75b848 // indirect
+	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
 	golang.org/x/net v0.20.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
