@@ -6,7 +6,7 @@ go 1.21
 
 require (
 	github.com/antihax/optional v1.0.0
-	github.com/getkin/kin-openapi v0.122.0
+	github.com/getkin/kin-openapi v0.123.0
 	github.com/grokify/goauth v0.20.10
 	github.com/grokify/gocharts/v2 v2.17.1
 	github.com/grokify/mogo v0.62.8
@@ -18,7 +18,7 @@ require (
 require (
 	github.com/caarlos0/env/v6 v6.10.1 // indirect
 	github.com/go-openapi/jsonpointer v0.20.2 // indirect
-	github.com/go-openapi/swag v0.22.7 // indirect
+	github.com/go-openapi/swag v0.22.8 // indirect
 	github.com/golang-jwt/jwt/v5 v5.2.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
