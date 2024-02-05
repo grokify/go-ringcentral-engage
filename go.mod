@@ -7,8 +7,8 @@ go 1.21
 require (
 	github.com/antihax/optional v1.0.0
 	github.com/getkin/kin-openapi v0.123.0
-	github.com/grokify/goauth v0.20.10
-	github.com/grokify/gocharts/v2 v2.17.1
+	github.com/grokify/goauth v0.20.11
+	github.com/grokify/gocharts/v2 v2.18.0
 	github.com/grokify/mogo v0.63.1
 	github.com/grokify/spectrum v1.18.2
 	github.com/jessevdk/go-flags v1.5.0
@@ -38,7 +38,7 @@ require (
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.3 // indirect
-	github.com/rivo/uniseg v0.4.4 // indirect
+	github.com/rivo/uniseg v0.4.6 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/quicktemplate v1.7.0 // indirect
 	github.com/xuri/efp v0.0.0-20231025114914-d1ff6096ae53 // indirect
