@@ -1,6 +1,7 @@
 module github.com/grokify/go-ringcentral-engage
 
 go 1.21
+toolchain go1.22.1
 
 // toolchain go1.21.1
 
@@ -9,7 +10,7 @@ require (
 	github.com/getkin/kin-openapi v0.123.0
 	github.com/grokify/goauth v0.20.11
 	github.com/grokify/gocharts/v2 v2.18.1
-	github.com/grokify/mogo v0.63.1
+	github.com/grokify/mogo v0.63.5
 	github.com/grokify/spectrum v1.18.3
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.16.0
@@ -44,14 +45,14 @@ require (
 	github.com/xuri/efp v0.0.0-20231025114914-d1ff6096ae53 // indirect
 	github.com/xuri/excelize/v2 v2.8.0 // indirect
 	github.com/xuri/nfp v0.0.0-20230919160717-d98342af3f05 // indirect
-	golang.org/x/crypto v0.18.0 // indirect
-	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
-	golang.org/x/net v0.20.0 // indirect
-	golang.org/x/sys v0.16.0 // indirect
+	golang.org/x/crypto v0.21.0 // indirect
+	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8 // indirect
+	golang.org/x/net v0.22.0 // indirect
+	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gonum.org/v1/gonum v0.14.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/protobuf v1.32.0 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
