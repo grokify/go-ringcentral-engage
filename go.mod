@@ -9,7 +9,7 @@ require (
 	github.com/getkin/kin-openapi v0.123.0
 	github.com/grokify/goauth v0.20.14
 	github.com/grokify/gocharts/v2 v2.18.5
-	github.com/grokify/mogo v0.63.8
+	github.com/grokify/mogo v0.63.9
 	github.com/grokify/spectrum v1.18.5
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/oauth2 v0.19.0
