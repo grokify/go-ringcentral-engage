@@ -1,16 +1,13 @@
 module github.com/grokify/go-ringcentral-engage
 
 go 1.22.0
-
-toolchain go1.22.3
-
 require (
 	github.com/antihax/optional v1.0.0
 	github.com/getkin/kin-openapi v0.123.0
 	github.com/grokify/goauth v0.21.10
-	github.com/grokify/gocharts/v2 v2.19.8
-	github.com/grokify/mogo v0.64.9
-	github.com/grokify/spectrum v1.18.8
+	github.com/grokify/gocharts/v2 v2.20.0
+	github.com/grokify/mogo v0.64.10
+	github.com/grokify/spectrum v1.18.9
 	github.com/jessevdk/go-flags v1.6.1
 	golang.org/x/oauth2 v0.22.0
 )
