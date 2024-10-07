@@ -6,7 +6,7 @@ toolchain go1.23.0
 
 require (
 	github.com/antihax/optional v1.0.0
-	github.com/getkin/kin-openapi v0.123.0
+	github.com/getkin/kin-openapi v0.128.0
 	github.com/grokify/goauth v0.22.0
 	github.com/grokify/gocharts/v2 v2.20.1
 	github.com/grokify/mogo v0.64.11
