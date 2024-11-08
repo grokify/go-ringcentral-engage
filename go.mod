@@ -12,7 +12,7 @@ require (
 	github.com/grokify/mogo v0.65.0
 	github.com/grokify/spectrum v1.18.9
 	github.com/jessevdk/go-flags v1.6.1
-	golang.org/x/oauth2 v0.23.0
+	golang.org/x/oauth2 v0.24.0
 )
 
 require (
