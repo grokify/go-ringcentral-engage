@@ -30,7 +30,7 @@ func MergeOAS2(dir, outfile string) error {
 		return errorsutil.Wrap(err, "E_MERGE_FAILED")
 	}
 
-	err = jsonutil.WriteFile(outfile, spec, "", "  ", 0600)
+	err = jsonutil.MarshalFile(outfile, spec, "", "  ", 0600)
 	if err != nil {
 		return errorsutil.Wrap(err, "E_WRITE_FAILED")
 	}

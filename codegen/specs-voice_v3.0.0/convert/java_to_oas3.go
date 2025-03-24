@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 
 	oas3 "github.com/getkin/kin-openapi/openapi3"
@@ -17,7 +17,7 @@ import (
 )
 
 func ReadOas3Spec(file string, validate bool) (*openapi3.Spec, error) {
-	bytes, err := ioutil.ReadFile(file)
+	bytes, err := os.ReadFile(file)
 	if err != nil {
 		return nil, errorsutil.Wrap(err, fmt.Sprintf("Filename [%v]", file))
 	}
@@ -45,7 +45,7 @@ func main() {
 		panic("Z")
 	}
 
-	bytes, err := ioutil.ReadFile("_class_agent.java")
+	bytes, err := os.ReadFile("_class_agent.java")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -81,7 +81,7 @@ func main() {
 	}
 	fmtutil.PrintJSON(mss)
 
-	err = jsonutil.WriteFile("_schema_agent.json", mss, "", "  ", 0600)
+	err = jsonutil.MarshalFile("_schema_agent.json", mss, "", "  ", 0600)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -100,7 +100,7 @@ func main() {
 	}
 	fmtutil.PrintJSON(swag2)
 	swagFile := "_openapi-spec_agents_models.json"
-	err = jsonutil.WriteFile(swagFile, swag2, "", "  ", 0600)
+	err = jsonutil.MarshalFile(swagFile, swag2, "", "  ", 0600)
 	if err != nil {
 		log.Fatal(err)
 	}
